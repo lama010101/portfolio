@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Shot from '../components/Shot.astro';
+import Ph from '../components/Ph.astro';
+import { config, mailto, isPlaceholder } from '../config';
+---
+<Layout path="/about/" title="About & Contact"
+  description="Laurent Martenot: French-American business and sales professional, MBA, former i18n QA at Google and Apple, building products with AI. Based in Thailand, open to remote work.">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">About &amp; Contact</p>
+      <h1>A business person who builds with AI.</h1>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="story-h">
+    <div class="wrap hero-grid">
+      <div>
+        <h2 id="story-h">My story</h2>
+        <p>I'm a French-American business and sales professional with an international perspective and an enduring interest in technology and innovation.</p>
+        <p>Over the past 18 months I have developed practical experience using AI to conceive, direct and build digital products independently, including BackToThePast (Guess-History).</p>
+        <p>I am not a software engineer. I define the problem, make the product decisions, direct AI to build and evaluate the result.</p>
+        <Ph block text="short professional bio and career history, from the CV (employers, titles and dates exactly as in the CV)" />
+      </div>
+      <Shot asset="portrait" label="professional photograph" alt="Portrait of Laurent Martenot" ratio="4 / 5" />
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="facts-h">
+    <div class="wrap grid g2">
+      <div>
+        <h2 id="facts-h">Background</h2>
+        <ul class="facts">
+          <li>MBA, ICN Business School, Nancy, France (1990).</li>
+          <li><Ph text="second MBA (American): institution and year, confirm from CV or remove" /></li>
+          <li>Software and product testing in an internationalization (i18n) team at Google and Apple. <Ph text="roles and dates from CV" /></li>
+          <li>International B2B sales and startup project management.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Languages and availability</h2>
+        <ul class="facts">
+          <li>English: fluent.</li>
+          <li>French: fluent.</li>
+          <li>Spanish: fluent.</li>
+          <li>Portuguese: conversational.</li>
+          <li>Based in Thailand. Open to overnight and remote work.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-h">Tell me what you need.</h2>
+      <div class="actions" style="margin-bottom:2rem">
+        <Link href={mailto('Hire: project inquiry')} label="email address" variant="primary">Hire Me / Discuss a Project</Link>
+        <Link href={mailto('Partnership: BackToThePast')} label="email address" variant="secondary">Partner With Me</Link>
+        <Link href={mailto('General contact')} label="email address" variant="secondary">General Contact</Link>
+      </div>
+      <ul class="facts" style="max-width:36rem">
+        <li>Email: {isPlaceholder(config.email) ? <Ph text="email address" /> : <a class="tlink" href={`mailto:${config.email}`}>{config.email}</a>}</li>
+        <li>LinkedIn: <Link value={config.linkedin} label="LinkedIn profile URL">Laurent Martenot on LinkedIn</Link></li>
+        <li><Ph text="any additional link (optional)" /></li>
+      </ul>
+
+      {config.formEndpoint && (
+        <form action={config.formEndpoint} method="POST" style="max-width:36rem;margin-top:2rem">
+          <h3>Or send a message</h3>
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" required autocomplete="name" /></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" /></div>
+          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Leave empty<input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+      )}
+    </div>
+  </section>
+</Layout>

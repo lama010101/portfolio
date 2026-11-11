@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Shot from '../components/Shot.astro';
+import Ph from '../components/Ph.astro';
+import { config, mailto } from '../config';
+---
+<Layout path="/backtothepast/" title="BackToThePast (Guess-History)"
+  description="BackToThePast: an interactive multiplayer history game, and an effort to build a sourced historical events dataset with historians, institutions and partners.">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">BackToThePast / Guess-History</p>
+      <h1>Making history interactive. Making historical knowledge measurable.</h1>
+      <div class="actions">
+        <Link value={config.gameUrl} label="live game URL" variant="primary">Play the game</Link>
+        <Link href="#partner" variant="secondary">Partner with me</Link>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="game" aria-labelledby="game-h">
+    <div class="wrap">
+      <p class="eyebrow">Part A - The game (live today)</p>
+      <h2 id="game-h">An interactive multiplayer history game.</h2>
+      <p>BackToThePast, also known as Guess-History, is a live multiplayer history and geography guessing game that I directed AI to build.</p>
+      <Ph block text="accurate description of the game concept and rules (how a round works, what players guess, how scoring works)" />
+      <div class="grid g3" style="margin-top:1.5rem">
+        <Shot asset="gameScreen1" label="game screenshot 1" ratio="4 / 3" />
+        <Shot asset="gameScreen2" label="game screenshot 2" ratio="4 / 3" />
+        <Shot asset="gameScreen3" label="game screenshot 3" ratio="4 / 3" />
+      </div>
+      <Ph block text="short demonstration (video or GIF)" />
+    </div>
+  </section>
+
+  <section class="section section-tint" id="ambition" aria-labelledby="amb-h">
+    <div class="wrap">
+      <p class="eyebrow">Part B - The larger ambition (future, not current)</p>
+      <h2 id="amb-h">From a game to a curated historical knowledge platform.</h2>
+      <p>The ambition is a structured, curated historical knowledge platform that can support educational experiences and AI model evaluation. These are goals, not current capabilities.</p>
+      <ul>
+        <li>Historical knowledge benchmarking.</li>
+        <li>Historical event verification.</li>
+        <li>AI factual accuracy evaluation.</li>
+        <li>Educational products.</li>
+        <li>Historical content licensing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="dataset" aria-labelledby="data-h">
+    <div class="wrap">
+      <p class="eyebrow">Part C - Historical data</p>
+      <h2 id="data-h">Building a sourced historical events dataset.</h2>
+      <p>I am looking for historians, institutions and partners to help build and verify a sourced dataset of historical events. It is in development: no claims are made here about its size, accuracy or licensing.</p>
+
+      <h3 style="margin-top:2rem">Sample dataset</h3>
+      <Ph block text="downloadable sample dataset (target 50-100 events), or confirm it is not ready and keep this development-stage notice" />
+      <p class="muted">Planned fields, where available: event ID, title, date or date range, geographic location, historical period, description, source references, verification status, confidence or evidence notes, licensing information.</p>
+
+      <h3 style="margin-top:2rem">Methodology</h3>
+      <ul>
+        <li>How events are selected: <Ph text="methodology" /></li>
+        <li>How sources are identified: <Ph text="methodology" /></li>
+        <li>How conflicting historical accounts are handled: <Ph text="methodology" /></li>
+        <li>How facts are reviewed: <Ph text="methodology" /></li>
+        <li>How provenance is maintained: <Ph text="methodology" /></li>
+        <li>What rights and licenses apply: <Ph text="licensing terms" /></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="partner" aria-labelledby="partner-h">
+    <div class="wrap">
+      <p class="eyebrow">Part D - Partnerships</p>
+      <h2 id="partner-h">Interested in historical data, AI benchmarking or a commercial partnership? Let's talk.</h2>
+      <p>I would like to hear from:</p>
+      <ul>
+        <li>AI laboratories and AI model developers.</li>
+        <li>Universities and historians.</li>
+        <li>Museums.</li>
+        <li>Educational publishers.</li>
+        <li>Historical content providers.</li>
+      </ul>
+      <div class="actions">
+        <Link href={mailto('Partnership: BackToThePast')} label="email address" variant="primary">Partner with me</Link>
+        <Link value={config.linkedin} label="LinkedIn URL" variant="secondary">LinkedIn</Link>
+      </div>
+    </div>
+  </section>
+</Layout>

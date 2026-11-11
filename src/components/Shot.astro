@@ -1,0 +1,13 @@
+---
+import { assets } from '../data/assets';
+interface Props { asset: string; label: string; alt?: string; ratio?: string }
+const { asset, label, alt, ratio = '16 / 10' } = Astro.props;
+const src = assets[asset];
+---
+{src ? (
+  <figure class="shot"><img src={src} alt={alt ?? label} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} /></figure>
+) : (
+  <figure class="shot shot-empty" style={`aspect-ratio:${ratio}`} role="img" aria-label={`Placeholder: ${label}`}>
+    <span class="ph" data-placeholder>[[PLACEHOLDER: {label}]]</span>
+  </figure>
+)}

@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Ph from '../components/Ph.astro';
+import { config, mailto } from '../config';
+
+const tasks = [
+  { title: 'Multilingual AI output evaluation (EN/FR/ES)', text: 'Assessing the accuracy, tone and cultural fit of AI outputs in English, French and Spanish.', subject: 'Multilingual AI output evaluation' },
+  { title: 'Localization and i18n quality testing for AI products', text: 'Testing AI products across languages and locales, building on past i18n QA work at Google and Apple.', subject: 'Localization and i18n quality testing' },
+  { title: 'Writing and testing evaluation guidelines and test cases', text: 'Turning quality expectations into clear guidelines and repeatable test cases for AI systems.', subject: 'Evaluation guidelines and test cases' },
+  { title: 'Directing AI-built products from idea to working release', text: 'Defining the product, directing AI coding agents and iterating until it works.', subject: 'Directing an AI-built product' },
+];
+---
+<Layout path="/hire-me/" title="Hire Me - How can I help you?"
+  description="Multilingual AI evaluation (EN/FR/ES), localization and i18n QA for AI products, evaluation guidelines, and directing AI-built products from idea to release.">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">How can I help you?</p>
+      <h1>Let's turn your next idea into something real.</h1>
+      <p class="lead">Choose the closest match and start a conversation. Not sure? Tell me the problem.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tasks-h">
+    <div class="wrap">
+      <h2 id="tasks-h" class="eyebrow">Where I can help most</h2>
+      <div class="grid g2">
+        {tasks.map((t, i) => (
+          <article class="card">
+            <p class="num">0{i + 1}</p>
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+            <Link href={mailto(t.subject)} label="email address" variant="secondary">Discuss this</Link>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:2rem"><strong>Not sure? Tell me the problem.</strong></p>
+      <div class="actions" style="margin-top:0.5rem"><Link href={mailto('Tell me what you need')} label="email address" variant="primary">Tell me what you need</Link></div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="cats-h">
+    <div class="wrap">
+      <p class="eyebrow">Broader scope</p>
+      <h2 id="cats-h">Three service areas.</h2>
+      <div class="grid g3" style="margin-top:2.5rem">
+        <article class="card">
+          <h3>AI Product &amp; Business Development</h3>
+          <ul>
+            <li>Product conception.</li>
+            <li>Business opportunity analysis.</li>
+            <li>Product requirements.</li>
+            <li>AI-assisted development coordination.</li>
+            <li>Product validation.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>AI Solutions &amp; Workflow Development</h3>
+          <ul>
+            <li>Identify processes suitable for AI.</li>
+            <li>Design AI-assisted workflows.</li>
+            <li>Coordinate implementation.</li>
+            <li>Evaluate outputs and reliability.</li>
+            <li>Improve operational efficiency.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>AI Evaluation &amp; Multilingual QA</h3>
+          <ul>
+            <li>Multilingual interface evaluation.</li>
+            <li>Localization QA.</li>
+            <li>AI output evaluation.</li>
+            <li>Cultural and linguistic consistency.</li>
+            <li>Business-oriented quality assessment.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="bg-h">
+    <div class="wrap grid g2">
+      <div>
+        <p class="eyebrow">Background</p>
+        <h2 id="bg-h">Experience behind the offer.</h2>
+        <p>I worked on software and product testing in internationalization (i18n) teams at Google and Apple, and have international B2B sales and startup project management experience.</p>
+        <Ph block text="verified roles, employers and dates from the CV (do not publish until supplied)" />
+      </div>
+      <div>
+        <p class="eyebrow">References</p>
+        <h2>Projects I can point to.</h2>
+        <ul>
+          <li><a class="tlink" href="/backtothepast/">BackToThePast (Guess-History)</a></li>
+          <li>LIKED</li>
+          <li>PromptPulse</li>
+        </ul>
+        <Ph block text="short professional biography (2-3 sentences, from CV)" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="contact-h">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-h">Tell me what you need.</h2>
+      <div class="actions">
+        <Link href={mailto('Project inquiry')} label="email address" variant="primary">Discuss a Project</Link>
+        <Link value={config.linkedin} label="LinkedIn URL" variant="secondary">LinkedIn</Link>
+        <Link href="/about/#contact">More ways to get in touch</Link>
+      </div>
+    </div>
+  </section>
+</Layout>

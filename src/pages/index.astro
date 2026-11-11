@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Shot from '../components/Shot.astro';
+import Ph from '../components/Ph.astro';
+import { config } from '../config';
+---
+<Layout path="/" title="Laurent Martenot | I turn business ideas into working products using AI"
+  description="Business professional, product thinker and AI-native builder. Multilingual AI evaluation (EN/FR/ES), i18n quality testing and AI-directed product building.">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow anim">{config.tagline}</p>
+        <h1 class="anim anim-2">I turn business ideas into <em>working products</em> using AI.</h1>
+        <p class="sub anim anim-3">Business professional. Product thinker. AI-native builder.</p>
+        <p class="lead anim anim-3">I combine commercial experience with hands-on AI to conceive, develop and launch digital products.</p>
+        <div class="actions anim anim-3">
+          <Link href="/hire-me/" variant="primary">How can I help you?</Link>
+          <Link href="/how-i-work/" variant="secondary">See how I work</Link>
+          <Link href="/backtothepast/#partner">Partner with me</Link>
+        </div>
+      </div>
+      <Shot asset="portrait" label="professional portrait (real photo only)" alt="Portrait of Laurent Martenot" ratio="4 / 5" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="proof-h">
+    <div class="wrap">
+      <h2 id="proof-h" class="eyebrow">Why it works</h2>
+      <ul class="proof">
+        <li>Google and Apple internationalization (i18n) QA background.</li>
+        <li>Fluent in English, French and Spanish.</li>
+        <li>Ships with AI daily.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="bring-h">
+    <div class="wrap">
+      <p class="eyebrow">What I bring</p>
+      <h2 id="bring-h">Business thinking. Product vision. AI execution.</h2>
+      <div class="grid g3" style="margin-top:2.5rem">
+        <article class="card">
+          <p class="num">01</p>
+          <h3>Business &amp; Strategy</h3>
+          <p>Understanding markets, customers, commercial opportunities, business models and value creation.</p>
+        </article>
+        <article class="card">
+          <p class="num">02</p>
+          <h3>AI Orchestration</h3>
+          <p>Using AI models and coding agents to explore, structure, challenge and execute complex ideas.</p>
+        </article>
+        <article class="card">
+          <p class="num">03</p>
+          <h3>Product Building</h3>
+          <p>Turning concepts into specifications, directing AI-assisted implementation, evaluating outcomes and iterating toward working products.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects-h">
+    <div class="wrap">
+      <p class="eyebrow">Selected projects</p>
+      <h2 id="projects-h">Things I have directed AI to build.</h2>
+      <p class="muted">Each project is labelled by its real status. Nothing here is shown as launched unless it is.</p>
+
+      <div style="margin-top:2.5rem">
+        <article class="project">
+          <div class="project-text">
+            <span class="status">Live game</span>
+            <h3>BackToThePast <span class="muted">(Guess-History)</span></h3>
+            <p>An interactive, multiplayer historical knowledge game with the ambition to develop into a broader historical knowledge and AI evaluation platform.</p>
+            <p class="shows">The actual game. Product concept. Multiplayer experience. Historical knowledge challenge. Potential historical data and AI benchmarking business.</p>
+            <div class="actions"><Link href="/backtothepast/" variant="primary">Explore BackToThePast</Link></div>
+          </div>
+          <Shot asset="gameScreen1" label="BackToThePast game screenshot" />
+        </article>
+
+        <article class="project">
+          <div class="project-text">
+            <span class="status"><Ph text="status: launched / prototype / concept" /></span>
+            <h3>LIKED</h3>
+            <p>A digital application designed to organize and manage personal interests, favorites and collections.</p>
+            <p class="shows">The product problem. The application concept. The user experience. The AI-assisted development process.</p>
+            <div class="actions"><Link value={config.likedUrl} label="LIKED project URL" variant="primary">Explore LIKED</Link></div>
+          </div>
+          <Shot asset="likedScreen" label="LIKED screenshot" />
+        </article>
+
+        <article class="project">
+          <div class="project-text">
+            <span class="status"><Ph text="status: launched / prototype / concept" /></span>
+            <h3>PromptPulse</h3>
+            <p>A concept exploring collective intelligence, shared answers and AI evaluation through human-like participation.</p>
+            <p class="shows">The business concept. The underlying mechanics. Potential AI evaluation and data applications.</p>
+            <div class="actions"><Link value={config.promptPulseUrl} label="PromptPulse project URL" variant="primary">Explore PromptPulse</Link></div>
+          </div>
+          <Shot asset="promptPulseScreen" label="PromptPulse screenshot or concept visual" />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">How I work</p>
+      <h2 id="how-h">AI is not just a tool I use. It is how I build.</h2>
+      <ol class="steps" style="margin-top:2rem">
+        <li>Identify a problem or opportunity.</li>
+        <li>Define the business objective.</li>
+        <li>Explore possible solutions with AI.</li>
+        <li>Translate the solution into precise requirements.</li>
+        <li>Direct AI coding agents to implement it.</li>
+        <li>Evaluate the implementation.</li>
+        <li>Challenge errors and inconsistencies.</li>
+        <li>Iterate until the product meets its objectives.</li>
+      </ol>
+      <div class="actions"><Link href="/how-i-work/" variant="secondary">See real examples</Link></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="paths-h">
+    <div class="wrap">
+      <p class="eyebrow">Work with me</p>
+      <h2 id="paths-h">Two ways to start a conversation.</h2>
+      <div class="grid g2" style="margin-top:2.5rem">
+        <div class="panel">
+          <h3>Hire Me</h3>
+          <p class="muted">For companies, startups and individuals looking for:</p>
+          <ul>
+            <li>AI solutions and workflow development.</li>
+            <li>AI product management.</li>
+            <li>AI-assisted application development.</li>
+            <li>Business development.</li>
+            <li>Product strategy.</li>
+            <li>Multilingual digital product QA and evaluation.</li>
+          </ul>
+          <Link href="/hire-me/" variant="primary">Discuss a Project</Link>
+        </div>
+        <div class="panel dark">
+          <h3>Partner With Me</h3>
+          <p>For people and organizations interested in:</p>
+          <ul>
+            <li>BackToThePast.</li>
+            <li>Historical knowledge databases.</li>
+            <li>AI historical benchmarking.</li>
+            <li>Content and data partnerships.</li>
+            <li>Commercial development.</li>
+          </ul>
+          <Link href="/backtothepast/#partner" variant="primary">Explore Partnership Opportunities</Link>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="intro-h">
+    <div class="wrap">
+      <p class="eyebrow">Introduction</p>
+      <h2 id="intro-h">A business person who builds.</h2>
+      <p>I'm a business and sales professional with an enduring interest in technology and innovation.</p>
+      <p>Over the past 18 months, I've developed practical experience using AI to conceive, direct and build digital products.</p>
+      <p>My approach combines commercial reasoning with the ability to work closely with AI systems and coding agents.</p>
+      <p>I enjoy exploring possibilities, challenging assumptions and turning ideas into working solutions.</p>
+      <div class="actions"><Link href="/about/" variant="secondary">Read my story</Link></div>
+    </div>
+  </section>
+</Layout>

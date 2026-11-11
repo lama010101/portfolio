@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Shot from '../components/Shot.astro';
+import Ph from '../components/Ph.astro';
+import { mailto } from '../config';
+
+const blocks = [
+  { t: 'The original business idea', ph: 'the real original idea behind Guess-History, in your own words' },
+  { t: 'The problem', ph: 'the problem the product solves and for whom' },
+  { t: 'My product decisions and reasoning', ph: 'key decisions you made and why (3-5 real decisions)' },
+  { t: 'From idea to instructions for AI', ph: 'real examples: requirements, structured prompts, coding-agent instructions' },
+  { t: 'How I coordinate AI coding agents', ph: 'how you split work, review output and keep agents on track' },
+];
+---
+<Layout path="/how-i-work/" title="How I Work With AI"
+  description="A practical methodology: business problem, product definition, AI orchestration, implementation, validation, iteration. Case study built around Guess-History.">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">How I work with AI</p>
+      <h1>AI is not just a tool I use. It is how I build.</h1>
+      <p class="lead">My contribution is not asking AI questions. It is defining the problem, directing the build and refusing to accept work that is wrong.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="flow-h">
+    <div class="wrap">
+      <h2 id="flow-h" class="eyebrow">The method</h2>
+      <p class="flow">
+        <span>Business problem</span><b>&rarr;</b> <span>Product definition</span><b>&rarr;</b> <span>AI orchestration</span><b>&rarr;</b> <span>Implementation</span><b>&rarr;</b> <span>Validation</span><b>&rarr;</b> <span>Iteration</span>
+      </p>
+      <ol class="steps" style="margin-top:2rem">
+        <li>Identify a problem or opportunity.</li>
+        <li>Define the business objective.</li>
+        <li>Explore possible solutions with AI.</li>
+        <li>Translate the solution into precise requirements.</li>
+        <li>Direct AI coding agents to implement it.</li>
+        <li>Evaluate the implementation.</li>
+        <li>Challenge errors and inconsistencies.</li>
+        <li>Iterate until the product meets its objectives.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="case-h">
+    <div class="wrap">
+      <p class="eyebrow">Case study</p>
+      <h2 id="case-h">Guess-History: from idea to working game.</h2>
+      <p class="muted">Real content to be supplied. Nothing below is invented.</p>
+
+      {blocks.map((b) => (
+        <div class="case">
+          <h3>{b.t}</h3>
+          <div><Ph block text={b.ph} /></div>
+        </div>
+      ))}
+
+      <div class="case">
+        <h3>When the AI got it wrong</h3>
+        <div>
+          {[1, 2, 3].map((n) => (
+            <div class="wrong">
+              <p><strong>Example {n}</strong> (use 2 to 3 real examples)</p>
+              <dl>
+                <dt>The problem</dt><dd><Ph text={`example ${n}: what you were trying to achieve`} /></dd>
+                <dt>The wrong output</dt><dd><Ph text={`example ${n}: what the AI produced`} /></dd>
+                <dt>My correction</dt><dd><Ph text={`example ${n}: how you corrected it`} /></dd>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="case">
+        <h3>The working result</h3>
+        <div>
+          <Shot asset="caseResult" label="screenshot of the working result" />
+          <p style="margin-top:1rem"><Link href="/backtothepast/">See the live game</Link></p>
+        </div>
+      </div>
+
+      <div class="case">
+        <h3>Workflow video</h3>
+        <div><Ph block text="short workflow video embed" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="next-h">
+    <div class="wrap">
+      <p class="eyebrow">Next case study</p>
+      <h2 id="next-h">Building my own professional portfolio with AI.</h2>
+      <p>This website is itself an example of the method. A written case study will be added after launch.</p>
+      <Ph block text="portfolio case study (to be completed after launch)" />
+      <div class="actions">
+        <Link href="/hire-me/" variant="primary">How can I help you?</Link>
+        <Link href={mailto('Question about how you work')} label="email address" variant="secondary">Ask me about my process</Link>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,23 @@
+---
+import { isPlaceholder } from '../config';
+interface Props {
+  href?: string;          // internal path, external URL or mailto
+  value?: string;         // config value (URL/email); if placeholder, the link is disabled + flagged
+  label?: string;         // what is missing, shown when value is a placeholder
+  variant?: 'primary' | 'secondary' | 'text';
+  class?: string;
+}
+const { href, value, label = 'link', variant = 'text', class: cls } = Astro.props;
+const target = href ?? value;
+const missing = !target || isPlaceholder(target);
+const external = !!target && /^https?:/.test(target);
+---
+{missing ? (
+  <span class:list={['link-missing', cls]}>
+    <a class:list={[variant === 'text' ? 'tlink' : `btn btn-${variant}`]} href="#" aria-disabled="true" tabindex="-1"><slot /></a>
+    <span class="ph" data-placeholder>[[PLACEHOLDER: {label}]]</span>
+  </span>
+) : (
+  <a class:list={[variant === 'text' ? 'tlink' : `btn btn-${variant}`, cls]} href={target}
+     {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}><slot /></a>
+)}

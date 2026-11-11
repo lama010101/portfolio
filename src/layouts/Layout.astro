@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { config, isPlaceholder } from '../config';
+import Link from '../components/Link.astro';
+
+interface Props { title: string; description: string; path: string }
+const { title, description, path } = Astro.props;
+const fullTitle = path === '/' ? title : `${title} | ${config.name}`;
+const canonical = new URL(path, config.siteUrl).href;
+const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/hire-me/', label: 'Hire Me' },
+  { href: '/backtothepast/', label: 'BackToThePast' },
+  { href: '/how-i-work/', label: 'How I Work' },
+  { href: '/about/', label: 'About & Contact' },
+];
+const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F5F1E8" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={config.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/" aria-label={`${config.name} - home`}>Laurent Martenot</a>
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav" type="button">Menu</button>
+        <nav id="nav" class="nav" aria-label="Main">
+          <ul>
+            {nav.map((n) => (
+              <li><a href={n.href} aria-current={current(n.href) ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <p class="brand">Laurent Martenot</p>
+          <p class="muted">{config.tagline}. Based in Thailand, working remotely.</p>
+        </div>
+        <ul class="foot-links">
+          <li><Link href="/hire-me/">Hire Me</Link></li>
+          <li><Link href="/backtothepast/#partner">Partner With Me</Link></li>
+          <li><Link value={config.linkedin} label="LinkedIn URL">LinkedIn</Link></li>
+          <li><Link href={isPlaceholder(config.email) ? undefined : `mailto:${config.email}`} label="email address">Email</Link></li>
+        </ul>
+      </div>
+    </footer>
+    <script is:inline>
+      const b = document.querySelector('.menu-btn');
+      const n = document.getElementById('nav');
+      b.addEventListener('click', () => {
+        const open = b.getAttribute('aria-expanded') === 'true';
+        b.setAttribute('aria-expanded', String(!open));
+        n.classList.toggle('open', !open);
+      });
+    </script>
+  </body>
+</html>
