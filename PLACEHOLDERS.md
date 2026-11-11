@@ -1,6 +1,8 @@
 # PLACEHOLDERS
 
-Every item below is shown on the site as a visible yellow `[[PLACEHOLDER: ...]]` marker. Search the built site for `PLACEHOLDER` before launch: there must be zero left (or each remaining one must be deliberate).
+Every item below is shown on the site as a visible yellow `[[PLACEHOLDER: ...]]` marker across the Editorial edition (`/`), the Studio edition (`/studio/`), and the Play edition (`/play/`). Search the built site for `PLACEHOLDER` before launch: there must be zero left (or each remaining one must be deliberate).
+
+> Note: `/` and `/studio/` both read directly from `src/config.ts` and `src/data/assets.ts`. `/play/` is a standalone static edition under `public/play/` and reads from `public/play/config.js`.
 
 ## Global config (`src/config.ts`)
 | Field | Needed |

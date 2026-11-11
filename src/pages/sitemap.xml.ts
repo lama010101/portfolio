@@ -1,6 +1,15 @@
 import { config } from '../config';
 
-const paths = ['/', '/hire-me/', '/backtothepast/', '/how-i-work/', '/about/'];
+const paths = [
+  '/',
+  '/hire-me/',
+  '/backtothepast/',
+  '/how-i-work/',
+  '/about/',
+  '/portfolios/',
+  '/studio/',
+  '/play/',
+];
 
 export const GET = () =>
   new Response(

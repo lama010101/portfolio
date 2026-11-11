@@ -1,6 +1,13 @@
-# Laurent Martenot - Portfolio
+# Laurent Martenot - Portfolio Suite
 
 Static site built with [Astro](https://astro.build) (no backend, no database, no analytics, no cookies).
+
+## Editions included
+
+- **`/portfolios/`** — **All Portfolios Hub**: compares and links to all three live portfolio editions, with a live responsive viewport previewer (Desktop / Tablet / Mobile).
+- **`/`** — **Edition 01: Editorial Consultancy** (`Home`, `Hire Me`, `BackToThePast`, `How I Work`, `About & Contact`).
+- **`/play/`** — **Edition 02: Laurent.Play** (`public/play/`, candy neo-brutalist single-page arcade with draggable stickers, confetti, and 4-choice year quiz; configured via `public/play/config.js`).
+- **`/studio/`** — **Edition 03: Laurent // Studio** (`src/pages/studio.astro`, playful chromatic AI & web showcase featuring 4 live color worlds, particle physics canvas, Web Audio harmonic synth, playable 8-step AI Director Simulator, EN/FR/ES Multilingual QA Arena, Chrono-Pin timeline scrubber, and Live Mission Brief Composer; wired directly to `src/config.ts` and `src/data/assets.ts`).
 
 ## Run
 
