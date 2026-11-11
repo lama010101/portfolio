@@ -10,7 +10,7 @@ Every item below is shown on the site as a visible yellow `[[PLACEHOLDER: ...]]`
 | `gameUrl` | Live BackToThePast / Guess-History URL. |
 | `likedUrl` | LIKED project URL. |
 | `promptPulseUrl` | PromptPulse project URL. |
-| `siteUrl` | Final production URL (canonical, sitemap, robots, social tags). Currently a guess: `https://laurent-martenot.vercel.app`. |
+| ~~`siteUrl`~~ | Done: `https://portfolio-lolos-projects-dc7e07be.vercel.app`. Change if you add a custom domain. |
 | `ogImage` | 1200x630 social sharing image (path under `/public`). None yet. |
 | `formEndpoint` | Optional. Form service URL. Empty = mailto only, no form shown. |
 
