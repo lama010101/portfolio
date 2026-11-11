@@ -16,7 +16,7 @@ export const config = {
   // Optional: URL of a form service (Formspree, Basin, etc). Leave '' to use mailto only.
   formEndpoint: '',
   // Public production URL (used for canonical, sitemap, social tags).
-  siteUrl: 'https://portfolio-lolos-projects-dc7e07be.vercel.app',
+  siteUrl: 'https://portfolio-psi-topaz-22.vercel.app',
   // Path under /public, e.g. '/og.png' (1200x630). '' = no social image yet.
   ogImage: '',
   tagline: 'AI-native Business & Product Builder',
