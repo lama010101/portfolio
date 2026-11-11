@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laurent Martenot — I turn business ideas into working products using AI (the playful edition)</title>
+  <meta name="description" content="Business professional, product thinker and AI-native builder. Multilingual AI evaluation (EN/FR/ES), i18n quality testing and AI-directed product building. The playful, interactive edition of the portfolio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Laurent Martenot — AI-native Business & Product Builder" />
+  <meta property="og:description" content="I turn business ideas into working products using AI. Play the portfolio: tilt the cards, guess the year, grab the stickers." />
+  <meta property="og:url" content="https://portfolio-psi-topaz-22.vercel.app" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#FFF8EC" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- scroll progress = XP bar -->
+  <div class="xpbar" aria-hidden="true"><div class="xpbar-fill" id="xpfill"></div></div>
+
+  <!-- confetti layer -->
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <!-- custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="nav" id="top">
+    <a class="logo" href="#top" id="logo" aria-label="Laurent Martenot — back to top">
+      <span class="logo-badge">LM</span>
+      <span class="logo-name">laurent<b>.play</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#play">Play</a>
+      <a href="#game">Mini-game</a>
+      <a href="#method">How I work</a>
+      <a href="#hire">Hire me</a>
+      <a href="#about">About</a>
+      <a href="/portfolios/">All Portfolios</a>
+    </nav>
+    <button class="btn btn-small btn-ink" data-link="email" data-subject="Hello Laurent!" data-magnet>Say hi</button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobilemenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobilemenu" id="mobilemenu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#play" style="--i:0">Play <em>my products</em></a>
+      <a href="#game" style="--i:1">Mini-game <em>guess the year</em></a>
+      <a href="#method" style="--i:2">How I work <em>with AI</em></a>
+      <a href="#hire" style="--i:3">Hire me <em>or partner</em></a>
+      <a href="#about" style="--i:4">About <em>& contact</em></a>
+      <a href="/portfolios/" style="--i:5">All Portfolios <em>3 editions</em></a>
+    </nav>
+    <p class="mobilemenu-hint">pick a level ↓</p>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="blob blob-1" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+      <div class="blob blob-3" aria-hidden="true"></div>
+
+      <div class="sticker" style="--x:6%;--y:18%;--r:-8deg;--d:0s" data-drag>🚀</div>
+      <div class="sticker" style="--x:88%;--y:14%;--r:10deg;--d:.6s" data-drag>🎮</div>
+      <div class="sticker" style="--x:80%;--y:66%;--r:-12deg;--d:.3s" data-drag>🧩</div>
+      <div class="sticker" style="--x:10%;--y:64%;--r:6deg;--d:.9s" data-drag>✨</div>
+      <div class="sticker sticker-note" style="--x:70%;--y:30%;--r:4deg" data-drag>drag me!</div>
+
+      <div class="wrap hero-inner">
+        <p class="hero-kicker reveal">AI-native Business & Product Builder <span class="spark">✦</span> the playful edition</p>
+        <h1 class="hero-title reveal d1">I turn business ideas into <span class="hl hl-pink">working products</span> using AI.</h1>
+        <p class="hero-sub reveal d2">Business professional. Product thinker. AI-native builder.<br />
+        I combine commercial experience with hands-on AI to conceive, develop and launch digital products.</p>
+
+        <div class="hero-now reveal d3" aria-label="Currently building">
+          <span class="now-dot" aria-hidden="true"></span>
+          right now directing AI to build: <b class="rotator" id="rotator" data-words='["BackToThePast (Guess-History)","LIKED","PromptPulse","this very portfolio"]'>BackToThePast</b>
+        </div>
+
+        <div class="hero-actions reveal d3">
+          <a class="btn btn-primary btn-big" href="#hire" data-magnet data-pop>How can I help you?</a>
+          <a class="btn btn-ink btn-big" href="#method" data-magnet data-pop>See how I work</a>
+          <a class="btn btn-ghost btn-big" href="#contact" data-magnet data-pop>Partner with me</a>
+        </div>
+
+        <div class="hero-hint reveal d4" aria-hidden="true">
+          <span>scroll to play</span>
+          <span class="hero-arrow">↓</span>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>BUSINESS THINKING <i>✦</i> PRODUCT VISION <i>✦</i> AI EXECUTION <i>✦</i> EN · FR · ES <i>✦</i> SHIPS WITH AI DAILY <i>✦</i> </span>
+          <span>BUSINESS THINKING <i>✦</i> PRODUCT VISION <i>✦</i> AI EXECUTION <i>✦</i> EN · FR · ES <i>✦</i> SHIPS WITH AI DAILY <i>✦</i> </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROOF ============ -->
+    <section class="section section-proof" aria-labelledby="proof-h">
+      <div class="wrap">
+        <h2 id="proof-h" class="visually-hidden">Why it works</h2>
+        <ul class="proof">
+          <li class="proof-chip reveal" style="--c:var(--pink)">🧪 Google & Apple i18n QA background</li>
+          <li class="proof-chip reveal d1" style="--c:var(--blue)">🗣️ Fluent EN · FR · ES</li>
+          <li class="proof-chip reveal d2" style="--c:var(--lime)">⚡ Ships with AI daily</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WHAT I BRING ============ -->
+    <section class="section" id="bring" aria-labelledby="bring-h">
+      <div class="wrap">
+        <p class="kicker reveal">What I bring</p>
+        <h2 class="h2 reveal d1">Business thinking. Product vision. <span class="hl hl-blue">AI execution.</span></h2>
+        <div class="grid g3">
+          <article class="card tilt reveal" style="--tilt:var(--pink)">
+            <div class="card-emoji" aria-hidden="true">📈</div>
+            <p class="card-num">01</p>
+            <h3>Business & Strategy</h3>
+            <p>Understanding markets, customers, commercial opportunities, business models and value creation.</p>
+          </article>
+          <article class="card tilt reveal d1" style="--tilt:var(--purple)">
+            <div class="card-emoji" aria-hidden="true">🤖</div>
+            <p class="card-num">02</p>
+            <h3>AI Orchestration</h3>
+            <p>Using AI models and coding agents to explore, structure, challenge and execute complex ideas.</p>
+          </article>
+          <article class="card tilt reveal d2" style="--tilt:var(--yellow)">
+            <div class="card-emoji" aria-hidden="true">🛠️</div>
+            <p class="card-num">03</p>
+            <h3>Product Building</h3>
+            <p>Turning concepts into specifications, directing AI-assisted implementation, evaluating outcomes and iterating toward working products.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section section-tint" id="play" aria-labelledby="play-h">
+      <div class="wrap">
+        <p class="kicker reveal">Selected projects</p>
+        <h2 class="h2 reveal d1">Things I have <span class="hl hl-purple">directed AI to build.</span></h2>
+        <p class="muted reveal d2">Each project is labelled by its real status. Nothing here is shown as launched unless it is.</p>
+
+        <div class="projects">
+          <article class="project tilt reveal" style="--tilt:var(--blue)">
+            <div class="project-shot" data-shot="gameScreen">
+              <span class="ph">[[PLACEHOLDER: game screenshot]]</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="status status-live">● LIVE GAME</span>
+                <span class="project-emoji" aria-hidden="true">🕹️</span>
+              </div>
+              <h3>BackToThePast <span class="alt-name">(Guess-History)</span></h3>
+              <p>An interactive, multiplayer historical knowledge game with the ambition to develop into a broader historical knowledge and AI evaluation platform.</p>
+              <p class="shows">The actual game · product concept · multiplayer experience · historical knowledge challenge · potential historical data and AI benchmarking business.</p>
+              <button class="btn btn-primary" data-link="gameUrl" data-subject="BackToThePast — show me the game" data-magnet>Play it →</button>
+            </div>
+          </article>
+
+          <article class="project project-flip tilt reveal" style="--tilt:var(--pink)">
+            <div class="project-shot" data-shot="likedScreen">
+              <span class="ph">[[PLACEHOLDER: LIKED screenshot]]</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="status status-ph">[[PLACEHOLDER: status — launched / prototype / concept]]</span>
+                <span class="project-emoji" aria-hidden="true">💖</span>
+              </div>
+              <h3>LIKED</h3>
+              <p>A digital application designed to organize and manage personal interests, favorites and collections.</p>
+              <p class="shows">The product problem · the application concept · the user experience · the AI-assisted development process.</p>
+              <button class="btn btn-ink" data-link="likedUrl" data-subject="LIKED — tell me more" data-magnet>Explore LIKED →</button>
+            </div>
+          </article>
+
+          <article class="project tilt reveal" style="--tilt:var(--yellow)">
+            <div class="project-shot" data-shot="promptPulseScreen">
+              <span class="ph">[[PLACEHOLDER: PromptPulse screenshot or concept visual]]</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="status status-ph">[[PLACEHOLDER: status — launched / prototype / concept]]</span>
+                <span class="project-emoji" aria-hidden="true">📡</span>
+              </div>
+              <h3>PromptPulse</h3>
+              <p>A concept exploring collective intelligence, shared answers and AI evaluation through human-like participation.</p>
+              <p class="shows">The business concept · the underlying mechanics · potential AI evaluation and data applications.</p>
+              <button class="btn btn-ink" data-link="promptPulseUrl" data-subject="PromptPulse — tell me more" data-magnet>Explore PromptPulse →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MINI-GAME ============ -->
+    <section class="section section-game" id="game" aria-labelledby="game-h">
+      <div class="wrap wrap-narrow">
+        <p class="kicker reveal">A playable slice of the idea</p>
+        <h2 class="h2 reveal d1">Guess the year. <span class="hl hl-yellow">30 seconds.</span></h2>
+        <p class="muted reveal d2">This is the spirit of BackToThePast in miniature: historical knowledge as a game. No sign-up, no fake data — just famous, verifiable events.</p>
+
+        <div class="game-card reveal d2" id="gamecard">
+          <div class="game-head">
+            <span class="game-tag">MINI-GAME</span>
+            <div class="game-dots" id="gamedots" aria-hidden="true"></div>
+            <span class="game-score" id="gamescore" aria-live="polite">0 / 0</span>
+          </div>
+
+          <div class="game-stage" id="gamestage">
+            <p class="game-q" id="gameq">Press start to play.</p>
+            <div class="game-opts" id="gameopts"></div>
+            <button class="btn btn-primary btn-big game-start" id="gamestart" data-magnet>▶ Start</button>
+          </div>
+
+          <div class="game-result" id="gameresult" hidden>
+            <p class="game-rank" id="gamerank"></p>
+            <p class="game-sub" id="gamesub"></p>
+            <button class="btn btn-ink" id="gamereplay" data-magnet>↺ Play again</button>
+          </div>
+        </div>
+        <p class="game-note reveal">Curious about the real thing? <button class="linklike" data-link="gameUrl" data-subject="BackToThePast — show me the game">Try BackToThePast →</button></p>
+      </div>
+    </section>
+
+    <!-- ============ HOW I WORK ============ -->
+    <section class="section" id="method" aria-labelledby="method-h">
+      <div class="wrap">
+        <p class="kicker reveal">How I work</p>
+        <h2 class="h2 reveal d1">AI is not just a tool I use. <span class="hl hl-lime">It is how I build.</span></h2>
+        <p class="muted reveal d2">The quest map, in eight steps — from fuzzy idea to shipped product.</p>
+
+        <ol class="quest" id="quest">
+          <li class="quest-step reveal" style="--c:var(--pink)"><span class="quest-num">1</span><p>Identify a problem or opportunity.</p></li>
+          <li class="quest-step reveal" style="--c:var(--orange)"><span class="quest-num">2</span><p>Define the business objective.</p></li>
+          <li class="quest-step reveal" style="--c:var(--yellow)"><span class="quest-num">3</span><p>Explore possible solutions with AI.</p></li>
+          <li class="quest-step reveal" style="--c:var(--lime)"><span class="quest-num">4</span><p>Translate the solution into precise requirements.</p></li>
+          <li class="quest-step reveal" style="--c:var(--blue)"><span class="quest-num">5</span><p>Direct AI coding agents to implement it.</p></li>
+          <li class="quest-step reveal" style="--c:var(--purple)"><span class="quest-num">6</span><p>Evaluate the implementation.</p></li>
+          <li class="quest-step reveal" style="--c:var(--pink)"><span class="quest-num">7</span><p>Challenge errors and inconsistencies.</p></li>
+          <li class="quest-step reveal" style="--c:var(--green)"><span class="quest-num">8</span><p>Iterate until the product meets its objectives.</p></li>
+        </ol>
+        <p class="quest-note reveal">Real prompts, corrections and screenshots live on the <a class="linklike" href="/how-i-work/">premium edition's How-I-Work page</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============ HIRE ME ============ -->
+    <section class="section section-tint" id="hire" aria-labelledby="hire-h">
+      <div class="wrap">
+        <p class="kicker reveal">Hire me</p>
+        <h2 class="h2 reveal d1">Let's turn your next idea into <span class="hl hl-pink">something real.</span></h2>
+        <p class="muted reveal d2">Pick the closest match and hit "discuss this". Not sure? Tell me the problem.</p>
+
+        <div class="grid g2">
+          <article class="offer tilt reveal" style="--tilt:var(--pink)">
+            <span class="offer-num">a</span>
+            <h3>Multilingual AI output evaluation <span class="langs">EN/FR/ES</span></h3>
+            <p>Assessing the accuracy, tone and cultural fit of AI outputs in English, French and Spanish.</p>
+            <button class="btn btn-ink btn-small" data-link="email" data-subject="Multilingual AI output evaluation" data-magnet>Discuss this</button>
+          </article>
+          <article class="offer tilt reveal d1" style="--tilt:var(--blue)">
+            <span class="offer-num">b</span>
+            <h3>Localization & i18n quality testing for AI products</h3>
+            <p>Testing AI products across languages and locales, building on past i18n QA work at Google and Apple.</p>
+            <button class="btn btn-ink btn-small" data-link="email" data-subject="Localization and i18n quality testing" data-magnet>Discuss this</button>
+          </article>
+          <article class="offer tilt reveal d2" style="--tilt:var(--yellow)">
+            <span class="offer-num">c</span>
+            <h3>Evaluation guidelines & test cases</h3>
+            <p>Turning quality expectations into clear guidelines and repeatable test cases for AI systems.</p>
+            <button class="btn btn-ink btn-small" data-link="email" data-subject="Evaluation guidelines and test cases" data-magnet>Discuss this</button>
+          </article>
+          <article class="offer tilt reveal d3" style="--tilt:var(--purple)">
+            <span class="offer-num">d</span>
+            <h3>Directing AI-built products, idea → release</h3>
+            <p>Defining the product, directing AI coding agents and iterating until it works.</p>
+            <button class="btn btn-ink btn-small" data-link="email" data-subject="Directing an AI-built product" data-magnet>Discuss this</button>
+          </article>
+        </div>
+
+        <div class="broader reveal">
+          <p class="kicker">Broader scope</p>
+          <div class="grid g3">
+            <div class="mini-card">
+              <h4>AI Product & Business Development</h4>
+              <p>Product conception · opportunity analysis · requirements · AI-assisted development coordination · validation.</p>
+            </div>
+            <div class="mini-card">
+              <h4>AI Solutions & Workflow Development</h4>
+              <p>Identify processes suited to AI · design workflows · coordinate implementation · evaluate reliability · improve efficiency.</p>
+            </div>
+            <div class="mini-card">
+              <h4>AI Evaluation & Multilingual QA</h4>
+              <p>Multilingual interface evaluation · localization QA · AI output evaluation · cultural and linguistic consistency.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hire-cta reveal">
+          <button class="btn btn-primary btn-big" data-link="email" data-subject="Tell me what you need" data-magnet data-pop>Tell me what you need</button>
+          <p class="muted">Background: software and product testing in internationalization (i18n) teams at Google and Apple, plus international B2B sales and startup project management.</p>
+          <span class="ph">[[PLACEHOLDER: verified roles, employers and dates from the CV — do not publish until supplied]]</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-h">
+      <div class="wrap about-grid">
+        <div class="about-photo reveal">
+          <div class="photo-frame" data-shot="portrait">
+            <span class="ph">[[PLACEHOLDER: professional photo — real only, never generated]]</span>
+          </div>
+          <p class="photo-note">hi, that's me* <span class="tiny">*as soon as the photo lands here</span></p>
+        </div>
+        <div class="about-text">
+          <p class="kicker reveal">About</p>
+          <h2 class="h2 reveal d1">A business person <span class="hl hl-blue">who builds.</span></h2>
+          <p class="reveal d2">I'm a business and sales professional with an enduring interest in technology and innovation. Over the past 18 months, I've developed practical experience using AI to conceive, direct and build digital products.</p>
+          <p class="reveal d2">My approach combines commercial reasoning with the ability to work closely with AI systems and coding agents. I enjoy exploring possibilities, challenging assumptions and turning ideas into working solutions.</p>
+          <ul class="facts">
+            <li class="fact reveal" style="--c:var(--yellow)">🎓 MBA, ICN Business School, Nancy, France (1990)</li>
+            <li class="fact reveal d1" style="--c:var(--blue)">🌍 French-American, international perspective</li>
+            <li class="fact reveal d2" style="--c:var(--lime)">🗣️ EN · FR · ES fluent, PT conversational</li>
+            <li class="fact reveal d3" style="--c:var(--pink)">📍 Based in Thailand — open to remote work</li>
+          </ul>
+          <button class="btn btn-ghost" id="highfive" data-magnet>Give me a high five 🖐️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT / FOOTER ============ -->
+    <footer class="footer" id="contact">
+      <div class="blob blob-4" aria-hidden="true"></div>
+      <div class="wrap wrap-narrow footer-inner">
+        <p class="kicker reveal">Contact</p>
+        <h2 class="footer-title reveal d1">Let's build something <span class="hl hl-yellow">fun.</span></h2>
+        <p class="reveal d2">Hire me, partner with me on BackToThePast, or just say hi.</p>
+        <div class="footer-actions reveal d3">
+          <button class="btn btn-primary btn-big" data-link="email" data-subject="Hello from your portfolio" data-magnet data-pop>✉️ Email me</button>
+          <button class="btn btn-ink btn-big" data-link="linkedin" data-magnet data-pop>in/ LinkedIn</button>
+          <a class="btn btn-ghost btn-big" href="/portfolios/" data-magnet>All Portfolios (3)</a>
+        </div>
+        <div class="footer-meta reveal d4">
+          <span class="ph">[[PLACEHOLDER: email address]]</span>
+          <span class="ph">[[PLACEHOLDER: LinkedIn profile URL]]</span>
+        </div>
+        <p class="footer-fine">Made with AI, directed by a human · © <span id="year">2026</span> Laurent Martenot · psst… try the Konami code <span aria-hidden="true">↑↑↓↓←→←→BA</span></p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

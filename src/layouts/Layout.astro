@@ -16,6 +16,7 @@ const nav = [
   { href: '/backtothepast/', label: 'BackToThePast' },
   { href: '/how-i-work/', label: 'How I Work' },
   { href: '/about/', label: 'About & Contact' },
+  { href: '/portfolios/', label: 'Portfolios' },
 ];
 const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
@@ -63,6 +64,9 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
           <p class="muted">{config.tagline}. Based in Thailand, working remotely.</p>
         </div>
         <ul class="foot-links">
+          <li><Link href="/portfolios/">All Portfolios (3)</Link></li>
+          <li><Link href="/studio/">Interactive Studio</Link></li>
+          <li><Link href="/play/">Laurent.Play</Link></li>
           <li><Link href="/hire-me/">Hire Me</Link></li>
           <li><Link href="/backtothepast/#partner">Partner With Me</Link></li>
           <li><Link value={config.linkedin} label="LinkedIn URL">LinkedIn</Link></li>

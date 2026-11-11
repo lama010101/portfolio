@@ -1,0 +1,878 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/studio.css';
+import { config, isPlaceholder } from '../config';
+import { assets } from '../data/assets';
+
+const pageTitle = `${config.name} // Studio — Interactive AI & Web Showcase`;
+const pageDesc =
+  'Playful, colorful, interactive showcase of Laurent Martenot: AI-native Business & Product Builder. Test the live AI Director Simulator, Multilingual QA Arena (EN/FR/ES), and BackToThePast Chrono-Pin Lab.';
+const canonical = new URL('/studio/', config.siteUrl).href;
+const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
+
+const clientConfig = {
+  email: isPlaceholder(config.email) ? '' : config.email,
+  linkedin: isPlaceholder(config.linkedin) ? '' : config.linkedin,
+  gameUrl: isPlaceholder(config.gameUrl) ? '' : config.gameUrl,
+  likedUrl: isPlaceholder(config.likedUrl) ? '' : config.likedUrl,
+  promptPulseUrl: isPlaceholder(config.promptPulseUrl) ? '' : config.promptPulseUrl,
+};
+---
+<!doctype html>
+<html lang="en" data-studio-theme="prism">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="theme-color" content="#FCF9F2" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={config.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+  </head>
+  <body class="studio-body">
+    <a class="st-skip" href="#main">Skip to content</a>
+
+    <div class="st-progress" aria-hidden="true">
+      <div class="st-progress-bar" id="st-progress-bar"></div>
+    </div>
+
+    <header class="st-header">
+      <div class="st-wrap st-topbar">
+        <a class="st-brand" href="/studio/" aria-label={`${config.name} Studio home`}>
+          <span class="st-brand-mark" aria-hidden="true">LM</span>
+          <span>Laurent Martenot</span>
+          <span class="st-brand-tag">Studio</span>
+        </a>
+
+        <nav class="st-nav" aria-label="Studio navigation">
+          <a href="#director">AI Director Lab</a>
+          <a href="#qa-arena">EN/FR/ES QA</a>
+          <a href="#chrono-lab">Chrono-Pin</a>
+          <a href="#projects">Projects</a>
+          <a href="#hire">Hire / Partner</a>
+          <a href="#about">About</a>
+          <a href="/portfolios/" class="st-nav-editions">All Portfolios (3)</a>
+        </nav>
+
+        <div class="st-controls">
+          <div class="st-theme-dots" role="group" aria-label="Switch color palette">
+            <button
+              type="button"
+              class="st-theme-dot"
+              style="background: linear-gradient(135deg, #ff3366, #2952ff)"
+              data-theme-pick="prism"
+              aria-pressed="true"
+              title="Prism Daylight"
+              aria-label="Prism Daylight palette"
+            ></button>
+            <button
+              type="button"
+              class="st-theme-dot"
+              style="background: linear-gradient(135deg, #0b0d17, #00f5a0)"
+              data-theme-pick="arcade"
+              aria-pressed="false"
+              title="Cyber Arcade"
+              aria-label="Cyber Arcade dark palette"
+            ></button>
+            <button
+              type="button"
+              class="st-theme-dot"
+              style="background: linear-gradient(135deg, #e63946, #f4a200)"
+              data-theme-pick="bauhaus"
+              aria-pressed="false"
+              title="Bauhaus Kinetic"
+              aria-label="Bauhaus Kinetic palette"
+            ></button>
+            <button
+              type="button"
+              class="st-theme-dot"
+              style="background: linear-gradient(135deg, #ff7a00, #ef2356)"
+              data-theme-pick="sunset"
+              aria-pressed="false"
+              title="Tropical Sundown"
+              aria-label="Tropical Sundown palette"
+            ></button>
+          </div>
+
+          <button type="button" class="st-pill-btn" id="st-sound-btn" aria-pressed="false">
+            <span id="st-sound-label">Sound: OFF</span>
+          </button>
+
+          <button
+            type="button"
+            class="st-pill-btn st-menu-toggle"
+            id="st-menu-btn"
+            aria-expanded="false"
+            aria-controls="st-mobile-drawer"
+          >
+            Menu
+          </button>
+        </div>
+      </div>
+
+      <div class="st-mobile-drawer" id="st-mobile-drawer" hidden>
+        <nav class="st-mobile-links" aria-label="Mobile navigation">
+          <a href="#director"><span>01 · AI Director Simulator</span><span>&rarr;</span></a>
+          <a href="#qa-arena"><span>02 · EN/FR/ES QA X-Ray Arena</span><span>&rarr;</span></a>
+          <a href="#chrono-lab"><span>03 · Chrono-Pin Timeline Game</span><span>&rarr;</span></a>
+          <a href="#projects"><span>04 · Selected Projects</span><span>&rarr;</span></a>
+          <a href="#hire"><span>05 · Mission Composer (Hire / Partner)</span><span>&rarr;</span></a>
+          <a href="#about"><span>06 · About &amp; Verified Background</span><span>&rarr;</span></a>
+          <a href="/portfolios/"><span>Switch Edition · All Portfolios (3)</span><span>&rarr;</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ==================== HERO ==================== -->
+      <section class="st-hero" id="st-hero">
+        <canvas class="st-canvas" id="st-hero-canvas" aria-hidden="true"></canvas>
+
+        <div class="st-wrap">
+          <div class="st-hero-grid">
+            <div>
+              <div class="st-kicker">
+                <span class="st-pulse-dot" aria-hidden="true"></span>
+                <span>{config.tagline} · Interactive Lab</span>
+              </div>
+
+              <h1>
+                I turn business ideas into <span class="st-gradient-word">working products</span> using AI.
+              </h1>
+
+              <p class="st-hero-lead">
+                <strong>Business person who ships real products with AI, without writing code.</strong>
+                I define the problem, structure the requirements, direct AI coding agents, challenge their mistakes, and iterate until the product delivers real value.
+              </p>
+
+              <div class="st-actions">
+                <a class="st-btn st-btn-coral" href="#hire">How can I help you?</a>
+                <a class="st-btn st-btn-cobalt" href="#director">Test My AI Workflow</a>
+                <a class="st-btn st-btn-amber" href="#chrono-lab">Play Chrono-Pin</a>
+                <a class="st-btn st-btn-surface" href="/portfolios/">All Portfolios</a>
+              </div>
+            </div>
+
+            <div class="st-hero-stage" aria-label="Interactive capability overview">
+              <div class="st-stage-top">
+                <span class="st-traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="st-stage-label">Human Direction × AI Execution</span>
+              </div>
+
+              <div class="st-role-equation">
+                <div class="st-eq-pill">
+                  <div class="st-eq-icon" style="background: var(--c-coral)" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M3 17l6-6 4 4 8-8" /><path d="M14 7h7v7" />
+                    </svg>
+                  </div>
+                  <strong>Business Thinking</strong>
+                </div>
+                <div class="st-eq-pill">
+                  <div class="st-eq-icon" style="background: var(--c-cobalt)" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </div>
+                  <strong>Product Vision</strong>
+                </div>
+                <div class="st-eq-pill">
+                  <div class="st-eq-icon" style="background: var(--c-mint); color: #052016" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                  </div>
+                  <strong>AI Execution</strong>
+                </div>
+              </div>
+
+              <div class="st-live-ticker">
+                <span class="st-live-ticker-label">Active Capability Stream</span>
+                <span class="st-typewriter" id="st-typewriter">BackToThePast (Guess-History) multiplayer rounds</span><span class="st-caret" aria-hidden="true"></span>
+              </div>
+
+              <p style="font-size: 0.8rem; color: var(--ink-soft); margin: 0.85rem 0 0">
+                Tip: Click anywhere on the hero background to send chromatic shockwaves, switch the 4 color worlds in the top bar, or toggle harmonic synth sound FX.
+              </p>
+            </div>
+          </div>
+
+          <div class="st-proof-strip" aria-label="Key proof points">
+            <div class="st-proof-card">
+              <div class="st-proof-badge" style="background: var(--c-coral)">QA</div>
+              <div>
+                <strong>Google &amp; Apple i18n QA</strong>
+                <span>Past software &amp; product testing in internationalization teams</span>
+              </div>
+            </div>
+            <div class="st-proof-card">
+              <div class="st-proof-badge" style="background: var(--c-cobalt)">3+1</div>
+              <div>
+                <strong>EN · FR · ES Fluent</strong>
+                <span>Plus conversational Portuguese · International perspective</span>
+              </div>
+            </div>
+            <div class="st-proof-card">
+              <div class="st-proof-badge" style="background: var(--c-mint); color: #052016">AI</div>
+              <div>
+                <strong>Ships With AI Daily</strong>
+                <span>18 months directing AI models &amp; coding agents into products</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== MARQUEE ==================== -->
+      <div class="st-marquee" aria-hidden="true">
+        <div class="st-marquee-track">
+          <span>
+            AI-NATIVE PRODUCT BUILDER <i class="st-marquee-sep">/</i> MULTILINGUAL QA (EN · FR · ES) <i class="st-marquee-sep">/</i> GOOGLE &amp; APPLE I18N BACKGROUND <i class="st-marquee-sep">/</i> BACKTOTHEPAST (GUESS-HISTORY) <i class="st-marquee-sep">/</i> SPEC TO VERIFIED RELEASE <i class="st-marquee-sep">/</i>
+          </span>
+          <span>
+            AI-NATIVE PRODUCT BUILDER <i class="st-marquee-sep">/</i> MULTILINGUAL QA (EN · FR · ES) <i class="st-marquee-sep">/</i> GOOGLE &amp; APPLE I18N BACKGROUND <i class="st-marquee-sep">/</i> BACKTOTHEPAST (GUESS-HISTORY) <i class="st-marquee-sep">/</i> SPEC TO VERIFIED RELEASE <i class="st-marquee-sep">/</i>
+          </span>
+        </div>
+      </div>
+
+      <!-- ==================== WHAT I BRING ==================== -->
+      <section class="st-section" aria-labelledby="bring-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">What I Bring</span>
+            <h2 id="bring-heading">Not a coder. The product decision-maker behind the AI.</h2>
+            <p>
+              I don't need to write every line of code. I understand the commercial problem, define the right product, direct AI coding agents to build it, and refuse to ship outputs that fail quality checks.
+            </p>
+          </div>
+
+          <div class="st-pillars">
+            <article class="st-card-3d">
+              <span class="st-card-num" style="background: var(--c-coral)">01</span>
+              <h3>Business &amp; Strategy</h3>
+              <p>
+                Understanding markets, customers, commercial opportunities, business models and practical value creation — grounded in international B2B sales, startup project management, and MBA training.
+              </p>
+            </article>
+            <article class="st-card-3d">
+              <span class="st-card-num" style="background: var(--c-cobalt)">02</span>
+              <h3>AI Orchestration</h3>
+              <p>
+                Using AI models and coding agents to explore possibilities, structure architecture, challenge weak assumptions, and coordinate multi-step implementation.
+              </p>
+            </article>
+            <article class="st-card-3d">
+              <span class="st-card-num" style="background: var(--c-violet)">03</span>
+              <h3>Product Building &amp; QA</h3>
+              <p>
+                Turning concepts into crisp specifications, evaluating every build across languages and edge cases, catching AI hallucinations, and iterating to a working release.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== LAB 1: AI DIRECTOR'S CONSOLE ==================== -->
+      <section class="st-section st-section-alt" id="director" aria-labelledby="director-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">Interactive Lab 01 · How I Work With AI</span>
+            <h2 id="director-heading">AI is not just a tool I use. It is how I build.</h2>
+            <p>
+              Test-drive my 8-step product loop below. Pick a real product scenario, switch output locales (<strong>EN / FR / ES</strong>), and see what happens when an unchallenged AI build meets human product supervision.
+            </p>
+          </div>
+
+          <div class="st-console">
+            <div class="st-console-bar">
+              <div class="st-scenario-tabs" role="tablist" aria-label="Product scenarios">
+                <button type="button" class="st-tab" role="tab" data-scenario="bttp" aria-selected="true">
+                  1. BackToThePast Round
+                </button>
+                <button type="button" class="st-tab" role="tab" data-scenario="i18n" aria-selected="false">
+                  2. EN/FR/ES Output Gate
+                </button>
+                <button type="button" class="st-tab" role="tab" data-scenario="liked" aria-selected="false">
+                  3. LIKED Collection UX
+                </button>
+              </div>
+
+              <div class="st-console-controls">
+                <div class="st-seg" role="group" aria-label="Preview language">
+                  <button type="button" data-sim-lang="en" aria-pressed="true">EN</button>
+                  <button type="button" data-sim-lang="fr" aria-pressed="false">FR</button>
+                  <button type="button" data-sim-lang="es" aria-pressed="false">ES</button>
+                </div>
+
+                <div class="st-seg" role="group" aria-label="Supervision mode">
+                  <button type="button" data-sim-mode="naive" aria-pressed="true">Catch AI Mistake</button>
+                  <button type="button" data-sim-mode="directed" aria-pressed="false">Full Directed Pass</button>
+                </div>
+
+                <button type="button" class="st-btn st-btn-coral st-btn-sm" id="st-run-sim">
+                  Run AI Build Loop &rarr;
+                </button>
+              </div>
+            </div>
+
+            <div class="st-console-body">
+              <ol class="st-pipeline" id="st-pipeline" aria-label="8-step AI product methodology">
+                <li class="st-pipe-step"><span class="st-pipe-idx">01</span><span>Identify problem or opportunity</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">02</span><span>Define business objective</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">03</span><span>Explore solutions with AI</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">04</span><span>Translate into precise requirements</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">05</span><span>Direct AI coding agents to implement</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">06</span><span>Evaluate the implementation</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">07</span><span>Challenge errors &amp; inconsistencies</span><span class="st-pipe-badge">Pending</span></li>
+                <li class="st-pipe-step"><span class="st-pipe-idx">08</span><span>Iterate until objectives are met</span><span class="st-pipe-badge">Pending</span></li>
+              </ol>
+
+              <div class="st-console-output" aria-live="polite">
+                <div>
+                  <div class="st-out-box" style="margin-bottom: 0.75rem">
+                    <div class="st-out-kicker">Business Problem</div>
+                    <div id="st-out-brief"></div>
+                  </div>
+
+                  <div class="st-out-box" style="margin-bottom: 0.75rem">
+                    <div class="st-out-kicker">Product Requirements Sent to Agent</div>
+                    <div id="st-out-spec"></div>
+                  </div>
+
+                  <div class="st-flaw-banner" id="st-flaw-banner" hidden>
+                    <div class="st-out-kicker" style="color: #ff8aa8">Step 06 Alert · When The AI Got It Wrong</div>
+                    <p id="st-flaw-text" style="font-size: 0.86rem; margin-bottom: 0.75rem"></p>
+                    <button type="button" class="st-btn st-btn-amber st-btn-sm" id="st-fix-sim">
+                      Challenge &amp; Redirect Agent &rarr;
+                    </button>
+                  </div>
+
+                  <div class="st-verified-banner" id="st-verified-banner" hidden>
+                    <div class="st-out-kicker" style="color: var(--c-mint)">Step 08 · Product Supervision Applied</div>
+                    <p id="st-verified-text" style="font-size: 0.86rem; margin: 0"></p>
+                  </div>
+                </div>
+
+                <div class="st-out-box">
+                  <div class="st-out-kicker">Live Resulting Build Preview</div>
+                  <div id="st-out-preview" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center">
+            <span class="st-ph" data-placeholder>[[PLACEHOLDER: real prompt transcripts, 2-3 documented Guess-History AI-correction logs &amp; workflow video embed]]</span>
+            <a class="st-btn st-btn-surface st-btn-sm" href="/how-i-work/">Open Full Case Study Template &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== LAB 2: MULTILINGUAL QA ARENA ==================== -->
+      <section class="st-section" id="qa-arena" aria-labelledby="qa-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">Interactive Lab 02 · Primary Offer Demo</span>
+            <h2 id="qa-heading">Multilingual AI Output Evaluation (EN · FR · ES).</h2>
+            <p>
+              Fluent LLM prose still hides register errors, locale traps, literal anglicisms, and fabricated citations. Built on past i18n QA experience at <strong>Google and Apple</strong>, tap the underlined segments below to inspect what automated checks miss.
+            </p>
+          </div>
+
+          <div class="st-qa-shell">
+            <div class="st-qa-header">
+              <div class="st-lang-tabs" role="tablist" aria-label="Evaluation language">
+                <button type="button" class="st-lang-btn" role="tab" data-qa-lang="fr" aria-selected="true">
+                  Francais (FR)
+                </button>
+                <button type="button" class="st-lang-btn" role="tab" data-qa-lang="es" aria-selected="false">
+                  Espanol (ES)
+                </button>
+                <button type="button" class="st-lang-btn" role="tab" data-qa-lang="en" aria-selected="false">
+                  English Fact-Check (EN)
+                </button>
+              </div>
+
+              <div class="st-qa-score" id="st-qa-score" aria-live="polite">Issues Caught: 0 / 3</div>
+            </div>
+
+            <div class="st-qa-grid">
+              <div class="st-qa-sample">
+                <div class="st-qa-context" id="st-qa-context"></div>
+                <p class="st-qa-passage" id="st-qa-passage"></p>
+
+                <div class="st-actions" style="margin-top: 1.25rem">
+                  <button type="button" class="st-btn st-btn-amber st-btn-sm" id="st-qa-reveal">
+                    Reveal All 3 Issues
+                  </button>
+                  <button type="button" class="st-btn st-btn-mint st-btn-sm" id="st-qa-toggle-fix" aria-pressed="false">
+                    Apply Verified Fixes
+                  </button>
+                </div>
+              </div>
+
+              <div class="st-qa-inspector">
+                <div>
+                  <h3 style="font-size: 1.15rem; margin-bottom: 0.65rem">Evaluator Findings Log</h3>
+                  <ul class="st-qa-findings" id="st-qa-findings"></ul>
+                </div>
+                <div>
+                  <a class="st-btn st-btn-cobalt st-btn-sm" href="#hire">Need EN/FR/ES QA? Build a Brief &rarr;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== LAB 3: CHRONO-PIN (BACKTOTHEPAST) ==================== -->
+      <section class="st-section st-section-alt" id="chrono-lab" aria-labelledby="chrono-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">Interactive Lab 03 · BackToThePast / Guess-History</span>
+            <h2 id="chrono-heading">Making history interactive. Making historical knowledge measurable.</h2>
+            <p>
+              Scrub the timeline below to pin five verified world events by year — a playable taste of <strong>BackToThePast (Guess-History)</strong>, the live multiplayer history and geography game I directed AI to build.
+            </p>
+          </div>
+
+          <div class="st-chrono-layout">
+            <div class="st-chrono-card">
+              <div class="st-chrono-top">
+                <span class="st-eyebrow" style="margin: 0">Chrono-Pin Mini-Challenge</span>
+                <div class="st-chrono-dots" id="st-chrono-dots" aria-hidden="true"></div>
+                <strong id="st-chrono-score" aria-live="polite">Score: 0 / 5000</strong>
+              </div>
+
+              <div class="st-chrono-clue">
+                <span class="st-chrono-era" id="st-chrono-era"></span>
+                <p class="st-chrono-event" id="st-chrono-event"></p>
+              </div>
+
+              <div class="st-year-readout">
+                <button type="button" class="st-step-btn" data-year-step="-1" aria-label="Subtract 1 year">&minus;</button>
+                <div class="st-year-big" id="st-chrono-year" aria-live="polite">1900</div>
+                <button type="button" class="st-step-btn" data-year-step="1" aria-label="Add 1 year">+</button>
+              </div>
+
+              <div class="st-slider-wrap">
+                <label for="st-chrono-slider" class="st-skip">Select historical year between 1750 and 2020</label>
+                <input
+                  id="st-chrono-slider"
+                  class="st-slider"
+                  type="range"
+                  min="1750"
+                  max="2020"
+                  value="1900"
+                />
+                <div class="st-slider-ticks" aria-hidden="true">
+                  <span>1750</span>
+                  <span>1820</span>
+                  <span>1890</span>
+                  <span>1955</span>
+                  <span>2020</span>
+                </div>
+              </div>
+
+              <div class="st-actions">
+                <button type="button" class="st-btn st-btn-coral" id="st-chrono-lock">Lock In Year</button>
+                <button type="button" class="st-btn st-btn-cobalt" id="st-chrono-next" hidden>Next Event &rarr;</button>
+                <button type="button" class="st-btn st-btn-mint" id="st-chrono-reset" hidden>Play New Run</button>
+              </div>
+
+              <div class="st-chrono-feedback" id="st-chrono-feedback" aria-live="polite" hidden></div>
+            </div>
+
+            <div class="st-bttp-side">
+              <div class="st-bttp-box">
+                <span class="st-status-pill">Live Game Today</span>
+                <h3>BackToThePast (Guess-History)</h3>
+                <p style="font-size: 0.94rem; color: var(--ink-soft)">
+                  Multiplayer historical &amp; geographic knowledge game conceived and directed with AI.
+                </p>
+                <span class="st-ph st-ph-block" data-placeholder>[[PLACEHOLDER: accurate game round rules &amp; scoring summary]]</span>
+                <div class="st-actions" style="margin-top: 0.75rem">
+                  {isPlaceholder(config.gameUrl) ? (
+                    <button type="button" class="st-btn st-btn-coral st-btn-sm" data-cfg-link="gameUrl">
+                      Play Live Game &rarr;
+                    </button>
+                  ) : (
+                    <a class="st-btn st-btn-coral st-btn-sm" href={config.gameUrl} target="_blank" rel="noopener noreferrer">
+                      Play Live Game &rarr;
+                    </a>
+                  )}
+                  <a class="st-btn st-btn-surface st-btn-sm" href="/backtothepast/">Full Partner Page &rarr;</a>
+                </div>
+                {isPlaceholder(config.gameUrl) && (
+                  <div style="margin-top: 0.6rem">
+                    <span class="st-ph" data-placeholder>[[PLACEHOLDER: live BackToThePast / Guess-History game URL]]</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="st-bttp-box">
+                <span class="st-eyebrow">Future Ambition · Seeking Partners</span>
+                <h3 style="font-size: 1.2rem">Sourced Historical Dataset &amp; AI Benchmarking</h3>
+                <p style="font-size: 0.9rem; color: var(--ink-soft)">
+                  Goal (not claimed as complete today): build a verified historical events dataset supporting education, fact verification, and AI factual accuracy benchmarking — in collaboration with historians, universities, museums, publishers, and AI labs.
+                </p>
+                <span class="st-ph st-ph-block" data-placeholder>[[PLACEHOLDER: 50-100 event sample dataset &amp; provenance/licensing methodology — in development]]</span>
+                <a class="st-btn st-btn-cobalt st-btn-sm" href="#hire">Partner With Me &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SELECTED PROJECTS ==================== -->
+      <section class="st-section" id="projects" aria-labelledby="projects-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">Selected Projects</span>
+            <h2 id="projects-heading">Products &amp; concepts directed with AI.</h2>
+            <p>
+              Every project is labelled honestly by its current stage — launched games, prototypes, and concepts are never conflated.
+            </p>
+          </div>
+
+          <div class="st-filter-bar" role="tablist" aria-label="Filter projects by stage">
+            <button type="button" class="st-lang-btn" data-proj-filter="all" aria-selected="true">All Projects (3)</button>
+            <button type="button" class="st-lang-btn" data-proj-filter="live" aria-selected="false">Live Game (1)</button>
+            <button type="button" class="st-lang-btn" data-proj-filter="stage-tbd" aria-selected="false">Apps &amp; Concepts (2)</button>
+          </div>
+
+          <div class="st-projects-grid">
+            <article class="st-proj-card st-card-3d" style="padding: 0" data-proj-cat="live">
+              <div class="st-proj-shot">
+                {assets.gameScreen1 ? (
+                  <img src={assets.gameScreen1} alt="BackToThePast game interface" loading="lazy" />
+                ) : (
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: BackToThePast game screenshot]]</span>
+                )}
+              </div>
+              <div class="st-proj-body">
+                <span class="st-status-pill">Live Game</span>
+                <h3>BackToThePast <span style="font-weight: 400; font-size: 0.95rem">(Guess-History)</span></h3>
+                <p style="font-size: 0.94rem">
+                  Interactive multiplayer historical knowledge game with the ambition to evolve into a curated historical data and AI evaluation platform.
+                </p>
+                <div class="st-proj-details">
+                  Shows: live game · product concept · multiplayer challenge · historical benchmarking potential.
+                </div>
+                <div class="st-actions" style="margin-top: auto">
+                  <a class="st-btn st-btn-coral st-btn-sm" href="/backtothepast/">Explore BackToThePast &rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="st-proj-card st-card-3d" style="padding: 0" data-proj-cat="stage-tbd">
+              <div class="st-proj-shot">
+                {assets.likedScreen ? (
+                  <img src={assets.likedScreen} alt="LIKED application screenshot" loading="lazy" />
+                ) : (
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: LIKED screenshot]]</span>
+                )}
+              </div>
+              <div class="st-proj-body">
+                <div style="margin-bottom: 0.75rem">
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: status — launched / prototype / concept]]</span>
+                </div>
+                <h3>LIKED</h3>
+                <p style="font-size: 0.94rem">
+                  Digital application designed to organize and manage personal interests, favorites, and curated collections without friction.
+                </p>
+                <div class="st-proj-details">
+                  Shows: product problem · application concept · user experience · AI-assisted development workflow.
+                </div>
+                <div class="st-actions" style="margin-top: auto">
+                  {isPlaceholder(config.likedUrl) ? (
+                    <button type="button" class="st-btn st-btn-cobalt st-btn-sm" data-cfg-link="likedUrl">
+                      Explore LIKED &rarr;
+                    </button>
+                  ) : (
+                    <a class="st-btn st-btn-cobalt st-btn-sm" href={config.likedUrl} target="_blank" rel="noopener noreferrer">
+                      Explore LIKED &rarr;
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+
+            <article class="st-proj-card st-card-3d" style="padding: 0" data-proj-cat="stage-tbd">
+              <div class="st-proj-shot">
+                {assets.promptPulseScreen ? (
+                  <img src={assets.promptPulseScreen} alt="PromptPulse concept visual" loading="lazy" />
+                ) : (
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: PromptPulse screenshot or concept visual]]</span>
+                )}
+              </div>
+              <div class="st-proj-body">
+                <div style="margin-bottom: 0.75rem">
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: status — launched / prototype / concept]]</span>
+                </div>
+                <h3>PromptPulse</h3>
+                <p style="font-size: 0.94rem">
+                  Concept exploring collective intelligence, shared answers, and AI evaluation through structured human-like participation.
+                </p>
+                <div class="st-proj-details">
+                  Shows: business concept · participation mechanics · AI evaluation &amp; data applications.
+                </div>
+                <div class="st-actions" style="margin-top: auto">
+                  {isPlaceholder(config.promptPulseUrl) ? (
+                    <button type="button" class="st-btn st-btn-amber st-btn-sm" data-cfg-link="promptPulseUrl">
+                      Explore PromptPulse &rarr;
+                    </button>
+                  ) : (
+                    <a class="st-btn st-btn-amber st-btn-sm" href={config.promptPulseUrl} target="_blank" rel="noopener noreferrer">
+                      Explore PromptPulse &rarr;
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== HIRE ME / PARTNER MISSION COMPOSER ==================== -->
+      <section class="st-section st-section-alt" id="hire" aria-labelledby="hire-heading">
+        <div class="st-wrap">
+          <div class="st-sec-head">
+            <span class="st-eyebrow">Hire Me · Partner With Me</span>
+            <h2 id="hire-heading">Let's turn your next idea into something real.</h2>
+            <p>
+              Toggle one or more cards below to assemble a structured inquiry brief in real time. Not sure which fits? Just describe the problem.
+            </p>
+          </div>
+
+          <div class="st-composer">
+            <div class="st-mission-list" role="group" aria-label="Select ways to work together">
+              <button
+                type="button"
+                class="st-mission-item"
+                data-mission="Multilingual AI output evaluation (EN/FR/ES)"
+                aria-pressed="true"
+              >
+                <span class="st-mission-check" aria-hidden="true">&#10003;</span>
+                <span>
+                  <strong>a) Multilingual AI output evaluation (EN/FR/ES)</strong>
+                  <span>Assessing accuracy, tone, and cultural fit across English, French, and Spanish outputs.</span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="st-mission-item"
+                data-mission="Localization and i18n quality testing for AI products"
+                aria-pressed="false"
+              >
+                <span class="st-mission-check" aria-hidden="true">+</span>
+                <span>
+                  <strong>b) Localization &amp; i18n quality testing for AI products</strong>
+                  <span>Testing interfaces and AI flows across locales, backed by Google and Apple i18n QA experience.</span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="st-mission-item"
+                data-mission="Writing and testing evaluation guidelines and test cases"
+                aria-pressed="false"
+              >
+                <span class="st-mission-check" aria-hidden="true">+</span>
+                <span>
+                  <strong>c) Evaluation guidelines &amp; repeatable test cases</strong>
+                  <span>Translating product quality standards into clear rubrics and edge-case test suites.</span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="st-mission-item"
+                data-mission="Directing AI-built products from idea to working release"
+                aria-pressed="false"
+              >
+                <span class="st-mission-check" aria-hidden="true">+</span>
+                <span>
+                  <strong>d) Directing AI-built products from idea to release</strong>
+                  <span>Product conception, specs, AI coding-agent coordination, and iterative validation.</span>
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="st-mission-item"
+                data-mission="BackToThePast historical dataset or AI benchmarking partnership"
+                aria-pressed="false"
+              >
+                <span class="st-mission-check" aria-hidden="true">+</span>
+                <span>
+                  <strong>Partner: BackToThePast &amp; Historical Benchmarking</strong>
+                  <span>For AI labs, historians, universities, museums, and educational or data partners.</span>
+                </span>
+              </button>
+            </div>
+
+            <div class="st-brief-panel">
+              <div class="st-out-kicker" style="color: var(--c-amber)">Live Mission Brief Composer</div>
+              <label for="st-brief-note" style="font-size: 0.85rem; font-weight: 700; display: block; margin-top: 0.5rem">
+                Optional 1-line problem or context:
+              </label>
+              <input
+                id="st-brief-note"
+                class="st-brief-input"
+                type="text"
+                placeholder="e.g. Evaluating EN/FR/ES customer assistant outputs before Q3 launch"
+              />
+
+              <div class="st-brief-preview" id="st-brief-preview" aria-live="polite"></div>
+
+              <div class="st-actions">
+                <button type="button" class="st-btn st-btn-coral st-btn-sm" id="st-send-brief">
+                  Tell Me What You Need &rarr;
+                </button>
+                <button type="button" class="st-btn st-btn-mint st-btn-sm" id="st-copy-brief">
+                  Copy Brief
+                </button>
+              </div>
+
+              {isPlaceholder(config.email) && (
+                <div style="margin-top: 0.85rem">
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: email address — set in src/config.ts]]</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div class="st-pillars" style="margin-top: 2.25rem">
+            <div class="st-card-3d">
+              <h3 style="font-size: 1.15rem">AI Product &amp; Business Development</h3>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); margin: 0">
+                Product conception · business opportunity analysis · requirements · AI-assisted development coordination · product validation.
+              </p>
+            </div>
+            <div class="st-card-3d">
+              <h3 style="font-size: 1.15rem">AI Solutions &amp; Workflow Development</h3>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); margin: 0">
+                Identify processes suitable for AI · design workflows · coordinate implementation · evaluate reliability · improve efficiency.
+              </p>
+            </div>
+            <div class="st-card-3d">
+              <h3 style="font-size: 1.15rem">AI Evaluation &amp; Multilingual QA</h3>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); margin: 0">
+                Multilingual interface evaluation · localization QA · AI output evaluation · cultural &amp; linguistic consistency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ABOUT & VERIFIED BACKGROUND ==================== -->
+      <section class="st-section" id="about" aria-labelledby="about-heading">
+        <div class="st-wrap">
+          <div class="st-about-grid">
+            <div class="st-portrait-card">
+              <div class:list={['st-portrait-slot', { 'has-img': !!assets.portrait }]}>
+                {assets.portrait ? (
+                  <img src={assets.portrait} alt={`Portrait of ${config.name}`} loading="lazy" />
+                ) : (
+                  <span class="st-ph" data-placeholder>[[PLACEHOLDER: real professional photograph — never AI-generated]]</span>
+                )}
+              </div>
+
+              <div class="st-clock-box" aria-label="Timezone availability">
+                <div class="st-clock-row">
+                  <span>Base:</span>
+                  <strong>Thailand (Remote / Overnight OK)</strong>
+                </div>
+                <div class="st-clock-row">
+                  <span>Laurent's Time:</span>
+                  <strong id="st-clock-th">--:--:-- ICT</strong>
+                </div>
+                <div class="st-clock-row">
+                  <span>Your Local Time:</span>
+                  <strong id="st-clock-local">--:--:--</strong>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <span class="st-eyebrow">About &amp; Verified Story</span>
+              <h2 id="about-heading" style="font-size: clamp(1.85rem, 4vw, 2.8rem)">A business person who builds.</h2>
+              <p>
+                I'm a French-American business and sales professional with an international perspective and an enduring interest in technology and innovation. Over the past 18 months, I've developed practical hands-on experience using AI to conceive, direct, and build digital products independently.
+              </p>
+              <p>
+                My background includes software and product testing in internationalization (i18n) teams at <strong>Google and Apple</strong>, international B2B sales, startup project management, and an <strong>MBA from ICN Business School, Nancy, France (1990)</strong>.
+              </p>
+
+              <span class="st-ph st-ph-block" data-placeholder>[[PLACEHOLDER: verified career roles, employers &amp; exact dates from CV + confirm second American MBA from CV]]</span>
+
+              <div class="st-lang-bars" aria-label="Language proficiency">
+                <div class="st-lang-bar">
+                  <div class="st-lang-bar-top"><span>English · Francais · Espanol</span><span>Fluent</span></div>
+                  <div class="st-lang-meter"><span style="width: 100%; background: linear-gradient(90deg, var(--c-coral), var(--c-cobalt), var(--c-mint))"></span></div>
+                </div>
+                <div class="st-lang-bar">
+                  <div class="st-lang-bar-top"><span>Portugues</span><span>Conversational</span></div>
+                  <div class="st-lang-meter"><span style="width: 62%; background: var(--c-amber)"></span></div>
+                </div>
+              </div>
+
+              <div class="st-actions" style="margin-top: 1.5rem">
+                <button type="button" class="st-btn st-btn-coral" data-cfg-link="email" data-subject="Project or evaluation inquiry">
+                  Email Laurent
+                </button>
+                <button type="button" class="st-btn st-btn-cobalt" data-cfg-link="linkedin">
+                  LinkedIn Profile
+                </button>
+                <a class="st-btn st-btn-surface" href="/portfolios/">Explore All 3 Portfolios &rarr;</a>
+              </div>
+
+              <div style="margin-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.5rem">
+                {isPlaceholder(config.email) && <span class="st-ph" data-placeholder>[[PLACEHOLDER: email address]]</span>}
+                {isPlaceholder(config.linkedin) && <span class="st-ph" data-placeholder>[[PLACEHOLDER: LinkedIn profile URL]]</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="st-footer">
+      <div class="st-wrap st-footer-grid">
+        <div>
+          <strong style="font-size: 1.08rem">{config.name} // Studio</strong>
+          <p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--console-muted)">
+            {config.tagline}. Directed by a human, built with AI. Zero cookies, zero fabricated metrics.
+          </p>
+        </div>
+
+        <ul class="st-footer-links">
+          <li><a href="/portfolios/">All Portfolios (3)</a></li>
+          <li><a href="/">Editorial Edition</a></li>
+          <li><a href="/play/">Laurent.Play Edition</a></li>
+          <li><a href="/about/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <div class="st-toast-host" id="st-toasts" aria-live="polite"></div>
+
+    <script is:inline define:vars={{ clientConfig }}>
+      window.__STUDIO_CONFIG__ = clientConfig;
+    </script>
+    <script is:inline src="/studio/studio.js"></script>
+  </body>
+</html>
