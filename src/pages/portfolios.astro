@@ -6,7 +6,7 @@ import { config } from '../config';
 
 const pageTitle = `All Portfolios | ${config.name}`;
 const pageDesc =
-  'Explore all three portfolio editions for Laurent Martenot (AI-native Business & Product Builder): Editorial Consultancy, Laurent.Play Sticker Arcade, and Laurent // Studio Interactive AI & Web Lab.';
+  'Explore all five portfolio editions for Laurent Martenot (AI-native Business & Product Builder): Editorial Consultancy, Laurent.Play Sticker Arcade, Laurent // Studio Interactive AI & Web Lab, Portfolio V2 Warm Editorial, and Direction — the product-builder lens.';
 const canonical = new URL('/portfolios/', config.siteUrl).href;
 const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
 
@@ -78,6 +78,52 @@ const editions = [
       { label: 'Mission Composer', href: '/studio/#hire' },
     ],
   },
+  {
+    num: 'Edition 04 · New',
+    name: 'Portfolio V2 — Warm Editorial',
+    href: '/v2/',
+    accent: '#DE4B1F',
+    btnClass: 'st-btn-v2',
+    swatches: ['#F4F0E6', '#181510', '#DE4B1F', '#A83A0F'],
+    summary:
+      'Premium editorial consultancy build: warm paper tones, Fraunces & Inter typography, interactive six-stage AI build pipeline, and spec-sheet details — implemented from the merged PORTFOLIO-001 spec.',
+    audience: 'Executives, AI labs & partners who want clarity and craft over noise',
+    highlights: [
+      'Five routes: Home, Hire Me, BackToThePast, How I Work, About & Contact',
+      'Interactive stage-by-stage "How I Work" pipeline + real prompt/agent-instruction slots',
+      'Honest placeholder system — every missing asset is visibly marked, never faked',
+    ],
+    sublinks: [
+      { label: 'Home', href: '/v2/' },
+      { label: 'Hire Me', href: '/v2/hire-me.html' },
+      { label: 'BackToThePast', href: '/v2/backtothepast.html' },
+      { label: 'How I Work', href: '/v2/how-i-work.html' },
+      { label: 'About', href: '/v2/about.html' },
+    ],
+  },
+  {
+    num: 'Edition 05 · New',
+    name: 'Direction — Product Builder Lens',
+    href: '/direction/',
+    accent: '#151712',
+    btnClass: 'st-btn-direction',
+    swatches: ['#F3F1EA', '#151712', '#D9FF57', '#2855D9'],
+    summary:
+      'An adaptive, product-builder lens: audience-switching hero, interactive method explorer, real-time case-study evidence, command palette (⌘K), and honest placeholder discipline throughout.',
+    audience: 'Employers, partners & visitors who want clarity over noise',
+    highlights: [
+      'Five routes: Home, Hire Me, BackToThePast, How I Work, About & Contact',
+      'Interactive audience lens, 6-step method explorer, live correction evidence slots',
+      'Command palette (⌘K), keyboard-first nav, prefers-reduced-motion, WCAG AA',
+    ],
+    sublinks: [
+      { label: 'Home', href: '/direction/' },
+      { label: 'Hire Me', href: '/direction/hire/' },
+      { label: 'BackToThePast', href: '/direction/backtothepast/' },
+      { label: 'How I Work', href: '/direction/process/' },
+      { label: 'About', href: '/direction/about/' },
+    ],
+  },
 ];
 ---
 <!doctype html>
@@ -107,7 +153,7 @@ const editions = [
       }
       @media (min-width: 62rem) {
         .hub-cards {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
         }
       }
       .hub-card {
@@ -193,6 +239,20 @@ const editions = [
         background: #fff;
         transition: max-width 0.3s ease;
       }
+      .st-btn-v2 {
+        background: #de4b1f;
+        color: #fff6ee;
+      }
+      .st-btn-v2:hover {
+        background: #a83a0f;
+      }
+      .st-btn-direction {
+        background: #151712;
+        color: #f3f1ea;
+      }
+      .st-btn-direction:hover {
+        background: #2855d9;
+      }
     </style>
   </head>
   <body class="studio-body">
@@ -212,6 +272,12 @@ const editions = [
           <a class="st-pill-btn" href="/studio/" style="background: var(--c-coral); color: #fff; border-color: var(--border)">
             03 Studio
           </a>
+          <a class="st-pill-btn" href="/v2/" style="background: #de4b1f; color: #fff6ee; border-color: var(--border)">
+            04 V2
+          </a>
+          <a class="st-pill-btn" href="/direction/" style="background: #151712; color: #f3f1ea; border-color: var(--border)">
+            05 Direction
+          </a>
         </div>
       </div>
     </header>
@@ -221,15 +287,15 @@ const editions = [
         <div class="st-wrap">
           <div class="st-kicker">
             <span class="st-pulse-dot" aria-hidden="true"></span>
-            <span>Portfolio Directory · 3 Live Editions</span>
+            <span>Portfolio Directory · 5 Live Editions</span>
           </div>
 
           <h1 style="max-width: 18ch">
-            One builder. <span class="st-gradient-word">Three live portfolios.</span>
+            One builder. <span class="st-gradient-word">Four live portfolios.</span>
           </h1>
 
           <p class="st-hero-lead">
-            Every edition below presents the exact same verified facts and zero fabricated claims — expressed across three distinct product directions: <strong>executive editorial</strong>, <strong>candy sticker arcade</strong>, and <strong>full-power interactive AI &amp; web lab</strong>.
+            Every edition below presents the exact same verified facts and zero fabricated claims — expressed across four distinct product directions: <strong>executive editorial</strong>, <strong>candy sticker arcade</strong>, <strong>full-power interactive AI &amp; web lab</strong>, and <strong>warm editorial minimalism</strong>.
           </p>
 
           <div class="hub-cards" style="margin-top: 2.25rem">
@@ -291,7 +357,7 @@ const editions = [
             <span class="st-eyebrow">Interactive Comparison Stage</span>
             <h2 id="stage-heading">Test any edition right here — Desktop, Tablet, or Mobile.</h2>
             <p>
-              Switch between all three portfolios and resize the live viewport without leaving this hub, or open your favorite edition full-screen.
+              Switch between all four portfolios and resize the live viewport without leaving this hub, or open your favorite edition full-screen.
             </p>
           </div>
 
@@ -306,6 +372,9 @@ const editions = [
                 </button>
                 <button type="button" class="st-tab" data-stage-src="/" aria-selected="false">
                   01 · Editorial
+                </button>
+                <button type="button" class="st-tab" data-stage-src="/v2/" aria-selected="false">
+                  04 · V2 Warm Editorial
                 </button>
               </div>
 
@@ -341,13 +410,14 @@ const editions = [
         <div>
           <strong>{config.name} · Portfolio Hub</strong>
           <p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--console-muted)">
-            {config.tagline}. All three editions live under one roof.
+            {config.tagline}. All four editions live under one roof.
           </p>
         </div>
         <ul class="st-footer-links">
           <li><a href="/">01 Editorial</a></li>
           <li><a href="/play/">02 Laurent.Play</a></li>
           <li><a href="/studio/">03 Laurent // Studio</a></li>
+          <li><a href="/v2/">04 Portfolio V2</a></li>
           <li><a href="/about/#contact">Contact</a></li>
         </ul>
       </div>

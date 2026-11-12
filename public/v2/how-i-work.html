@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I Work With AI — Laurent Martenot</title>
+<meta name="description" content="How Laurent Martenot directs AI to build real products: business problem, product definition, AI orchestration, implementation, validation, iteration — with a real case study.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How I Work With AI — Laurent Martenot">
+<meta property="og:description" content="AI is not just a tool I use. It is how I build. A repeatable method from business problem to working product.">
+<meta property="og:image" content="assets/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How I Work With AI — Laurent Martenot">
+<meta name="twitter:description" content="AI is not just a tool I use. It is how I build.">
+<meta name="twitter:image" content="assets/og.svg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;550;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="how-i-work">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Laurent Martenot — home">
+      <span class="mark">LM</span>
+      <span>Laurent Martenot</span>
+      <span class="tag">Portfolio—001</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="hire-me.html">Hire Me</a>
+      <a href="backtothepast.html">BackToThePast</a>
+      <a href="how-i-work.html" aria-current="page">How I Work</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a class="btn btn-ink btn-sm header-cta" href="hire-me.html">Hire Me <span class="arr">→</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Mobile">
+    <a href="index.html"><span class="idx">01</span>Home</a>
+    <a href="hire-me.html"><span class="idx">02</span>Hire Me</a>
+    <a href="backtothepast.html"><span class="idx">03</span>BackToThePast</a>
+    <a href="how-i-work.html"><span class="idx">04</span>How I Work</a>
+    <a href="about.html"><span class="idx">05</span>About &amp; Contact</a>
+  </nav>
+  <div class="menu-foot">
+    <a class="btn btn-ink" href="hire-me.html">Hire Me <span class="arr">→</span></a>
+    <a class="btn btn-line" href="about.html#contact">Get in touch</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="index.html">Home</a> / How I Work</p>
+      <p class="eyebrow"><span class="num">How I Work With AI</span> — The differentiator</p>
+      <h1 class="display" style="margin-top:1.2rem">AI is not just a tool I use.<br><em class="it">It is how I build.</em></h1>
+      <p class="lede">My contribution isn't asking AI questions — it's running a disciplined product operation where AI models and coding agents do the implementation, and I do the deciding, directing and verifying.</p>
+      <div class="hero-actions">
+        <a class="btn btn-ink btn-lg" href="#case-study">Read the case study <span class="arr">→</span></a>
+        <a class="btn btn-line btn-lg" href="hire-me.html">Work with me this way</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PIPELINE ============ -->
+  <section aria-labelledby="pipeline-h">
+    <div class="wrap">
+      <div class="section-head" data-rv>
+        <div>
+          <p class="eyebrow"><span class="num">01</span> — The method</p>
+          <h2 class="h2" id="pipeline-h">Six stages, <em class="it">zero hand-waving.</em></h2>
+        </div>
+        <p class="aside">Every project runs the same loop. Click a stage to see what happens in it and what comes out the other side.</p>
+      </div>
+
+      <div class="pipeline" data-rv>
+        <div class="stage-list" data-stepper role="tablist" aria-label="Build stages">
+          <button class="stage-btn" role="tab" data-kicker="Frame" data-title="Find the real problem"
+            data-desc="Start from the business, not the technology. I interview the need, study the market context and isolate what actually has to be true for this to be worth building. AI helps me explore — I decide what matters."
+            data-output="A one-page opportunity brief: the problem, the audience, the commercial angle.">
+            <span class="s-num">01</span><span><span class="s-title">Business problem</span><span class="s-sub">Frame the need</span></span>
+          </button>
+          <button class="stage-btn" role="tab" data-kicker="Specify" data-title="Turn it into precise requirements"
+            data-desc="Ambition becomes specification. I write functional requirements, user flows, acceptance criteria and edge cases — the document AI agents execute against and the document I hold them to."
+            data-output="A functional spec + acceptance criteria the build can be tested against.">
+            <span class="s-num">02</span><span><span class="s-title">Product definition</span><span class="s-sub">Write the spec</span></span>
+          </button>
+          <button class="stage-btn" role="tab" data-kicker="Orchestrate" data-title="Brief the models and agents"
+            data-desc="I decompose the spec into tasks sized for AI coding agents, choose the right models for each kind of work, and write the instructions — including the guardrails: what not to touch, what must keep working."
+            data-output="A task breakdown plus agent instructions with explicit constraints."
+            >
+            <span class="s-num">03</span><span><span class="s-title">AI orchestration</span><span class="s-sub">Direct the agents</span></span>
+          </button>
+          <button class="stage-btn" role="tab" data-kicker="Build" data-title="Direct the implementation"
+            data-desc="Agents write the code; I run the project. I sequence work, review every change before it lands, and keep a running list of what must not regress. The agents execute — the accountability stays with me."
+            data-output="Working increments, each reviewed and verified before the next."
+            >
+            <span class="s-num">04</span><span><span class="s-title">Implementation</span><span class="s-sub">Build &amp; review</span></span>
+          </button>
+          <button class="stage-btn" role="tab" data-kicker="Verify" data-title="Evaluate like a customer"
+            data-desc="I test what was built against the spec — not just 'does it run' but 'does it do the job'. For language-facing products this is where my i18n QA background does the heavy lifting: linguistic, functional and cultural checks."
+            data-output="Test results, an issue list ranked by severity, and a verdict."
+            >
+            <span class="s-num">05</span><span><span class="s-title">Validation</span><span class="s-sub">Test &amp; evaluate</span></span>
+          </button>
+          <button class="stage-btn" role="tab" data-kicker="Refine" data-title="Challenge until it's right"
+            data-desc="Errors get challenged, inconsistencies get explained, and the loop repeats until the product meets its objective — or until I can show exactly why it can't yet. Shipping means the job is done, not that the code compiles."
+            data-output="A product that meets its objective — or a documented reason it doesn't yet."
+            >
+            <span class="s-num">06</span><span><span class="s-title">Iteration</span><span class="s-sub">Refine to goal</span></span>
+          </button>
+        </div>
+        <div class="stage-panel" data-stepper-panel aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY ============ -->
+  <section aria-labelledby="case-h" id="case-study" style="background:var(--paper-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head" data-rv>
+        <div>
+          <p class="eyebrow"><span class="num">02</span> — Case study</p>
+          <h2 class="h2" id="case-h">Building Guess-History<br><em class="it">with AI.</em></h2>
+        </div>
+        <p class="aside">The full anatomy of a real build: my decisions, the instructions I gave the agents, where the AI got it wrong — and what shipped.</p>
+      </div>
+
+      <!-- Original idea -->
+      <div class="two-col" style="margin-bottom:3rem" data-rv>
+        <div>
+          <div class="divider-label">The original idea</div>
+          <p>A multiplayer game where knowing history wins — and where AI models playing alongside humans quietly reveal how good their historical knowledge really is.</p>
+        </div>
+        <div>
+          <div class="divider-label">The problem</div>
+          <p><span class="ph">[[PLACEHOLDER: the real problem statement — e.g. how to make historical knowledge measurable, or the gap the game fills]]</span></p>
+        </div>
+      </div>
+
+      <!-- Product decisions -->
+      <div style="margin-bottom:3rem" data-rv>
+        <div class="divider-label">My product decisions &amp; reasoning</div>
+        <div class="card">
+          <p><span class="ph">[[PLACEHOLDER: 2–4 real product decisions made while directing Guess-History — scope cuts, mechanic choices, what was deliberately NOT built, and why]]</span></p>
+        </div>
+      </div>
+
+      <!-- Idea → instructions -->
+      <div style="margin-bottom:3rem" data-rv>
+        <div class="divider-label">How I turned the idea into instructions for AI</div>
+        <p class="muted" style="margin-bottom:1.5rem;max-width:70ch">Real prompts, requirements and agent instructions from the build — shown exactly as they were used.</p>
+        <div class="grid-2">
+          <div class="prompt-card">
+            <div class="pc-bar">
+              <span class="pc-dot r"></span><span class="pc-dot y"></span><span class="pc-dot g"></span>
+              <span class="pc-name">agent_brief_event_pipeline.md</span>
+              <button class="pc-copy" data-copy type="button">Copy</button>
+            </div>
+            <pre><span class="ph">[[PLACEHOLDER: real agent instruction — the brief given to the coding agent that built the event-generation pipeline (theme → prompts → images → guess rounds)]]</span></pre>
+          </div>
+          <div class="prompt-card">
+            <div class="pc-bar">
+              <span class="pc-dot r"></span><span class="pc-dot y"></span><span class="pc-dot g"></span>
+              <span class="pc-name">requirements_round_scoring.txt</span>
+              <button class="pc-copy" data-copy type="button">Copy</button>
+            </div>
+            <pre><span class="ph">[[PLACEHOLDER: real requirements doc — scoring rules, round flow and acceptance criteria for the multiplayer round]]</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coordinating agents -->
+      <div style="margin-bottom:3rem" data-rv>
+        <div class="divider-label">How I coordinate AI coding agents</div>
+        <div class="card">
+          <ul class="check-list">
+            <li><span class="ph">[[PLACEHOLDER: how tasks are scoped and sequenced for agents]]</span></li>
+            <li><span class="ph">[[PLACEHOLDER: how changes are reviewed before they land]]</span></li>
+            <li><span class="ph">[[PLACEHOLDER: how regressions are guarded against]]</span></li>
+            <li><span class="ph">[[PLACEHOLDER: how tests are supervised and interpreted]]</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- When the AI got it wrong -->
+      <div style="margin-bottom:3rem" data-rv>
+        <div class="divider-label">When the AI got it wrong</div>
+        <p class="muted" style="margin-bottom:1.5rem;max-width:70ch">Real examples — what the agent produced, why it was wrong, and the correction I gave. This is the job most "AI users" never see.</p>
+
+        <div class="wrong-grid" style="margin-bottom:1.25rem">
+          <div class="card wrong-card">
+            <span class="w-label w-problem">Problem</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 1 — what was being built and what went wrong]]</span></div>
+          </div>
+          <div class="card wrong-card">
+            <span class="w-label w-wrong">Wrong output</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 1 — the incorrect result the agent produced]]</span></div>
+          </div>
+          <div class="card wrong-card">
+            <span class="w-label w-fix">My correction</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 1 — the instruction or decision that fixed it]]</span></div>
+          </div>
+        </div>
+
+        <div class="wrong-grid">
+          <div class="card wrong-card">
+            <span class="w-label w-problem">Problem</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 2 — what was being built and what went wrong]]</span></div>
+          </div>
+          <div class="card wrong-card">
+            <span class="w-label w-wrong">Wrong output</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 2 — the incorrect result the agent produced]]</span></div>
+          </div>
+          <div class="card wrong-card">
+            <span class="w-label w-fix">My correction</span>
+            <div class="w-body"><span class="ph">[[PLACEHOLDER: example 2 — the instruction or decision that fixed it]]</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Working result -->
+      <div data-rv>
+        <div class="divider-label">The working result</div>
+        <div class="grid-3" data-rv-group>
+          <div class="shot ratio-43" style="--d:.03s">
+            <div class="shot-inner"><div class="ph-block"><span>[[PLACEHOLDER: result screenshot 1 — game in play]]</span></div></div>
+            <div class="shot-label">In play</div>
+          </div>
+          <div class="shot ratio-43" style="--d:.1s">
+            <div class="shot-inner"><div class="ph-block"><span>[[PLACEHOLDER: result screenshot 2 — AI model results]]</span></div></div>
+            <div class="shot-label">AI model results</div>
+          </div>
+          <div class="shot ratio-43" style="--d:.17s">
+            <div class="shot-inner"><div class="ph-block"><span>[[PLACEHOLDER: result screenshot 3 — deployed build]]</span></div></div>
+            <div class="shot-label">Deployed build</div>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:0.9rem"><a class="text-link" href="backtothepast.html">See the product page <span class="arr">→</span></a></p>
+      </div>
+
+      <!-- Video slot -->
+      <div style="margin-top:3rem" data-rv>
+        <div class="divider-label">See it in motion</div>
+        <div class="empty-slot"><strong>Workflow video:</strong> <span class="ph">[[PLACEHOLDER: short screen-recording or walkthrough embed — e.g. my build workflow from spec to shipped alpha]]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECOND CASE STUDY ============ -->
+  <section aria-labelledby="case2-h">
+    <div class="wrap">
+      <div class="section-head" data-rv>
+        <div>
+          <p class="eyebrow"><span class="num">03</span> — Next case study</p>
+          <h2 class="h2" id="case2-h">Building this portfolio <em class="it">with AI.</em></h2>
+        </div>
+        <p class="aside">The site you're reading was itself conceived, directed and shipped with AI — documented as a second case study after launch.</p>
+      </div>
+      <div class="callout neutral" data-rv>
+        <div class="callout-title">Post-launch</div>
+        <p><span class="ph">[[PLACEHOLDER: second case study — "Building my own professional portfolio with AI": the prompts, decisions and corrections used to ship this very site]]</span></p>
+      </div>
+
+      <div style="margin-top:3rem;text-align:center" data-rv>
+        <p class="lede" style="margin-inline:auto">Want a product built this way?</p>
+        <div class="btn-row" style="justify-content:center;margin-top:1.4rem">
+          <a class="btn btn-ink btn-lg" href="hire-me.html">Discuss a Project <span class="arr">→</span></a>
+          <a class="btn btn-line btn-lg" href="hire-me.html">How can I help you?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p class="eyebrow"><span class="num">Contact</span> — Let's talk</p>
+      <h2>Have an idea?<br><em class="it" style="color:var(--paper)">Let's make it real.</em></h2>
+      <p class="lede">Tell me the problem — I'll tell you what's possible, and how to get it built with AI.</p>
+      <div class="btn-row">
+        <a class="btn btn-paper btn-lg" href="hire-me.html">Hire Me <span class="arr">→</span></a>
+        <a class="btn btn-line btn-lg" href="backtothepast.html#partnerships">Partner With Me</a>
+      </div>
+      <a class="mail-big" data-mailto="Hello — let's talk">laurent.martenot@gmail.com</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Laurent Martenot — home">
+          <span class="mark">LM</span>
+          <span>Laurent Martenot</span>
+        </a>
+        <p>AI-native business &amp; product builder. Business thinking. Product vision. AI execution.</p>
+      </div>
+      <nav class="footer-col" aria-label="Site">
+        <h4>Site</h4>
+        <a href="index.html">Home</a>
+        <a href="hire-me.html">Hire Me</a>
+        <a href="backtothepast.html">BackToThePast</a>
+        <a href="how-i-work.html">How I Work</a>
+        <a href="about.html">About &amp; Contact</a>
+      </nav>
+      <nav class="footer-col" aria-label="Work">
+        <h4>Work</h4>
+        <a href="backtothepast.html">BackToThePast / Guess-History</a>
+        <a data-cfg-link="likedUrl">LIKED</a>
+        <a data-cfg-link="promptPulseUrl">PromptPulse</a>
+      </nav>
+      <nav class="footer-col" aria-label="Elsewhere">
+        <h4>Elsewhere</h4>
+        <a data-cfg-link="linkedin">LinkedIn</a>
+        <a data-mailto="Hello — let's talk">Email</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Laurent Martenot</span>
+      <span class="ai-note">This site was itself conceived, directed and built with AI.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

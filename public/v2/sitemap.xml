@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: replace YOUR-DOMAIN.example.com with the real production domain (see config.js siteUrl). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://YOUR-DOMAIN.example.com/</loc></url>
+  <url><loc>https://YOUR-DOMAIN.example.com/hire-me.html</loc></url>
+  <url><loc>https://YOUR-DOMAIN.example.com/backtothepast.html</loc></url>
+  <url><loc>https://YOUR-DOMAIN.example.com/how-i-work.html</loc></url>
+  <url><loc>https://YOUR-DOMAIN.example.com/about.html</loc></url>
+</urlset>
