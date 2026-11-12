@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/AtelierLayout.astro';
+import Link from '../../components/atelier/Link.astro';
+import Shot from '../../components/atelier/Shot.astro';
+import Ph from '../../components/atelier/Ph.astro';
+import { blueprintSteps, mailto } from '../../data/atelier';
+
+const blocks = [
+  { t: 'The original business idea', ph: 'the real original idea behind Guess-History, in your own words' },
+  { t: 'The problem', ph: 'the problem the product solves and for whom' },
+  { t: 'My product decisions and reasoning', ph: 'key decisions made and why (3–5 real decisions)' },
+  { t: 'From idea to instructions for AI', ph: 'real examples: requirements, structured prompts, coding-agent instructions' },
+  { t: 'How I coordinate AI coding agents', ph: 'how work is split, reviewed and kept on track' },
+];
+---
+<Layout path="/atelier/how-i-work/" title="How I Work With AI"
+  description="Laurent Martenot's method: business problem, product definition, AI orchestration, implementation, validation, iteration — a case study built around BackToThePast.">
+
+  <section class="at-page-head" id="top" data-rail="Intro">
+    <div class="at-wrap">
+      <p class="at-eyebrow">How I work with AI</p>
+      <h1>AI is not just a tool I use. <em class="at-serif">It is how I build.</em></h1>
+      <p class="at-lead">My contribution is not asking AI questions. It is defining the problem, directing the build and refusing to accept work that is wrong.</p>
+    </div>
+  </section>
+
+  <section class="at-sec" id="flow" data-rail="The method">
+    <div class="at-wrap">
+      <p class="at-eyebrow">The method</p>
+      <p class="at-flow">
+        <span>Business problem</span><b>&rarr;</b> <span>Product definition</span><b>&rarr;</b> <span>AI orchestration</span><b>&rarr;</b> <span>Implementation</span><b>&rarr;</b> <span>Validation</span><b>&rarr;</b> <span>Iteration</span>
+      </p>
+      <ol class="at-steps" style="margin-top:2.4rem">
+        {blueprintSteps.map((s) => <li>{s.title}.</li>)}
+      </ol>
+      <p class="at-muted" style="margin-top:1.6rem">At every step the split is the same: I decide; AI executes. The interactive version of this loop is on the <a class="at-tlink" href="/atelier/#method">home page</a>.</p>
+    </div>
+  </section>
+
+  <section class="at-sec at-sec-tint" id="case" data-rail="Case study">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Case study</p>
+      <h2>Guess-History: from idea to working game.</h2>
+      <p class="at-muted">Real content to be supplied — nothing below is invented. Each block opens with a native details element.</p>
+
+      {blocks.map((b, i) => (
+        <div class="at-case">
+          <h3><span class="at-n">0{i + 1}</span>{b.t}</h3>
+          <div>
+            <details class="at-details">
+              <summary>Evidence &amp; detail — awaiting supply</summary>
+              <div class="at-details-body"><Ph block text={b.ph} /></div>
+            </details>
+          </div>
+        </div>
+      ))}
+
+      <div class="at-case">
+        <h3><span class="at-n">06</span>When the AI got it wrong</h3>
+        <div>
+          {[1, 2, 3].map((n) => (
+            <div class="at-wrong">
+              <p style="margin-bottom:0.3rem"><strong>Example {n}</strong> <span class="at-faint">(2–3 real examples)</span></p>
+              <dl>
+                <dt>The problem</dt><dd><Ph text={`example ${n}: what was being attempted`} /></dd>
+                <dt>The wrong output</dt><dd><Ph text={`example ${n}: what the AI produced`} /></dd>
+                <dt>My correction</dt><dd><Ph text={`example ${n}: how it was corrected`} /></dd>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="at-case">
+        <h3><span class="at-n">07</span>The working result</h3>
+        <div>
+          <Shot asset="caseResult" label="screenshot of the working result" />
+          <p style="margin-top:1rem"><a class="at-tlink" href="/atelier/backtothepast/">See the live game</a></p>
+        </div>
+      </div>
+
+      <div class="at-case">
+        <h3><span class="at-n">08</span>Workflow video</h3>
+        <div><Ph block text="short workflow video embed" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="at-sec" id="next" data-rail="Next case">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Next case study</p>
+      <h2>Building my own professional portfolio with AI.</h2>
+      <p>This site is itself an example of the method — this edition was designed and built through AI direction, like everything else here. A written case study will be added after launch.</p>
+      <Ph block text="portfolio case study (to be completed after launch)" />
+      <div class="at-actions">
+        <Link href="/atelier/hire/" variant="ink">How can I help you?</Link>
+        <Link href={mailto('Question about how you work')} variant="line">Ask me about my process</Link>
+      </div>
+    </div>
+  </section>
+</Layout>

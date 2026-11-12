@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/AtelierLayout.astro';
+import Link from '../../components/atelier/Link.astro';
+import Ph from '../../components/atelier/Ph.astro';
+import { atelier, atelierAssets, experience, languages, education, tools, mailto } from '../../data/atelier';
+---
+<Layout path="/atelier/about/" title="About & Contact"
+  description="Laurent Martenot — French-American business and product builder with 30 years of international experience, former i18n/l10n QA at Google and Apple, now directing AI-built products. Based in Thailand, remote.">
+
+  <section class="at-page-head" id="top" data-rail="Intro">
+    <div class="at-wrap">
+      <p class="at-eyebrow">About &amp; Contact</p>
+      <h1>A business person <em class="at-serif">who builds with AI.</em></h1>
+      <p class="at-lead">Thirty years of international business, now applied to conceiving, directing and evaluating AI-built products.</p>
+    </div>
+  </section>
+
+  <section class="at-sec" id="story" data-rail="Story">
+    <div class="at-wrap at-hero-grid">
+      <div>
+        <h2>My story</h2>
+        <p>I'm a French-American business and sales professional — a citizen of France and the United States — with an international perspective and an enduring interest in technology and innovation. I have lived and worked in the United States, Mexico, France and Thailand.</p>
+        <p>After a period as a family caregiver, I have spent the time since mid-2024 developing practical experience using AI to conceive, direct and build digital products independently — including BackToThePast (Guess-History), a multiplayer history game now live in alpha.</p>
+        <p>I am not a software engineer. I define the problem, make the product decisions, direct AI coding agents to build, and evaluate the result. I also produced "Let It Roll", an album made with Suno with AI-generated videos — the same builder's habit, applied to music.</p>
+      </div>
+      <div>
+        {atelierAssets.portrait ? (
+          <figure class="at-shot"><img src={atelierAssets.portrait} alt="Portrait of Laurent Martenot" style="aspect-ratio:4 / 5; object-fit:cover; border:1px solid var(--at-ink); border-radius:6px" /></figure>
+        ) : (
+          <div class="at-portrait" role="img" aria-label="Portrait placeholder — professional photograph to be supplied">
+            <span class="at-portrait-tag">Identity — Laurent Martenot</span>
+            <span class="at-mono-badge">L</span>
+            <Ph text="professional photograph (real photo only)" />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="at-sec at-sec-tint" id="experience" data-rail="Experience">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Experience</p>
+      <h2>Thirty years, internationally.</h2>
+      <ul class="at-tl" style="margin-top:2rem">
+        {experience.map((e) => (
+          <li>
+            <span class="at-dates">{e.dates}</span>
+            <div>
+              <div class="at-role">{e.role}</div>
+              {e.org && <div class="at-org">{e.org}</div>}
+              {e.note && <p class="at-note">{e.note}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="at-sec" id="facts" data-rail="Facts">
+    <div class="at-wrap at-grid at-g2">
+      <div>
+        <h2>Education &amp; languages</h2>
+        <ul class="at-facts">
+          {education.map((ed) => (
+            <li><span class="at-fact-k">Education</span><span class="at-fact-v">{ed}</span></li>
+          ))}
+          {languages.map((l) => (
+            <li><span class="at-fact-k">{l.lang}</span><span class="at-fact-v">{l.level}</span></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Availability &amp; tools</h2>
+        <ul class="at-facts">
+          <li><span class="at-fact-k">Base</span><span class="at-fact-v">Thailand (UTC+7) — citizen of France and the United States.</span></li>
+          <li><span class="at-fact-k">Work</span><span class="at-fact-v">Remote contract work; overnight shifts accepted.</span></li>
+          <li><span class="at-fact-k">Tools</span><span class="at-fact-v">{tools.join(' · ')}</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="at-sec at-sec-tint" id="contact" data-rail="Contact">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Contact</p>
+      <h2>Tell me what you need.</h2>
+      <div class="at-actions" style="margin-bottom:2rem">
+        <Link href={mailto('Hire me / Discuss a project')} variant="verm">Hire me / Discuss a project</Link>
+        <Link href={mailto('Partnership: BackToThePast')} variant="line">Partner with me</Link>
+        <Link href={mailto('General contact')} variant="line">General contact</Link>
+      </div>
+      <ul class="at-facts" style="max-width:42rem">
+        <li><span class="at-fact-k">Email</span><span class="at-fact-v"><a class="at-tlink" href={`mailto:${atelier.email}`}>{atelier.email}</a></span></li>
+        <li><span class="at-fact-k">LinkedIn</span><span class="at-fact-v"><Link value={atelier.linkedin} label="LinkedIn profile URL">Laurent Martenot on LinkedIn</Link></span></li>
+        <li><span class="at-fact-k">Elsewhere</span><span class="at-fact-v"><Ph text="any additional link (optional)" /></span></li>
+      </ul>
+      <p class="at-muted" style="margin-top:1.6rem">No contact form — every button above opens a pre-addressed email. That is the working mechanism, and it always will be.</p>
+    </div>
+  </section>
+</Layout>

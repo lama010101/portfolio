@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F6F2EA"/>
+  <g stroke="#E4DDD0" stroke-width="1">
+    <line x1="0" y1="78" x2="1200" y2="78"/>
+    <line x1="0" y1="552" x2="1200" y2="552"/>
+    <line x1="78" y1="0" x2="78" y2="630"/>
+    <line x1="1122" y1="0" x2="1122" y2="630"/>
+  </g>
+  <circle cx="950" cy="315" r="170" fill="none" stroke="#14161B" stroke-width="1.5"/>
+  <circle cx="950" cy="315" r="135" fill="none" stroke="#1F3D5A" stroke-width="1" stroke-dasharray="3 7"/>
+  <path d="M 950 145 A 170 170 0 0 1 1070 230" fill="none" stroke="#D2462A" stroke-width="5"/>
+  <g fill="#D2462A">
+    <circle cx="950" cy="145" r="6"/>
+    <circle cx="1070" cy="230" r="6"/>
+    <circle cx="1120" cy="315" r="6"/>
+    <circle cx="1070" cy="400" r="6"/>
+    <circle cx="950" cy="485" r="6"/>
+    <circle cx="830" cy="400" r="6"/>
+    <circle cx="780" cy="315" r="6"/>
+    <circle cx="830" cy="230" r="6"/>
+  </g>
+  <circle cx="950" cy="315" r="5" fill="#D2462A"/>
+  <text x="950" y="322" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="34" fill="#14161B" dy="-46">idea &#8594; product</text>
+  <text x="110" y="150" font-family="ui-monospace, Consolas, monospace" font-size="17" letter-spacing="6" fill="#D2462A">LAURENT / ATELIER — EDITION 04</text>
+  <text x="110" y="330" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="76" letter-spacing="-3" fill="#14161B">I turn business ideas into</text>
+  <text x="110" y="420" font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="76" letter-spacing="-3" fill="#14161B">working products <tspan font-family="Georgia, serif" font-style="italic" font-weight="400" fill="#D2462A">using AI.</tspan></text>
+  <text x="110" y="505" font-family="ui-monospace, Consolas, monospace" font-size="19" letter-spacing="4" fill="#6D7078">BUSINESS THINKING · PRODUCT VISION · AI EXECUTION</text>
+  <text x="1090" y="600" text-anchor="end" font-family="ui-monospace, Consolas, monospace" font-size="14" letter-spacing="3" fill="#6D7078">L/ATELIER — SHEET 01</text>
+</svg>

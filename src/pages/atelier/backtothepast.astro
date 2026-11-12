@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/AtelierLayout.astro';
+import Link from '../../components/atelier/Link.astro';
+import Shot from '../../components/atelier/Shot.astro';
+import Ph from '../../components/atelier/Ph.astro';
+import { atelier, mailto } from '../../data/atelier';
+
+const schemaFields = [
+  ['event_id', 'Stable unique identifier'],
+  ['title', 'Short event name'],
+  ['date_or_range', 'Date or date range, with precision noted'],
+  ['location', 'Geographic place or region'],
+  ['period', 'Historical period tag'],
+  ['description', 'Factual summary of the event'],
+  ['sources', 'Source references'],
+  ['verification', 'Verification status'],
+  ['confidence', 'Confidence / evidence notes'],
+  ['license', 'Licensing information'],
+];
+---
+<Layout path="/atelier/backtothepast/" title="BackToThePast (Guess-History)"
+  description="BackToThePast: a multiplayer history & geography guessing game live in alpha — and the ambition to build a sourced, verified historical events dataset with partners.">
+
+  <section class="at-page-head" id="top" data-rail="Intro">
+    <div class="at-wrap">
+      <p class="at-eyebrow">BackToThePast / Guess-History</p>
+      <h1>Making history interactive. Making historical knowledge <em class="at-serif">measurable.</em></h1>
+      <p class="at-lead">A live multiplayer guessing game today — and a roadmap toward a curated historical knowledge platform.</p>
+      <div class="at-actions">
+        <Link value={atelier.gameUrl} label="live BackToThePast game URL" variant="verm">Play the game</Link>
+        <Link href="#partner" variant="line">Partner with me</Link>
+      </div>
+    </div>
+  </section>
+
+  <section class="at-sec" id="game" data-rail="Live vs ambition">
+    <div class="at-wrap">
+      <p class="at-eyebrow">The game &amp; the ambition</p>
+      <h2>One product, two horizons — clearly separated.</h2>
+
+      <div class="at-split" style="margin-top:2.4rem">
+        <section aria-labelledby="live-h">
+          <div class="at-split-head">
+            <span class="at-chip at-chip-live">Live · Alpha</span>
+            <h3 id="live-h">What exists now</h3>
+          </div>
+          <p>A multiplayer history and geography guessing game. I conceived it, defined the product and directed AI coding agents to build it — scoping each task, reviewing every change and setting safeguards against regressions.</p>
+          <ul>
+            <li>Players guess real historical events and places.</li>
+            <li>A pipeline generates prompts from event themes and produces the images players guess from.</li>
+            <li>Several AI models can also play — their answers feed back into quality evaluation.</li>
+            <li>Multiplayer sessions, live in alpha today.</li>
+          </ul>
+          <p class="at-muted" style="font-size:0.92rem">Under active development and verification — expect rough edges; that is what alpha means.</p>
+          <div class="at-actions" style="margin-top:1.2rem">
+            <Link value={atelier.gameUrl} label="live BackToThePast game URL" variant="ink">Play the game</Link>
+          </div>
+        </section>
+        <section aria-labelledby="amb-h">
+          <div class="at-split-head">
+            <span class="at-chip at-chip-blue">Ambition</span>
+            <h3 id="amb-h">Where it could go</h3>
+          </div>
+          <p>The ambition — not a current capability — is a structured, curated historical knowledge platform supporting education and AI model evaluation.</p>
+          <ul>
+            <li>Historical knowledge benchmarking.</li>
+            <li>Historical event verification.</li>
+            <li>AI factual accuracy evaluation.</li>
+            <li>Educational products.</li>
+            <li>Historical content licensing.</li>
+          </ul>
+          <p class="at-muted" style="font-size:0.92rem">The longer-term goal: a community-built database of verified real historical events.</p>
+        </section>
+      </div>
+
+      <div class="at-grid at-g3" style="margin-top:2rem">
+        <Shot asset="gameScreen1" label="BackToThePast screenshot — gameplay" ratio="4 / 3" />
+        <Shot asset="gameScreen2" label="BackToThePast screenshot — multiplayer" ratio="4 / 3" />
+        <Shot asset="gameScreen3" label="BackToThePast screenshot — results" ratio="4 / 3" />
+      </div>
+      <Ph block text="short gameplay demonstration (video or GIF)" />
+    </div>
+  </section>
+
+  <section class="at-sec at-sec-tint" id="dataset" data-rail="Dataset">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Part C — Historical data</p>
+      <h2>Building a sourced historical events dataset.</h2>
+      <p>I am looking for historians, institutions and partners to help build and verify a sourced dataset of historical events. It is in development: <strong>no claims are made here about its size, accuracy or licensing.</strong></p>
+      <span class="at-chip at-chip-plan">Development stage — not yet published</span>
+
+      <div class="at-schema" style="margin-top:1.6rem">
+        <div class="at-schema-head">
+          <strong>historical_event — planned schema</strong>
+          <span class="at-mono">DRAFT · v0</span>
+        </div>
+        <dl>
+          {schemaFields.map(([f, d]) => (
+            <div><dt>{f}</dt><dd>{d}</dd></div>
+          ))}
+        </dl>
+      </div>
+
+      <h3 style="margin-top:2.4rem">Sample</h3>
+      <Ph block text="downloadable sample dataset (target 50–100 events) — or keep this development-stage notice until supplied" />
+
+      <h3 style="margin-top:2rem">Methodology</h3>
+      <ul class="at-facts">
+        <li><span class="at-fact-k">Selection</span><span class="at-fact-v">How events are selected: <Ph text="methodology" /></span></li>
+        <li><span class="at-fact-k">Sources</span><span class="at-fact-v">How sources are identified: <Ph text="methodology" /></span></li>
+        <li><span class="at-fact-k">Conflicts</span><span class="at-fact-v">How conflicting historical accounts are handled: <Ph text="methodology" /></span></li>
+        <li><span class="at-fact-k">Review</span><span class="at-fact-v">How facts are reviewed: <Ph text="methodology" /></span></li>
+        <li><span class="at-fact-k">Provenance</span><span class="at-fact-v">How provenance is maintained: <Ph text="methodology" /></span></li>
+        <li><span class="at-fact-k">Rights</span><span class="at-fact-v">What rights and licenses apply: <Ph text="licensing terms" /></span></li>
+      </ul>
+      <p class="at-muted">Nothing here is fabricated — each item ships only when a real methodology is supplied.</p>
+    </div>
+  </section>
+
+  <section class="at-sec" id="partner" data-rail="Partner">
+    <div class="at-wrap">
+      <p class="at-eyebrow">Part D — Partnerships</p>
+      <h2>Interested in historical data, AI benchmarking or a commercial partnership? <em class="at-serif">Let's talk.</em></h2>
+      <div class="at-grid at-g2" style="margin-top:1.5rem">
+        <p>I would like to hear from:</p>
+        <ul>
+          <li>AI laboratories and AI model developers.</li>
+          <li>Universities and historians.</li>
+          <li>Museums.</li>
+          <li>Educational publishers.</li>
+          <li>Historical content providers.</li>
+        </ul>
+      </div>
+      <div class="at-actions">
+        <Link href={mailto('Partnership: BackToThePast')} variant="verm">Partner with me</Link>
+        <Link value={atelier.linkedin} label="LinkedIn profile URL" variant="line">LinkedIn</Link>
+      </div>
+    </div>
+  </section>
+</Layout>

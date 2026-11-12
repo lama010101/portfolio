@@ -1,0 +1,13 @@
+---
+import { atelierAssets } from '../../data/atelier';
+interface Props { asset: string; label: string; alt?: string; ratio?: string }
+const { asset, label, alt, ratio = '16 / 10' } = Astro.props;
+const src = atelierAssets[asset];
+---
+{src ? (
+  <figure class="at-shot"><img src={src} alt={alt ?? label} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} /></figure>
+) : (
+  <figure class="at-shot at-shot-empty" style={`aspect-ratio:${ratio}`} role="img" aria-label={`Placeholder: ${label}`}>
+    <span class="at-ph" data-placeholder>[[PLACEHOLDER: {label}]]</span>
+  </figure>
+)}

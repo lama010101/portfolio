@@ -1,0 +1,31 @@
+---
+import { blueprintSteps } from '../../data/atelier';
+---
+<div class="at-bp" data-bp>
+  <div class="at-bp-steps" role="group" aria-label="The eight method steps — choose one">
+    {blueprintSteps.map((s, i) => (
+      <button type="button" data-bp-step={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+        <span class="at-n">{s.n}</span>
+        <span class="at-t">{s.short}</span>
+      </button>
+    ))}
+  </div>
+  <div>
+    {blueprintSteps.map((s, i) => (
+      <div class:list={['at-bp-panel', { 'is-on': i === 0 }]} data-bp-panel={i}>
+        <h3><span class="at-n">STEP {s.n}</span>{s.title}</h3>
+        <div class="at-bp-cols">
+          <div class="at-bp-col">
+            <h4>What I decide</h4>
+            <p>{s.decide}</p>
+          </div>
+          <div class="at-bp-col">
+            <h4>What AI executes</h4>
+            <p>{s.execute}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <p class="at-bp-hint">Method illustration — select a step, or use arrow keys. I decide; AI executes.</p>
+</div>

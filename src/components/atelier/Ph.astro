@@ -1,0 +1,6 @@
+---
+interface Props { text: string; block?: boolean }
+const { text, block = false } = Astro.props;
+const Tag = block ? 'div' : 'span';
+---
+<Tag class:list={['at-ph', { 'at-ph-block': block }]} data-placeholder>[[PLACEHOLDER: {text}]]</Tag>

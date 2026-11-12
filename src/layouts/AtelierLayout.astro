@@ -1,0 +1,152 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/atelier.css';
+import { atelier, isPh, nav, mailto } from '../data/atelier';
+import Link from '../components/atelier/Link.astro';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
+
+interface Props { title: string; description: string; path: string }
+const { title, description, path } = Astro.props;
+const fullTitle = path === '/atelier/' ? title : `${title} — ${atelier.edition}`;
+const canonical = new URL(path, atelier.siteUrl).href;
+const ogImage = new URL(atelier.ogImage, atelier.siteUrl).href;
+const current = (href: string) =>
+  href === '/atelier/' ? path === '/atelier/' : path.startsWith(href);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F6F2EA" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={atelier.favicon} type="image/svg+xml" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={atelier.edition} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      (() => {
+        const d = document.documentElement;
+        d.classList.add('js');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          d.classList.add('at-rm');
+        } else {
+          d.classList.add('at-smooth');
+        }
+      })();
+    </script>
+    <script is:inline define:vars={{ atEmail: atelier.email, atLinkedin: isPh(atelier.linkedin) ? '' : atelier.linkedin }}>
+      window.__ATELIER__ = { email: atEmail, linkedin: atLinkedin };
+    </script>
+    <script src="/atelier/atelier.js" defer></script>
+  </head>
+  <body class="at-body">
+    <a class="at-skip" href="#main">Skip to content</a>
+    <div class="at-progress" aria-hidden="true"><i id="at-progress-bar"></i></div>
+
+    <header class="at-header">
+      <div class="at-wrap">
+        <div class="at-head-bar">
+          <a class="at-brand" href="/atelier/" aria-label={`${atelier.name} — Atelier home`}>
+            <span class="at-brand-mark" aria-hidden="true">L<i></i></span>
+            <span>
+              <span class="at-brand-name">{atelier.name}</span>
+              <span class="at-brand-tag at-mono"> / Atelier</span>
+            </span>
+            <span class="at-brand-sub">Field notebook</span>
+          </a>
+
+          <nav class="at-nav" id="at-nav" aria-label="Atelier">
+            <ul>
+              {nav.map((n) => (
+                <li><a href={n.href} aria-current={current(n.href) ? 'page' : undefined}>{n.label}</a></li>
+              ))}
+              <li><a class="at-nav-all" href="/portfolios/">All portfolios</a></li>
+            </ul>
+          </nav>
+
+          <div class="at-head-actions">
+            <button type="button" class="at-jump" id="at-jump-btn" aria-haspopup="dialog">
+              Jump to&hellip; <kbd>Ctrl K</kbd>
+            </button>
+            <a class="at-btn at-btn-verm at-btn-sm" href={mailto('Discuss a project')}>Discuss a project</a>
+            <button type="button" class="at-menu-btn" id="at-menu-btn" aria-expanded="false" aria-controls="at-nav">
+              Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="at-rail" id="at-rail" aria-label="On this page"></nav>
+
+    <main id="main"><slot /></main>
+
+    <footer class="at-footer">
+      <div class="at-wrap">
+        <div class="at-foot">
+          <div>
+            <div class="at-foot-brand">
+              <span class="at-brand-mark" aria-hidden="true">L<i></i></span>
+              <strong>{atelier.name}</strong>
+            </div>
+            <h2 class="at-mono">Laurent / Atelier</h2>
+            <p class="at-muted" style="font-size:0.92rem; margin:0">
+              {atelier.tagline}. Business thinking, product vision, AI execution.
+              Based in Thailand (UTC+7) — remote contract work welcome.
+            </p>
+          </div>
+          <div>
+            <h3>Pages</h3>
+            <ul>
+              {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+              <li><a href="/portfolios/" class="at-mono" style="font-size:0.66rem">ALL PORTFOLIOS</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <ul>
+              <li><a href={`mailto:${atelier.email}`}>{atelier.email}</a></li>
+              <li><Link value={atelier.linkedin} label="LinkedIn profile URL">LinkedIn</Link></li>
+              <li><a href={mailto('Discuss a project')}>Discuss a project</a></li>
+              <li><a href="/atelier/backtothepast/#partner">Partner with me</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="at-colophon">
+          <span>{atelier.edition} · Field notebook of a product builder</span>
+          <span>Static · No trackers</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="at-palette" id="at-palette" hidden>
+      <div class="at-palette-box" role="dialog" aria-modal="true" aria-label="Jump to">
+        <div class="at-palette-in">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5" />
+            <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <input id="at-palette-input" type="text" placeholder="Jump to a page, section or action&hellip;" aria-label="Search destinations" autocomplete="off" spellcheck="false" />
+        </div>
+        <ul class="at-palette-list" id="at-palette-list" role="listbox" aria-label="Destinations"></ul>
+        <div class="at-palette-foot">
+          <span>&uarr;&darr; navigate</span><span>&crarr; open</span><span>esc close</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
