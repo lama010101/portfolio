@@ -6,7 +6,7 @@ import { config } from '../config';
 
 const pageTitle = `All Portfolios | ${config.name}`;
 const pageDesc =
-  'Explore all five portfolio editions for Laurent Martenot (AI-native Business & Product Builder): Editorial Consultancy, Laurent.Play Sticker Arcade, Laurent // Studio Interactive AI & Web Lab, Portfolio V2 Warm Editorial, and Direction — the product-builder lens.';
+  'Explore all seven portfolio editions for Laurent Martenot (AI-native Business & Product Builder): Editorial Consultancy, Laurent.Play Sticker Arcade, Laurent // Studio Interactive AI & Web Lab, Portfolio V2 Warm Editorial, Direction, Lens — the adaptive portfolio, and Laurent / Atelier product-builder field notebook.';
 const canonical = new URL('/portfolios/', config.siteUrl).href;
 const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
 
@@ -57,7 +57,7 @@ const editions = [
     ],
   },
   {
-    num: 'Edition 03 · New',
+    num: 'Edition 03',
     name: 'Laurent // Studio (AI & Web Lab)',
     href: '/studio/',
     accent: 'var(--c-coral)',
@@ -122,6 +122,52 @@ const editions = [
       { label: 'BackToThePast', href: '/direction/backtothepast/' },
       { label: 'How I Work', href: '/direction/process/' },
       { label: 'About', href: '/direction/about/' },
+    ],
+  },
+  {
+    num: 'Edition 06 · New',
+    name: 'Lens — Adaptive Portfolio',
+    href: '/lens/',
+    accent: '#B23C1C',
+    btnClass: 'st-btn-lens',
+    swatches: ['#F3F1EC', '#14171D', '#FF4B23', '#12564F'],
+    summary:
+      'A portfolio that re-composes itself for whoever is reading: three audience lenses re-order the whole page, an EN/FR/ES headline, a scroll-driven build pipeline, a claim-source audit mode and a self-drafting inquiry email.',
+    audience: 'Busy executives, AI labs & partners who want their own route through the same verified facts',
+    highlights: [
+      'Audience lens switcher physically re-orders sections + suggested route (hiring / partner / explore)',
+      'Ctrl K command palette, EN/FR/ES headline, light & dark themes, scroll-driven AI build pipeline',
+      'Sources mode labels every claim and counts every visible placeholder — zero invented facts',
+    ],
+    sublinks: [
+      { label: 'Lens hero', href: '/lens/#top' },
+      { label: 'Selected work', href: '/lens/#work' },
+      { label: 'Build pipeline', href: '/lens/#method' },
+      { label: 'BackToThePast', href: '/lens/#btp' },
+      { label: 'Inquiry composer', href: '/lens/#hire' },
+    ],
+  },
+  {
+    num: 'Edition 07 · New',
+    name: 'Laurent / Atelier',
+    href: '/atelier/',
+    accent: '#D2462A',
+    btnClass: 'st-btn-atelier',
+    swatches: ['#F6F2EA', '#14161B', '#D2462A', '#1F3D5A'],
+    summary:
+      'Premium Swiss-editorial product-builder field notebook: vermilion blueprint ring diagram, interactive 8-step method pipeline, audience switcher, Ctrl+K command palette and a project brief builder.',
+    audience: 'Executives, hiring managers and partners who value quiet precision over spectacle',
+    highlights: [
+      'Five routes under /atelier/ with Fraunces italics, Inter display type and ruled hairline grids',
+      'Interactive Idea-to-Product blueprint (8 steps: what I decide vs what AI executes)',
+      'Audience switcher, command palette, brief builder & scroll section index — all keyboard accessible',
+    ],
+    sublinks: [
+      { label: 'Home', href: '/atelier/' },
+      { label: 'How can I help?', href: '/atelier/hire/' },
+      { label: 'BackToThePast', href: '/atelier/backtothepast/' },
+      { label: 'How I Work', href: '/atelier/how-i-work/' },
+      { label: 'About', href: '/atelier/about/' },
     ],
   },
 ];
@@ -253,6 +299,20 @@ const editions = [
       .st-btn-direction:hover {
         background: #2855d9;
       }
+      .st-btn-lens {
+        background: #b23c1c;
+        color: #fff6ee;
+      }
+      .st-btn-lens:hover {
+        background: #ff4b23;
+      }
+      .st-btn-atelier {
+        background: #d2462a;
+        color: #fff6ee;
+      }
+      .st-btn-atelier:hover {
+        background: #a83417;
+      }
     </style>
   </head>
   <body class="studio-body">
@@ -269,14 +329,18 @@ const editions = [
         <div class="st-controls">
           <a class="st-pill-btn" href="/">01 Editorial</a>
           <a class="st-pill-btn" href="/play/">02 Play</a>
-          <a class="st-pill-btn" href="/studio/" style="background: var(--c-coral); color: #fff; border-color: var(--border)">
-            03 Studio
-          </a>
+          <a class="st-pill-btn" href="/studio/">03 Studio</a>
           <a class="st-pill-btn" href="/v2/" style="background: #de4b1f; color: #fff6ee; border-color: var(--border)">
             04 V2
           </a>
           <a class="st-pill-btn" href="/direction/" style="background: #151712; color: #f3f1ea; border-color: var(--border)">
             05 Direction
+          </a>
+          <a class="st-pill-btn" href="/lens/" style="background: #b23c1c; color: #fff6ee; border-color: var(--border)">
+            06 Lens
+          </a>
+          <a class="st-pill-btn" href="/atelier/" style="background: #d2462a; color: #fff; border-color: var(--border)">
+            07 Atelier
           </a>
         </div>
       </div>
@@ -287,15 +351,15 @@ const editions = [
         <div class="st-wrap">
           <div class="st-kicker">
             <span class="st-pulse-dot" aria-hidden="true"></span>
-            <span>Portfolio Directory · 5 Live Editions</span>
+            <span>Portfolio Directory · 7 Live Editions</span>
           </div>
 
           <h1 style="max-width: 18ch">
-            One builder. <span class="st-gradient-word">Four live portfolios.</span>
+            One builder. <span class="st-gradient-word">Seven live portfolios.</span>
           </h1>
 
           <p class="st-hero-lead">
-            Every edition below presents the exact same verified facts and zero fabricated claims — expressed across four distinct product directions: <strong>executive editorial</strong>, <strong>candy sticker arcade</strong>, <strong>full-power interactive AI &amp; web lab</strong>, and <strong>warm editorial minimalism</strong>.
+            Every edition below presents the exact same verified facts and zero fabricated claims — expressed across seven distinct product directions: <strong>executive editorial</strong>, <strong>candy sticker arcade</strong>, <strong>full-power interactive AI &amp; web lab</strong>, <strong>warm editorial minimalism</strong>, <strong>product-builder lens</strong>, <strong>adaptive audience lens</strong>, and a <strong>premium atelier field notebook</strong>.
           </p>
 
           <div class="hub-cards" style="margin-top: 2.25rem">
@@ -357,14 +421,23 @@ const editions = [
             <span class="st-eyebrow">Interactive Comparison Stage</span>
             <h2 id="stage-heading">Test any edition right here — Desktop, Tablet, or Mobile.</h2>
             <p>
-              Switch between all four portfolios and resize the live viewport without leaving this hub, or open your favorite edition full-screen.
+              Switch between all seven portfolios and resize the live viewport without leaving this hub, or open your favorite edition full-screen.
             </p>
           </div>
 
           <div class="hub-stage-shell">
             <div class="hub-stage-bar">
               <div class="st-scenario-tabs" role="tablist" aria-label="Choose portfolio to preview">
-                <button type="button" class="st-tab" data-stage-src="/studio/" aria-selected="true">
+                <button type="button" class="st-tab" data-stage-src="/atelier/" aria-selected="true">
+                  07 · Laurent / Atelier
+                </button>
+                <button type="button" class="st-tab" data-stage-src="/lens/" aria-selected="false">
+                  06 · Lens — Adaptive Portfolio
+                </button>
+                <button type="button" class="st-tab" data-stage-src="/direction/" aria-selected="false">
+                  05 · Direction — Product Builder Lens
+                </button>
+                <button type="button" class="st-tab" data-stage-src="/studio/" aria-selected="false">
                   03 · Laurent // Studio
                 </button>
                 <button type="button" class="st-tab" data-stage-src="/play/" aria-selected="false">
@@ -385,7 +458,7 @@ const editions = [
                   <button type="button" data-vp="375px" aria-pressed="false">Mobile</button>
                 </div>
 
-                <a class="st-btn st-btn-coral st-btn-sm" id="hub-open-full" href="/studio/">
+                <a class="st-btn st-btn-coral st-btn-sm" id="hub-open-full" href="/atelier/">
                   Open Fullscreen &rarr;
                 </a>
               </div>
@@ -395,7 +468,7 @@ const editions = [
               <iframe
                 id="hub-iframe"
                 class="hub-iframe"
-                src="/studio/"
+                src="/atelier/"
                 title="Live portfolio edition preview"
                 loading="lazy"
               ></iframe>
@@ -410,7 +483,7 @@ const editions = [
         <div>
           <strong>{config.name} · Portfolio Hub</strong>
           <p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--console-muted)">
-            {config.tagline}. All four editions live under one roof.
+            {config.tagline}. All seven editions live under one roof.
           </p>
         </div>
         <ul class="st-footer-links">
@@ -418,6 +491,9 @@ const editions = [
           <li><a href="/play/">02 Laurent.Play</a></li>
           <li><a href="/studio/">03 Laurent // Studio</a></li>
           <li><a href="/v2/">04 Portfolio V2</a></li>
+          <li><a href="/direction/">05 Direction</a></li>
+          <li><a href="/lens/">06 Lens</a></li>
+          <li><a href="/atelier/">07 Laurent / Atelier</a></li>
           <li><a href="/about/#contact">Contact</a></li>
         </ul>
       </div>

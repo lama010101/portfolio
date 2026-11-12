@@ -1,0 +1,74 @@
+---
+import DirectionLayout from '../../layouts/DirectionLayout.astro';
+import DirectionLink from '../../components/DirectionLink.astro';
+import DirectionPlaceholder from '../../components/DirectionPlaceholder.astro';
+import DirectionAsset from '../../components/DirectionAsset.astro';
+import { mailto } from '../../config';
+
+const stages = ['Business problem', 'Product definition', 'AI orchestration', 'Implementation', 'Validation', 'Iteration'];
+const caseBlocks = [
+  { title: 'The original business idea', text: 'the real original idea behind Guess-History, in Laurent’s own words' },
+  { title: 'The problem', text: 'the problem the product solves, who experiences it and why it matters' },
+  { title: 'My product decisions and reasoning', text: '3–5 real product decisions, alternatives considered and why each direction was chosen' },
+  { title: 'From idea to instructions for AI', text: 'real requirements, structured prompts and coding-agent instructions used during the build' },
+  { title: 'How I coordinate AI coding agents', text: 'real workflow for splitting work, supplying context, reviewing output and keeping agents on track' },
+];
+const eightSteps = ['Identify a problem or opportunity', 'Define the business objective', 'Explore possible solutions with AI', 'Translate the solution into precise requirements', 'Direct AI coding agents to implement it', 'Evaluate the implementation', 'Challenge errors and inconsistencies', 'Iterate until the product meets its objectives'];
+---
+<DirectionLayout path="/direction/process/" title="How I Work With AI" description="Laurent Martenot's practical AI product-building method: business problem, product definition, AI orchestration, implementation, validation and iteration.">
+  <section class="d-page-head">
+    <div class="d-shell">
+      <span class="d-page-index">04 / HOW I WORK WITH AI</span>
+      <div class="d-page-head-grid">
+        <h1>AI is not just a tool I use. <em>It is how I build.</em></h1>
+        <div class="d-page-head-aside"><p class="d-kicker">Direction over automation</p><p>My contribution is not simply asking AI questions. It is defining the problem, making product decisions, directing the build and refusing to accept work that is wrong.</p><DirectionLink href="#case-study">Open the case study</DirectionLink></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light" aria-labelledby="method-section-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">The method / Interactive sequence</p><h2 id="method-section-title">From business intent to a <em>working result.</em></h2></div><p>Select a stage to inspect the role it plays. The loop is deliberately iterative: evaluation feeds better direction.</p></div>
+      <div class="d-method-explorer" data-reveal>
+        <div class="d-method-tabs" role="tablist" aria-label="Product building method">
+          {stages.map((stage, index) => <button id={`method-tab-${index}`} type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} aria-controls="method-panel" data-method-step={index}><span>0{index + 1}</span>{stage}</button>)}
+        </div>
+        <div id="method-panel" class="d-method-panel" role="tabpanel" aria-labelledby="method-tab-0" aria-live="polite">
+          <span id="method-count">01 / 06</span><h3 id="method-title">Business problem</h3><h4 id="method-subtitle">Start with the opportunity, not the technology.</h4><p id="method-description">Identify a real problem or opportunity. Clarify who it matters to and what a useful outcome looks like.</p>
+        </div>
+      </div>
+      <ol class="d-process-preview" style="border-color:var(--d-line);margin-top:2rem" data-reveal>
+        {eightSteps.map((step, index) => <li class="d-process-step" style="border-color:var(--d-line)"><span style="color:var(--d-blue)">0{index + 1}</span><p style="color:var(--d-ink)">{step}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section id="case-study" class="d-section" aria-labelledby="case-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Case file 01 / Guess-History</p><h2 id="case-title">From an idea to a <em>working game.</em></h2></div><p>This case-study structure is ready for real build evidence. Placeholders remain visible until genuine examples are supplied; no prompts, decisions or corrections are invented.</p></div>
+      <div class="d-case-list" data-reveal>
+        {caseBlocks.map((block, index) => <article class="d-case-item"><span>0{index + 1}</span><h3>{block.title}</h3><div><DirectionPlaceholder block text={block.text} /></div></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light d-section--line" aria-labelledby="corrections-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Evaluation in practice</p><h2 id="corrections-title">When the AI got it <em>wrong.</em></h2></div><p>The useful evidence is not a perfect first answer. It is recognizing the gap, correcting the instruction and improving the result.</p></div>
+      <div class="d-corrections" data-reveal>
+        {[1, 2, 3].map((number) => <article class="d-correction"><span class="d-page-index">REAL EXAMPLE 0{number}</span><h3>Problem → wrong output → correction</h3><dl><dt>The objective</dt><dd><DirectionPlaceholder text={`example ${number}: what I was trying to achieve`} /></dd><dt>The wrong output</dt><dd><DirectionPlaceholder text={`example ${number}: what the AI produced and why it missed`} /></dd><dt>My correction</dt><dd><DirectionPlaceholder text={`example ${number}: the actual instruction or product correction`} /></dd></dl></article>)}
+      </div>
+      <div class="d-split" style="margin-top:4rem" data-reveal>
+        <div><p class="d-kicker">The working result</p><h2>Evidence belongs here.</h2><p>A verified capture of the working result will replace this slot. The live game link is available once its URL is supplied in the site configuration.</p><DirectionLink href="/direction/backtothepast/" variant="secondary">See the BackToThePast product file</DirectionLink></div>
+        <div><DirectionAsset asset="caseResult" label="verified screenshot of the working Guess-History result" alt="Working Guess-History product result" /><div style="margin-top:1rem"><DirectionPlaceholder block text="short real workflow video embed" /></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="next-case-title">
+    <div class="d-shell d-split" data-reveal>
+      <div><p class="d-kicker">Case file 02 / To be completed after launch</p><h2 id="next-case-title">Building my own professional portfolio with AI.</h2></div>
+      <div><p>This website is itself an example of the method: define the positioning and requirements, direct the implementation, evaluate the result and iterate.</p><DirectionPlaceholder block text="portfolio case study with real requirements, decisions and correction examples (after launch)" /><div class="d-actions" style="margin-top:2rem"><DirectionLink href="/direction/hire/" variant="primary">How can I help you?</DirectionLink><DirectionLink href={mailto('Question about how you work')} label="email address">Ask about my process</DirectionLink></div></div>
+    </div>
+  </section>
+</DirectionLayout>

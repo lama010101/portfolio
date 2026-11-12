@@ -1,0 +1,16 @@
+---
+import { assets } from '../data/assets';
+interface Props { asset: string; label: string; alt?: string; ratio?: string; class?: string }
+const { asset, label, alt = '', ratio = '16 / 10', class: cls } = Astro.props;
+const src = assets[asset];
+---
+<figure class:list={['ln-slot', { 'is-empty': !src }, cls]} style={`aspect-ratio:${ratio}`}>
+  {src ? (
+    <img src={src} alt={alt || label} loading="lazy" decoding="async" />
+  ) : (
+    <figcaption>
+      <span class="ln-slot-tag" aria-hidden="true">Blueprint · image slot</span>
+      <span class="ph" data-placeholder>[[PLACEHOLDER: {label}]]</span>
+    </figcaption>
+  )}
+</figure>

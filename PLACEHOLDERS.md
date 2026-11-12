@@ -45,5 +45,22 @@ Every item below is shown on the site as a visible yellow `[[PLACEHOLDER: ...]]`
 - Google/Apple roles and dates from the CV.
 - Professional photograph; optional additional link.
 
+## Lens (`/lens/`)
+- Everything above applies (same `config.ts` + `assets.ts` sources). Additional slots:
+- Portrait photo (`assets.portrait`); project screenshots (`assets.gameScreen1-3`, `likedScreen`, `promptPulseScreen`).
+- `[[PLACEHOLDER: status: launched / prototype / concept]]` for LIKED and PromptPulse.
+- Portrait, LIKED/PromptPulse URLs, email and LinkedIn come from `src/config.ts`.
+- 3 "when the AI got it wrong" examples (problem / wrong output / correction), workflow video embed, Guess-History case-study prompts and agent instructions, portfolio case study.
+- Game concept/rules description, demo video/GIF, dataset sample + methodology + licensing, verified CV roles/dates, bio, second MBA, additional link.
+
+## Atelier (`/atelier/`)
+All values live in `src/data/atelier.ts` (empty string = visible placeholder) — it does not read `src/config.ts`. Email is already set (`laurent.martenot@gmail.com`).
+- **Global**: `linkedin` (profile URL), `gameUrl` (live BackToThePast URL), `likedUrl`, `promptPulseUrl`, `formEndpoint` (optional; mailto is the working mechanism). Image slots in `atelierAssets`: `portrait`, `gameScreen1-3`, `likedScreen`, `promptPulseScreen`, `caseResult`, `datasetSample`, `workflowVideo`.
+- **Home** (`/atelier/`): LIKED status chip + LIKED process detail; PromptPulse process detail; BackToThePast screenshot; LIKED/PromptPulse URLs.
+- **Hire** (`/atelier/hire/`): LinkedIn URL only — all other contact paths use the verified email.
+- **BackToThePast** (`/atelier/backtothepast/`): live game URL (Play CTA), 3 screenshots, gameplay demo video/GIF, downloadable dataset sample (50–100 events), 6 methodology items + licensing terms.
+- **How I Work** (`/atelier/how-i-work/`): 5 case-study evidence blocks (idea, problem, decisions, prompts/instructions, agent coordination), 3 "when the AI got it wrong" examples (problem / wrong output / correction), working-result screenshot, workflow video embed, portfolio case study.
+- **About** (`/atelier/about/`): professional photograph (real photo only — monogram panel shown meanwhile), LinkedIn URL, optional additional link.
+
 ## Open decisions
 - Public name: BackToThePast or Guess-History (both shown for now).

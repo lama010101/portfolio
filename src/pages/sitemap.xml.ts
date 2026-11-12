@@ -9,6 +9,17 @@ const paths = [
   '/portfolios/',
   '/studio/',
   '/play/',
+  '/lens/',
+  '/direction/',
+  '/direction/hire/',
+  '/direction/backtothepast/',
+  '/direction/process/',
+  '/direction/about/',
+  '/atelier/',
+  '/atelier/hire/',
+  '/atelier/backtothepast/',
+  '/atelier/how-i-work/',
+  '/atelier/about/',
 ];
 
 export const GET = () =>

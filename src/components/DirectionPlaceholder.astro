@@ -1,0 +1,5 @@
+---
+const { text, block = false } = Astro.props;
+const Tag = block ? 'div' : 'span';
+---
+<Tag class="d-placeholder">[[PLACEHOLDER: {text}]]</Tag>

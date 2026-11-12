@@ -1,0 +1,69 @@
+---
+import DirectionLayout from '../../layouts/DirectionLayout.astro';
+import DirectionLink from '../../components/DirectionLink.astro';
+import DirectionPlaceholder from '../../components/DirectionPlaceholder.astro';
+import { config, mailto } from '../../config';
+
+const tasks = [
+  { title: 'Multilingual AI output evaluation', lang: 'EN / FR / ES', text: 'Assess accuracy, tone and cultural fit across English, French and Spanish — with quality judged in context, not in isolation.', subject: 'Multilingual AI output evaluation (EN/FR/ES)' },
+  { title: 'Localization & i18n quality testing', lang: 'AI PRODUCTS', text: 'Test AI products across languages and locales, building on past software and product testing in internationalization teams at Google and Apple.', subject: 'Localization and i18n quality testing for AI products' },
+  { title: 'Evaluation guidelines & test cases', lang: 'QUALITY SYSTEMS', text: 'Turn quality expectations into clear guidelines and repeatable test cases so evaluation becomes consistent and useful.', subject: 'Writing and testing AI evaluation guidelines and test cases' },
+  { title: 'Directing AI-built products', lang: 'IDEA → RELEASE', text: 'Define the product, coordinate AI-assisted implementation and iterate from an initial idea to a working release.', subject: 'Directing an AI-built product from idea to working release' },
+];
+const categories = [
+  { title: 'AI Product & Business Development', items: ['Product conception', 'Opportunity analysis', 'Product requirements', 'AI-assisted development coordination', 'Product validation'] },
+  { title: 'AI Solutions & Workflow Development', items: ['Identify processes suited to AI', 'Design AI-assisted workflows', 'Coordinate implementation', 'Evaluate output and reliability', 'Improve operational efficiency'] },
+  { title: 'AI Evaluation & Multilingual QA', items: ['Multilingual interface evaluation', 'Localization QA', 'AI output evaluation', 'Cultural and linguistic consistency', 'Business-oriented quality assessment'] },
+];
+---
+<DirectionLayout path="/direction/hire/" title="How can I help you?" description="Work with Laurent Martenot on multilingual AI evaluation, localization and i18n quality testing, evaluation guidelines, and AI-directed product building.">
+  <section class="d-page-head">
+    <div class="d-shell">
+      <span class="d-page-index">02 / HIRE ME</span>
+      <div class="d-page-head-grid">
+        <h1>Let’s turn your next idea into something <em>real.</em></h1>
+        <div class="d-page-head-aside"><p class="d-kicker">How can I help you?</p><p>Start with the closest match. Each path leads to a focused conversation about your actual needs — not a pre-packaged answer.</p><DirectionLink href="#contact">Not sure? Tell me the problem</DirectionLink></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light" aria-labelledby="services-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Primary offer / Choose a starting point</p><h2 id="services-title">Where I can help <em>most.</em></h2></div><p>Multilingual evaluation and localization quality lead the offer, backed by international product experience and hands-on AI product direction.</p></div>
+      <div class="d-service-grid" data-reveal>
+        {tasks.map((task, index) => (
+          <article class="d-service">
+            <div class="d-service-top"><span>0{index + 1}</span><span>{task.lang}</span></div>
+            <h3>{task.title}</h3><p>{task.text}</p>
+            <DirectionLink href={mailto(task.subject)} label="email address" variant="secondary">Discuss this</DirectionLink>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="scope-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Secondary capabilities</p><h2 id="scope-title">A broader product <em>perspective.</em></h2></div><p>Commercial reasoning, product definition and quality evaluation belong in the same conversation.</p></div>
+      <div class="d-category-grid" data-reveal>
+        {categories.map((category, index) => <article class="d-category"><span class="d-page-index">0{index + 1}</span><h3>{category.title}</h3><ul>{category.items.map((item) => <li>{item}</li>)}</ul></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light d-section--line" aria-labelledby="experience-title">
+    <div class="d-shell d-split" data-reveal>
+      <div><p class="d-kicker">Experience behind the offer</p><h2 id="experience-title">Product quality, across languages and contexts.</h2><p>I worked on software and product testing in internationalization (i18n) teams at Google and Apple. My broader background includes international B2B sales and startup project management.</p><DirectionPlaceholder block text="verified Google and Apple roles, titles and dates exactly as shown in the CV" /></div>
+      <div><p class="d-kicker">A short professional introduction</p><h2>Business judgment meets practical AI direction.</h2><p>I am a French-American business and sales professional based in Thailand, working in English, French and Spanish. I define the problem, make product decisions, direct AI to build and evaluate the result.</p><DirectionPlaceholder block text="short professional biography and career history, verified against the CV" /><h3 style="margin-top:2rem">Project references</h3><p><a class="d-text-link" href="/direction/backtothepast/">BackToThePast / Guess-History <span aria-hidden="true">↗</span></a></p><p>LIKED — personal interests and collections.<br />PromptPulse — collective intelligence concept.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="d-section" aria-labelledby="contact-title">
+    <div class="d-shell">
+      <div class="d-contact-box" data-reveal>
+        <p class="d-kicker">Direct inquiry</p><h2 id="contact-title">Tell me what you need.</h2><p>Share the problem, the context and what a good outcome would look like. We can start there.</p>
+        <div class="d-actions"><DirectionLink href={mailto('Tell me what you need')} label="email address" variant="primary">Start a direct inquiry</DirectionLink><DirectionLink value={config.linkedin} label="LinkedIn profile URL" variant="secondary">LinkedIn</DirectionLink><DirectionLink href="/direction/about/#contact">All contact options</DirectionLink></div>
+      </div>
+    </div>
+  </section>
+</DirectionLayout>

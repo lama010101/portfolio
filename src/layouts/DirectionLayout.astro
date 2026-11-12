@@ -1,0 +1,99 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import '../styles/direction.css';
+import { config } from '../config';
+import DirectionLink from '../components/DirectionLink.astro';
+
+const { title, description, path = '/direction/' } = Astro.props;
+const pageTitle = title.includes(config.name) ? title : `${title} | ${config.name}`;
+const canonical = new URL(path, config.siteUrl).href;
+const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
+const nav = [
+  { label: 'Home', href: '/direction/' },
+  { label: 'Hire me', href: '/direction/hire/' },
+  { label: 'BackToThePast', href: '/direction/backtothepast/' },
+  { label: 'How I work', href: '/direction/process/' },
+  { label: 'About & contact', href: '/direction/about/' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3f1ea" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/direction/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={config.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+  </head>
+  <body>
+    <a class="d-skip" href="#main">Skip to content</a>
+    <div class="d-progress" aria-hidden="true"><span data-reading-progress></span></div>
+
+    <header class="d-header">
+      <div class="d-header-inner">
+        <a class="d-brand" href="/direction/" aria-label="Laurent Martenot — Direction home">
+          <span class="d-brand-mark">LM</span>
+          <span class="d-brand-name">Laurent Martenot<small>AI-native Business & Product Builder</small></span>
+          <span class="d-edition">Direction / 04</span>
+        </a>
+        <nav class="d-desktop-nav" aria-label="Primary navigation">
+          {nav.map((item) => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <div class="d-header-actions">
+          <button class="d-command-trigger" type="button" data-command-open aria-label="Open site index"><span>Index</span><kbd>⌘ K</kbd></button>
+          <button class="d-menu-trigger" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-navigation"><span>Menu</span><i aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <nav id="mobile-navigation" class="d-mobile-nav" aria-label="Mobile navigation" data-mobile-nav hidden>
+        {nav.map((item, index) => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}><span>0{index + 1}</span>{item.label}<b aria-hidden="true">↗</b></a>)}
+        <a href="/portfolios/"><span>↖</span>All portfolio editions</a>
+      </nav>
+    </header>
+
+    <main id="main"><slot /></main>
+
+    <footer class="d-footer">
+      <div class="d-shell">
+        <div class="d-footer-cta" data-reveal>
+          <p class="d-kicker d-kicker--light">A useful conversation starts here</p>
+          <h2>Have a problem<br /><em>worth solving?</em></h2>
+          <DirectionLink href="/direction/hire/#contact" variant="acid">Tell me what you need</DirectionLink>
+        </div>
+        <div class="d-footer-bottom">
+          <div><strong>{config.name}</strong><span>Business thinking. Product vision. AI execution.</span></div>
+          <div><span>Based in Thailand</span><span>Working internationally / remote</span></div>
+          <div><a href="/portfolios/">All editions</a><button type="button" data-command-open>Site index</button><a href="#main">Back to top ↑</a></div>
+        </div>
+        <div class="d-footer-signoff"><span>Direction — Edition 04</span><span>English · Français · Español</span></div>
+      </div>
+    </footer>
+
+    <dialog id="command-menu" class="d-command" aria-labelledby="command-title">
+      <div class="d-command-head">
+        <div><span class="d-kicker">Quick navigation</span><h2 id="command-title">Where would you like to go?</h2></div>
+        <button type="button" data-command-close aria-label="Close site index">Close <kbd>Esc</kbd></button>
+      </div>
+      <label class="d-command-search" for="command-filter"><span aria-hidden="true">⌕</span><input id="command-filter" type="search" placeholder="Filter destinations…" autocomplete="off" /></label>
+      <nav class="d-command-list" aria-label="Site index">
+        {nav.map((item, index) => <a href={item.href} data-command-link><span>0{index + 1}</span><strong>{item.label}</strong><b aria-hidden="true">↗</b></a>)}
+        <a href="/direction/backtothepast/#partner" data-command-link><span>06</span><strong>Partner with me</strong><b aria-hidden="true">↗</b></a>
+        <a href="/portfolios/" data-command-link><span>↖</span><strong>All portfolio editions</strong><b aria-hidden="true">↗</b></a>
+      </nav>
+      <p class="d-command-hint">Business professional. Product thinker. AI-native builder.</p>
+    </dialog>
+    <script is:inline src="/direction/direction.js" defer></script>
+  </body>
+</html>

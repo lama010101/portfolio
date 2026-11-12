@@ -1,0 +1,79 @@
+---
+import DirectionLayout from '../../layouts/DirectionLayout.astro';
+import DirectionLink from '../../components/DirectionLink.astro';
+import DirectionPlaceholder from '../../components/DirectionPlaceholder.astro';
+import DirectionAsset from '../../components/DirectionAsset.astro';
+import { config, mailto, isPlaceholder } from '../../config';
+
+const languages = [
+  { name: 'English', level: 'Fluent' },
+  { name: 'Français', level: 'Fluent' },
+  { name: 'Español', level: 'Fluent' },
+  { name: 'Português', level: 'Conversational' },
+];
+---
+<DirectionLayout path="/direction/about/" title="About & Contact" description="About Laurent Martenot: French-American business and sales professional, AI-native product builder, fluent in English, French and Spanish, based in Thailand.">
+  <section class="d-page-head">
+    <div class="d-shell">
+      <span class="d-page-index">05 / ABOUT & CONTACT</span>
+      <div class="d-page-head-grid">
+        <h1>A business person who <em>builds with AI.</em></h1>
+        <div class="d-page-head-aside"><p class="d-kicker">International by perspective</p><p>French-American. Based in Thailand. Comfortable across cultures, languages, commercial problems and new product possibilities.</p><DirectionLink href="#contact">Start a conversation</DirectionLink></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light" aria-labelledby="story-title">
+    <div class="d-shell d-about-grid">
+      <div data-reveal><DirectionAsset asset="portrait" label="real professional portrait of Laurent Martenot" alt="Portrait of Laurent Martenot" ratio="4 / 5" /><p style="margin-top:1rem"><DirectionPlaceholder text="professional biography and career history from the authoritative CV" /></p></div>
+      <div class="d-about-copy" data-reveal>
+        <p class="d-kicker">My story</p><h2 id="story-title">Commercial experience.<br />An enduring interest in <em>what’s next.</em></h2>
+        <p>I’m a French-American business and sales professional with an international perspective and an enduring interest in technology and innovation.</p>
+        <p>Over the past 18 months, I’ve developed practical experience using AI to conceive, direct and build digital products independently, including BackToThePast (Guess-History).</p>
+        <p>My approach combines commercial reasoning with the ability to work closely with AI systems and coding agents. I enjoy exploring possibilities, challenging assumptions and turning ideas into working solutions.</p>
+        <p><strong>I am not a software engineer.</strong> I define the problem, make the product decisions, direct AI to build and evaluate the result.</p>
+        <div class="d-actions" style="margin-top:2rem"><DirectionLink href="/direction/process/" variant="secondary">See my working method</DirectionLink></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="background-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Background / Verified foundations</p><h2 id="background-title">Experience that informs the <em>work.</em></h2></div><p>Business, internationalization and product quality are connected by a practical question: does this work for the person it is meant to serve?</p></div>
+      <div class="d-facts" data-reveal>
+        <article class="d-fact"><span class="d-page-index">01 / EDUCATION</span><h3>Business education</h3><ul><li>MBA, ICN Business School, Nancy, France (1990).</li><li><DirectionPlaceholder text="second MBA (American): institution and year — confirm from CV or remove" /></li></ul></article>
+        <article class="d-fact"><span class="d-page-index">02 / PRODUCT QUALITY</span><h3>Internationalization & testing</h3><p>Software and product testing in internationalization (i18n) teams at Google and Apple.</p><DirectionPlaceholder text="exact Google and Apple roles, titles and dates from the CV" /></article>
+        <article class="d-fact"><span class="d-page-index">03 / COMMERCIAL</span><h3>International business</h3><p>International B2B sales and startup project management experience, bringing commercial context to product decisions.</p><DirectionPlaceholder text="verified international B2B sales and startup roles, employers and dates from the CV" /></article>
+        <article class="d-fact"><span class="d-page-index">04 / AVAILABILITY</span><h3>Based in Thailand</h3><p>Open to overnight and remote work, with an international and multilingual working perspective.</p><DirectionLink href="/direction/hire/">Discuss an opportunity</DirectionLink></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light d-section--line" aria-labelledby="languages-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Languages / Working range</p><h2 id="languages-title">Four languages.<br /><em>Three fluent.</em></h2></div><p>Language ability is part of the product-quality offer: meaning, tone and cultural fit need to work in context.</p></div>
+      <div class="d-language-grid" data-reveal>{languages.map((language, index) => <div class="d-language"><span class="d-page-index">0{index + 1}</span><strong>{language.name}</strong><span>{language.level}</span></div>)}</div>
+    </div>
+  </section>
+
+  <section id="contact" class="d-section" aria-labelledby="contact-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Contact / Choose your reason</p><h2 id="contact-title">Tell me what you <em>need.</em></h2></div><p>A project, a partnership, a role or simply a question — start with the path that fits.</p></div>
+      <div class="d-contact-grid" data-reveal>
+        <div class="d-contact-options">
+          <DirectionLink href={mailto('Hire Me / opportunity')} label="email address">Hire me</DirectionLink>
+          <DirectionLink href={mailto('Project inquiry')} label="email address">Discuss a project</DirectionLink>
+          <DirectionLink href={mailto('Partnership: BackToThePast')} label="email address">Partner with me</DirectionLink>
+          <DirectionLink href={mailto('General contact')} label="email address">General contact</DirectionLink>
+        </div>
+        <div>
+          <h3>Direct details</h3>
+          <p><strong>Email</strong><br />{isPlaceholder(config.email) ? <DirectionPlaceholder text="email address" /> : <a class="d-text-link" href={`mailto:${config.email}`}>{config.email}</a>}</p>
+          <p><strong>LinkedIn</strong><br /><DirectionLink value={config.linkedin} label="LinkedIn profile URL">Laurent Martenot on LinkedIn</DirectionLink></p>
+          <p><strong>Additional link</strong><br /><DirectionPlaceholder text="optional additional professional link" /></p>
+          <p><strong>Location</strong><br />Thailand · Open to remote and overnight work</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</DirectionLayout>

@@ -1,0 +1,682 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/lens.css';
+import LensLink from '../components/LensLink.astro';
+import LensSlot from '../components/LensSlot.astro';
+import { config, isPlaceholder, mailto } from '../config';
+
+const pageTitle = `${config.name} / Lens | An adaptive portfolio for whoever is reading`;
+const pageDesc =
+  'Laurent Martenot, AI-native Business & Product Builder. An adaptive portfolio that re-composes itself for employers, partners and explorers: multilingual AI evaluation (EN/FR/ES), i18n QA and AI-directed product building.';
+const canonical = new URL('/lens/', config.siteUrl).href;
+const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
+const email = isPlaceholder(config.email) ? '' : config.email;
+
+const headlines = {
+  en: 'I turn business ideas into working products using AI.',
+  fr: "Je transforme des idées business en produits qui fonctionnent, grâce à l'IA.",
+  es: 'Convierto ideas de negocio en productos que funcionan, con IA.',
+};
+
+const lenses = {
+  hire: {
+    label: "I'm hiring",
+    lead: 'For companies, startups and founders: multilingual AI evaluation in English, French and Spanish, i18n quality testing, and directing AI-built products from idea to working release.',
+    cta: { label: 'How can I help you?', href: '#hire' },
+    alt: { label: 'See how I work', href: '#method' },
+    order: ['bring', 'work', 'method', 'hire', 'btp', 'about'],
+  },
+  partner: {
+    label: 'I want to partner',
+    lead: 'For AI labs, universities, historians, museums and publishers: BackToThePast is a live history game with the ambition to grow into a curated, sourced historical knowledge platform.',
+    cta: { label: 'Partner with me', href: '#btp' },
+    alt: { label: 'See what I have built', href: '#work' },
+    order: ['btp', 'work', 'method', 'about', 'bring', 'hire'],
+  },
+  explore: {
+    label: 'Just exploring',
+    lead: 'Business professional. Product thinker. AI-native builder. I combine commercial experience with hands-on AI to conceive, develop and launch digital products.',
+    cta: { label: 'Explore my work', href: '#work' },
+    alt: { label: 'See how I work', href: '#method' },
+    order: ['work', 'method', 'btp', 'bring', 'about', 'hire'],
+  },
+};
+
+const sectionTitles: Record<string, string> = {
+  bring: 'What I bring',
+  work: 'Selected work',
+  method: 'How I work',
+  btp: 'BackToThePast',
+  hire: 'How can I help',
+  about: 'About & contact',
+};
+
+const projects = [
+  {
+    id: 'btp',
+    name: 'BackToThePast',
+    alt: 'Guess-History',
+    status: 'Live game',
+    real: true,
+    desc: 'An interactive, multiplayer historical knowledge game with the ambition to develop into a broader historical knowledge and AI evaluation platform.',
+    shows: ['The actual game', 'Product concept', 'Multiplayer experience', 'Historical knowledge challenge', 'Potential data & AI benchmarking business'],
+    asset: 'gameScreen1',
+    cta: 'Explore BackToThePast',
+    href: '#btp',
+  },
+  {
+    id: 'liked',
+    name: 'LIKED',
+    status: '',
+    real: false,
+    desc: 'A digital application designed to organize and manage personal interests, favorites and collections.',
+    shows: ['The product problem', 'The application concept', 'The user experience', 'The AI-assisted development process'],
+    asset: 'likedScreen',
+    cta: 'Explore LIKED',
+    value: config.likedUrl,
+    label: 'LIKED project URL',
+  },
+  {
+    id: 'pp',
+    name: 'PromptPulse',
+    status: '',
+    real: false,
+    desc: 'A concept exploring collective intelligence, shared answers and AI evaluation through human-like participation.',
+    shows: ['The business concept', 'The underlying mechanics', 'Potential AI evaluation & data applications'],
+    asset: 'promptPulseScreen',
+    cta: 'Explore PromptPulse',
+    value: config.promptPulseUrl,
+    label: 'PromptPulse project URL',
+  },
+];
+
+const stages = [
+  {
+    name: 'Business problem',
+    steps: ['Identify a problem or opportunity.', 'Define the business objective.'],
+    file: 'opportunity.note',
+    lines: [
+      ['q', 'Who has the problem?'],
+      ['q', 'What does it cost them today?'],
+      ['q', 'What would success look like?'],
+      ['k', 'objective: one sentence, measurable'],
+    ],
+  },
+  {
+    name: 'Product definition',
+    steps: ['Explore possible solutions with AI.', 'Translate the solution into precise requirements.'],
+    file: 'requirements.md',
+    lines: [
+      ['h', '# Objective'],
+      ['h', '# Users'],
+      ['h', '# Must have'],
+      ['h', '# Out of scope'],
+      ['h', '# Acceptance criteria'],
+    ],
+  },
+  {
+    name: 'AI orchestration',
+    steps: ['Direct AI coding agents to implement it.'],
+    file: 'agent-brief.txt',
+    lines: [
+      ['k', 'You implement; you do not redefine strategy.'],
+      ['k', 'Do not invent facts, metrics or claims.'],
+      ['k', 'Mark anything missing as a visible placeholder.'],
+      ['c', '// excerpt from the real brief behind this site'],
+    ],
+  },
+  {
+    name: 'Implementation',
+    steps: ['AI agents execute the implementation. I direct the work and make the product decisions.'],
+    file: 'milestone-report.md',
+    lines: [
+      ['h', '1. What was implemented'],
+      ['h', '2. Files changed'],
+      ['h', '3. What was tested'],
+      ['h', '4. What remains incomplete'],
+      ['h', '5. Evidence it works'],
+    ],
+  },
+  {
+    name: 'Validation',
+    steps: ['Evaluate the implementation.', 'Challenge errors and inconsistencies.'],
+    file: 'review.checklist',
+    lines: [
+      ['ok', 'Renders at 360px and 1440px, no horizontal scroll'],
+      ['ok', 'Every CTA works or is visibly marked'],
+      ['ok', 'No fabricated metrics or claims'],
+      ['ok', 'Keyboard navigable, WCAG AA contrast'],
+    ],
+  },
+  {
+    name: 'Iteration',
+    steps: ['Iterate until the product meets its objectives.'],
+    file: 'next.diff',
+    lines: [
+      ['del', '- a confident claim nobody can verify'],
+      ['add', '+ a verified fact, or a visible placeholder'],
+      ['del', '- a feature that looks impressive'],
+      ['add', '+ a feature that works'],
+    ],
+  },
+];
+
+const tasks = [
+  { id: 'eval', title: 'Multilingual AI output evaluation (EN/FR/ES)', text: 'Assessing the accuracy, tone and cultural fit of AI outputs in English, French and Spanish.' },
+  { id: 'i18n', title: 'Localization and i18n quality testing for AI products', text: 'Testing AI products across languages and locales, building on past i18n QA work at Google and Apple.' },
+  { id: 'guide', title: 'Writing and testing evaluation guidelines and test cases', text: 'Turning quality expectations into clear guidelines and repeatable test cases for AI systems.' },
+  { id: 'build', title: 'Directing AI-built products from idea to working release', text: 'Defining the product, directing AI coding agents and iterating until it works.' },
+];
+
+const categories = [
+  { t: 'AI Product & Business Development', items: ['Product conception', 'Business opportunity analysis', 'Product requirements', 'AI-assisted development coordination', 'Product validation'] },
+  { t: 'AI Solutions & Workflow Development', items: ['Identify processes suitable for AI', 'Design AI-assisted workflows', 'Coordinate implementation', 'Evaluate outputs and reliability', 'Improve operational efficiency'] },
+  { t: 'AI Evaluation & Multilingual QA', items: ['Multilingual interface evaluation', 'Localization QA', 'AI output evaluation', 'Cultural and linguistic consistency', 'Business-oriented quality assessment'] },
+];
+
+const datasetFields = ['event ID', 'title', 'date or date range', 'geographic location', 'historical period', 'description', 'source references', 'verification status', 'confidence / evidence notes', 'licensing information'];
+const methodology = [
+  ['How events are selected', 'methodology'],
+  ['How sources are identified', 'methodology'],
+  ['How conflicting accounts are handled', 'methodology'],
+  ['How facts are reviewed', 'methodology'],
+  ['How provenance is maintained', 'methodology'],
+  ['What rights and licenses apply', 'licensing terms'],
+];
+
+const clientData = {
+  email,
+  headlines,
+  lenses: Object.fromEntries(Object.entries(lenses).map(([k, v]) => [k, { lead: v.lead, cta: v.cta, alt: v.alt, order: v.order }])),
+  titles: sectionTitles,
+  tasks: tasks.map(({ id, title }) => ({ id, title })),
+};
+const defaultOrder = lenses.hire.order;
+---
+<!doctype html>
+<html lang="en" data-lens="hire" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="theme-color" content="#F3F1EC" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={config.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body class="ln">
+    <a class="ln-skip" href="#main">Skip to content</a>
+    <div class="ln-progress" aria-hidden="true"><span id="ln-progress"></span></div>
+
+    <header class="ln-header">
+      <div class="ln-wrap ln-bar">
+        <a class="ln-brand" href="/lens/" aria-label={`${config.name} Lens edition, top of page`}>
+          <span class="ln-mark" aria-hidden="true">LM</span>
+          <span class="ln-brand-name">Laurent Martenot</span>
+          <span class="ln-brand-ed">/ Lens</span>
+        </a>
+        <nav class="ln-nav" aria-label="Sections">
+          <a href="#work">Work</a>
+          <a href="#method">Method</a>
+          <a href="#btp">BackToThePast</a>
+          <a href="#hire">Hire</a>
+          <a href="#about">About</a>
+        </nav>
+        <div class="ln-tools">
+          <button type="button" class="ln-tool" id="ln-src-toggle" aria-pressed="false" title="Show where every claim comes from">
+            <span class="ln-tool-dot" aria-hidden="true"></span><span>Sources</span>
+          </button>
+          <button type="button" class="ln-tool" id="ln-theme" aria-pressed="false" aria-label="Dark mode">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" /></svg>
+          </button>
+          <button type="button" class="ln-tool ln-tool-k" id="ln-cmd-open" aria-haspopup="dialog" aria-controls="ln-cmd">
+            <span class="ln-only-m">Menu</span><span class="ln-only-d">Jump to</span><kbd class="ln-only-d">Ctrl K</kbd>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="ln-hero" id="top" aria-labelledby="ln-h1">
+        <div class="ln-wrap ln-hero-grid">
+          <div class="ln-hero-copy">
+            <div class="ln-lens" role="group" aria-label="Who are you? The page re-orders itself for you">
+              <span class="ln-lens-q">Who's reading?</span>
+              {Object.entries(lenses).map(([k, v]) => (
+                <button type="button" class="ln-lens-btn" data-lens-btn={k} aria-pressed={k === 'hire' ? 'true' : 'false'}>{v.label}</button>
+              ))}
+            </div>
+
+            <p class="ln-eyebrow" data-src="Laurent">{config.tagline}</p>
+            <h1 id="ln-h1" class="ln-h1" lang="en" data-src="Laurent"><span id="ln-headline">{headlines.en}</span></h1>
+
+            <div class="ln-lang" role="group" aria-label="Read the headline in English, French or Spanish">
+              <button type="button" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+              <button type="button" data-lang="es" aria-pressed="false">ES</button>
+              <span class="ln-lang-note">The three languages I evaluate AI output in.</span>
+            </div>
+
+            <p class="ln-lead" id="ln-lead" aria-live="polite">{lenses.hire.lead}</p>
+
+            <div class="ln-actions">
+              <a class="ln-btn ln-btn-solid" id="ln-cta" href={lenses.hire.cta.href}>{lenses.hire.cta.label} <span aria-hidden="true">&rarr;</span></a>
+              <a class="ln-btn ln-btn-ghost" id="ln-cta-alt" href={lenses.hire.alt.href}>{lenses.hire.alt.label}</a>
+              <a class="ln-tlink" href="#btp-partner">Partner with me</a>
+            </div>
+
+            <ol class="ln-route" id="ln-route" aria-label="Your suggested route through this page">
+              {defaultOrder.slice(0, 3).map((id, i) => (
+                <li><a href={`#${id}`}><b>0{i + 1}</b>{sectionTitles[id]}</a></li>
+              ))}
+            </ol>
+          </div>
+
+          <aside class="ln-card ln-id" aria-label="At a glance">
+            <div class="ln-id-top">
+              <LensSlot asset="portrait" label="professional portrait (real photo only)" alt="Portrait of Laurent Martenot" ratio="1 / 1" class="ln-id-photo" />
+              <div>
+                <p class="ln-id-name">{config.name}</p>
+                <p class="ln-id-role">Business &amp; Product Builder</p>
+                <p class="ln-id-loc" data-src="Laurent"><span class="ln-live" aria-hidden="true"></span>Based in Thailand · open to overnight &amp; remote work</p>
+              </div>
+            </div>
+            <ul class="ln-proof">
+              <li data-src="Laurent"><span>i18n QA</span>Google &amp; Apple internationalization testing background</li>
+              <li data-src="Laurent"><span>EN · FR · ES</span>Fluent in English, French and Spanish</li>
+              <li data-src="Laurent"><span>Daily</span>Ships with AI every day</li>
+            </ul>
+            <div class="ln-langs" aria-label="Language levels">
+              {[['English', 'Fluent', 100], ['French', 'Fluent', 100], ['Spanish', 'Fluent', 100], ['Portuguese', 'Conversational', 55]].map(([l, lvl, w]) => (
+                <div class="ln-langbar" data-src="Laurent">
+                  <span>{l}</span><i style={`--w:${w}%`} aria-hidden="true"></i><em>{lvl}</em>
+                </div>
+              ))}
+            </div>
+            <p class="ln-legend"><span class="ln-legend-solid"></span>Solid = real today <span class="ln-legend-bp"></span>Blueprint = planned or awaiting input</p>
+          </aside>
+        </div>
+      </section>
+
+      <div id="ln-flow">
+        <!-- WHAT I BRING -->
+        <section class="ln-sec" id="bring" data-sec aria-labelledby="bring-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">What I bring</p>
+            <h2 id="bring-h" class="ln-h2">Business thinking. <em>Product vision.</em> AI execution.</h2>
+            <div class="ln-bring">
+              {[
+                ['Business & Strategy', 'Understanding markets, customers, commercial opportunities, business models and value creation.'],
+                ['AI Orchestration', 'Using AI models and coding agents to explore, structure, challenge and execute complex ideas.'],
+                ['Product Building', 'Turning concepts into specifications, directing AI-assisted implementation, evaluating outcomes and iterating toward working products.'],
+              ].map(([t, d], i) => (
+                <article class="ln-card ln-spot ln-reveal">
+                  <span class="ln-num">0{i + 1}</span>
+                  <h3>{t}</h3>
+                  <p>{d}</p>
+                </article>
+              ))}
+            </div>
+            <p class="ln-note ln-reveal">I am not a software engineer. I define the problem, make the product decisions, direct AI to build, and evaluate the result.</p>
+          </div>
+        </section>
+
+        <!-- WORK -->
+        <section class="ln-sec ln-sec-alt" id="work" data-sec aria-labelledby="work-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">Selected work</p>
+            <h2 id="work-h" class="ln-h2">Things I have directed AI to build.</h2>
+            <p class="ln-sub">Each project carries its real status. Nothing is shown as launched unless it is.</p>
+
+            <div class="ln-work">
+              <div class="ln-work-tabs" role="tablist" aria-label="Projects" aria-orientation="vertical">
+                {projects.map((p, i) => (
+                  <button type="button" role="tab" id={`tab-${p.id}`} aria-controls={`panel-${p.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class:list={['ln-work-tab', { 'is-bp': !p.real }]}>
+                    <span class="ln-work-idx">0{i + 1}</span>
+                    <span class="ln-work-name">{p.name}{p.alt && <small> ({p.alt})</small>}</span>
+                    {p.real ? <span class="ln-status">{p.status}</span> : <span class="ln-status ln-status-bp">Status pending</span>}
+                  </button>
+                ))}
+              </div>
+              <div class="ln-work-panels">
+                {projects.map((p, i) => (
+                  <div role="tabpanel" id={`panel-${p.id}`} aria-labelledby={`tab-${p.id}`} class:list={['ln-work-panel', { 'is-bp': !p.real }]} hidden={i !== 0} tabindex="0">
+                    <LensSlot asset={p.asset} label={`${p.name} screenshot`} />
+                    <div class="ln-work-body">
+                      <div class="ln-work-head">
+                        <h3>{p.name}{p.alt && <span class="ln-muted"> ({p.alt})</span>}</h3>
+                        {p.real ? <span class="ln-status" data-src="Laurent">{p.status}</span> : <span class="ph" data-placeholder>[[PLACEHOLDER: status: launched / prototype / concept]]</span>}
+                      </div>
+                      <p data-src="Laurent">{p.desc}</p>
+                      <ul class="ln-chips" aria-label="What this project shows">
+                        {p.shows.map((s) => <li>{s}</li>)}
+                      </ul>
+                      <div class="ln-actions">
+                        {p.href ? <a class="ln-btn ln-btn-solid" href={p.href}>{p.cta} <span aria-hidden="true">&rarr;</span></a> : <LensLink value={p.value} label={p.label} variant="solid">{p.cta}</LensLink>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- METHOD -->
+        <section class="ln-sec" id="method" data-sec aria-labelledby="method-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">How I work with AI</p>
+            <h2 id="method-h" class="ln-h2">AI is not just a tool I use. <em>It is how I build.</em></h2>
+            <p class="ln-sub">My contribution is not asking AI questions. It is defining the problem, directing the build and refusing to accept work that is wrong. Scroll through the pipeline.</p>
+
+            <ol class="ln-rail" aria-label="Workflow stages" id="ln-rail">
+              {stages.map((s, i) => <li data-rail={i} class:list={{ 'is-on': i === 0 }}><a href={`#stage-${i}`}>{s.name}</a></li>)}
+            </ol>
+
+            <div class="ln-pipe">
+              <div class="ln-pipe-sticky" aria-hidden="true">
+                <div class="ln-term" id="ln-term"></div>
+                <p class="ln-term-cap">Illustrative templates of the method. The agent-brief and checklist lines are taken from the real brief behind this site.</p>
+              </div>
+              <div class="ln-pipe-steps">
+                {stages.map((s, i) => (
+                  <article class="ln-stage" id={`stage-${i}`} data-stage={i}>
+                    <p class="ln-stage-n">Stage {i + 1} / {stages.length}</p>
+                    <h3>{s.name}</h3>
+                    <ul>{s.steps.map((t) => <li data-src="Laurent">{t}</li>)}</ul>
+                    <figure class="ln-term ln-term-inline" data-term={i}>
+                      <figcaption><span class="ln-dots" aria-hidden="true"><i></i><i></i><i></i></span>{s.file}</figcaption>
+                      <pre>{s.lines.map(([k, t]) => <span class={`t-${k}`}>{t}{'\n'}</span>)}</pre>
+                    </figure>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div class="ln-wrong">
+              <div class="ln-wrong-head">
+                <h3>When the AI got it wrong</h3>
+                <p class="ln-sub">Real examples only. These slots stay as blueprints until Laurent supplies them.</p>
+              </div>
+              <div class="ln-wrong-grid">
+                {[1, 2, 3].map((n) => (
+                  <article class="ln-diff is-bp">
+                    <p class="ln-diff-t">Example {n}</p>
+                    <dl>
+                      <dt>Problem</dt><dd><span class="ph" data-placeholder>[[PLACEHOLDER: example {n}: what you were trying to achieve]]</span></dd>
+                      <dt class="d-del">AI output</dt><dd><span class="ph" data-placeholder>[[PLACEHOLDER: example {n}: what the AI produced]]</span></dd>
+                      <dt class="d-add">My correction</dt><dd><span class="ph" data-placeholder>[[PLACEHOLDER: example {n}: how you corrected it]]</span></dd>
+                    </dl>
+                  </article>
+                ))}
+              </div>
+              <div class="ln-case-row">
+                <div class="ln-card is-bp">
+                  <h3>Workflow video</h3>
+                  <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: short workflow video embed]]</span>
+                </div>
+                <div class="ln-card">
+                  <h3>Case study: this portfolio</h3>
+                  <p>This edition was directed from a written brief and built by an AI coding agent. A full write-up follows after launch.</p>
+                  <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: portfolio case study (to be completed after launch)]]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BACKTOTHEPAST -->
+        <section class="ln-sec ln-sec-dark" id="btp" data-sec aria-labelledby="btp-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">BackToThePast / Guess-History</p>
+            <h2 id="btp-h" class="ln-h2">Making history interactive. <em>Making historical knowledge measurable.</em></h2>
+
+            <div class="ln-split" id="ln-split" data-split="now">
+              <div class="ln-split-switch" role="group" aria-label="Compare what is live today with the ambition">
+                <button type="button" data-split="now" aria-pressed="true">Live today</button>
+                <button type="button" data-split="next" aria-pressed="false">The ambition</button>
+                <span class="ln-split-knob" aria-hidden="true"></span>
+              </div>
+
+              <div class="ln-split-grid">
+                <article class="ln-split-pane ln-pane-now" data-pane="now">
+                  <span class="ln-status">Live today</span>
+                  <h3>An interactive multiplayer history game.</h3>
+                  <p data-src="Laurent">BackToThePast, also known as Guess-History, is a live multiplayer history and geography guessing game that I directed AI to build.</p>
+                  <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: accurate description of the game concept and rules (how a round works, what players guess, how scoring works)]]</span>
+                  <div class="ln-shots">
+                    <LensSlot asset="gameScreen1" label="game screenshot 1" ratio="4 / 3" />
+                    <LensSlot asset="gameScreen2" label="game screenshot 2" ratio="4 / 3" />
+                    <LensSlot asset="gameScreen3" label="game screenshot 3" ratio="4 / 3" />
+                  </div>
+                  <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: short demonstration (video or GIF)]]</span>
+                  <div class="ln-actions"><LensLink value={config.gameUrl} label="live game URL" variant="signal">Play the game</LensLink></div>
+                </article>
+
+                <article class="ln-split-pane ln-pane-next is-bp" data-pane="next">
+                  <span class="ln-status ln-status-bp">Ambition · not a current capability</span>
+                  <h3>From a game to a curated historical knowledge platform.</h3>
+                  <p data-src="Laurent">A structured, curated historical knowledge platform that can support educational experiences and AI model evaluation.</p>
+                  <ul class="ln-amb">
+                    {['Historical knowledge benchmarking', 'Historical event verification', 'AI factual accuracy evaluation', 'Educational products', 'Historical content licensing'].map((a) => <li>{a}</li>)}
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="ln-data">
+              <div>
+                <h3>Building a sourced historical events dataset.</h3>
+                <p data-src="Laurent">I am looking for historians, institutions and partners to help build and verify it. It is in development: no claims are made here about its size, accuracy or licensing.</p>
+                <p class="ln-devnote"><span aria-hidden="true">&#9679;</span> Development stage · sample not yet published</p>
+                <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: downloadable sample dataset (target 50-100 events), or keep this development-stage notice]]</span>
+              </div>
+              <figure class="ln-term ln-schema">
+                <figcaption><span class="ln-dots" aria-hidden="true"><i></i><i></i><i></i></span>event.schema · planned fields</figcaption>
+                <pre>{'{\n'}{datasetFields.map((f, i) => <span><span class="t-k">  "{f}"</span>: <span class="t-c">planned</span>{i < datasetFields.length - 1 ? ',' : ''}{'\n'}</span>)}{'}'}</pre>
+              </figure>
+            </div>
+
+            <div class="ln-meth">
+              <h3>Methodology</h3>
+              <ol>
+                {methodology.map(([t, p]) => (
+                  <li><span>{t}</span><span class="ph" data-placeholder>[[PLACEHOLDER: {p}]]</span></li>
+                ))}
+              </ol>
+            </div>
+
+            <div class="ln-partner" id="btp-partner">
+              <div>
+                <h3>Interested in historical data, AI benchmarking or a commercial partnership? Let's talk.</h3>
+                <ul class="ln-chips ln-chips-dark" aria-label="Who I would like to hear from">
+                  {['AI laboratories', 'AI model developers', 'Universities', 'Historians', 'Museums', 'Educational publishers', 'Historical content providers'].map((t) => <li>{t}</li>)}
+                </ul>
+              </div>
+              <div class="ln-actions">
+                <LensLink href={mailto('Partnership: BackToThePast')} label="email address" variant="signal">Partner with me</LensLink>
+                <LensLink value={config.linkedin} label="LinkedIn URL" variant="ghost">LinkedIn</LensLink>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HIRE -->
+        <section class="ln-sec" id="hire" data-sec aria-labelledby="hire-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">How can I help you?</p>
+            <h2 id="hire-h" class="ln-h2">Let's turn your next idea into <em>something real.</em></h2>
+            <p class="ln-sub">Pick what you need. Your message drafts itself on the right.</p>
+
+            <div class="ln-hire">
+              <div class="ln-tasks" role="group" aria-label="Choose what you need (select one or more)">
+                {tasks.map((t, i) => (
+                  <button type="button" class="ln-task ln-spot" data-task={t.id} aria-pressed="false">
+                    <span class="ln-num">0{i + 1}</span>
+                    <span class="ln-task-t">{t.title}</span>
+                    <span class="ln-task-d">{t.text}</span>
+                    <span class="ln-task-check" aria-hidden="true"></span>
+                  </button>
+                ))}
+                <label class="ln-problem">
+                  <span>Not sure? Tell me the problem.</span>
+                  <textarea id="ln-problem" rows="3" placeholder="A sentence or two is enough."></textarea>
+                </label>
+              </div>
+
+              <div class="ln-draft">
+                <figure class="ln-term ln-mail" aria-live="polite">
+                  <figcaption><span class="ln-dots" aria-hidden="true"><i></i><i></i><i></i></span>new-message.eml</figcaption>
+                  <div class="ln-mail-body">
+                    <p><b>To</b> {email ? <span>{email}</span> : <span class="ph" data-placeholder>[[PLACEHOLDER: email address]]</span>}</p>
+                    <p><b>Subject</b> <span id="ln-mail-subj">Tell me what you need</span></p>
+                    <pre id="ln-mail-text">Hi Laurent,
+
+I'd like to talk about a project.</pre>
+                  </div>
+                </figure>
+                <div class="ln-actions">
+                  {email ? (
+                    <a class="ln-btn ln-btn-signal" id="ln-mail-send" href={mailto('Tell me what you need')}>Open in my email <span aria-hidden="true">&rarr;</span></a>
+                  ) : (
+                    <span class="ln-missing"><a class="ln-btn ln-btn-signal" href="#" aria-disabled="true" tabindex="-1">Open in my email</a><span class="ph" data-placeholder>[[PLACEHOLDER: email address]]</span></span>
+                  )}
+                  <button type="button" class="ln-btn ln-btn-ghost" id="ln-mail-copy">Copy draft</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ln-cats">
+              {categories.map((c) => (
+                <details class="ln-cat">
+                  <summary>{c.t}</summary>
+                  <ul>{c.items.map((x) => <li>{x}</li>)}</ul>
+                </details>
+              ))}
+            </div>
+
+            <div class="ln-bg">
+              <div class="ln-card">
+                <h3>Experience behind the offer</h3>
+                <p data-src="Laurent">Software and product testing in internationalization (i18n) teams at Google and Apple, plus international B2B sales and startup project management.</p>
+                <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: verified roles, employers and dates from the CV]]</span>
+              </div>
+              <div class="ln-card">
+                <h3>Short bio</h3>
+                <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: short professional biography (2-3 sentences, from CV)]]</span>
+                <p class="ln-muted" style="margin-top:1rem">References: <a class="ln-tlink" href="#btp">BackToThePast</a>, LIKED, PromptPulse.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="ln-sec ln-sec-alt" id="about" data-sec aria-labelledby="about-h">
+          <div class="ln-wrap">
+            <p class="ln-eyebrow">About &amp; contact</p>
+            <h2 id="about-h" class="ln-h2">A business person <em>who builds.</em></h2>
+            <div class="ln-about">
+              <div class="ln-story">
+                <p data-src="Laurent">I'm a French-American business and sales professional with an international perspective and an enduring interest in technology and innovation.</p>
+                <p data-src="Laurent">Over the past 18 months, I've developed practical experience using AI to conceive, direct and build digital products independently.</p>
+                <p data-src="Laurent">My approach combines commercial reasoning with the ability to work closely with AI systems and coding agents. I enjoy exploring possibilities, challenging assumptions and turning ideas into working solutions.</p>
+                <span class="ph ph-block" data-placeholder>[[PLACEHOLDER: career history from the CV (employers, titles and dates exactly as in the CV)]]</span>
+              </div>
+              <div class="ln-facts">
+                <h3>Background</h3>
+                <ul>
+                  <li data-src="Laurent">MBA, ICN Business School, Nancy, France (1990)</li>
+                  <li><span class="ph" data-placeholder>[[PLACEHOLDER: second MBA (American): institution and year, confirm from CV or remove]]</span></li>
+                  <li data-src="Laurent">i18n software &amp; product testing at Google and Apple <span class="ph" data-placeholder>[[PLACEHOLDER: roles and dates from CV]]</span></li>
+                  <li data-src="Laurent">International B2B sales and startup project management</li>
+                  <li data-src="Laurent">English, French, Spanish fluent · Portuguese conversational</li>
+                  <li data-src="Laurent">Based in Thailand · open to overnight and remote work</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="ln-contact">
+              <h3>Tell me what you need.</h3>
+              <div class="ln-actions">
+                <LensLink href={mailto('Hire: project inquiry')} label="email address" variant="solid">Hire Me</LensLink>
+                <LensLink href={mailto('Discuss a project')} label="email address" variant="ghost">Discuss a Project</LensLink>
+                <LensLink href={mailto('Partnership: BackToThePast')} label="email address" variant="ghost">Partner With Me</LensLink>
+                <LensLink href={mailto('General contact')} label="email address" variant="ghost">General Contact</LensLink>
+              </div>
+              <ul class="ln-contact-list">
+                <li>Email: {email ? <a class="ln-tlink" href={`mailto:${email}`}>{email}</a> : <span class="ph" data-placeholder>[[PLACEHOLDER: email address]]</span>}</li>
+                <li>LinkedIn: <LensLink value={config.linkedin} label="LinkedIn profile URL" variant="text">Laurent Martenot on LinkedIn</LensLink></li>
+                <li><span class="ph" data-placeholder>[[PLACEHOLDER: any additional link (optional)]]</span></li>
+              </ul>
+              {config.formEndpoint && (
+                <form class="ln-form" action={config.formEndpoint} method="POST">
+                  <label>Name<input name="name" required autocomplete="name" /></label>
+                  <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+                  <label>Message<textarea name="message" rows="4" required></textarea></label>
+                  <div class="ln-hp" aria-hidden="true"><label>Leave empty<input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+                  <button class="ln-btn ln-btn-solid" type="submit">Send</button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="ln-mini" aria-label="Page map" id="ln-mini"></nav>
+
+    <aside class="ln-ledger" id="ln-ledger" hidden aria-live="polite">
+      <strong>Claim ledger</strong>
+      <span><i class="lg-ok"></i><b id="ln-count-src">0</b> statements supplied by Laurent</span>
+      <span><i class="lg-ph"></i><b id="ln-count-ph">0</b> visibly awaiting input</span>
+      <span class="ln-ledger-foot">0 invented. Nothing on this page is generated.</span>
+    </aside>
+
+    <dialog class="ln-cmd" id="ln-cmd" aria-label="Jump to a section or run an action">
+      <div class="ln-cmd-box">
+        <label class="ln-cmd-search">
+          <span class="ln-visually-hidden">Search sections and actions</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4" /></svg>
+          <input id="ln-cmd-input" type="text" autocomplete="off" placeholder="Jump to a section, switch lens, language or theme..." role="combobox" aria-expanded="true" aria-controls="ln-cmd-list" />
+          <kbd>Esc</kbd>
+        </label>
+        <ul id="ln-cmd-list" role="listbox" aria-label="Results"></ul>
+        <p class="ln-cmd-foot"><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate <kbd>Enter</kbd> select</p>
+      </div>
+    </dialog>
+
+    <div class="ln-toast" id="ln-toast" role="status" aria-live="polite"></div>
+
+    <footer class="ln-footer">
+      <div class="ln-wrap ln-footer-grid">
+        <div>
+          <p class="ln-brand-name">{config.name}</p>
+          <p class="ln-muted">{config.tagline}. Edition 04 · Lens.</p>
+        </div>
+        <ul>
+          <li><a href="/portfolios/">All portfolios</a></li>
+          <li><a href="/">01 Editorial</a></li>
+          <li><a href="/play/">02 Play</a></li>
+          <li><a href="/studio/">03 Studio</a></li>
+          <li><LensLink value={config.linkedin} label="LinkedIn URL" variant="text">LinkedIn</LensLink></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script is:inline define:vars={{ clientData }}>window.LENS = clientData;</script>
+    <script is:inline src="/lens/lens.js"></script>
+  </body>
+</html>

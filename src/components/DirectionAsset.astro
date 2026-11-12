@@ -1,0 +1,14 @@
+---
+import { assets } from '../data/assets';
+const { asset, label, alt = '', ratio = '16 / 10' } = Astro.props;
+const src = assets[asset];
+---
+{src ? (
+  <img class="d-asset" src={src} alt={alt} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} />
+) : (
+  <div class="d-asset d-asset--empty" style={`aspect-ratio:${ratio}`} role="img" aria-label={`Placeholder: ${label}`}>
+    <span class="d-asset-cross" aria-hidden="true"></span>
+    <span class="d-asset-label">Verified asset only</span>
+    <code>[[PLACEHOLDER: {label}]]</code>
+  </div>
+)}

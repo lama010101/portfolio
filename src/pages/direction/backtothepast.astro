@@ -1,0 +1,66 @@
+---
+import DirectionLayout from '../../layouts/DirectionLayout.astro';
+import DirectionLink from '../../components/DirectionLink.astro';
+import DirectionPlaceholder from '../../components/DirectionPlaceholder.astro';
+import DirectionAsset from '../../components/DirectionAsset.astro';
+import { config, mailto } from '../../config';
+
+const fields = ['Event ID', 'Title', 'Date / range', 'Location', 'Historical period', 'Description', 'Source references', 'Verification status', 'Evidence notes', 'Licensing information'];
+const methodology = ['How events are selected', 'How sources are identified', 'How conflicting accounts are handled', 'How facts are reviewed', 'How provenance is maintained', 'What rights and licenses apply'];
+const partners = ['AI laboratories', 'AI model developers', 'Universities', 'Historians', 'Museums', 'Educational publishers', 'Historical content providers'];
+---
+<DirectionLayout path="/direction/backtothepast/" title="BackToThePast — Making history interactive" description="Explore BackToThePast / Guess-History, Laurent Martenot's live multiplayer history game and its future potential for historical knowledge and AI evaluation.">
+  <section class="d-page-head">
+    <div class="d-shell">
+      <span class="d-page-index">03 / BACKTOTHEPAST · GUESS-HISTORY</span>
+      <div class="d-page-head-grid">
+        <h1>Making history <em>interactive.</em><br />Making historical knowledge <em>measurable.</em></h1>
+        <div class="d-page-head-aside"><span class="d-status">Live game</span><p>A multiplayer history and geography guessing game directed with AI — and a larger ambition for sourced historical knowledge and AI evaluation.</p><div class="d-actions"><DirectionLink value={config.gameUrl} label="live BackToThePast / Guess-History game URL" variant="primary">Play the game</DirectionLink><DirectionLink href="#partner">Partner with me</DirectionLink></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="game" class="d-section d-section--light" aria-labelledby="game-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Part A / The game today</p><h2 id="game-title">A historical challenge built to be <em>played.</em></h2></div><p>BackToThePast, also known as Guess-History, is a live multiplayer history and geography guessing game that I directed AI to build.</p></div>
+      <div class="d-split" style="margin-bottom:3rem" data-reveal>
+        <div><h3>The product</h3><p>An interactive historical knowledge experience combining a game concept, multiplayer participation and the challenge of placing events in their historical and geographic context.</p></div>
+        <div><h3>How a round works</h3><DirectionPlaceholder block text="accurate game mechanics: what players see and guess, round sequence, multiplayer interaction and scoring rules" /><div style="margin-top:1rem"><DirectionPlaceholder block text="verified short game demonstration (video or GIF)" /></div></div>
+      </div>
+      <div class="d-asset-grid" data-reveal>
+        <DirectionAsset asset="gameScreen1" label="verified game screenshot — main challenge" alt="BackToThePast main challenge" ratio="4 / 3" />
+        <DirectionAsset asset="gameScreen2" label="verified game screenshot — multiplayer experience" alt="BackToThePast multiplayer experience" ratio="4 / 3" />
+        <DirectionAsset asset="gameScreen3" label="verified game screenshot — round result" alt="BackToThePast round result" ratio="4 / 3" />
+      </div>
+    </div>
+  </section>
+
+  <section id="ambition" class="d-section" aria-labelledby="ambition-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Part B / The larger ambition</p><h2 id="ambition-title">From a game to a historical <em>knowledge platform.</em></h2></div><p>The distinction matters: the game is live; the structured knowledge and evaluation platform below is a future ambition, not a current capability.</p></div>
+      <div class="d-current-future" data-reveal>
+        <div><span class="d-status">Current</span><h3>An interactive game</h3><p>A live multiplayer history and geography guessing game, directed through AI-assisted product development.</p><DirectionLink value={config.gameUrl} label="live game URL" variant="secondary">Open the live game</DirectionLink></div>
+        <div><span class="d-status d-status--concept">Future ambition</span><h3>A curated knowledge & evaluation platform</h3><ul><li>Historical knowledge benchmarking</li><li>Historical event verification</li><li>AI factual accuracy evaluation</li><li>Educational products</li><li>Historical content licensing</li></ul><p>These are potential applications to develop with qualified partners.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dataset" class="d-section d-section--light d-section--line" aria-labelledby="dataset-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker">Part C / Historical data</p><h2 id="dataset-title">A sourced dataset, built with <em>evidence.</em></h2></div><p>I am looking for historians, institutions and partners to help build and verify a sourced dataset of historical events.</p></div>
+      <div class="d-notice" data-reveal><strong>Development-stage notice.</strong> No claims are made about dataset size, accuracy, verification or licensing. A downloadable sample is not presented until a real sample is supplied. <DirectionPlaceholder text="downloadable sample dataset (target 50–100 events), or confirmation that it is not ready" /></div>
+      <div class="d-split" style="margin-top:4rem" data-reveal>
+        <div><h3>Planned event fields</h3><p>Where available, each event should carry enough context to understand what happened and how the claim is supported.</p><ul class="d-data-fields">{fields.map((field) => <li>{field}</li>)}</ul><div style="margin-top:1.5rem"><DirectionAsset asset="datasetPreview" label="verified historical dataset sample preview" alt="Historical events dataset sample" ratio="16 / 9" /></div></div>
+        <div><h3>Methodology to be supplied</h3><p>Selection, sourcing, review and rights must be explicit before the dataset can be represented as reliable or licensable.</p><ul class="d-method-list">{methodology.map((item) => <li>{item}:<br /><DirectionPlaceholder text={`${item.toLowerCase()} — documented methodology`} /></li>)}</ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="partner" class="d-section d-section--ink" aria-labelledby="partner-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal><div><p class="d-kicker d-kicker--light">Part D / Partnerships</p><h2 id="partner-title">Interested in historical data, AI benchmarking or a commercial partnership? <em>Let’s talk.</em></h2></div><p>The right partners can bring historical expertise, source material, evaluation needs or commercial reach.</p></div>
+      <ul class="d-partner-list" data-reveal>{partners.map((partner) => <li>{partner}</li>)}</ul>
+      <div class="d-actions" data-reveal><DirectionLink href={mailto('Partnership: BackToThePast')} label="email address" variant="acid">Partner with me</DirectionLink><DirectionLink value={config.linkedin} label="LinkedIn profile URL" variant="secondary">Connect on LinkedIn</DirectionLink></div>
+    </div>
+  </section>
+</DirectionLayout>

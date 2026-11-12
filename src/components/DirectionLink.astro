@@ -1,0 +1,16 @@
+---
+import { isPlaceholder } from '../config';
+const { href, value, label = 'link', variant = 'text', class: className = '', ...rest } = Astro.props;
+const destination = href ?? value;
+const missing = !destination || isPlaceholder(destination);
+---
+{missing ? (
+  <span class={`d-unavailable ${className}`}>
+    <span class={`d-button d-button--${variant}`} aria-disabled="true"><slot /></span>
+    <code>[[PLACEHOLDER: {label}]]</code>
+  </span>
+) : (
+  <a href={destination} class={variant === 'text' ? `d-text-link ${className}` : `d-button d-button--${variant} ${className}`} {...rest}>
+    <slot /><span aria-hidden="true">↗</span>
+  </a>
+)}

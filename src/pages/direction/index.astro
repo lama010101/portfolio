@@ -1,0 +1,150 @@
+---
+import DirectionLayout from '../../layouts/DirectionLayout.astro';
+import DirectionLink from '../../components/DirectionLink.astro';
+import DirectionPlaceholder from '../../components/DirectionPlaceholder.astro';
+import DirectionAsset from '../../components/DirectionAsset.astro';
+import { config } from '../../config';
+
+const capabilities = [
+  { title: 'Business & Strategy', text: 'Markets, customers, commercial opportunities, business models and value creation.', tag: 'Start with why it matters' },
+  { title: 'AI Orchestration', text: 'Using AI models and coding agents to explore, structure, challenge and execute complex ideas.', tag: 'Direct with context & precision' },
+  { title: 'Product Building', text: 'Concepts into specifications, AI-assisted implementation, evaluation and iteration to working products.', tag: 'Finish with something useful' },
+];
+const steps = [
+  'Identify the problem or opportunity.',
+  'Define the business objective.',
+  'Explore solutions with AI.',
+  'Translate into precise requirements.',
+  'Direct AI coding agents.',
+  'Evaluate the implementation.',
+  'Challenge errors and inconsistencies.',
+  'Iterate until objectives are met.',
+];
+---
+<DirectionLayout path="/direction/" title="Laurent Martenot | Business ideas, directed into working products" description="Laurent Martenot is an AI-native Business & Product Builder: multilingual AI evaluation, product direction and BackToThePast, built through hands-on AI orchestration.">
+  <section class="d-hero">
+    <div class="d-shell">
+      <div class="d-hero-top">
+        <p class="d-kicker">AI-native Business & Product Builder</p>
+        <span class="d-availability">Open to remote opportunities</span>
+      </div>
+      <div class="d-hero-grid">
+        <div class="d-hero-copy" data-reveal>
+          <h1>I turn business ideas into <em>working products</em> using AI.</h1>
+          <p class="d-lead"><strong>Business professional. Product thinker. AI-native builder.</strong><br />I combine commercial experience with hands-on AI to conceive, develop and launch digital products.</p>
+          <div class="d-actions">
+            <DirectionLink href="/direction/hire/" variant="primary">How can I help you?</DirectionLink>
+            <DirectionLink href="/direction/process/" variant="secondary">See how I work</DirectionLink>
+            <DirectionLink href="/direction/backtothepast/#partner">Partner with me</DirectionLink>
+          </div>
+          <p class="d-hero-note">A business person who ships real products with AI, without writing code. <a href="/portfolios/">View all portfolio editions</a>.</p>
+        </div>
+
+        <div class="d-lens" data-reveal>
+          <div class="d-lens-head"><span>Choose your lens</span><span>Interactive / 01</span></div>
+          <div class="d-lens-tabs" role="tablist" aria-label="Choose your area of interest">
+            <button id="lens-tab-employers" type="button" role="tab" aria-selected="true" aria-controls="lens-panel" data-lens="employers">Employers</button>
+            <button id="lens-tab-partners" type="button" role="tab" aria-selected="false" aria-controls="lens-panel" data-lens="partners">Partners</button>
+            <button id="lens-tab-visitors" type="button" role="tab" aria-selected="false" aria-controls="lens-panel" data-lens="visitors">Visitors</button>
+          </div>
+          <div id="lens-panel" class="d-lens-display" role="tabpanel" aria-labelledby="lens-tab-employers" aria-live="polite">
+            <span id="lens-number" class="d-lens-number">01</span>
+            <span id="lens-eyebrow" class="d-lens-eyebrow">For employers & clients</span>
+            <h2 id="lens-title">Turn a business need into a useful, evaluated product.</h2>
+            <p id="lens-text">Multilingual AI evaluation, localization quality and hands-on product direction — grounded in commercial thinking.</p>
+            <a id="lens-link" href="/direction/hire/">See how I can help ↗</a>
+          </div>
+          <div class="d-lens-foot">Business thinking / Product vision / AI execution</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-proof" aria-label="Professional proof points">
+    <div class="d-proof-item"><b>01</b><div><strong>Google / Apple</strong><span>Internationalization (i18n) QA background</span></div></div>
+    <div class="d-proof-item"><b>02</b><div><strong>EN / FR / ES</strong><span>Fluent across three working languages</span></div></div>
+    <div class="d-proof-item"><b>03</b><div><strong>AI, applied daily</strong><span>Conceiving, directing and evaluating product builds</span></div></div>
+  </section>
+
+  <section class="d-section d-section--light" aria-labelledby="bring-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal>
+        <div><p class="d-kicker">What I bring / 03 disciplines</p><h2 id="bring-title">The value is in the <em>direction.</em></h2></div>
+        <p>I do not need to write every line of code. I need to understand the problem, define the solution, direct AI to build it and ensure the result delivers value.</p>
+      </div>
+      <div class="d-capabilities" data-reveal>
+        {capabilities.map((item, index) => (
+          <article class="d-capability">
+            <div class="d-capability-num"><span>0{index + 1}</span><span>Capability</span></div>
+            <h3>{item.title}</h3><p>{item.text}</p><span class="d-capability-tag">{item.tag}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="selected-work" class="d-section" aria-labelledby="work-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal>
+        <div><p class="d-kicker">Selected work / Product files</p><h2 id="work-title">Ideas made <em>tangible.</em></h2></div>
+        <p>Three product directions, each labelled honestly. Open a file to see the concept, the product thinking and its current status.</p>
+      </div>
+      <div class="d-project-list" data-reveal>
+        <details class="d-project" name="selected-projects">
+          <summary><span class="d-project-num">P.01</span><span class="d-project-name">BackToThePast<small>Guess-History / Live game</small></span><p class="d-project-summary">Making history interactive. Making historical knowledge measurable.</p></summary>
+          <div class="d-project-body">
+            <div><span class="d-status">Live game</span><h3>A multiplayer historical knowledge game.</h3><p>An interactive history and geography guessing game that I directed AI to build, with the ambition to grow into a historical knowledge and AI evaluation platform.</p><p>Explore the product concept, multiplayer experience, historical challenge and potential data and benchmarking business.</p><div class="d-actions"><DirectionLink href="/direction/backtothepast/" variant="primary">Explore BackToThePast</DirectionLink></div></div>
+            <div class="d-project-visual"><DirectionAsset asset="gameScreen1" label="BackToThePast verified game screenshot" alt="BackToThePast game interface" /></div>
+          </div>
+        </details>
+        <details class="d-project" name="selected-projects">
+          <summary><span class="d-project-num">P.02</span><span class="d-project-name">LIKED<small>Personal interests & collections</small></span><p class="d-project-summary">A more intentional home for the things that matter to you.</p></summary>
+          <div class="d-project-body">
+            <div><span class="d-status d-status--concept">Status to confirm</span><DirectionPlaceholder text="LIKED status: launched / prototype / concept" /><h3 style="margin-top:1.5rem">Organize personal interests, favorites and collections.</h3><p>An application concept centered on the problem of keeping personal interests and collections organized, with a user experience developed through AI-assisted implementation.</p><p>The product file covers the problem, concept, UX and AI-assisted development process.</p><div class="d-actions"><DirectionLink value={config.likedUrl} label="LIKED project URL" variant="primary">Explore LIKED</DirectionLink></div></div>
+            <div class="d-project-visual"><DirectionAsset asset="likedScreen" label="LIKED verified product screenshot" alt="LIKED application interface" /></div>
+          </div>
+        </details>
+        <details class="d-project" name="selected-projects">
+          <summary><span class="d-project-num">P.03</span><span class="d-project-name">PromptPulse<small>Concept / Collective intelligence</small></span><p class="d-project-summary">Exploring shared answers, participation and AI evaluation.</p></summary>
+          <div class="d-project-body">
+            <div><span class="d-status d-status--concept">Concept</span><h3>Collective intelligence as an evaluation layer.</h3><p>A business concept exploring collective intelligence, shared answers and AI evaluation through human-like participation.</p><p>The product file focuses on the underlying mechanics and potential evaluation and data applications. It is presented as a concept, not a launched product.</p><div class="d-actions"><DirectionLink value={config.promptPulseUrl} label="PromptPulse project URL" variant="primary">Explore PromptPulse</DirectionLink></div></div>
+            <div class="d-project-visual"><DirectionAsset asset="promptPulseScreen" label="PromptPulse verified screenshot or concept visual" alt="PromptPulse concept visual" /></div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--ink" aria-labelledby="method-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal>
+        <div><p class="d-kicker d-kicker--light">The build loop / 08 moves</p><h2 id="method-title">AI is not just a tool I use. <em>It is how I build.</em></h2></div>
+        <p>My contribution is more than asking AI questions. It is deciding what should exist, directing the work and refusing to accept output that misses the objective.</p>
+      </div>
+      <ol class="d-process-preview" data-reveal>
+        {steps.map((step, index) => <li class="d-process-step"><span>0{index + 1}</span><p>{step}</p></li>)}
+      </ol>
+      <div class="d-actions"><DirectionLink href="/direction/process/" variant="acid">Enter the process</DirectionLink></div>
+    </div>
+  </section>
+
+  <section class="d-section d-section--light" aria-labelledby="paths-title">
+    <div class="d-shell">
+      <div class="d-section-head" data-reveal>
+        <div><p class="d-kicker">Two ways to begin</p><h2 id="paths-title">Bring a brief.<br />Or build a <em>partnership.</em></h2></div>
+        <p>Different goals, same approach: understand the opportunity, define what matters and turn it into something useful.</p>
+      </div>
+      <div class="d-paths" data-reveal>
+        <article class="d-path"><span class="d-path-num">01 / Hire me</span><h3>From need to next step.</h3><p>For companies, startups and individuals looking for practical AI and product support:</p><ul><li>AI solutions and workflow development</li><li>AI product management and strategy</li><li>AI-assisted application development</li><li>Business development</li><li>Multilingual digital product QA and evaluation</li></ul><DirectionLink href="/direction/hire/" variant="primary">Discuss a project</DirectionLink></article>
+        <article class="d-path"><span class="d-path-num">02 / Partner with me</span><h3>From history to shared value.</h3><p>For people and organizations interested in BackToThePast and its wider potential:</p><ul><li>Historical knowledge databases</li><li>AI historical benchmarking</li><li>Content and data partnerships</li><li>Educational applications</li><li>Commercial development</li></ul><DirectionLink href="/direction/backtothepast/#partner" variant="secondary">Explore partnerships</DirectionLink></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="intro-title">
+    <div class="d-shell d-intro" data-reveal>
+      <div><p class="d-kicker">A personal introduction</p><h2 id="intro-title">A business person who <em>builds.</em></h2></div>
+      <blockquote><p>“I’m a business and sales professional with an enduring interest in technology and innovation. Over the past 18 months, I’ve developed practical experience using AI to conceive, direct and build digital products.”</p><p>“My approach combines commercial reasoning with the ability to work closely with AI systems and coding agents. I enjoy exploring possibilities, challenging assumptions and turning ideas into working solutions.”</p><div class="d-actions"><DirectionLink href="/direction/about/" variant="secondary">Read my story</DirectionLink></div></blockquote>
+    </div>
+  </section>
+</DirectionLayout>
