@@ -1,0 +1,17 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME } from '../config';
+---
+<StudioLayout title="Page not found" description="This page does not exist on the Locale & Logic studio site." path="/404/">
+  <section class="ll-404">
+    <div class="ll-wrap" style="text-align:center">
+      <p class="ll-kicker">404</p>
+      <h1 class="ll-h1">This page took a wrong turn.</h1>
+      <p class="ll-sub" style="margin:0 auto 2rem">The link may be old — several portfolio editions were retired in the studio pivot.</p>
+      <div class="ll-actions" style="justify-content:center">
+        <a class="ll-btn ll-btn-solid" href="/">Back to {SITE_NAME}</a>
+        <a class="ll-btn ll-btn-ghost" href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

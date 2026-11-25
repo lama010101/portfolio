@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    { "source": "/atelier", "destination": "/", "permanent": true },
+    { "source": "/atelier/:path*", "destination": "/", "permanent": true },
+    { "source": "/lens", "destination": "/", "permanent": true },
+    { "source": "/lens/:path*", "destination": "/", "permanent": true },
+    { "source": "/studio", "destination": "/", "permanent": true },
+    { "source": "/studio/:path*", "destination": "/", "permanent": true },
+    { "source": "/direction", "destination": "/", "permanent": true },
+    { "source": "/direction/:path*", "destination": "/", "permanent": true },
+    { "source": "/portfolios", "destination": "/", "permanent": true },
+    { "source": "/portfolios/:path*", "destination": "/", "permanent": true },
+    { "source": "/play", "destination": "/", "permanent": true },
+    { "source": "/play/:path*", "destination": "/", "permanent": true },
+    { "source": "/v2", "destination": "/", "permanent": true },
+    { "source": "/v2/:path*", "destination": "/", "permanent": true },
+    { "source": "/hire-me", "destination": "/", "permanent": true },
+    { "source": "/hire-me/:path*", "destination": "/", "permanent": true },
+    { "source": "/how-i-work", "destination": "/", "permanent": true },
+    { "source": "/how-i-work/:path*", "destination": "/", "permanent": true },
+    { "source": "/backtothepast", "destination": "/", "permanent": true },
+    { "source": "/backtothepast/:path*", "destination": "/", "permanent": true }
+  ]
+}

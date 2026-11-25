@@ -1,6 +1,6 @@
-import { config } from '../config';
+import { pageUrl } from '../config';
 
 export const GET = () =>
-  new Response(`User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', config.siteUrl).href}\n`, {
+  new Response(`User-agent: *\nAllow: /\n\nSitemap: ${pageUrl('/sitemap.xml')}\n`, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });

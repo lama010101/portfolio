@@ -1,0 +1,81 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { mailto } from '../config';
+import { proofItems, scoringMethodology } from '../data/studio';
+
+const description = 'Published proof for Locale & Logic: Guess-History live alpha and the MQM-style scoring methodology behind every finding.';
+const published = proofItems.filter((p) => p.published);
+---
+<StudioLayout title="Proof" description={description} path="/proof/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Proof</p>
+      <p class="ll-eyebrow">Proof</p>
+      <h1 class="ll-h1">What exists today, <em>labelled honestly.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">Only published work appears here. Nothing is shown as more than it is.</p>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="proof-items-h">
+    <div class="ll-wrap">
+      <h2 id="proof-items-h" class="ll-h2 ll-visually-hidden">Published work</h2>
+      <div class="ll-proof-list">
+        {published.map((p) => (
+          <article class="ll-proof-item ll-card">
+            <div class="ll-proof-meta">
+              <span class="ll-kind">{p.kind === 'project' ? 'Project' : p.kind}</span>
+              <span class="ll-status">{p.status}</span>
+            </div>
+            <div class="ll-proof-body">
+              <h3>{p.title}</h3>
+              <p>{p.summary}</p>
+              <ul>{p.body.map((b) => <li>{b}</li>)}</ul>
+              {p.url && (
+                <div class="ll-actions">
+                  <a class="ll-btn ll-btn-solid" href={p.url} rel="noopener">Open {p.title} <span aria-hidden="true">&rarr;</span></a>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" id="scoring" aria-labelledby="scoring-h">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Methodology</p>
+      <h2 id="scoring-h" class="ll-h2">{scoringMethodology.title}</h2>
+      <p class="ll-sub ll-prose">{scoringMethodology.intro}</p>
+
+      <div class="ll-sev" role="list" aria-label="Severity levels">
+        {scoringMethodology.levels.map((l) => (
+          <article role="listitem">
+            <b>{l.sev}</b>
+            <p>{l.def}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="ll-grid-2" style="margin-top:2.5rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Categories</h3>
+          <ul class="ll-cats" style="margin-top:0">
+            {scoringMethodology.categories.map((c) => <li class="ll-tag" style="border-color:var(--rule);color:var(--ink-2)">{c}</li>)}
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Scoring rules</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            {scoringMethodology.rules.map((r) => <li>{r}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href={mailto('Quote request — Locale & Logic')}>Request a quote</a>
+        <a class="ll-btn ll-btn-ghost" href="/quality/">See the QA offer</a>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

@@ -1,82 +1,120 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Link from '../components/Link.astro';
-import Shot from '../components/Shot.astro';
-import Ph from '../components/Ph.astro';
-import { config, mailto, isPlaceholder } from '../config';
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto, siteUrl } from '../config';
+import { countries, education, experience, founder, languageBadge, languages, location, tools } from '../data/studio';
+
+const professionalService = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: SITE_NAME,
+  description: SITE_TAGLINE,
+  url: siteUrl,
+  email: CONTACT_EMAIL,
+  knowsLanguage: ['French', 'English', 'Spanish'],
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+};
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: founder.name,
+  jobTitle: 'Founder',
+  worksFor: { '@type': 'ProfessionalService', name: SITE_NAME },
+  knowsLanguage: ['French', 'English', 'Spanish'],
+};
+const description = 'About Locale & Logic: a one-person studio run by Laurent Martenot, former QA test engineer on Google i18n and Apple localization teams.';
 ---
-<Layout path="/about/" title="About & Contact"
-  description="Laurent Martenot: French-American business and sales professional, MBA, former i18n QA at Google and Apple, building products with AI. Based in Thailand, open to remote work.">
-
-  <section class="page-head">
-    <div class="wrap">
-      <p class="eyebrow">About &amp; Contact</p>
-      <h1>A business person who builds with AI.</h1>
+<StudioLayout title="About" description={description} path="/about/" jsonld={[professionalService, person]}>
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / About</p>
+      <p class="ll-eyebrow">About</p>
+      <h1 class="ll-h1">One person. <em>A whole language layer.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is a solo studio run by {founder.name}. {founder.statement}</p>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="story-h">
-    <div class="wrap hero-grid">
-      <div>
-        <h2 id="story-h">My story</h2>
-        <p>I'm a French-American business and sales professional with an international perspective and an enduring interest in technology and innovation.</p>
-        <p>Over the past 18 months I have developed practical experience using AI to conceive, direct and build digital products independently, including BackToThePast (Guess-History).</p>
-        <p>I am not a software engineer. I define the problem, make the product decisions, direct AI to build and evaluate the result.</p>
-        <Ph block text="short professional bio and career history, from the CV (employers, titles and dates exactly as in the CV)" />
-      </div>
-      <Shot asset="portrait" label="professional photograph" alt="Portrait of Laurent Martenot" ratio="4 / 5" />
-    </div>
-  </section>
-
-  <section class="section section-tint" aria-labelledby="facts-h">
-    <div class="wrap grid g2">
-      <div>
-        <h2 id="facts-h">Background</h2>
-        <ul class="facts">
-          <li>MBA, ICN Business School, Nancy, France (1990).</li>
-          <li><Ph text="second MBA (American): institution and year, confirm from CV or remove" /></li>
-          <li>Software and product testing in an internationalization (i18n) team at Google and Apple. <Ph text="roles and dates from CV" /></li>
-          <li>International B2B sales and startup project management.</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Languages and availability</h2>
-        <ul class="facts">
-          <li>English: fluent.</li>
-          <li>French: fluent.</li>
-          <li>Spanish: fluent.</li>
-          <li>Portuguese: conversational.</li>
-          <li>Based in Thailand. Open to overnight and remote work.</li>
-        </ul>
+  <section class="ll-sec" aria-labelledby="a-story">
+    <div class="ll-wrap">
+      <div class="ll-grid-2">
+        <div class="ll-prose">
+          <h2 id="a-story" class="ll-h2">The short version.</h2>
+          <p>{founder.name} is a French-native QA professional who spent years testing software in the languages that matter — first inside Google's internationalization team (via Accenture) and later on Apple's localization team (via Moravia).</p>
+          <p>He then moved into international B2B sales and startup project management, founding and leading teams in Mexico and the US. Today he runs {SITE_NAME} as a one-person studio: human multilingual review for AI outputs, apps, games and web products.</p>
+          <p>He has lived and worked in {countries}. He doesn't sell headcount — he sells reviewed, scored, reproducible findings.</p>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.9rem">At a glance</h3>
+          <ul class="ll-facts" style="margin:0">
+            <li><strong>Location:</strong> {location}</li>
+            <li><strong>Languages:</strong> {languageBadge}</li>
+            <li><strong>Model:</strong> Solo studio &middot; NDA-ready &middot; works in your tracker and tools</li>
+            <li><strong>Tools:</strong> {tools.slice(0, 6).join(', ')} &hellip;</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="contact" aria-labelledby="contact-h">
-    <div class="wrap">
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact-h">Tell me what you need.</h2>
-      <div class="actions" style="margin-bottom:2rem">
-        <Link href={mailto('Hire: project inquiry')} label="email address" variant="primary">Hire Me / Discuss a Project</Link>
-        <Link href={mailto('Partnership: BackToThePast')} label="email address" variant="secondary">Partner With Me</Link>
-        <Link href={mailto('General contact')} label="email address" variant="secondary">General Contact</Link>
-      </div>
-      <ul class="facts" style="max-width:36rem">
-        <li>Email: {isPlaceholder(config.email) ? <Ph text="email address" /> : <a class="tlink" href={`mailto:${config.email}`}>{config.email}</a>}</li>
-        <li>LinkedIn: <Link value={config.linkedin} label="LinkedIn profile URL">Laurent Martenot on LinkedIn</Link></li>
-        <li><Ph text="any additional link (optional)" /></li>
-      </ul>
-
-      {config.formEndpoint && (
-        <form action={config.formEndpoint} method="POST" style="max-width:36rem;margin-top:2rem">
-          <h3>Or send a message</h3>
-          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" required autocomplete="name" /></div>
-          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" /></div>
-          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
-          <div class="hp" aria-hidden="true"><label>Leave empty<input name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
-          <button class="btn btn-primary" type="submit">Send</button>
-        </form>
-      )}
+  <section class="ll-sec ll-sec-alt" aria-labelledby="a-exp">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Experience</p>
+      <h2 id="a-exp" class="ll-h2">QA roots. <em>Commercial range.</em></h2>
+      <ol class="ll-timeline">
+        {experience.map((e) => (
+          <li>
+            <span class="ll-when">{e.dates}</span>
+            <span class="ll-what">{e.role}</span>
+            <span class="ll-where">{e.org}</span>
+            {e.note && <span class="ll-note2">{e.note}</span>}
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
-</Layout>
+
+  <section class="ll-sec" aria-labelledby="a-edu">
+    <div class="ll-wrap">
+      <div class="ll-grid-2">
+        <div>
+          <p class="ll-eyebrow">Education</p>
+          <h2 id="a-edu" class="ll-h2">Two degrees, <em>two systems.</em></h2>
+          <div class="ll-table-wrap" style="margin-top:1.5rem">
+            <table class="ll-table">
+              <tbody>
+                {education.map((ed) => (
+                  <tr><th scope="row">{ed.school}</th><td>{ed.degree}{ed.detail ? ` — ${ed.detail}` : ''}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <p class="ll-eyebrow">Languages</p>
+          <h2 class="ll-h2">What "fluent" means here.</h2>
+          <div class="ll-langs" style="margin-top:1.5rem">
+            {languages.map((l) => (
+              <div class="ll-langbar">
+                <span>{l.lang}</span><i style={`--w:${l.width}%`} aria-hidden="true"></i><em>{l.level}</em>
+              </div>
+            ))}
+          </div>
+          <p class="ll-note" style="margin-top:1.25rem">French is the primary working language. English is near-native. Spanish is professional: reviews and second-language checks, EN&harr;ES source-side.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="a-contact">
+    <div class="ll-wrap">
+      <div class="ll-contact" id="contact">
+        <h2 id="a-contact">Work with the studio.</h2>
+        <p class="ll-prose">For quotes, partnerships or questions: email is the fastest channel. A pre-filled draft is one click away on the <a class="ll-tlink" href="/contact/">contact page</a>.</p>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-solid" href={mailto('Hello — Locale & Logic')}>{'laurent.martenot@gmail.com'}</a>
+          <a class="ll-btn ll-btn-ghost" href="/partners/">Partner terms</a>
+          <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

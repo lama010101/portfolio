@@ -1,0 +1,66 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME, mailto } from '../config';
+import { partnerFacts, tools } from '../data/studio';
+
+const description = 'Partner with Locale & Logic: multilingual QA and AI evaluation capacity for agencies and vendors — NDA-ready, works in your tracker and tools, UTC+7 coverage, rates on request.';
+---
+<StudioLayout title="Partners" description={description} path="/partners/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Partners</p>
+      <p class="ll-eyebrow">For agencies &amp; vendors</p>
+      <h1 class="ll-h1">Subcontract the <em>language layer.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">You keep the client relationship and the project management. I deliver the multilingual QA and AI evaluation work inside your tracker and tools — under NDA when needed.</p>
+      <div class="ll-actions">
+        <button type="button" class="ll-btn ll-btn-ghost" data-print>Print / save as PDF</button>
+        <a class="ll-btn ll-btn-solid" href={mailto('Partnership enquiry — Locale & Logic')}>Start a conversation <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="p-facts">
+    <div class="ll-wrap">
+      <h2 id="p-facts" class="ll-h2 ll-visually-hidden">Partner terms</h2>
+      <div class="ll-table-wrap">
+        <table class="ll-table">
+          <tbody>
+            {partnerFacts.map((f) => (
+              <tr><th scope="row">{f.k}</th><td>{f.v}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ll-grid-2" style="margin-top:2.5rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Services I can take on</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Localization &amp; i18n QA for your clients' apps, web and games</li>
+            <li>Multilingual AI evaluation in FR/EN/ES — rubrics, guidelines, calibration</li>
+            <li>Launch-readiness reviews for small AI-built products</li>
+            <li>White-label delivery: findings and reports carry your brand</li>
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Tools &amp; trackers</h3>
+          <p style="font-size:0.92rem;color:var(--ink-2);margin-bottom:0.75rem">I work inside the tools you already use. Current stack:</p>
+          <ul class="ll-cats" style="margin-top:0">
+            {tools.map((t) => <li class="ll-tag" style="border-color:var(--rule);color:var(--ink-2)">{t}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="ll-band" style="margin-top:2.5rem">
+        <div>
+          <h3>Rates on request. Scoped in writing before work starts.</h3>
+          <p>Every engagement follows the same five steps: Scope &middot; Test or evaluate &middot; Score &middot; Report &middot; Retest. A capability statement is available as a one-page PDF.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-solid" href={mailto('Partnership enquiry — Locale & Logic')}>Email {SITE_NAME}</a>
+          <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Vendor one-pager (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>
