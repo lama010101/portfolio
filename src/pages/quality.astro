@@ -1,0 +1,87 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { mailto } from '../config';
+import { languageBadge, methodSteps, offers } from '../data/studio';
+
+const offer = offers[0];
+const description = 'Localization & i18n QA for apps, web and games: functional and linguistic testing in FR/EN/ES, bugs in your tracker, MQM-style severity scoring.';
+---
+<StudioLayout title="Localization & i18n QA" description={description} path="/quality/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Offers / Quality</p>
+      <p class="ll-eyebrow">Offer 01</p>
+      <h1 class="ll-h1">Localization &amp; i18n QA</h1>
+      <p class="ll-sub" style="margin-top:1rem">{offer.tagline} {offer.summary}</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href={mailto('Quote request — Localization & i18n QA')}>Request a quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Vendor one-pager (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="q-scope">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">What gets tested</p>
+      <h2 id="q-scope" class="ll-h2">Functional first. <em>Linguistic second.</em> Both scored.</h2>
+      <div class="ll-grid-2" style="margin-top:2rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Functional i18n/l10n</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Truncated, clipped or overflowing strings in FR/EN/ES</li>
+            <li>Encoding issues, mojibake, broken punctuation</li>
+            <li>Locale formats: dates, times, numbers, currency, units</li>
+            <li>Hard-coded strings, untranslated UI, wrong-language fallbacks</li>
+            <li>Android, iOS and web builds; pseudo-localization where useful</li>
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Linguistic review</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Grammar, spelling and register per language</li>
+            <li>Terminology consistency across the product</li>
+            <li>Cultural fit: idioms, examples, imagery, units</li>
+            <li>Source-side checks EN&harr;ES against French-primary copy</li>
+            <li>Style-guide and glossary alignment when you provide one</li>
+          </ul>
+        </div>
+      </div>
+      <p class="ll-note">{languageBadge}. Spanish covers reviews and second-language checks; French remains the primary reference language.</p>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="q-deliver">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Deliverables</p>
+      <h2 id="q-deliver" class="ll-h2">What lands in your inbox.</h2>
+      <div class="ll-table-wrap" style="margin-top:2rem">
+        <table class="ll-table">
+          <tbody>
+            <tr><th scope="row">Bug report</th><td>Every defect logged in your tracker (Jira, Trello, Linear, etc.) with steps to reproduce, severity and evidence.</td></tr>
+            <tr><th scope="row">Scorecard</th><td>Summary scorecard: findings by severity (Blocker / Major / Minor / Cosmetic) and by category, comparable across retests.</td></tr>
+            <tr><th scope="row">Retest</th><td>Fixed issues are retested and the scorecard updated, so progress is a visible delta.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href={mailto('Quote request — Localization & i18n QA')}>Request a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="q-method">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">How it runs</p>
+      <h2 id="q-method" class="ll-h2">The same five steps, every engagement.</h2>
+      <ol class="ll-steps" style="grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))">
+        {methodSteps.map((s) => (
+          <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-ghost" href="/partners/">Working with agencies? See partner terms</a>
+        <a class="ll-btn ll-btn-ghost" href="/proof/">See proof &amp; scoring methodology</a>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

@@ -1,0 +1,139 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/site.css';
+import { CONTACT_EMAIL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, mailto, ogImage, pageUrl, siteUrl } from '../config';
+import { audiences, contactOptions, defaultAudience, sectionTitles } from '../data/studio';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonld?: object[];
+}
+const { title, description, path, jsonld } = Astro.props;
+const isHome = path === '/';
+const fullTitle = isHome ? `${SITE_NAME} — ${SITE_TAGLINE}` : `${title} | ${SITE_NAME}`;
+const canonical = pageUrl(path);
+const og = new URL(ogImage, siteUrl).href;
+
+const nav = [
+  { href: '/quality/', label: 'Quality' },
+  { href: '/ai-evaluation/', label: 'AI Evaluation' },
+  { href: '/proof/', label: 'Proof' },
+  { href: '/partners/', label: 'Partners' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
+const current = (href: string) => (isHome ? false : path.startsWith(href));
+
+const professionalService = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: SITE_NAME,
+  description: SITE_TAGLINE,
+  url: siteUrl,
+  email: CONTACT_EMAIL,
+  knowsLanguage: ['French', 'English', 'Spanish'],
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+};
+const schemas = jsonld ?? [professionalService];
+
+const siteData = {
+  audiences: audiences.map(({ id, label, lead, cta, alt, order }) => ({ id, label, lead, cta, alt, order })),
+  sectionTitles,
+  defaultAudience,
+  pages: nav,
+  contactOptions,
+  email: CONTACT_EMAIL,
+  quoteMailto: mailto('Quote request — Locale & Logic'),
+};
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F3F1EC" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body class="ll">
+    <a class="ll-skip" href="#main">Skip to content</a>
+    <div class="ll-progress" aria-hidden="true"><span id="ll-progress"></span></div>
+
+    <header class="ll-header">
+      <div class="ll-wrap ll-bar">
+        <a class="ll-brand" href="/" aria-label={`${SITE_NAME} — home`}>
+          <span class="ll-mark" aria-hidden="true">L&amp;L</span>
+          <span class="ll-brand-name">{SITE_NAME}</span>
+        </a>
+        <nav class="ll-nav" aria-label="Main">
+          {nav.map((n) => <a href={n.href} aria-current={current(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+        <div class="ll-tools">
+          <button type="button" class="ll-tool" id="ll-theme" aria-pressed="false" aria-label="Dark mode">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" /></svg>
+          </button>
+          <button type="button" class="ll-tool ll-tool-k" id="ll-cmd-open" aria-haspopup="dialog" aria-controls="ll-cmd">
+            <span class="ll-only-m">Menu</span><span class="ll-only-d">Jump to</span><kbd class="ll-only-d">Ctrl K</kbd>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main"><slot /></main>
+
+    <nav class="ll-mini" aria-label="Page map" id="ll-mini"></nav>
+
+    <dialog class="ll-cmd" id="ll-cmd" aria-label="Jump to a page or run an action">
+      <div class="ll-cmd-box">
+        <label class="ll-cmd-search">
+          <span class="ll-visually-hidden">Search pages and actions</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4" /></svg>
+          <input id="ll-cmd-input" type="text" autocomplete="off" placeholder="Jump to a page, quote or theme..." role="combobox" aria-expanded="true" aria-controls="ll-cmd-list" />
+          <kbd>Esc</kbd>
+        </label>
+        <ul id="ll-cmd-list" role="listbox" aria-label="Results"></ul>
+        <p class="ll-cmd-foot"><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate <kbd>Enter</kbd> select</p>
+      </div>
+    </dialog>
+
+    <div class="ll-toast" id="ll-toast" role="status" aria-live="polite"></div>
+
+    <footer class="ll-footer">
+      <div class="ll-wrap ll-footer-grid">
+        <div>
+          <p class="ll-brand-name">{SITE_NAME}</p>
+          <p class="ll-muted">{SITE_TAGLINE} Static &middot; No trackers.</p>
+        </div>
+        <ul>
+          {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+          {LINKEDIN_URL && <li><a href={LINKEDIN_URL} rel="noopener">LinkedIn</a></li>}
+          <li><a href={mailto('Hello — Locale & Logic')}>{CONTACT_EMAIL}</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script is:inline define:vars={{ siteData }}>window.SITE_DATA = siteData;</script>
+    <script is:inline src="/site.js"></script>
+  </body>
+</html>

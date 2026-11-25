@@ -1,26 +1,26 @@
 /*
- * SITE CONFIG - edit the values below.
- * Any value that is still "[[PLACEHOLDER: ...]]" is shown on the site as a visible
- * placeholder and flagged. See PLACEHOLDERS.md for the full list.
+ * SITE CONFIG — single source of truth for brand, contact and URLs.
+ * SITE_NAME is used everywhere: title, meta, JSON-LD, footer, OG image, PDF.
  */
-export const PH = (description: string) => `[[PLACEHOLDER: ${description}]]`;
-export const isPlaceholder = (value?: string) => !value || value.startsWith('[[PLACEHOLDER');
 
-export const config = {
-  name: 'Laurent Martenot',
-  email: PH('email address'),
-  linkedin: PH('LinkedIn profile URL'),
-  gameUrl: PH('live BackToThePast / Guess-History game URL'),
-  likedUrl: PH('LIKED project URL'),
-  promptPulseUrl: PH('PromptPulse project URL'),
-  // Optional: URL of a form service (Formspree, Basin, etc). Leave '' to use mailto only.
-  formEndpoint: '',
-  // Public production URL (used for canonical, sitemap, social tags).
-  siteUrl: 'https://portfolio-psi-topaz-22.vercel.app',
-  // Path under /public, e.g. '/og.png' (1200x630). '' = no social image yet.
-  ogImage: '',
-  tagline: 'AI-native Business & Product Builder',
-};
+export const SITE_NAME = 'Locale & Logic';
+export const SITE_TAGLINE = 'Multilingual quality for AI and software — FR · EN · ES.';
 
-export const mailto = (subject = 'Hello from your portfolio') =>
-  isPlaceholder(config.email) ? undefined : `mailto:${config.email}?subject=${encodeURIComponent(subject)}`;
+// Interim contact address until a studio-domain mailbox exists.
+export const CONTACT_EMAIL = 'laurent.martenot@gmail.com';
+
+// Optional externals — leave '' to hide the corresponding link.
+export const LINKEDIN_URL = '';
+export const GAME_URL = '';
+
+// Public production URL. Override with the SITE_URL env var when a custom
+// domain is live; no DNS or domain changes are made from this repo.
+export const siteUrl = (import.meta.env?.SITE_URL || 'https://portfolio-psi-topaz-22.vercel.app').replace(/\/+$/, '');
+
+// Path under /public for the social share image (1200x630 PNG).
+export const ogImage = '/og.png';
+
+export const mailto = (subject: string, body = '') =>
+  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
+
+export const pageUrl = (path: string) => new URL(path, siteUrl).href;
