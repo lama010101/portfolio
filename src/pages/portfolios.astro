@@ -1,0 +1,74 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME, SITE_TAGLINE } from '../config';
+
+const description = `Portfolio editions for Laurent Martenot. ${SITE_NAME} is the current studio site; earlier personal-portfolio editions were retired.`;
+
+const current = {
+  name: SITE_NAME,
+  href: '/',
+  status: 'Current',
+  summary:
+    'Vendor-facing one-person studio: multilingual human QA and AI evaluation as subcontracting capacity for agencies and vendors, plus carefully directed small product builds.',
+  sublinks: [
+    { label: 'Services', href: '/services/' },
+    { label: 'Work', href: '/work/' },
+    { label: 'For agencies', href: '/partners/' },
+    { label: 'How we build', href: '/how-we-build/' },
+  ],
+};
+
+const retired = [
+  'Editorial Consultancy',
+  'Laurent.Play Arcade',
+  'Laurent // Studio (AI & Web Lab)',
+  'Portfolio V2 — Warm Editorial',
+  'Direction — Product Builder Lens',
+  'Lens — Adaptive Portfolio',
+  'Laurent / Atelier',
+];
+---
+<StudioLayout title="Portfolio editions" description={description} path="/portfolios/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Editions</p>
+      <p class="ll-eyebrow">Portfolio hub</p>
+      <h1 class="ll-h1">Editions.</h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_TAGLINE}</p>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="hub-current">
+    <div class="ll-wrap">
+      <h2 id="hub-current" class="ll-h2">Current edition</h2>
+      <div class="ll-proof-list" style="margin-top:1.5rem">
+        <article class="ll-proof-item ll-card">
+          <div class="ll-proof-meta">
+            <span class="ll-kind">Studio site</span>
+            <span class="ll-status">{current.status}</span>
+          </div>
+          <div class="ll-proof-body">
+            <h3>{current.name}</h3>
+            <p>{current.summary}</p>
+            <ul class="ll-cats" style="margin:0 0 1rem">
+              {current.sublinks.map((l) => <li><a class="ll-tag" href={l.href} style="text-decoration:none">{l.label}</a></li>)}
+            </ul>
+            <div class="ll-actions">
+              <a class="ll-btn ll-btn-solid" href={current.href}>Open {SITE_NAME} <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="hub-retired">
+    <div class="ll-wrap">
+      <h2 id="hub-retired" class="ll-h2">Retired editions</h2>
+      <p class="ll-sub">Earlier personal-portfolio editions of this site. Their routes now redirect to {SITE_NAME}.</p>
+      <ul class="ll-cats" style="margin-top:1.5rem">
+        {retired.map((r) => <li class="ll-tag" style="border-color:var(--rule);color:var(--ink-2)">{r} · retired</li>)}
+      </ul>
+    </div>
+  </section>
+</StudioLayout>

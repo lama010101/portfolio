@@ -14,6 +14,7 @@ const paths = [
   '/about/',
   '/terms-of-work/',
   '/contact/',
+  '/portfolios/',
 ];
 
 export const GET = () =>

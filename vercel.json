@@ -12,8 +12,6 @@
     { "source": "/studio/:path*", "destination": "/", "permanent": true },
     { "source": "/direction", "destination": "/", "permanent": true },
     { "source": "/direction/:path*", "destination": "/", "permanent": true },
-    { "source": "/portfolios", "destination": "/", "permanent": true },
-    { "source": "/portfolios/:path*", "destination": "/", "permanent": true },
     { "source": "/play", "destination": "/", "permanent": true },
     { "source": "/play/:path*", "destination": "/", "permanent": true },
     { "source": "/v2", "destination": "/", "permanent": true },
