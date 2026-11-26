@@ -70,6 +70,9 @@
     let time = 0;
     let raf = 0;
     let visible = false;
+    let lastFrame = 0;
+    let activeUntil = 0;
+    const frameMs = 1000 / 30;
     const pointer = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 };
     const centers = [0.24, 0.55, 0.84];
 
@@ -216,12 +219,24 @@
       drawResolutionMarkers(humanPoints, aiPoints);
     }
 
-    function tick() {
-      time += 0.012;
-      pointer.x += (pointer.tx - pointer.x) * 0.055;
-      pointer.y += (pointer.ty - pointer.y) * 0.055;
-      draw();
-      if (visible && !reducedMotion) raf = window.requestAnimationFrame(tick);
+    function tick(now = 0) {
+      raf = 0;
+      if (!visible || reducedMotion) return;
+      if (now - lastFrame >= frameMs) {
+        const delta = lastFrame ? Math.min((now - lastFrame) / 1000, 0.05) : 1 / 30;
+        time += delta * 0.72;
+        pointer.x += (pointer.tx - pointer.x) * 0.055;
+        pointer.y += (pointer.ty - pointer.y) * 0.055;
+        draw();
+        lastFrame = now;
+      }
+      if (now < activeUntil) raf = window.requestAnimationFrame(tick);
+    }
+
+    function play(duration = 1200) {
+      if (reducedMotion) return;
+      activeUntil = Math.max(activeUntil, performance.now() + duration);
+      if (visible && !raf) raf = window.requestAnimationFrame(tick);
     }
 
     if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
@@ -229,25 +244,32 @@
         const rect = frame.getBoundingClientRect();
         pointer.tx = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
         pointer.ty = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+        play(900);
       });
       frame.addEventListener('pointerleave', () => {
         pointer.tx = 0.5;
         pointer.ty = 0.5;
+        play(700);
       });
     }
 
-    if ('IntersectionObserver' in window && !reducedMotion) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          visible = entry.isIntersecting;
-          if (visible && !raf) raf = window.requestAnimationFrame(tick);
-          if (!visible && raf) {
-            window.cancelAnimationFrame(raf);
-            raf = 0;
-          }
-        });
-      }, { threshold: 0.08 });
-      observer.observe(frame);
+    if (!reducedMotion) {
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            visible = entry.isIntersecting;
+            if (visible) play(1600);
+            if (!visible && raf) {
+              window.cancelAnimationFrame(raf);
+              raf = 0;
+            }
+          });
+        }, { threshold: 0.08 });
+        observer.observe(frame);
+      } else {
+        visible = true;
+        play(1600);
+      }
     }
 
     window.addEventListener('resize', resize, { passive: true });

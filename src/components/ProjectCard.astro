@@ -19,6 +19,6 @@ const { project, linkLabel } = Astro.props;
       {project.facts.slice(0, 3).map((fact) => <li>{fact}</li>)}
     </ul>
     {project.caveat && <p class="ds-caveat">{project.caveat}</p>}
-    <span class="ds-textlink">{linkLabel}<span aria-hidden="true"> →</span></span>
+    <a class="ds-textlink" href={`/work/${project.slug}/`}>{linkLabel}<span aria-hidden="true"> →</span></a>
   </div>
 </article>

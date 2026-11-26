@@ -66,7 +66,7 @@ h1{font-family:Georgia,'Times New Roman',serif;font-size:82px;line-height:.92;le
 <div class="brand"><span class="mark"></span>${esc(SITE_NAME)}</div>
 <div class="deck"><div><h1>${esc(homeCopy.hero.titleA)}<br><em>${esc(homeCopy.hero.titleB)}</em></h1><p class="sub">${esc(assetCopy.ogSummary)}</p><div class="offers">${assetCopy.ogOffers.map((offer) => `<span>${esc(offer)}</span>`).join('')}</div></div>
 <div class="visual"><svg viewBox="0 0 330 190" preserveAspectRatio="none"><path d="M18 126 C70 48 105 48 158 112 S250 160 312 82" fill="none" stroke="#FF8C6E" stroke-width="4" stroke-linecap="round"/><path d="M18 84 C78 142 112 142 164 82 S246 38 312 120" fill="none" stroke="#91A4FF" stroke-width="4" stroke-linecap="round"/><circle cx="164" cy="97" r="7" fill="#F7F0E4"/><circle cx="164" cy="97" r="13" fill="none" stroke="#58C7A9" stroke-width="2"/></svg></div></div>
-<div class="foot"><span>${esc(SITE_TAGLINE)}</span><span><b>${esc(CONTACT_EMAIL)}</b><br>${esc(SITE_URL.replace('https://', ''))}</span></div>
+<div class="foot"><span>${esc(SITE_TAGLINE)}</span><span><b>${esc(CONTACT_EMAIL)}</b></span></div>
 </div></body></html>`;
 const ogPath = join(root, '.og-tmp.html');
 writeFileSync(ogPath, ogHtml);

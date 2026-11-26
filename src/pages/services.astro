@@ -19,7 +19,6 @@ const serviceSchemas = serviceOffers.map((offer) => ({
   serviceType: offer.title,
   description: offer.summary,
   provider: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-  areaServed: 'Worldwide',
   url: new URL(offer.href, SITE_URL).href,
 }));
 ---

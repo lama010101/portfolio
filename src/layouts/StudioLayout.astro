@@ -1,8 +1,10 @@
 ---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
 import '../styles/site.css';
 import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, SITE_URL, ogImage, pageUrl } from '../config';
 import { brand, ctas, footerCopy, navigation } from '../content/site';
-import { sharedUi } from '../content/ui';
+import { assetCopy, sharedUi } from '../content/ui';
 
 interface Props {
   title: string;
@@ -103,6 +105,7 @@ const schemas = [organization, ...jsonld];
           <span>{CONTACT_EMAIL}</span>
           <a class="ds-btn ds-btn-outline-light" href={ctas.spotCheck.href}>{ctas.spotCheck.label}</a>
           <a class="ds-textlink ds-textlink-light" href={ctas.contact.href}>{sharedUi.generalEmailLabel}<span aria-hidden="true"> →</span></a>
+          <a class="ds-textlink ds-textlink-light" href="/capability-statement.pdf">{assetCopy.capabilityStatementLabel}<span aria-hidden="true"> →</span></a>
         </div>
       </div>
     </footer>

@@ -18,6 +18,7 @@ Static [Astro](https://astro.build) site for Duet Studio: verification, localiza
 - `src/content/work.ts` — project names, honest statuses, facts, capabilities, and external links
 - `src/content/pages.ts` — page-specific copy for the main pages
 - `src/content/quality.ts` — QA, French LQA, and AI evaluation page copy
+- `src/content/ui.ts` — shared interface labels, accessibility text, and small reusable UI copy
 - `scripts/generate-assets.mjs` — regenerates `public/og.png`, `public/capability-statement.pdf`, and favicon assets (`npm run assets`)
 
 ## Commands
