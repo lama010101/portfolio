@@ -39,4 +39,4 @@ npm run assets     # regenerate OG image, PDF, favicons
 
 ## Redirects
 
-`vercel.json` issues permanent redirects from retired routes. `/partners` now redirects to `/services`; `/proof` redirects to `/work`; `/ai-evaluation` redirects to `/quality/multilingual-ai-evaluation`. Legacy portfolio-edition routes continue to redirect to `/`.
+`vercel.json` issues permanent redirects from retired routes. `/partners` now redirects to `/services`; `/proof` redirects to `/work`; `/ai-evaluation` redirects to `/quality/multilingual-ai-evaluation`. `/portfolios/` remains live as the editions hub, while the retired portfolio-edition routes redirect to `/`.

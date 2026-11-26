@@ -15,6 +15,7 @@ const paths = [
   '/quality/french-lqa-testing/',
   '/quality/multilingual-ai-evaluation/',
   '/terms-of-work/',
+  '/portfolios/',
 ];
 
 export const GET = () =>

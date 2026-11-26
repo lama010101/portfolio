@@ -1,3 +1,5 @@
+import { SITE_NAME } from '../config';
+
 export const homeCopy = {
   meta: {
     title: 'AI-speed work, held to human standards',
@@ -385,6 +387,49 @@ export const termsCopy = {
       text: 'NDA on request. Client materials are used for the agreed work only. The site itself has no backend and no form submission pipeline.',
     },
   ],
+};
+
+export const portfolioHubCopy = {
+  meta: {
+    title: 'Portfolio editions',
+    description: `Portfolio editions for Laurent Martenot. ${SITE_NAME} is the current studio site; earlier personal-portfolio editions are retired.`,
+  },
+  hero: {
+    eyebrow: 'Portfolio hub',
+    titleA: 'One current edition.',
+    titleB: 'Several retired directions.',
+    lede: `${SITE_NAME} is the live studio site. Earlier personal-portfolio editions are kept here as context; their routes redirect to the studio rather than competing with it.`,
+  },
+  current: {
+    eyebrow: 'Current edition',
+    title: `${SITE_NAME} is the edition that represents the studio now.`,
+    lede: 'The hub is intentionally small: one current public identity, with older directions labelled instead of preserved as competing artifacts.',
+    kind: 'Studio site',
+    status: 'Current',
+    summary: `Verification, localization and functional QA, and directed builds presented through the current ${SITE_NAME} identity.`,
+    links: [
+      { label: 'Open studio', href: '/' },
+      { label: 'Services', href: '/services/' },
+      { label: 'Work', href: '/work/' },
+      { label: 'How we verify', href: '/how-we-verify/' },
+      { label: 'Spot check', href: '/spot-check/' },
+    ],
+  },
+  retired: {
+    eyebrow: 'Retired editions',
+    title: 'Earlier directions remain visible as history, not as parallel identities.',
+    lede: 'These personal-portfolio directions were retired during the studio pivot. Their old routes redirect to the current studio site.',
+    statusLabel: 'Retired',
+    items: [
+      'Editorial Consultancy',
+      'Laurent.Play Arcade',
+      'Laurent // Studio (AI & Web Lab)',
+      'Portfolio V2 — Warm Editorial',
+      'Direction — Product Builder Lens',
+      'Lens — Adaptive Portfolio',
+      'Laurent / Atelier',
+    ],
+  },
 };
 
 export const notFoundCopy = {
