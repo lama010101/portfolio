@@ -1,6 +1,6 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { SITE_NAME, SITE_TAGLINE } from '../config';
+import { SITE_NAME } from '../config';
 
 const description = `Portfolio editions for Laurent Martenot. ${SITE_NAME} is the current studio site; earlier personal-portfolio editions were retired.`;
 
@@ -9,7 +9,7 @@ const current = {
   href: '/',
   status: 'Current',
   summary:
-    'Vendor-facing one-person studio: multilingual human QA and AI evaluation as subcontracting capacity for agencies and vendors, plus carefully directed small product builds.',
+    'Vendor-facing solo-led studio: multilingual human QA and AI evaluation as subcontracting capacity for agencies and vendors, plus carefully directed small product builds.',
   sublinks: [
     { label: 'Services', href: '/services/' },
     { label: 'Work', href: '/work/' },
@@ -34,7 +34,7 @@ const retired = [
       <p class="ll-crumbs"><a href="/">Home</a> / Editions</p>
       <p class="ll-eyebrow">Portfolio hub</p>
       <h1 class="ll-h1">Editions.</h1>
-      <p class="ll-sub" style="margin-top:1rem">{SITE_TAGLINE}</p>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is the current edition. Earlier personal-portfolio directions are retired and redirect to the studio site.</p>
     </div>
   </section>
 
@@ -50,9 +50,9 @@ const retired = [
           <div class="ll-proof-body">
             <h3>{current.name}</h3>
             <p>{current.summary}</p>
-            <ul class="ll-cats" style="margin:0 0 1rem">
-              {current.sublinks.map((l) => <li><a class="ll-tag" href={l.href} style="text-decoration:none">{l.label}</a></li>)}
-            </ul>
+            <div class="ll-cats" style="margin:0 0 1rem">
+              {current.sublinks.map((l) => <a class="ll-tag" href={l.href} style="text-decoration:none">{l.label}</a>)}
+            </div>
             <div class="ll-actions">
               <a class="ll-btn ll-btn-solid" href={current.href}>Open {SITE_NAME} <span aria-hidden="true">&rarr;</span></a>
             </div>
