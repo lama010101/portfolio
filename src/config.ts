@@ -3,15 +3,14 @@
  * SITE_NAME is used everywhere: title, meta, JSON-LD, footer, OG image, PDF.
  */
 
-export const SITE_NAME = 'Locale & Logic';
-export const SITE_TAGLINE = 'Multilingual quality for AI and software — FR · EN · ES.';
+export const SITE_NAME = 'Duet Studio';
+export const SITE_TAGLINE = 'Human judgement, machine-paced delivery — multilingual QA and directed software builds.';
 
 // Interim contact address until a studio-domain mailbox exists.
 export const CONTACT_EMAIL = 'laurent.martenot@gmail.com';
 
-// Optional externals — leave '' to hide the corresponding link.
+// Optional external profile — intentionally blank until the public URL is confirmed.
 export const LINKEDIN_URL = '';
-export const GAME_URL = '';
 
 // Public production URL. Override with the SITE_URL env var when a custom
 // domain is live; no DNS or domain changes are made from this repo.

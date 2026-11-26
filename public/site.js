@@ -1,5 +1,5 @@
-/* Locale & Logic — interaction layer (no dependencies). */
-(() => {
+/* Studio interaction layer (no dependencies). */
+function initStudioInteractions() {
   const D = window.SITE_DATA || {};
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -29,15 +29,15 @@
     const cfg = (D.audiences || []).find((a) => a.id === next);
     if (!cfg || !flow) { if (cfg) audience = next; return; }
     audience = next;
-    $$('[data-audience-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.audienceBtn === next)));
+    $$('[data-audience-btn]').forEach((b) => {
+      const pressed = String(b.dataset.audienceBtn === next);
+      if (b.getAttribute('aria-pressed') !== pressed) b.setAttribute('aria-pressed', pressed);
+    });
 
     const lead = $('#ll-lead');
-    if (lead) lead.textContent = cfg.lead;
-    const cta = $('#ll-cta');
-    if (cta) { cta.href = cfg.cta.href; cta.childNodes[0].textContent = cfg.cta.label + ' '; }
-    const alt = $('#ll-cta-alt');
-    if (alt) { alt.textContent = cfg.alt.label; alt.href = cfg.alt.href; }
+    if (lead && lead.textContent !== cfg.lead) lead.textContent = cfg.lead;
 
+    const alreadyOrdered = cfg.order.every((id, index) => flow.children[index]?.id === id) && flow.children.length === cfg.order.length;
     const move = () => {
       cfg.order.forEach((id) => {
         const el = document.getElementById(id);
@@ -45,22 +45,29 @@
       });
       buildMini();
     };
-    if (animate && !RM && document.startViewTransition) document.startViewTransition(move);
-    else move();
+    if (!alreadyOrdered) {
+      if (animate && !RM && document.startViewTransition) document.startViewTransition(move);
+      else move();
+    }
 
     const route = $('#ll-route');
     if (route) {
-      route.innerHTML = '';
-      cfg.order.slice(0, 3).forEach((id, i) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#' + id;
-        const b = document.createElement('b');
-        b.textContent = '0' + (i + 1);
-        a.append(b, document.createTextNode(D.sectionTitles[id] || id));
-        li.appendChild(a);
-        route.appendChild(li);
-      });
+      const wanted = cfg.order.slice(0, 3);
+      const current = $$('a', route).map((a) => a.getAttribute('href')).join('|');
+      const target = wanted.map((id) => '#' + id).join('|');
+      if (current !== target) {
+        route.innerHTML = '';
+        wanted.forEach((id, i) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#' + id;
+          const b = document.createElement('b');
+          b.textContent = '0' + (i + 1);
+          a.append(b, document.createTextNode(D.sectionTitles[id] || id));
+          li.appendChild(a);
+          route.appendChild(li);
+        });
+      }
     }
 
     store.set('audience', next);
@@ -85,19 +92,15 @@
   }
   $('#ll-theme')?.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
-  /* ---------------- progress + nav state + reveal + spotlight ---------------- */
-  const reveals = $$('.ll-reveal');
-  if (reveals.length && 'IntersectionObserver' in window && !RM) {
-    const ro = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    reveals.forEach((el) => ro.observe(el));
-  } else reveals.forEach((el) => el.classList.add('is-in'));
+  /* ---------------- progress + nav state + spotlight ---------------- */
+  const miniMedia = window.matchMedia('(min-width: 80rem)');
+  let secObs = null;
 
   function buildMini() {
     const mini = $('#ll-mini');
     if (!mini) return;
-    mini.innerHTML = '';
+    if (mini.innerHTML) mini.innerHTML = '';
+    if (!miniMedia.matches) return;
     $$('[data-sec]').forEach((s) => {
       const a = document.createElement('a');
       a.href = '#' + s.id;
@@ -109,10 +112,16 @@
       mini.appendChild(a);
     });
   }
-  buildMini();
 
-  if (sections.length) {
-    const secObs = new IntersectionObserver((entries) => {
+  function watchSections() {
+    if (!sections.length) return;
+    if (!miniMedia.matches) {
+      secObs?.disconnect();
+      secObs = null;
+      return;
+    }
+    if (secObs) return;
+    secObs = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
         const id = e.target.id;
@@ -123,6 +132,10 @@
     sections.forEach((s) => secObs.observe(s));
   }
 
+  buildMini();
+  watchSections();
+  miniMedia.addEventListener?.('change', () => { buildMini(); watchSections(); });
+
   let ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -131,12 +144,13 @@
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const p = max > 0 ? (window.scrollY / max) * 100 : 0;
       const bar = $('#ll-progress');
-      if (bar) bar.style.width = p + '%';
+      const width = p + '%';
+      if (bar && bar.style.width !== width && !(p === 0 && !bar.style.width)) bar.style.width = width;
       ticking = false;
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+
 
   if (!RM && window.matchMedia('(pointer: fine)').matches) {
     $$('.ll-spot').forEach((el) => {
@@ -154,7 +168,7 @@
   function draft() {
     const sel = topics.filter((t) => picked.has(t.id));
     const problem = ($('#ll-problem')?.value || '').trim();
-    const subject = sel.length ? sel.map((t) => t.subject).join(' + ') : 'Quote request — Locale & Logic';
+    const subject = sel.length ? sel.map((t) => t.subject).join(' + ') : (D.quoteSubject || 'Quote request');
     let body = 'Hello,\n\n';
     body += sel.length
       ? 'I would like a quote or more information about:\n' + sel.map((t) => '- ' + t.label).join('\n') + '\n'
@@ -305,4 +319,19 @@
   let initial = new URLSearchParams(window.location.search).get('audience') || store.get('audience') || D.defaultAudience || 'agency';
   if (!D.audiences?.some((a) => a.id === initial)) initial = D.defaultAudience || 'agency';
   applyAudience(initial, false, false);
-})();
+}
+
+try {
+  const initialTheme = localStorage.getItem('ll:theme');
+  if (initialTheme === 'dark' || initialTheme === 'light') document.documentElement.setAttribute('data-theme', initialTheme);
+} catch { /* private mode */ }
+
+function scheduleStudioInteractions() {
+  requestAnimationFrame(() => setTimeout(initStudioInteractions, 0));
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', scheduleStudioInteractions, { once: true });
+} else {
+  scheduleStudioInteractions();
+}

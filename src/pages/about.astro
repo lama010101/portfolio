@@ -1,6 +1,6 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto, siteUrl } from '../config';
+import { CONTACT_EMAIL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, mailto, siteUrl } from '../config';
 import { countries, education, experience, founder, languageBadge, languages, location, tools } from '../data/studio';
 
 const professionalService = {
@@ -12,6 +12,7 @@ const professionalService = {
   email: CONTACT_EMAIL,
   knowsLanguage: ['French', 'English', 'Spanish'],
   areaServed: { '@type': 'Place', name: 'Worldwide' },
+  ...(LINKEDIN_URL ? { sameAs: [LINKEDIN_URL] } : {}),
 };
 const person = {
   '@context': 'https://schema.org',
@@ -20,16 +21,17 @@ const person = {
   jobTitle: 'Founder',
   worksFor: { '@type': 'ProfessionalService', name: SITE_NAME },
   knowsLanguage: ['French', 'English', 'Spanish'],
+  ...(LINKEDIN_URL ? { sameAs: [LINKEDIN_URL] } : {}),
 };
-const description = 'About Locale & Logic: a one-person studio run by Laurent Martenot, former QA test engineer on Google i18n and Apple localization teams.';
+const description = `About ${SITE_NAME}: a solo-led multilingual QA and directed-build studio run by Laurent Martenot, with human specialists joining per project when needed.`;
 ---
 <StudioLayout title="About" description={description} path="/about/" jsonld={[professionalService, person]}>
   <section class="ll-page-hero">
     <div class="ll-wrap">
       <p class="ll-crumbs"><a href="/">Home</a> / About</p>
       <p class="ll-eyebrow">About</p>
-      <h1 class="ll-h1">One person. <em>A whole language layer.</em></h1>
-      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is a solo studio run by {founder.name}. {founder.statement}</p>
+      <h1 class="ll-h1">One lead. <em>A flexible bench.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is a solo-led studio run by {founder.name}. Human specialists and subcontractors join per project when the work needs them. No anonymous “team” is invented for the website.</p>
     </div>
   </section>
 
@@ -38,17 +40,18 @@ const description = 'About Locale & Logic: a one-person studio run by Laurent Ma
       <div class="ll-grid-2">
         <div class="ll-prose">
           <h2 id="a-story" class="ll-h2">The short version.</h2>
-          <p>{founder.name} is a French-native QA professional who spent years testing software in the languages that matter — first inside Google's internationalization team (via Accenture) and later on Apple's localization team (via Moravia).</p>
-          <p>He then moved into international B2B sales and startup project management, founding and leading teams in Mexico and the US. Today he runs {SITE_NAME} as a one-person studio: human multilingual review for AI outputs, apps, games and web products.</p>
-          <p>He has lived and worked in {countries}. He doesn't sell headcount — he sells reviewed, scored, reproducible findings.</p>
+          <p>{founder.name} is a French-native QA professional who tested software inside Google's internationalization team (via Accenture) and Apple's localization team (via Moravia). His work there covered functional and linguistic testing, bug reporting, triage and follow-up across real product surfaces.</p>
+          <p>He also brings commercial and project-management range from international B2B sales, startup operations and founder roles. That combination explains the studio shape: quality services first, directed product builds second, and no pretense that he personally writes production code.</p>
+          <p>Today {SITE_NAME} sells reviewed, scored, reproducible findings and carefully directed implementation. He has lived and worked in {countries}. Experience years are intentionally not aggregated until the exact count is confirmed.</p>
         </div>
         <div class="ll-card">
           <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.9rem">At a glance</h3>
           <ul class="ll-facts" style="margin:0">
             <li><strong>Location:</strong> {location}</li>
             <li><strong>Languages:</strong> {languageBadge}</li>
-            <li><strong>Model:</strong> Solo studio &middot; NDA-ready &middot; works in your tracker and tools</li>
+            <li><strong>Model:</strong> Solo-led studio · NDA-ready · specialists join per project when needed</li>
             <li><strong>Tools:</strong> {tools.slice(0, 6).join(', ')} &hellip;</li>
+            {LINKEDIN_URL && <li><strong>LinkedIn:</strong> <a class="ll-tlink" href={LINKEDIN_URL} rel="noopener">Public profile</a></li>}
           </ul>
         </div>
       </div>
@@ -90,7 +93,7 @@ const description = 'About Locale & Logic: a one-person studio run by Laurent Ma
         </div>
         <div>
           <p class="ll-eyebrow">Languages</p>
-          <h2 class="ll-h2">What "fluent" means here.</h2>
+          <h2 class="ll-h2">What “fluent” means here.</h2>
           <div class="ll-langs" style="margin-top:1.5rem">
             {languages.map((l) => (
               <div class="ll-langbar">
@@ -98,7 +101,7 @@ const description = 'About Locale & Logic: a one-person studio run by Laurent Ma
               </div>
             ))}
           </div>
-          <p class="ll-note" style="margin-top:1.25rem">French is the primary working language. English is near-native. Spanish is professional: reviews and second-language checks, EN&harr;ES source-side.</p>
+          <p class="ll-note" style="margin-top:1.25rem">French is the primary working language. English is near-native. Spanish is professional: reviews and second-language checks, EN↔ES source-side.</p>
         </div>
       </div>
     </div>
@@ -108,10 +111,10 @@ const description = 'About Locale & Logic: a one-person studio run by Laurent Ma
     <div class="ll-wrap">
       <div class="ll-contact" id="contact">
         <h2 id="a-contact">Work with the studio.</h2>
-        <p class="ll-prose">For quotes, partnerships or questions: email is the fastest channel. A pre-filled draft is one click away on the <a class="ll-tlink" href="/contact/">contact page</a>.</p>
+        <p class="ll-prose">For vendor onboarding, QA quotes, partnerships or scoped build questions: email is the fastest channel. Agencies should start on the vendor page so the onboarding subject is pre-filled correctly.</p>
         <div class="ll-actions">
-          <a class="ll-btn ll-btn-solid" href={mailto('Hello — Locale & Logic')}>{'laurent.martenot@gmail.com'}</a>
-          <a class="ll-btn ll-btn-ghost" href="/partners/">Partner terms</a>
+          <a class="ll-btn ll-btn-signal" href="/partners/">Vendor onboarding</a>
+          <a class="ll-btn ll-btn-solid" href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a>
           <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
         </div>
       </div>

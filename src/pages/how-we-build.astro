@@ -1,0 +1,97 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME, mailto } from '../config';
+import { buildSteps } from '../data/studio';
+import { projects } from '../data/work';
+
+const description = `How ${SITE_NAME} builds small software products: human product direction, atomic AI-agent tasks, reviewed implementation, verification and honest status labels.`;
+---
+<StudioLayout title="How we build" description={description} path="/how-we-build/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / How we build</p>
+      <p class="ll-eyebrow">Build method</p>
+      <h1 class="ll-h1">AI can write fast. <em>A human still decides what is true.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} uses AI coding agents as implementation leverage, not as a substitute for product judgement. The founder writes the scope, slices the work, reviews the result and labels release status honestly.</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href={mailto('Build enquiry — scoped product work')}>Discuss a scoped build</a>
+        <a class="ll-btn ll-btn-ghost" href="/work/">See project status labels</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="build-steps">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Method</p>
+      <h2 id="build-steps" class="ll-h2">Five controls against chaos.</h2>
+      <ol class="ll-steps">
+        {buildSteps.map((s) => (
+          <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="build-rules">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Operating rules</p>
+      <h2 id="build-rules" class="ll-h2">What this is — and what it is not.</h2>
+      <div class="ll-grid-2" style="margin-top:2rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">This is</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Product direction for small, bounded software systems</li>
+            <li>Written requirements and acceptance criteria before implementation</li>
+            <li>AI-assisted implementation split into reviewable tasks</li>
+            <li>Human review of behavior, test evidence and user-facing claims</li>
+            <li>Quality-first release decisions with honest alpha/development/planned labels</li>
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">This is not</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>A claim that the founder writes production code</li>
+            <li>Unbounded “build me an app” work without written scope</li>
+            <li>Marketing unfinished features as shipped</li>
+            <li>Automated acceptance without human review</li>
+            <li>A replacement for a full senior engineering team on large systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="build-evidence">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Evidence</p>
+      <h2 id="build-evidence" class="ll-h2">The method is visible in current projects.</h2>
+      <div class="ll-proof-list">
+        {projects.map((p) => (
+          <article class="ll-proof-item ll-card">
+            <div class="ll-proof-meta">
+              <span class="ll-kind">Project</span>
+              <span class="ll-status">{p.status}</span>
+            </div>
+            <div class="ll-proof-body">
+              <h3>{p.title}</h3>
+              <p>{p.summary}</p>
+              <div class="ll-actions">
+                <a class="ll-btn ll-btn-ghost" href={`/work/${p.slug}/`}>Read the honest status <span aria-hidden="true">&rarr;</span></a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="ll-band" style="margin-top:2.5rem">
+        <div>
+          <h3>Start with scope, not hype.</h3>
+          <p>Build enquiries should include the user problem, target platform, constraints, desired timeline and what must not be claimed yet. Quality subcontracting remains the studio's primary service.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-solid" href={mailto('Build enquiry — scoped product work')}>Email the build scope</a>
+          <a class="ll-btn ll-btn-ghost" href="/terms-of-work/">Read terms of work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

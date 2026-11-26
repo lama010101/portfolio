@@ -1,6 +1,4 @@
 ---
-import '@fontsource-variable/fraunces';
-import '@fontsource-variable/inter';
 import '../styles/site.css';
 import { CONTACT_EMAIL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, mailto, ogImage, pageUrl, siteUrl } from '../config';
 import { audiences, contactOptions, defaultAudience, sectionTitles } from '../data/studio';
@@ -18,12 +16,12 @@ const canonical = pageUrl(path);
 const og = new URL(ogImage, siteUrl).href;
 
 const nav = [
+  { href: '/services/', label: 'Services' },
   { href: '/quality/', label: 'Quality' },
-  { href: '/ai-evaluation/', label: 'AI Evaluation' },
-  { href: '/proof/', label: 'Proof' },
-  { href: '/partners/', label: 'Partners' },
+  { href: '/partners/', label: 'For agencies', highlight: true },
+  { href: '/work/', label: 'Work' },
+  { href: '/how-we-build/', label: 'How we build' },
   { href: '/about/', label: 'About' },
-  { href: '/contact/', label: 'Contact' },
 ];
 const current = (href: string) => (isHome ? false : path.startsWith(href));
 
@@ -36,17 +34,19 @@ const professionalService = {
   email: CONTACT_EMAIL,
   knowsLanguage: ['French', 'English', 'Spanish'],
   areaServed: { '@type': 'Place', name: 'Worldwide' },
+  ...(LINKEDIN_URL ? { sameAs: [LINKEDIN_URL] } : {}),
 };
 const schemas = jsonld ?? [professionalService];
 
 const siteData = {
-  audiences: audiences.map(({ id, label, lead, cta, alt, order }) => ({ id, label, lead, cta, alt, order })),
+  audiences: audiences.map(({ id, label, lead, order }) => ({ id, label, lead, order })),
   sectionTitles,
   defaultAudience,
   pages: nav,
   contactOptions,
   email: CONTACT_EMAIL,
-  quoteMailto: mailto('Quote request — Locale & Logic'),
+  quoteSubject: `Quote request — ${SITE_NAME}`,
+  quoteMailto: mailto(`Quote request — ${SITE_NAME}`),
 };
 ---
 <!doctype html>
@@ -83,11 +83,13 @@ const siteData = {
     <header class="ll-header">
       <div class="ll-wrap ll-bar">
         <a class="ll-brand" href="/" aria-label={`${SITE_NAME} — home`}>
-          <span class="ll-mark" aria-hidden="true">L&amp;L</span>
+          <span class="ll-mark" aria-hidden="true">{SITE_NAME.charAt(0)}</span>
           <span class="ll-brand-name">{SITE_NAME}</span>
         </a>
         <nav class="ll-nav" aria-label="Main">
-          {nav.map((n) => <a href={n.href} aria-current={current(n.href) ? 'page' : undefined}>{n.label}</a>)}
+          {nav.map((n) => (
+            <a href={n.href} class:list={[{ 'll-nav-highlight': n.highlight }]} aria-current={current(n.href) ? 'page' : undefined}>{n.label}</a>
+          ))}
         </nav>
         <div class="ll-tools">
           <button type="button" class="ll-tool" id="ll-theme" aria-pressed="false" aria-label="Dark mode">
@@ -109,7 +111,7 @@ const siteData = {
         <label class="ll-cmd-search">
           <span class="ll-visually-hidden">Search pages and actions</span>
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4" /></svg>
-          <input id="ll-cmd-input" type="text" autocomplete="off" placeholder="Jump to a page, quote or theme..." role="combobox" aria-expanded="true" aria-controls="ll-cmd-list" />
+          <input id="ll-cmd-input" type="text" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="ll-cmd-list" />
           <kbd>Esc</kbd>
         </label>
         <ul id="ll-cmd-list" role="listbox" aria-label="Results"></ul>
@@ -127,13 +129,15 @@ const siteData = {
         </div>
         <ul>
           {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/terms-of-work/">Terms of work</a></li>
           {LINKEDIN_URL && <li><a href={LINKEDIN_URL} rel="noopener">LinkedIn</a></li>}
-          <li><a href={mailto('Hello — Locale & Logic')}>{CONTACT_EMAIL}</a></li>
+          <li><a href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a></li>
         </ul>
       </div>
     </footer>
 
     <script is:inline define:vars={{ siteData }}>window.SITE_DATA = siteData;</script>
-    <script is:inline src="/site.js"></script>
+    <script is:inline src="/site.js" defer></script>
   </body>
 </html>

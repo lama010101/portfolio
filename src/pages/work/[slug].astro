@@ -1,0 +1,98 @@
+---
+import StudioLayout from '../../layouts/StudioLayout.astro';
+import { mailto } from '../../config';
+import { projects } from '../../data/work';
+import type { WorkProject } from '../../data/work-types';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+interface Props {
+  project: WorkProject;
+}
+const { project } = Astro.props;
+---
+<StudioLayout title={`${project.title} — Work`} description={project.seoDescription} path={`/work/${project.slug}/`}>
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / <a href="/work/">Work</a> / {project.title}</p>
+      <p class="ll-eyebrow">Case study</p>
+      <h1 class="ll-h1">{project.title}</h1>
+      <p style="margin:0 0 1rem"><span class="ll-status">{project.status}</span></p>
+      <p class="ll-sub" style="margin-top:1rem">{project.summary}</p>
+      {project.links?.length ? (
+        <div class="ll-actions">
+          {project.links.map((link) => <a class="ll-btn ll-btn-solid" href={link.url} rel="noopener">{link.label} <span aria-hidden="true">&rarr;</span></a>)}
+        </div>
+      ) : null}
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="case-capabilities">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Capabilities shown</p>
+      <h2 id="case-capabilities" class="ll-h2">What this project demonstrates.</h2>
+      <div class="ll-grid-2" style="margin-top:2rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Capabilities</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            {project.capabilities.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+        {project.facts?.length ? (
+          <div class="ll-card">
+            <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Honest status</h3>
+            <ul class="ll-facts" style="margin:0">
+              {project.facts.map((fact) => <li><strong>{fact.k}:</strong> {fact.v}</li>)}
+            </ul>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  </section>
+
+  {project.body?.length ? (
+    <section class="ll-sec ll-sec-alt" aria-labelledby="case-detail">
+      <div class="ll-wrap">
+        <p class="ll-eyebrow">Detail</p>
+        <h2 id="case-detail" class="ll-h2">What is true today.</h2>
+        <div class="ll-prose">
+          {project.body.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+    </section>
+  ) : null}
+
+  {project.screenshots?.length ? (
+    <section class="ll-sec" aria-labelledby="case-screens">
+      <div class="ll-wrap">
+        <p class="ll-eyebrow">Screenshots</p>
+        <h2 id="case-screens" class="ll-h2">Product evidence.</h2>
+        <div class="ll-shot-grid">
+          {project.screenshots.map((shot) => (
+            <figure class="ll-shot">
+              <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" />
+              <figcaption>{shot.alt}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null}
+
+  <section class="ll-sec" aria-labelledby="case-next">
+    <div class="ll-wrap">
+      <div class="ll-band">
+        <div>
+          <h2 id="case-next">Need this kind of directed quality work?</h2>
+          <p>The same discipline behind these projects is available first as QA and localization subcontracting, and second as small directed build work.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-signal" href="/partners/">Vendor onboarding</a>
+          <a class="ll-btn ll-btn-ghost" href={mailto('Quote request — project quality review')}>Request a quality review</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

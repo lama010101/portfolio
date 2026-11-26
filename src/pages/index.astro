@@ -1,11 +1,23 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
 import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto } from '../config';
-import { audiences, defaultAudience, languageBadge, languages, location, methodLine, methodSteps, offers, proofItems, sectionTitles } from '../data/studio';
+import {
+  audiences,
+  buildServices,
+  buildSteps,
+  defaultAudience,
+  languageBadge,
+  languages,
+  location,
+  qualityServices,
+  sectionTitles,
+} from '../data/studio';
+import { projects } from '../data/work';
 
-const description = `${SITE_TAGLINE} Human review of apps, games and AI outputs, from a former Google i18n and Apple localization QA test engineer.`;
-const quoteHref = mailto('Quote request — Locale & Logic');
-const publishedProof = proofItems.filter((p) => p.published);
+const description = `${SITE_TAGLINE} Subcontract multilingual QA, localization and AI evaluation, or commission a small honestly scoped directed build.`;
+const quoteHref = mailto(`Quote request — ${SITE_NAME}`);
+const vendorHref = '/partners/';
+const audience = audiences.find((a) => a.id === defaultAudience)!;
 ---
 <StudioLayout title={SITE_NAME} description={description} path="/">
   <section class="ll-hero" id="top" aria-labelledby="ll-h1">
@@ -19,17 +31,17 @@ const publishedProof = proofItems.filter((p) => p.published);
         </div>
 
         <p class="ll-eyebrow ll-reveal">{SITE_TAGLINE}</p>
-        <h1 id="ll-h1" class="ll-h1 ll-reveal">Multilingual quality for <em>AI and software.</em></h1>
-        <p class="ll-sub ll-reveal" style="margin-top:1rem">Native-French, near-native English, professional Spanish. Human review of apps, games and AI outputs, from a former Google i18n and Apple localization QA test engineer.</p>
-        <p class="ll-lead ll-reveal" id="ll-lead" aria-live="polite">{audiences.find((a) => a.id === defaultAudience)!.lead}</p>
+        <h1 id="ll-h1" class="ll-h1 ll-reveal">Human judgement. <em>Machine-paced delivery.</em></h1>
+        <p class="ll-sub ll-reveal" style="margin-top:1rem">{SITE_NAME} pairs multilingual human QA with carefully directed AI-assisted implementation. Agencies and vendors can subcontract the language layer; product teams can also commission small, honestly scoped builds.</p>
+        <p class="ll-lead ll-reveal" id="ll-lead" aria-live="polite">{audience.lead}</p>
 
         <div class="ll-actions ll-reveal">
-          <a class="ll-btn ll-btn-solid" id="ll-cta" href={quoteHref}>Request a quote <span aria-hidden="true">&rarr;</span></a>
-          <a class="ll-btn ll-btn-ghost" id="ll-cta-alt" href="/capability-statement.pdf">Vendor one-pager (PDF)</a>
+          <a class="ll-btn ll-btn-solid" href={quoteHref}>Request a QA quote <span aria-hidden="true">&rarr;</span></a>
+          <a class="ll-btn ll-btn-signal" href={vendorHref}>For agencies: add us to your vendor database</a>
         </div>
 
         <ol class="ll-route" id="ll-route" aria-label="Your suggested route through this page">
-          {audiences.find((a) => a.id === defaultAudience)!.order.slice(0, 3).map((id, i) => (
+          {audience.order.slice(0, 3).map((id, i) => (
             <li><a href={`#${id}`}><b>0{i + 1}</b>{sectionTitles[id]}</a></li>
           ))}
         </ol>
@@ -39,14 +51,24 @@ const publishedProof = proofItems.filter((p) => p.published);
         <div class="ll-id-top">
           <div>
             <p class="ll-id-name">{SITE_NAME}</p>
-            <p class="ll-id-role">One-person studio &middot; {SITE_TAGLINE}</p>
+            <p class="ll-id-role">Dual-intelligence studio &middot; human review plus directed AI leverage</p>
             <p class="ll-id-loc"><span class="ll-live" aria-hidden="true"></span>{location}</p>
           </div>
         </div>
+        <div class="ll-duet" aria-label="The two kinds of intelligence behind the studio">
+          <div>
+            <span>Human intelligence</span>
+            <p>Native-French linguistic judgement, enterprise QA habits, severity decisions and final acceptance review.</p>
+          </div>
+          <div>
+            <span>Machine leverage</span>
+            <p>AI tools accelerate triage, drafting and bounded implementation — never final quality judgement.</p>
+          </div>
+        </div>
         <ul class="ll-proof">
-          <li><span>i18n QA</span>Google &amp; Apple localization testing background</li>
+          <li><span>QA roots</span>Google i18n and Apple localization testing background</li>
           <li><span>Languages</span>{languageBadge}</li>
-          <li><span>Model</span>Solo studio &middot; NDA-ready &middot; works in your tracker</li>
+          <li><span>Model</span>Solo-led studio &middot; specialists join per project when needed</li>
         </ul>
         <div class="ll-langs" aria-label="Language levels">
           {languages.map((l) => (
@@ -60,15 +82,36 @@ const publishedProof = proofItems.filter((p) => p.published);
   </section>
 
   <div id="ll-flow">
-    <!-- OFFERS -->
     <section class="ll-sec" id="services" data-sec aria-labelledby="services-h">
       <div class="ll-wrap">
-        <p class="ll-eyebrow">Offers</p>
-        <h2 id="services-h" class="ll-h2">Three ways to buy <em>multilingual quality.</em></h2>
-        <p class="ll-sub">Fixed scopes, written deliverables, findings you can act on.</p>
-        <div class="ll-offers">
-          {offers.map((o) => (
-            <article class:list={['ll-card', 'll-offer', 'll-spot', { 'll-offer-secondary': o.secondary }]}>
+        <p class="ll-eyebrow">Services</p>
+        <h2 id="services-h" class="ll-h2">Quality first. <em>Build second.</em></h2>
+        <p class="ll-sub">The primary conversion goal is QA and localization subcontracting by agencies and vendors. Directed builds are available, but deliberately secondary.</p>
+
+        <h3 class="ll-group-title">Quality services</h3>
+        <div class="ll-offers ll-offers-quality">
+          {qualityServices.map((o) => (
+            <article class="ll-card ll-offer ll-spot">
+              <p class="ll-num">{o.index}</p>
+              <h3>{o.title}</h3>
+              <p class="ll-tagline">{o.tagline}</p>
+              <p>{o.summary}</p>
+              <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
+              <div class="ll-deliver">
+                <span>Deliverable</span>
+                <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
+              </div>
+              <div class="ll-actions">
+                <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <h3 class="ll-group-title ll-group-title-build">Build services</h3>
+        <div class="ll-offers ll-offers-build">
+          {buildServices.map((o) => (
+            <article class="ll-card ll-offer ll-offer-secondary ll-spot">
               <p class="ll-num">{o.index}</p>
               <h3>{o.title}</h3>
               <p class="ll-tagline">{o.tagline}</p>
@@ -87,81 +130,75 @@ const publishedProof = proofItems.filter((p) => p.published);
       </div>
     </section>
 
-    <!-- METHOD -->
-    <section class="ll-sec ll-sec-alt" id="method" data-sec aria-labelledby="method-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">Method</p>
-        <h2 id="method-h" class="ll-h2">Five steps. <em>Zero ambiguity.</em></h2>
-        <ol class="ll-steps">
-          {methodSteps.map((s) => (
-            <li class="ll-step">
-              <b>{s.n}</b>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))}
-        </ol>
-        <p class="ll-note ll-method-note">{methodLine}</p>
-      </div>
-    </section>
-
-    <!-- PROOF -->
-    <section class="ll-sec" id="proof" data-sec aria-labelledby="proof-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">Proof</p>
-        <h2 id="proof-h" class="ll-h2">Real work, <em>labelled honestly.</em></h2>
-        <div class="ll-proof-list">
-          {publishedProof.map((p) => (
-            <article class="ll-proof-item ll-card">
-              <div class="ll-proof-meta">
-                <span class="ll-kind">{p.kind === 'project' ? 'Project' : p.kind}</span>
-                <span class="ll-status">{p.status}</span>
-              </div>
-              <div class="ll-proof-body">
-                <h3>{p.title}</h3>
-                <p>{p.summary}</p>
-                <ul>{p.body.slice(0, 2).map((b) => <li>{b}</li>)}</ul>
-                <div class="ll-actions">
-                  <a class="ll-btn ll-btn-ghost" href="/proof/">See proof &amp; methodology <span aria-hidden="true">&rarr;</span></a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <p class="ll-note">Scoring is MQM-style: severity first, category second — comparable across languages and across retests. <a class="ll-tlink" href="/proof/#scoring">How I score findings</a></p>
-      </div>
-    </section>
-
-    <!-- PARTNERS -->
     <section class="ll-sec ll-sec-alt" id="partners" data-sec aria-labelledby="partners-h">
       <div class="ll-wrap">
         <div class="ll-band">
           <div>
             <p class="ll-eyebrow">For agencies &amp; vendors</p>
-            <h2 id="partners-h">Subcontract the <em>language layer.</em></h2>
-            <p>You keep the client. I do the multilingual QA and AI evaluation inside your tracker and tools — NDA-ready, UTC+7 coverage for US/EU overnight windows, rates on request.</p>
+            <h2 id="partners-h">Add a multilingual QA vendor <em>without adding headcount.</em></h2>
+            <p>You keep the client. We deliver localization QA, linguistic QA, functional QA and multilingual AI evaluation inside your tracker and tools — NDA-ready, hourly or per project, with UTC+7 coverage of US/EU overnight windows.</p>
           </div>
           <div class="ll-actions">
-            <a class="ll-btn ll-btn-solid" href="/partners/">Partner details <span aria-hidden="true">&rarr;</span></a>
-            <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">One-pager (PDF)</a>
+            <a class="ll-btn ll-btn-solid" href="/partners/">Vendor onboarding <span aria-hidden="true">&rarr;</span></a>
+            <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <section class="ll-sec" id="work" data-sec aria-labelledby="work-h">
+      <div class="ll-wrap">
+        <p class="ll-eyebrow">Work</p>
+        <h2 id="work-h" class="ll-h2">Real projects, <em>honest labels.</em></h2>
+        <p class="ll-sub">The showcase is content-driven and intentionally small. It shows what exists now — nothing is padded with filler case studies.</p>
+        <div class="ll-proof-list">
+          {projects.map((p) => (
+            <article class="ll-proof-item ll-card">
+              <div class="ll-proof-meta">
+                <span class="ll-kind">Project</span>
+                <span class="ll-status">{p.status}</span>
+              </div>
+              <div class="ll-proof-body">
+                <h3>{p.title}</h3>
+                <p>{p.summary}</p>
+                <ul>{p.capabilities.slice(0, 3).map((c) => <li>{c}</li>)}</ul>
+                <div class="ll-actions">
+                  <a class="ll-btn ll-btn-ghost" href={`/work/${p.slug}/`}>Read the case study <span aria-hidden="true">&rarr;</span></a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ll-sec ll-sec-alt" id="build" data-sec aria-labelledby="build-h">
+      <div class="ll-wrap">
+        <p class="ll-eyebrow">How we build</p>
+        <h2 id="build-h" class="ll-h2">Directed AI implementation. <em>Human acceptance.</em></h2>
+        <ol class="ll-steps ll-steps-three">
+          {buildSteps.slice(0, 3).map((s) => (
+            <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
+          ))}
+        </ol>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-solid" href="/how-we-build/">See the full build method <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
     <section class="ll-sec" id="about" data-sec aria-labelledby="about-h">
       <div class="ll-wrap">
         <p class="ll-eyebrow">About</p>
-        <h2 id="about-h" class="ll-h2">A solo studio with <em>enterprise QA roots.</em></h2>
+        <h2 id="about-h" class="ll-h2">A solo-led studio with <em>enterprise QA roots.</em></h2>
         <div class="ll-grid-2">
           <div class="ll-prose">
-            <p>{SITE_NAME} is a one-person studio run by Laurent Martenot — a former QA test engineer on Google's i18n team (via Accenture) and Apple's localization team (via Moravia).</p>
-            <p>He tests, evaluates and directs software; he doesn't write production code. Before the studio, he spent years in international B2B sales and startup project management, and has lived and worked in France, the US, Mexico and Asia.</p>
+            <p>{SITE_NAME} is led by Laurent Martenot — a former QA test engineer on Google's i18n team (via Accenture) and Apple's localization team (via Moravia).</p>
+            <p>Human specialists and subcontractors join per project when the work needs them. No names are listed until the right people are assigned to a real engagement.</p>
           </div>
           <div class="ll-actions" style="margin-top:0">
             <a class="ll-btn ll-btn-solid" href="/about/">Read the full story <span aria-hidden="true">&rarr;</span></a>
-            <a class="ll-btn ll-btn-ghost" href={mailto('Hello — Locale & Logic')}>{CONTACT_EMAIL}</a>
+            <a class="ll-btn ll-btn-ghost" href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a>
           </div>
         </div>
       </div>

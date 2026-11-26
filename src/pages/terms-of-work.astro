@@ -1,0 +1,79 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME, mailto } from '../config';
+
+const description = `${SITE_NAME} terms of work: written scope, rates on request, NDA-ready subcontracting, client materials, delivery, acceptance and honest quality-evidence boundaries.`;
+const sections = [
+  {
+    title: 'Written scope before work',
+    body: 'Every engagement starts with a written scope: service type, languages, platforms, deliverables, access requirements, turnaround expectations, exclusions and acceptance criteria. Work outside that scope is confirmed before it is performed.',
+  },
+  {
+    title: 'Rates and engagement shape',
+    body: 'Work can be hourly or per project. Rates are provided on request after enough scope is visible. Availability, turnaround and batch size are confirmed in writing for each engagement rather than implied by this website.',
+  },
+  {
+    title: 'Client materials and access',
+    body: 'The client provides the access, builds, source text, glossaries, style guides, trackers, test accounts and reference material needed for the agreed work. Delays or missing access are reported early because they affect turnaround.',
+  },
+  {
+    title: 'Confidentiality and NDAs',
+    body: `${SITE_NAME} is NDA-ready. Client material is used only for the agreed engagement. No client names, project details or confidential screenshots are published without written permission.`,
+  },
+  {
+    title: 'Subcontractors and specialists',
+    body: 'Human specialists and subcontractors join per project when the work needs them. They are bound by the confidentiality and delivery expectations agreed for the engagement. Names are shared when relevant to the work, not used as decorative website claims.',
+  },
+  {
+    title: 'Delivery and acceptance',
+    body: 'Deliverables are defined in the scope: tracker tickets, reports, scorecards, rubrics, guidelines, calibration sets, retest notes or build-review evidence. Acceptance means the deliverable matches the written scope, not that a product is certified or risk-free.',
+  },
+  {
+    title: 'Quality-evidence boundary',
+    body: 'QA and evaluation findings are evidence-based professional review. They do not constitute legal compliance advice, certification, a guarantee of defect-free software or a promise that every user-facing risk has been eliminated.',
+  },
+  {
+    title: 'Directed build boundary',
+    body: 'For directed builds, the founder writes scope, delegates bounded implementation tasks to AI coding agents and reviews the result. He does not claim to personally write production code. Larger systems may require client-side engineers or additional specialists.',
+  },
+  {
+    title: 'Payment and administrative terms',
+    body: 'Invoicing schedule, payment due dates, taxes, late-payment handling, cancellation and intellectual-property transfer are confirmed in the project agreement or vendor paperwork. This page summarizes operations and does not replace a signed contract.',
+  },
+];
+---
+<StudioLayout title="Terms of work" description={description} path="/terms-of-work/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Terms of work</p>
+      <p class="ll-eyebrow">Terms of work</p>
+      <h1 class="ll-h1">Clear scope before <em>work begins.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">These terms explain how {SITE_NAME} runs QA, evaluation and directed-build engagements. Contractual details are confirmed in writing per project or vendor agreement; this page is an operational summary, not legal advice.</p>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="terms-list">
+    <div class="ll-wrap">
+      <h2 id="terms-list" class="ll-h2 ll-visually-hidden">Terms</h2>
+      <div class="ll-service-list">
+        {sections.map((section, i) => (
+          <article class="ll-card ll-service-row">
+            <span class="ll-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{section.title}</h3>
+            <p>{section.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="ll-band" style="margin-top:2.5rem">
+        <div>
+          <h3>Questions before onboarding?</h3>
+          <p>Ask before sending confidential material. Vendor onboarding starts with the service type, language pairs, volume, tracker and timeline.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-signal" href="/partners/">Vendor onboarding</a>
+          <a class="ll-btn ll-btn-ghost" href={mailto(`Terms question — ${SITE_NAME}`)}>Email a terms question</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

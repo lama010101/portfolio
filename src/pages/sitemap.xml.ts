@@ -1,12 +1,18 @@
 import { pageUrl } from '../config';
+import { projects } from '../data/work';
 
 const paths = [
   '/',
+  '/services/',
   '/quality/',
-  '/ai-evaluation/',
-  '/proof/',
+  '/quality/french-lqa-testing/',
+  '/quality/multilingual-ai-evaluation/',
   '/partners/',
+  '/work/',
+  ...projects.map((project) => `/work/${project.slug}/`),
+  '/how-we-build/',
   '/about/',
+  '/terms-of-work/',
   '/contact/',
 ];
 

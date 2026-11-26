@@ -1,0 +1,128 @@
+---
+import StudioLayout from '../../layouts/StudioLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME, mailto, pageUrl, siteUrl } from '../../config';
+
+const description = 'Multilingual AI output evaluation in French, English and Spanish: human review, rubrics, annotation guidelines, calibration sets and failure-mode reports.';
+const faqs = [
+  {
+    q: 'Which languages are covered?',
+    a: 'French, English and Spanish are covered. French is native-led, English is near-native, and Spanish is professional secondary support rather than a native-language claim.',
+  },
+  {
+    q: 'Can you write the rubric as well as score outputs?',
+    a: 'Yes. Rubric writing, annotation guidelines, examples and calibration sets can be included so your reviewers or vendors can apply the same criteria consistently.',
+  },
+  {
+    q: 'Is the evaluation automated?',
+    a: 'No. The evaluation is human-led. Tools may assist with triage or drafting only when the client allows it; quality judgements and final scores are reviewed by a human.',
+  },
+  {
+    q: 'What do we receive?',
+    a: 'Depending on scope: a per-language evaluation report, cited examples, a failure-mode taxonomy, rubric and annotation guidelines, and a calibration set for reviewer alignment.',
+  },
+];
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Multilingual AI output evaluation',
+  serviceType: 'Multilingual AI output evaluation',
+  description,
+  provider: { '@type': 'ProfessionalService', name: SITE_NAME, url: siteUrl, email: CONTACT_EMAIL },
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+  availableLanguage: ['French', 'English', 'Spanish'],
+  url: pageUrl('/quality/multilingual-ai-evaluation/'),
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<StudioLayout title="Multilingual AI evaluation" description={description} path="/quality/multilingual-ai-evaluation/" jsonld={[serviceSchema, faqSchema]}>
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / <a href="/quality/">Quality</a> / Multilingual AI evaluation</p>
+      <p class="ll-eyebrow">AI quality service</p>
+      <h1 class="ll-h1">Multilingual AI evaluation with <em>human judgement.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">Human evaluation of AI outputs in French, English and Spanish — with rubrics, annotation guidelines, calibration sets and failure-mode reports that make quality decisions reproducible.</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-signal" href="/partners/">Add us to your vendor database</a>
+        <a class="ll-btn ll-btn-ghost" href={mailto('Quote request — Multilingual AI evaluation')}>Request an evaluation quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="ai-what">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">What is evaluated</p>
+      <h2 id="ai-what" class="ll-h2">Model output is a language product.</h2>
+      <div class="ll-prose">
+        <p>Multilingual AI quality cannot be reduced to whether an answer looks fluent at first glance. A model can produce smooth French that misses the instruction, accurate English that uses the wrong register, or Spanish that is understandable but inconsistent with the product voice. It can also perform well in one language while silently degrading in another. Evaluation needs human reviewers who can separate those failure modes instead of compressing them into one opaque score.</p>
+        <p>{SITE_NAME} evaluates outputs against written criteria agreed before scoring starts. Depending on the task, those criteria can cover factuality or accuracy, instruction following, fluency, terminology, style, cultural fit, safety-adjacent behavior defined by the client, completeness, concision and cross-language consistency. Examples are cited so a score can be traced back to visible evidence.</p>
+        <p>The language posture is deliberately honest: French is native-led, English is near-native, and Spanish is professional secondary support. That makes the service suitable for EN&gt;FR primary work, FR&gt;EN review support and EN&lt;&gt;ES secondary checks, without pretending that every language has the same depth of native coverage.</p>
+      </div>
+      <div class="ll-grid-2" style="margin-top:2rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Output review</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Accuracy, fluency and instruction following per language</li>
+            <li>Register, terminology and cultural fit</li>
+            <li>Cross-language consistency and divergence</li>
+            <li>Edge cases and recurring failure modes</li>
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Evaluation infrastructure</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Rubric writing for your exact task</li>
+            <li>Annotation guidelines and pass/fail examples</li>
+            <li>Calibration sets for reviewer alignment</li>
+            <li>Failure-mode taxonomy and report structure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="ai-how">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">How engagements run</p>
+      <h2 id="ai-how" class="ll-h2">Criteria first. Scores second.</h2>
+      <div class="ll-prose">
+        <p>An evaluation starts by making the task scoreable. That means identifying the user-facing risk, the languages, the prompt or output types, the volume, the required turnaround and the decision the evaluation is meant to support. If no usable rubric exists, one can be drafted with examples of passes, failures and edge cases. If a rubric already exists, it is reviewed for ambiguity before production scoring begins.</p>
+        <p>Calibration matters because multilingual review often involves more than one rater. A small calibration set can expose whether reviewers interpret “minor”, “major”, “fluent” or “culturally appropriate” in the same way. The goal is not artificial agreement; it is explicit criteria and fewer hidden differences. When a score is subjective, the guideline should say how the judgement is bounded.</p>
+        <p>Reports are written for action. A per-language summary can show which failure modes recur, which examples demonstrate them, and which fixes or data changes are worth testing next. Automated tools may assist triage or drafting only where the client allows it. Final quality judgements are human-reviewed, and no invented aggregate quality percentage is supplied when the evidence does not support one.</p>
+        <p>This service pairs naturally with localization QA. AI output may be technically correct but still unusable in a localized product flow; localized UI may be correct while the model output underneath it is inconsistent. Internal links to both services are intentional because the problems often meet in production.</p>
+      </div>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href="/quality/french-lqa-testing/">Pair it with French LQA testing</a>
+        <a class="ll-btn ll-btn-ghost" href="/quality/">See all quality services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="ai-faq">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">FAQ</p>
+      <h2 id="ai-faq" class="ll-h2">Multilingual AI evaluation questions.</h2>
+      <div class="ll-faq">
+        {faqs.map((f) => (
+          <details class="ll-card">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="ll-band" style="margin-top:2.5rem">
+        <div>
+          <h3>Need evaluation capacity inside your vendor workflow?</h3>
+          <p>Send the onboarding note with languages, task type, expected volume, rubric status, tracker and turnaround requirements. Rates are provided on request.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-signal" href="/partners/">Go to vendor onboarding</a>
+          <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

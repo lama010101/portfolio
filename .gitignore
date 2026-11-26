@@ -8,3 +8,6 @@ dist
 shots/
 lh/
 *.log
+
+.og-tmp.html
+.pdf-tmp.html

@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Locale & Logic — studio site
+   Studio site
    Isolated stylesheet. All classes are prefixed ll- / t- (terminal lines).
-   Palette: bone paper, ink, vermilion signal, deep teal. Fraunces + Inter.
+   Palette: bone paper, ink, vermilion signal, deep teal. System serif + sans.
    ========================================================================== */
 
 :root {
@@ -22,8 +22,8 @@
   --ph-bg: #fff3bf;
   --ph-ink: #5c4400;
   --ph-rule: #d9a400;
-  --serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, 'Cascadia Code', Menlo, Consolas, monospace;
   --max: 76rem;
   --radius: 18px;
@@ -158,7 +158,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .ll-only-d { display: none; }
 @media (min-width: 40rem) { .ll-only-d { display: inline; } .ll-only-m { display: none; } }
 
-/* ---------- buttons, links, placeholders ---------- */
+/* ---------- buttons, links, missing-state styling ---------- */
 .ll-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1.5rem; }
 .ll-btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -228,7 +228,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .ll-langbar em { font-style: normal; font-family: var(--mono); font-size: 0.66rem; color: var(--ink-2); }
 
 /* ---------- sections ---------- */
-.ll-sec { padding: clamp(3.5rem, 7vw, 6rem) 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 4.5rem; content-visibility: auto; contain-intrinsic-size: auto 30rem; }
+.ll-sec { padding: clamp(3.5rem, 7vw, 6rem) 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 4.5rem; }
 .ll-sec-alt { background: var(--paper-2); }
 .ll-note { margin-top: 2rem; font-size: 0.95rem; color: var(--ink-2); max-width: 60ch; border-left: 2px solid var(--signal); padding-left: 1rem; }
 .ll-bring { display: grid; gap: 1rem; margin-top: 2.25rem; }
@@ -381,15 +381,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .ll-footer a { text-decoration: none; }
 .ll-footer a:hover { color: var(--signal); }
 
-/* ---------- reveal ---------- */
-html.js .ll-reveal { opacity: 0; transform: translateY(16px); }
-html.js .ll-reveal.is-in { opacity: 1; transform: none; transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .ll-sec { view-transition-name: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-  html.js .ll-reveal { opacity: 1; transform: none; }
   .ll-btn:hover, .ll-route li a:hover, .ll-lens-btn:hover { transform: none; }
 }
 
@@ -502,3 +498,51 @@ html.js .ll-reveal.is-in { opacity: 1; transform: none; transition: opacity 0.6s
   a { color: #111; text-decoration: none; }
   .ll-table th { width: auto; }
 }
+
+/* ---------- Studio pivot additions ---------- */
+.ll-nav a.ll-nav-highlight {
+  color: var(--ink);
+  font-weight: 650;
+  border: 1px solid var(--signal);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  background: color-mix(in srgb, var(--signal-fill) 10%, transparent);
+}
+.ll-nav a.ll-nav-highlight:hover { color: var(--signal); background-size: 0 0; border-color: var(--ink); }
+.ll-duet { display: grid; gap: 0.75rem; margin-top: 1.35rem; }
+@media (min-width: 34rem) { .ll-duet { grid-template-columns: 1fr 1fr; } }
+.ll-duet > div { border: 1px solid var(--rule-soft); border-radius: 12px; padding: 0.85rem; background: color-mix(in srgb, var(--paper) 55%, transparent); }
+.ll-duet span { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); margin-bottom: 0.4rem; }
+.ll-duet p { font-size: 0.82rem; color: var(--ink-2); margin: 0; }
+.ll-group-title { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); margin: 2.4rem 0 0; }
+.ll-group-title-build { margin-top: 3rem; color: var(--signal); }
+@media (min-width: 52rem) {
+  .ll-offers-quality { grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr)); }
+  .ll-offers-build { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.ll-steps-three, .ll-steps-four { grid-template-columns: 1fr; }
+@media (min-width: 48rem) {
+  .ll-steps-three { grid-template-columns: repeat(3, 1fr); }
+  .ll-steps-four { grid-template-columns: repeat(4, 1fr); }
+}
+.ll-pair-grid { display: grid; gap: 1rem; margin-top: 2rem; }
+@media (min-width: 52rem) { .ll-pair-grid { grid-template-columns: repeat(3, 1fr); } }
+.ll-pair span { display: block; font-family: var(--mono); font-size: 1rem; letter-spacing: 0.08em; color: var(--signal); margin-bottom: 0.5rem; }
+.ll-pair p { margin: 0; color: var(--ink-2); font-size: 0.92rem; }
+.ll-service-list { display: grid; gap: 0.9rem; margin-top: 2.25rem; }
+.ll-service-row { display: grid; gap: 0.35rem; }
+@media (min-width: 60rem) { .ll-service-row { grid-template-columns: 4rem 16rem minmax(0, 1fr); gap: 1.2rem; align-items: baseline; } }
+.ll-service-row h3 { font-family: var(--serif); font-size: 1.28rem; font-weight: 520; }
+.ll-service-row p { margin: 0; color: var(--ink-2); font-size: 0.92rem; }
+.ll-faq { display: grid; gap: 0.85rem; margin-top: 2rem; }
+.ll-faq details { padding: 1rem 1.15rem; }
+.ll-faq summary { cursor: pointer; font-weight: 620; font-size: 0.98rem; }
+.ll-faq details p { margin: 0.8rem 0 0; color: var(--ink-2); font-size: 0.92rem; }
+.ll-shot-grid { display: grid; gap: 1rem; margin-top: 2rem; }
+@media (min-width: 52rem) { .ll-shot-grid { grid-template-columns: repeat(2, 1fr); } }
+.ll-shot { margin: 0; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--card); }
+.ll-shot figcaption { padding: 0.65rem 0.85rem; font-size: 0.78rem; color: var(--ink-2); border-top: 1px solid var(--rule-soft); }
+
+/* AA contrast for signal actions and selected audience chips. */
+.ll-btn-signal, .ll-lens-btn[aria-pressed='true'] { background: var(--signal); border-color: var(--signal); color: #fff; }
+html[data-theme='dark'] .ll-btn-signal, html[data-theme='dark'] .ll-lens-btn[aria-pressed='true'] { color: #14171d; }

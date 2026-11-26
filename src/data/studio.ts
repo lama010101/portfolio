@@ -1,32 +1,31 @@
 /*
- * CONTENT — single source of truth for the Locale & Logic studio site.
+ * CONTENT — single source of truth for the studio site.
  * Imported by Astro pages and by scripts/generate-assets.mjs (PDF, OG image).
  * Keep claims honest: no years unless verified, no invented metrics.
  */
-import { CONTACT_EMAIL, GAME_URL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, siteUrl } from '../config';
+import { CONTACT_EMAIL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, siteUrl } from '../config';
 
 export const founder = {
   name: 'Laurent Martenot',
   role: 'Founder',
-  // Honest positioning: tests, evaluates and directs software; does not write production code.
-  statement: 'I test, evaluate and direct software; I don\u2019t write production code.',
+  statement: 'I test, evaluate and direct software; I don’t write production code.',
 };
 
-export const location = 'Remote \u00b7 UTC+7 \u00b7 covers US/EU overnight windows';
+export const location = 'Remote · UTC+7 · covers US/EU overnight windows';
 
 export const languages = [
   { lang: 'French', level: 'Native', note: 'Primary working language', width: 100 },
   { lang: 'English', level: 'Near-native', note: '10 years in the United States', width: 88 },
-  { lang: 'Spanish', level: 'Professional', note: 'Reviews and second-language checks, EN\u2194ES source-side', width: 72 },
+  { lang: 'Spanish', level: 'Professional', note: 'Reviews and second-language checks, EN↔ES source-side', width: 72 },
 ] as const;
 
-export const languageBadge = 'Native French \u00b7 Near-native English \u00b7 Professional Spanish';
+export const languageBadge = 'Native French · Near-native English · Professional Spanish';
 
 export const education = [
   {
     school: 'ICN Business School, Nancy, France',
-    degree: 'Dipl\u00f4me Programme Grande \u00c9cole',
-    detail: 'Grade de Master, Bac+5, RNCP level 7 \u2014 international title: Master in Management',
+    degree: 'Diplôme Programme Grande École',
+    detail: 'Grade de Master, Bac+5, RNCP level 7 — international title: Master in Management',
   },
   {
     school: 'Indiana University of Pennsylvania, USA',
@@ -38,45 +37,45 @@ export const education = [
 export const experience = [
   {
     role: 'QA Test Engineer, Internationalization (i18n)',
-    org: 'Google \u2014 via Accenture',
-    dates: 'May 2021 \u2013 Feb 2022',
+    org: 'Google — via Accenture',
+    dates: 'May 2021 – Feb 2022',
     note: 'Functional testing of Google Assistant on iOS and Android; bug reporting, triage and follow-ups.',
   },
   {
     role: 'QA Test Engineer, Localization (l10n)',
-    org: 'Apple \u2014 via Moravia',
-    dates: 'Aug 2016 \u2013 Dec 2017',
+    org: 'Apple — via Moravia',
+    dates: 'Aug 2016 – Dec 2017',
     note: 'Functional and linguistic testing on iOS and web.',
   },
   {
     role: 'Functional Consultant (part-time)',
-    org: 'Lovie Studio, San Jos\u00e9, CA',
-    dates: 'Apr 2018 \u2013 Apr 2022',
+    org: 'Lovie Studio, San José, CA',
+    dates: 'Apr 2018 – Apr 2022',
     note: 'Analysis, project coordination and QA: specs and test plans, UI/UX decisions, offshore Agile sprints and budgets.',
   },
   {
     role: 'Key Account Manager, QA testing software',
     org: 'Solution-Soft, Santa Clara, CA',
-    dates: 'Apr 2015 \u2013 Jul 2016',
+    dates: 'Apr 2015 – Jul 2016',
     note: '',
   },
   {
     role: 'Co-founder, Business Analyst & Project Manager',
     org: '5Oi50, San Francisco / Montpellier',
-    dates: 'Nov 2011 \u2013 Mar 2015',
-    note: 'Led teams of 5\u201315.',
+    dates: 'Nov 2011 – Mar 2015',
+    note: 'Led teams of 5–15.',
   },
   {
     role: 'Founder & Managing Director',
-    org: 'Eldesem, Quer\u00e9taro, Mexico',
-    dates: 'Aug 2001 \u2013 Sep 2011',
+    org: 'Eldesem, Querétaro, Mexico',
+    dates: 'Aug 2001 – Sep 2011',
     note: '',
   },
   {
     role: 'Independent Product Owner',
-    org: 'Guess-History (BackToThePast)',
-    dates: '2022 \u2013 present',
-    note: 'Conceiving and directing a multiplayer history & geography guessing game, live in alpha. Directs AI coding agents: scopes each task, reviews every change, supervises tests.',
+    org: 'Dig the Past and LIKED',
+    dates: '2022 – present',
+    note: 'Conceives and directs software products; scopes each task, reviews every change and supervises tests performed by AI coding agents.',
   },
 ];
 
@@ -85,20 +84,18 @@ export const countries = 'France, the United States, Mexico and Asia';
 export const tools = [
   'Jira',
   'Trello',
+  'Linear',
   'Worldserver',
   'Smartling',
   'Figma',
-  'GitHub',
   'ADB',
   'Android & iOS testing',
   'Supabase',
   'Vercel',
 ];
 
-/* ---------------- offers ---------------- */
-
-export interface Offer {
-  id: 'quality' | 'ai-evaluation' | 'launch-review';
+export interface ServiceTile {
+  id: string;
   index: string;
   title: string;
   tagline: string;
@@ -107,64 +104,132 @@ export interface Offer {
   deliverables: string[];
   href: string;
   cta: string;
-  secondary?: boolean;
 }
 
-export const offers: Offer[] = [
+export const qualityServices: ServiceTile[] = [
   {
-    id: 'quality',
-    index: '01',
+    id: 'localization-i18n-qa',
+    index: 'Q1',
     title: 'Localization & i18n QA',
-    tagline: 'Functional and linguistic testing of apps, web and games.',
+    tagline: 'Functional internationalization testing before language quality is judged.',
     summary:
-      'End-to-end localization and internationalization testing: functional bugs, truncated or broken strings, encoding issues, locale formats, layout overflow, and linguistic review of FR/EN/ES copy.',
+      'End-to-end localization and internationalization testing for apps, web products and games: broken strings, encoding, locale formats, layout overflow, untranslated UI and wrong-language fallbacks.',
     points: [
-      'Functional i18n/l10n testing on Android, iOS and web',
-      'Linguistic review: grammar, tone, terminology, cultural fit',
-      'Bugs logged directly in your tracker (Jira, Trello, Linear, etc.)',
-      'Findings severity-scored, MQM-style',
+      'Android, iOS and web builds',
+      'Locale formats, pluralization, encoding and truncation',
+      'Bugs logged directly in your tracker',
+      'Severity-scored findings with evidence',
     ],
-    deliverables: ['Bug report in your tracker', 'Summary scorecard with severity breakdown'],
-    href: '/quality/',
-    cta: 'Explore the offer',
+    deliverables: ['Bug report in your tracker', 'Severity scorecard'],
+    href: '/quality/french-lqa-testing/',
+    cta: 'French LQA testing',
   },
   {
-    id: 'ai-evaluation',
-    index: '02',
-    title: 'Multilingual AI evaluation',
-    tagline: 'Human evaluation of model outputs in FR/EN/ES.',
+    id: 'functional-qa',
+    index: 'Q2',
+    title: 'Functional QA',
+    tagline: 'Release-focused passes that answer what breaks, where and how badly.',
     summary:
-      'Structured human evaluation of AI outputs: accuracy, fluency, cultural fit and instruction following, with rubrics and annotation guidelines written for your use case.',
+      'Structured functional testing of scoped user journeys, edge cases and regression areas, with reproducible evidence rather than a vague “tested” claim.',
     points: [
-      'Human evaluation of model outputs in FR/EN/ES',
-      'Rubric and annotation-guideline writing',
-      'Calibration sets for annotator alignment',
-      'Failure-mode report across languages',
+      'Scoped test plans and exploratory passes',
+      'Reproduction steps, screenshots or recordings where useful',
+      'Regression and retest passes',
+      'Tracker-native delivery',
     ],
-    deliverables: ['Evaluation report per language', 'Rubric & annotation guidelines', 'Failure-mode taxonomy'],
-    href: '/ai-evaluation/',
-    cta: 'Explore the offer',
+    deliverables: ['Reproducible defect list', 'Retest delta'],
+    href: '/quality/',
+    cta: 'See quality services',
   },
   {
-    id: 'launch-review',
-    index: '03',
-    title: 'Launch-readiness review',
-    tagline: 'Fixed-price pre-launch pass for small AI-built products.',
+    id: 'linguistic-qa',
+    index: 'Q3',
+    title: 'Linguistic QA',
+    tagline: 'Native-French review with English near-native and Spanish professional support.',
     summary:
-      'A single fixed-price pass combining localization QA and multilingual AI evaluation, scoped for small products shipping fast.',
+      'Linguistic review of product copy, localization output and customer-facing flows: grammar, terminology, tone, register, consistency and cultural fit.',
     points: [
-      'Combines offer 01 and offer 02 in one pass',
-      'Fixed price \u2014 quoted once scope is confirmed',
-      'Go/no-go checklist plus prioritized findings',
+      'EN>FR primary language pair',
+      'FR>EN review support',
+      'EN<>ES secondary checks',
+      'Glossary and style-guide alignment when supplied',
     ],
-    deliverables: ['Launch checklist', 'Prioritized findings report'],
-    href: '/quality/',
-    cta: 'See how it works',
-    secondary: true,
+    deliverables: ['Linguistic findings report', 'Terminology and style notes'],
+    href: '/quality/french-lqa-testing/',
+    cta: 'See French LQA',
+  },
+  {
+    id: 'multilingual-ai-evaluation',
+    index: 'Q4',
+    title: 'Multilingual AI output evaluation',
+    tagline: 'Human judgement of model output quality across languages.',
+    summary:
+      'Structured evaluation of AI outputs in French, English and Spanish: accuracy, fluency, instruction following, cultural fit and cross-language consistency.',
+    points: [
+      'Human review, not automated-only scoring',
+      'Per-language findings and cited examples',
+      'Failure-mode taxonomy',
+      'Calibration sets for reviewer alignment',
+    ],
+    deliverables: ['Evaluation report per language', 'Failure-mode report'],
+    href: '/quality/multilingual-ai-evaluation/',
+    cta: 'See AI evaluation',
+  },
+  {
+    id: 'rubrics-guidelines',
+    index: 'Q5',
+    title: 'Rubric & annotation-guideline writing',
+    tagline: 'Written criteria that let humans score the same thing the same way.',
+    summary:
+      'Rubrics, annotation guidelines and calibration examples written for your product, workflow and language requirements.',
+    points: [
+      'Task-specific scoring criteria',
+      'Examples of pass/fail and edge cases',
+      'Reviewer calibration material',
+      'Revision after pilot feedback',
+    ],
+    deliverables: ['Rubric', 'Annotation guidelines', 'Calibration examples'],
+    href: '/quality/multilingual-ai-evaluation/',
+    cta: 'See evaluation support',
   },
 ];
 
-/* ---------------- method ---------------- */
+export const buildServices: ServiceTile[] = [
+  {
+    id: 'directed-builds',
+    index: 'B1',
+    title: 'Directed small product builds',
+    tagline: 'Human product direction with AI-assisted implementation.',
+    summary:
+      'For small, bounded products: scope is written by a human, implementation is delegated to AI coding agents in small tasks, and every change is reviewed before release.',
+    points: [
+      'Product requirements and acceptance criteria',
+      'Atomic implementation tasks for AI coding agents',
+      'Human review of diffs, behavior and test evidence',
+      'Honest status labels: live alpha, in development or planned',
+    ],
+    deliverables: ['Scoped build plan', 'Reviewed working increments'],
+    href: '/how-we-build/',
+    cta: 'How we build',
+  },
+  {
+    id: 'build-quality-review',
+    index: 'B2',
+    title: 'Build quality & launch review',
+    tagline: 'A pre-release reality check for small AI-built products.',
+    summary:
+      'A fixed-scope review combining functional QA, localization QA and product evidence so a small team can decide what is ready, what is alpha and what should not be claimed yet.',
+    points: [
+      'Scope and claims review',
+      'Functional and language pass',
+      'Prioritized launch findings',
+      'Retest of fixed issues',
+    ],
+    deliverables: ['Launch-readiness report', 'Prioritized findings'],
+    href: '/quality/',
+    cta: 'Start with quality',
+  },
+];
 
 export const methodLine =
   'Every finding is decided by a human reviewer; AI tools are used for triage and drafting only where the client allows it.';
@@ -188,7 +253,7 @@ export const methodSteps = [
   {
     n: '04',
     title: 'Report',
-    text: 'Bug report in your tracker plus a summary scorecard \u2014 findings, severity, evidence, recommended fix.',
+    text: 'Bug report in your tracker plus a summary scorecard — findings, severity, evidence, recommended fix.',
   },
   {
     n: '05',
@@ -197,40 +262,36 @@ export const methodSteps = [
   },
 ];
 
-/* ---------------- proof ---------------- */
-
-export interface ProofItem {
-  slug: string;
-  published: boolean;
-  kind: 'project' | 'methodology' | 'case';
-  title: string;
-  status: string;
-  summary: string;
-  body: string[];
-  url: string;
-}
-
-export const proofItems: ProofItem[] = [
+export const buildSteps = [
   {
-    slug: 'guess-history',
-    published: true,
-    kind: 'project',
-    title: 'Guess-History (BackToThePast)',
-    status: 'Live alpha',
-    summary:
-      'A multiplayer history & geography guessing game conceived and directed end-to-end, with AI coding agents implementing under direction. It doubles as this studio\u2019s live test subject for evaluation workflows.',
-    body: [
-      'Guess-History, also known as BackToThePast, is a live multiplayer history and geography guessing game.',
-      'It is in alpha: playable, still being extended, and used here as the concrete subject for evaluation and QA work rather than a claim about scale.',
-      'The build itself is a working example of the method on this site: a human sets scope and product decisions, AI agents implement, and every result is reviewed by a person.',
-    ],
-    url: GAME_URL,
+    n: '01',
+    title: 'Write the product truth',
+    text: 'A human defines the user problem, boundaries, data model expectations and honest release status before implementation starts.',
+  },
+  {
+    n: '02',
+    title: 'Slice the work atomically',
+    text: 'Large features are broken into small tasks with exact files, behaviors and acceptance evidence. Vague tasks are rejected.',
+  },
+  {
+    n: '03',
+    title: 'Delegate implementation',
+    text: 'AI coding agents implement bounded tasks. The founder directs and reviews; he does not present himself as the production-code author.',
+  },
+  {
+    n: '04',
+    title: 'Verify before acceptance',
+    text: 'Builds, tests, type checks, screenshots or behavior proofs are reviewed against the written scope before a task is accepted.',
+  },
+  {
+    n: '05',
+    title: 'Label status honestly',
+    text: 'Work is presented as live alpha, in development or planned. Unfinished features are not marketed as shipped.',
   },
 ];
 
-/* "How I score findings" — the studio's own methodology, always published. */
 export const scoringMethodology = {
-  title: 'How I score findings',
+  title: 'How findings are scored',
   intro:
     'Findings are scored severity-first, MQM-style: the category says what kind of problem it is, the severity says how much it matters. Scores are comparable across languages and across rounds, so a retest shows a real delta.',
   levels: [
@@ -251,27 +312,23 @@ export const scoringMethodology = {
   rules: [
     'One finding = one defect, with reproduction steps and a screenshot or log line where possible.',
     'Severity is argued from user impact, not from effort to fix.',
-    'The scorecard counts findings by severity and category \u2014 never an invented quality percentage.',
+    'The scorecard counts findings by severity and category — never an invented quality percentage.',
     'Retests re-score only the reported issues, so progress is measurable.',
   ],
 };
 
-/* ---------------- audiences (home selector) ---------------- */
-
 export interface Audience {
-  id: 'agency' | 'ai' | 'game';
+  id: 'agency' | 'product' | 'build';
   label: string;
   lead: string;
-  cta: { label: string; href: string };
-  alt: { label: string; href: string };
   order: string[];
 }
 
 export const sectionTitles: Record<string, string> = {
-  services: 'Offers',
-  method: 'Method',
-  proof: 'Proof',
-  partners: 'For agencies & vendors',
+  services: 'Services',
+  partners: 'For agencies',
+  work: 'Work',
+  build: 'How we build',
   about: 'About',
 };
 
@@ -279,47 +336,83 @@ export const audiences: Audience[] = [
   {
     id: 'agency',
     label: 'Agency / vendor',
-    lead: 'White-label multilingual QA and AI evaluation capacity: you keep the client relationship, I do the language work. I work inside your tracker and tools, under NDA when needed, with coverage that spans US and EU overnight windows from UTC+7.',
-    cta: { label: 'Request a quote', href: '/contact/' },
-    alt: { label: 'Vendor one-pager (PDF)', href: '/capability-statement.pdf' },
-    order: ['services', 'partners', 'method', 'proof', 'about'],
+    lead: 'White-label multilingual QA and AI evaluation capacity: you keep the client relationship, we deliver the language work inside your tracker and tools. Human specialists and subcontractors join per project when the work needs them.',
+    order: ['services', 'partners', 'work', 'build', 'about'],
   },
   {
-    id: 'ai',
-    label: 'AI / product team',
-    lead: 'Human evaluation of model outputs in French, English and Spanish \u2014 rubrics, annotation guidelines, calibration sets and a failure-mode report your team can act on.',
-    cta: { label: 'Request a quote', href: '/contact/' },
-    alt: { label: 'See the AI evaluation offer', href: '/ai-evaluation/' },
-    order: ['services', 'method', 'proof', 'partners', 'about'],
+    id: 'product',
+    label: 'Product / AI team',
+    lead: 'Human evaluation and localization QA for products shipping across French, English and Spanish — with rubrics, calibration and evidence your team can reuse.',
+    order: ['services', 'work', 'partners', 'build', 'about'],
   },
   {
-    id: 'game',
-    label: 'Game studio',
-    lead: 'Localization and i18n QA for games and apps: functional and linguistic testing, bugs in your tracker, severity-scored findings. Games are a secondary market here \u2014 Guess-History is the live test subject, not a portfolio of shipped titles.',
-    cta: { label: 'Request a quote', href: '/contact/' },
-    alt: { label: 'See localization QA', href: '/quality/' },
-    order: ['services', 'proof', 'method', 'partners', 'about'],
+    id: 'build',
+    label: 'Build client',
+    lead: 'Small product builds are second priority here: human direction, AI-assisted implementation and strict acceptance review. Quality work remains the primary studio service.',
+    order: ['services', 'build', 'work', 'partners', 'about'],
   },
 ];
 
 export const defaultAudience = 'agency';
 
-/* ---------------- partners ---------------- */
-
-export const partnerFacts = [
-  { k: 'Languages', v: 'French (native) \u00b7 English (near-native) \u00b7 Spanish (professional, EN\u2194ES source-side)' },
-  { k: 'Services', v: 'Localization & i18n QA \u00b7 Multilingual AI evaluation \u00b7 Launch-readiness reviews' },
-  { k: 'Availability', v: 'Remote \u00b7 UTC+7 \u00b7 covers US/EU overnight windows' },
-  { k: 'Working model', v: 'NDA-ready \u00b7 works in your tracker and tools \u00b7 rates on request' },
+export const languagePairs = [
+  { pair: 'EN>FR', note: 'Primary — French native lead' },
+  { pair: 'FR>EN', note: 'English near-native review support' },
+  { pair: 'EN<>ES', note: 'Secondary — Spanish professional checks' },
 ];
 
-/* ---------------- contact ---------------- */
+export const partnerServiceTypes = [
+  'Localization/i18n QA',
+  'Functional QA',
+  'Linguistic QA',
+  'Multilingual AI output evaluation',
+  'Rubric and annotation-guideline writing',
+];
+
+export const engagementModel = [
+  'Hourly or per project',
+  'Rates on request',
+  'Availability and turnaround confirmed in writing per engagement',
+  'UTC+7 coverage of US/EU overnight windows',
+  'NDA-ready',
+  'Works in your tracker and tools',
+];
+
+export const onboardingSteps = [
+  {
+    n: '01',
+    title: 'Send the vendor note',
+    text: 'Email the studio with your language pairs, service types, expected volumes and tracker. The vendor onboarding subject is already prepared.',
+  },
+  {
+    n: '02',
+    title: 'Exchange paperwork',
+    text: 'NDA, vendor forms, tax details and confidentiality constraints are completed before client material is shared.',
+  },
+  {
+    n: '03',
+    title: 'Run a scoped pilot',
+    text: 'A small paid pilot or sample batch confirms quality expectations, turnaround, communication style and tool access.',
+  },
+  {
+    n: '04',
+    title: 'Calibrate and produce',
+    text: 'Rubrics, severity definitions and delivery format are calibrated; production batches then run inside your tracker and tools.',
+  },
+];
+
+export const partnerFacts = [
+  { k: 'Language pairs', v: 'EN>FR primary · FR>EN · EN<>ES secondary' },
+  { k: 'Service types', v: partnerServiceTypes.join(' · ') },
+  { k: 'Engagement', v: engagementModel.join(' · ') },
+  { k: 'Coverage', v: 'Remote · UTC+7 · US/EU overnight windows' },
+];
 
 export const contactOptions = [
-  { id: 'quality', label: offers[0].title, subject: 'Quote request \u2014 Localization & i18n QA' },
-  { id: 'ai-evaluation', label: offers[1].title, subject: 'Quote request \u2014 Multilingual AI evaluation' },
-  { id: 'launch-review', label: offers[2].title, subject: 'Quote request \u2014 Launch-readiness review' },
-  { id: 'partner', label: 'Agency / vendor partnership', subject: `Partnership enquiry \u2014 ${SITE_NAME}` },
+  { id: 'vendor', label: 'Vendor onboarding / agency subcontracting', subject: `Vendor onboarding — ${SITE_NAME}` },
+  { id: 'quality', label: 'Localization, functional or linguistic QA', subject: 'Quote request — QA services' },
+  { id: 'ai-evaluation', label: 'Multilingual AI output evaluation', subject: 'Quote request — Multilingual AI evaluation' },
+  { id: 'build', label: 'Directed small product build', subject: 'Build enquiry — scoped product work' },
 ];
 
 export const contact = {

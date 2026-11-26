@@ -1,18 +1,19 @@
-# Locale & Logic — studio site
+# Duet Studio — studio site
 
-Vendor-facing one-person studio site for multilingual QA and AI evaluation.
+Vendor-facing studio site for multilingual QA, localization, AI evaluation and carefully directed small software builds.
 Static [Astro](https://astro.build) site — no backend, no database, no analytics, no cookies.
 
 ## Stack
 
-- Astro 7 (static output, `dist/`), self-hosted variable fonts (Fraunces + Inter)
+- Astro 7 (static output, `dist/`), system serif and sans font stacks
 - Vanilla JS enhancement layer (`public/site.js`): audience routing, Ctrl+K palette, theme toggle, contact composer
 - Works without JS: all content is in the HTML; the audience selector falls back to the default section order
 
 ## Content sources
 
-- `src/config.ts` — SITE_NAME, tagline, CONTACT_EMAIL, LINKEDIN_URL, GAME_URL, `SITE_URL` env override
-- `src/data/studio.ts` — all site copy: offers, method, proof items, audiences, partner facts, founder bio
+- `src/config.ts` — SITE_NAME, tagline, CONTACT_EMAIL, LINKEDIN_URL, `SITE_URL` env override
+- `src/data/studio.ts` — studio copy: services, methods, partner facts, onboarding, founder bio
+- `src/data/work/projects/*.ts` — one data file per work case study; adding a file in that folder adds the project to `/work/` and `/work/<slug>/`
 - `scripts/generate-assets.mjs` — regenerates `public/og.png`, `public/capability-statement.pdf`, favicon PNGs from the same constants (`npm run assets`)
 
 ## Commands
@@ -33,4 +34,4 @@ npm run assets     # regenerate OG image, PDF, favicons
 
 ## Redirects
 
-`vercel.json` issues 301s from all retired portfolio-edition routes (`/atelier*`, `/lens*`, `/studio*`, `/direction*`, `/portfolios*`, `/play*`, `/v2*`, `/hire-me*`, `/how-i-work*`, `/backtothepast*`) to `/`.
+`vercel.json` issues 301s from retired portfolio-edition routes and retired studio routes to the current pages.
