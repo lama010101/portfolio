@@ -1,0 +1,109 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto, pageUrl, siteUrl } from '../config';
+import { buildServices, methodLine, methodSteps, qualityServices } from '../data/studio';
+
+const description = `${SITE_NAME} services: localization/i18n QA, functional QA, linguistic QA, multilingual AI output evaluation, rubric writing, and secondary directed build services.`;
+const provider = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: SITE_NAME,
+  description: SITE_TAGLINE,
+  url: siteUrl,
+  email: CONTACT_EMAIL,
+  knowsLanguage: ['French', 'English', 'Spanish'],
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+};
+const serviceSchemas = qualityServices.map((service) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  serviceType: service.title,
+  description: service.summary,
+  provider: { '@type': 'ProfessionalService', name: SITE_NAME, url: siteUrl },
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+  url: pageUrl(service.href),
+}));
+---
+<StudioLayout title="Services" description={description} path="/services/" jsonld={[provider, ...serviceSchemas]}>
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Services</p>
+      <p class="ll-eyebrow">Services</p>
+      <h1 class="ll-h1">Quality services first. <em>Build services second.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is optimized for QA and localization subcontracting by agencies and vendors. Directed build work is real, but it is intentionally the second priority.</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href={mailto(`Quote request — ${SITE_NAME}`)}>Request a QA quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="ll-btn ll-btn-signal" href="/partners/">For agencies: vendor onboarding</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="quality-services-h">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Priority 01</p>
+      <h2 id="quality-services-h" class="ll-h2">Quality services.</h2>
+      <div class="ll-offers ll-offers-quality">
+        {qualityServices.map((o) => (
+          <article class="ll-card ll-offer ll-spot">
+            <p class="ll-num">{o.index}</p>
+            <h3>{o.title}</h3>
+            <p class="ll-tagline">{o.tagline}</p>
+            <p>{o.summary}</p>
+            <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
+            <div class="ll-deliver">
+              <span>Deliverable</span>
+              <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
+            </div>
+            <div class="ll-actions">
+              <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="build-services-h">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Priority 02</p>
+      <h2 id="build-services-h" class="ll-h2">Directed build services.</h2>
+      <p class="ll-sub">Small product builds are scoped conservatively. The founder directs and reviews; AI coding agents implement bounded tasks. This is not sold as traditional full-service software development.</p>
+      <div class="ll-offers ll-offers-build">
+        {buildServices.map((o) => (
+          <article class="ll-card ll-offer ll-offer-secondary ll-spot">
+            <p class="ll-num">{o.index}</p>
+            <h3>{o.title}</h3>
+            <p class="ll-tagline">{o.tagline}</p>
+            <p>{o.summary}</p>
+            <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
+            <div class="ll-deliver">
+              <span>Deliverable</span>
+              <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
+            </div>
+            <div class="ll-actions">
+              <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="method-h">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">Quality method</p>
+      <h2 id="method-h" class="ll-h2">Five steps. <em>Written evidence.</em></h2>
+      <ol class="ll-steps">
+        {methodSteps.map((s) => (
+          <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+      <p class="ll-note ll-method-note">{methodLine}</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href="/partners/">Onboard us as a vendor</a>
+        <a class="ll-btn ll-btn-ghost" href="/work/">See honest project status</a>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

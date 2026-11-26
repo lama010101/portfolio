@@ -5,3 +5,9 @@ dist
 
 .vercel
 .env*
+shots/
+lh/
+*.log
+
+.og-tmp.html
+.pdf-tmp.html

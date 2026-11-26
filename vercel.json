@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    { "source": "/proof", "destination": "/work/", "permanent": true },
+    { "source": "/proof/:path*", "destination": "/work/", "permanent": true },
+    { "source": "/ai-evaluation", "destination": "/quality/multilingual-ai-evaluation/", "permanent": true },
+    { "source": "/ai-evaluation/:path*", "destination": "/quality/multilingual-ai-evaluation/", "permanent": true },
+    { "source": "/atelier", "destination": "/", "permanent": true },
+    { "source": "/atelier/:path*", "destination": "/", "permanent": true },
+    { "source": "/lens", "destination": "/", "permanent": true },
+    { "source": "/lens/:path*", "destination": "/", "permanent": true },
+    { "source": "/studio", "destination": "/", "permanent": true },
+    { "source": "/studio/:path*", "destination": "/", "permanent": true },
+    { "source": "/direction", "destination": "/", "permanent": true },
+    { "source": "/direction/:path*", "destination": "/", "permanent": true },
+    { "source": "/play", "destination": "/", "permanent": true },
+    { "source": "/play/:path*", "destination": "/", "permanent": true },
+    { "source": "/v2", "destination": "/", "permanent": true },
+    { "source": "/v2/:path*", "destination": "/", "permanent": true },
+    { "source": "/hire-me", "destination": "/", "permanent": true },
+    { "source": "/hire-me/:path*", "destination": "/", "permanent": true },
+    { "source": "/how-i-work", "destination": "/how-we-build/", "permanent": true },
+    { "source": "/how-i-work/:path*", "destination": "/how-we-build/", "permanent": true },
+    { "source": "/backtothepast", "destination": "/work/digthepast/", "permanent": true },
+    { "source": "/backtothepast/:path*", "destination": "/work/digthepast/", "permanent": true }
+  ]
+}

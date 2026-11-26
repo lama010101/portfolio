@@ -1,0 +1,41 @@
+---
+import StudioLayout from '../../layouts/StudioLayout.astro';
+import { SITE_NAME } from '../../config';
+import { projects } from '../../data/work';
+
+const description = `${SITE_NAME} work showcase: content-driven case studies with honest live-alpha, in-development or planned status labels. No filler projects.`;
+---
+<StudioLayout title="Work" description={description} path="/work/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Work</p>
+      <p class="ll-eyebrow">Work</p>
+      <h1 class="ll-h1">The showcase is small <em>on purpose.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">Each project is rendered from one data file and labeled with its honest status. Sections appear only when the project has real content for them — no empty case-study boxes, no stock images, no invented outcomes.</p>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="work-list">
+    <div class="ll-wrap">
+      <h2 id="work-list" class="ll-h2 ll-visually-hidden">Projects</h2>
+      <div class="ll-proof-list">
+        {projects.map((p) => (
+          <article class="ll-proof-item ll-card">
+            <div class="ll-proof-meta">
+              <span class="ll-kind">Project</span>
+              <span class="ll-status">{p.status}</span>
+            </div>
+            <div class="ll-proof-body">
+              <h3>{p.title}</h3>
+              <p>{p.summary}</p>
+              <ul>{p.capabilities.map((c) => <li>{c}</li>)}</ul>
+              <div class="ll-actions">
+                <a class="ll-btn ll-btn-solid" href={`/work/${p.slug}/`}>Open case study <span aria-hidden="true">&rarr;</span></a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</StudioLayout>

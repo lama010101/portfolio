@@ -1,0 +1,86 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME, mailto } from '../config';
+import { contactOptions } from '../data/studio';
+
+const description = `Contact ${SITE_NAME}: email-only contact for vendor onboarding, QA quotes, multilingual AI evaluation and scoped build questions.`;
+const quickLinks = [
+  { label: 'Vendor onboarding', href: '/partners/' },
+  { label: 'Quality services', href: '/quality/' },
+  { label: 'French LQA testing', href: '/quality/french-lqa-testing/' },
+  { label: 'Multilingual AI evaluation', href: '/quality/multilingual-ai-evaluation/' },
+  { label: 'Terms of work', href: '/terms-of-work/' },
+];
+---
+<StudioLayout title="Contact" description={description} path="/contact/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Contact</p>
+      <p class="ll-eyebrow">Contact</p>
+      <h1 class="ll-h1">Tell us what you need.</h1>
+      <p class="ll-sub" style="margin-top:1rem">Email is the channel — no forms, no trackers, no newsletters. Pick what you need and the message drafts itself on the right. Agencies can skip straight to vendor onboarding.</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-signal" href={mailto(`Vendor onboarding — ${SITE_NAME}`)}>Vendor onboarding email</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="c-composer">
+    <div class="ll-wrap">
+      <h2 id="c-composer" class="ll-h2 ll-visually-hidden">Message composer</h2>
+      <div class="ll-hire">
+        <div class="ll-tasks" role="group" aria-label="Choose what you need (select one or more)">
+          {contactOptions.map((t, i) => (
+            <button type="button" class="ll-task ll-spot" data-topic={t.id} aria-pressed="false">
+              <span class="ll-num">0{i + 1}</span>
+              <span class="ll-task-t">{t.label}</span>
+              <span class="ll-task-check" aria-hidden="true"></span>
+            </button>
+          ))}
+          <label class="ll-problem">
+            <span>Context (optional)</span>
+            <textarea id="ll-problem" rows="3" aria-describedby="ll-problem-hint"></textarea>
+            <small id="ll-problem-hint" class="ll-muted">Product type, languages, volume, timeline, tracker — a sentence or two is enough.</small>
+          </label>
+        </div>
+
+        <div class="ll-draft">
+          <figure class="ll-term ll-mail" aria-live="polite">
+            <figcaption><span class="ll-dots" aria-hidden="true"><i></i><i></i><i></i></span>new-message.eml</figcaption>
+            <div class="ll-mail-body">
+              <p><b>To</b> <span id="ll-mail-to">{CONTACT_EMAIL}</span></p>
+              <p><b>Subject</b> <span id="ll-mail-subj">Quote request</span></p>
+              <pre id="ll-mail-text">Hello,</pre>
+            </div>
+          </figure>
+          <div class="ll-actions">
+            <a class="ll-btn ll-btn-signal" id="ll-mail-send" href={mailto(`Quote request — ${SITE_NAME}`)}>Open in my email <span aria-hidden="true">&rarr;</span></a>
+            <button type="button" class="ll-btn ll-btn-ghost" id="ll-mail-copy">Copy draft</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="c-direct">
+    <div class="ll-wrap">
+      <div class="ll-grid-2">
+        <div>
+          <p class="ll-eyebrow">Direct</p>
+          <h2 id="c-direct" class="ll-h2">Or skip the draft.</h2>
+          <div class="ll-actions">
+            <a class="ll-btn ll-btn-solid" href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a>
+          </div>
+          <p class="ll-note">Static site &middot; no analytics &middot; no cookies &middot; no trackers. Replies come from a human.</p>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Before you write</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            {quickLinks.map((q) => <li><a class="ll-tlink" href={q.href}>{q.label}</a></li>)}
+            <li><a class="ll-tlink" href="/capability-statement.pdf">Capability statement (PDF)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>

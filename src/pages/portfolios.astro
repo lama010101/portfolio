@@ -1,547 +1,76 @@
 ---
-import '@fontsource-variable/fraunces';
-import '@fontsource-variable/inter';
-import '../styles/studio.css';
-import { config } from '../config';
+import StudioLayout from '../layouts/StudioLayout.astro';
+import { SITE_NAME } from '../config';
 
-const pageTitle = `All Portfolios | ${config.name}`;
-const pageDesc =
-  'Explore all seven portfolio editions for Laurent Martenot (AI-native Business & Product Builder): Editorial Consultancy, Laurent.Play Sticker Arcade, Laurent // Studio Interactive AI & Web Lab, Portfolio V2 Warm Editorial, Direction, Lens — the adaptive portfolio, and Laurent / Atelier product-builder field notebook.';
-const canonical = new URL('/portfolios/', config.siteUrl).href;
-const ogImage = config.ogImage ? new URL(config.ogImage, config.siteUrl).href : undefined;
+const description = `Portfolio editions for Laurent Martenot. ${SITE_NAME} is the current studio site; earlier personal-portfolio editions were retired.`;
 
-const editions = [
-  {
-    num: 'Edition 01',
-    name: 'Editorial Consultancy',
-    href: '/',
-    accent: 'var(--c-cobalt)',
-    btnClass: 'st-btn-cobalt',
-    swatches: ['#F5F1E8', '#15181E', '#A8402A', '#1E4D4A'],
-    summary:
-      'Calm, authoritative five-page consultancy portfolio with warm paper tones, Fraunces & Inter editorial typography, and dedicated deep-dive pages.',
-    audience: 'Executives, hiring managers, research & institutional partners',
-    highlights: [
-      'Five focused routes: Home, Hire Me, BackToThePast, How I Work, About & Contact',
-      'Structured Guess-History case study & dataset methodology templates',
-      'Minimalist motion, fast static Astro architecture',
-    ],
-    sublinks: [
-      { label: 'Home', href: '/' },
-      { label: 'Hire Me', href: '/hire-me/' },
-      { label: 'BackToThePast', href: '/backtothepast/' },
-      { label: 'How I Work', href: '/how-i-work/' },
-      { label: 'About', href: '/about/' },
-    ],
-  },
-  {
-    num: 'Edition 02',
-    name: 'Laurent.Play Arcade',
-    href: '/play/',
-    accent: 'var(--c-amber)',
-    btnClass: 'st-btn-amber',
-    swatches: ['#FFF8EC', '#FF4D8D', '#8B5CF6', '#FFD23F', '#A3E635'],
-    summary:
-      'Candy-colored neo-brutalist single-page arcade with draggable hero stickers, magnetic buttons, confetti bursts, and a 30-second multiple-choice year quiz.',
-    audience: 'Founders & visitors looking for fast, punchy zine energy',
-    highlights: [
-      'Draggable hero stickers, custom cursor ring & click confetti',
-      'Quick 5-question multiple-choice "Guess the Year" mini-game',
-      'Scroll XP progress bar & hidden Konami party mode',
-    ],
-    sublinks: [
-      { label: 'Hero', href: '/play/#hero' },
-      { label: 'Mini-Game', href: '/play/#game' },
-      { label: 'Quest Map', href: '/play/#method' },
-      { label: 'Hire Me', href: '/play/#hire' },
-    ],
-  },
-  {
-    num: 'Edition 03',
-    name: 'Laurent // Studio (AI & Web Lab)',
-    href: '/studio/',
-    accent: 'var(--c-coral)',
-    btnClass: 'st-btn-coral',
-    swatches: ['#FCF9F2', '#FF3366', '#2952FF', '#00B884', '#0B0D17'],
-    summary:
-      'Full-spectrum interactive AI & web engineering showcase: 4 live color worlds, particle physics canvas, Web Audio synth, and three playable product & QA laboratories.',
-    audience: 'AI labs, product leaders & partners testing what AI-directed web builds can do',
-    highlights: [
-      'Playable 8-step AI Director Simulator (catch & redirect naive AI bugs in EN/FR/ES)',
-      'Interactive Multilingual AI Evaluation Arena (FR, ES & EN QA X-Ray inspector)',
-      'Chrono-Pin timeline scrubbing challenge + Live Mission Brief Composer + 4 themes & Web Audio synth',
-    ],
-    sublinks: [
-      { label: 'AI Director Lab', href: '/studio/#director' },
-      { label: 'EN/FR/ES QA Arena', href: '/studio/#qa-arena' },
-      { label: 'Chrono-Pin Lab', href: '/studio/#chrono-lab' },
-      { label: 'Mission Composer', href: '/studio/#hire' },
-    ],
-  },
-  {
-    num: 'Edition 04 · New',
-    name: 'Portfolio V2 — Warm Editorial',
-    href: '/v2/',
-    accent: '#DE4B1F',
-    btnClass: 'st-btn-v2',
-    swatches: ['#F4F0E6', '#181510', '#DE4B1F', '#A83A0F'],
-    summary:
-      'Premium editorial consultancy build: warm paper tones, Fraunces & Inter typography, interactive six-stage AI build pipeline, and spec-sheet details — implemented from the merged PORTFOLIO-001 spec.',
-    audience: 'Executives, AI labs & partners who want clarity and craft over noise',
-    highlights: [
-      'Five routes: Home, Hire Me, BackToThePast, How I Work, About & Contact',
-      'Interactive stage-by-stage "How I Work" pipeline + real prompt/agent-instruction slots',
-      'Honest placeholder system — every missing asset is visibly marked, never faked',
-    ],
-    sublinks: [
-      { label: 'Home', href: '/v2/' },
-      { label: 'Hire Me', href: '/v2/hire-me.html' },
-      { label: 'BackToThePast', href: '/v2/backtothepast.html' },
-      { label: 'How I Work', href: '/v2/how-i-work.html' },
-      { label: 'About', href: '/v2/about.html' },
-    ],
-  },
-  {
-    num: 'Edition 05 · New',
-    name: 'Direction — Product Builder Lens',
-    href: '/direction/',
-    accent: '#151712',
-    btnClass: 'st-btn-direction',
-    swatches: ['#F3F1EA', '#151712', '#D9FF57', '#2855D9'],
-    summary:
-      'An adaptive, product-builder lens: audience-switching hero, interactive method explorer, real-time case-study evidence, command palette (⌘K), and honest placeholder discipline throughout.',
-    audience: 'Employers, partners & visitors who want clarity over noise',
-    highlights: [
-      'Five routes: Home, Hire Me, BackToThePast, How I Work, About & Contact',
-      'Interactive audience lens, 6-step method explorer, live correction evidence slots',
-      'Command palette (⌘K), keyboard-first nav, prefers-reduced-motion, WCAG AA',
-    ],
-    sublinks: [
-      { label: 'Home', href: '/direction/' },
-      { label: 'Hire Me', href: '/direction/hire/' },
-      { label: 'BackToThePast', href: '/direction/backtothepast/' },
-      { label: 'How I Work', href: '/direction/process/' },
-      { label: 'About', href: '/direction/about/' },
-    ],
-  },
-  {
-    num: 'Edition 06 · New',
-    name: 'Lens — Adaptive Portfolio',
-    href: '/lens/',
-    accent: '#B23C1C',
-    btnClass: 'st-btn-lens',
-    swatches: ['#F3F1EC', '#14171D', '#FF4B23', '#12564F'],
-    summary:
-      'A portfolio that re-composes itself for whoever is reading: three audience lenses re-order the whole page, an EN/FR/ES headline, a scroll-driven build pipeline, a claim-source audit mode and a self-drafting inquiry email.',
-    audience: 'Busy executives, AI labs & partners who want their own route through the same verified facts',
-    highlights: [
-      'Audience lens switcher physically re-orders sections + suggested route (hiring / partner / explore)',
-      'Ctrl K command palette, EN/FR/ES headline, light & dark themes, scroll-driven AI build pipeline',
-      'Sources mode labels every claim and counts every visible placeholder — zero invented facts',
-    ],
-    sublinks: [
-      { label: 'Lens hero', href: '/lens/#top' },
-      { label: 'Selected work', href: '/lens/#work' },
-      { label: 'Build pipeline', href: '/lens/#method' },
-      { label: 'BackToThePast', href: '/lens/#btp' },
-      { label: 'Inquiry composer', href: '/lens/#hire' },
-    ],
-  },
-  {
-    num: 'Edition 07 · New',
-    name: 'Laurent / Atelier',
-    href: '/atelier/',
-    accent: '#D2462A',
-    btnClass: 'st-btn-atelier',
-    swatches: ['#F6F2EA', '#14161B', '#D2462A', '#1F3D5A'],
-    summary:
-      'Premium Swiss-editorial product-builder field notebook: vermilion blueprint ring diagram, interactive 8-step method pipeline, audience switcher, Ctrl+K command palette and a project brief builder.',
-    audience: 'Executives, hiring managers and partners who value quiet precision over spectacle',
-    highlights: [
-      'Five routes under /atelier/ with Fraunces italics, Inter display type and ruled hairline grids',
-      'Interactive Idea-to-Product blueprint (8 steps: what I decide vs what AI executes)',
-      'Audience switcher, command palette, brief builder & scroll section index — all keyboard accessible',
-    ],
-    sublinks: [
-      { label: 'Home', href: '/atelier/' },
-      { label: 'How can I help?', href: '/atelier/hire/' },
-      { label: 'BackToThePast', href: '/atelier/backtothepast/' },
-      { label: 'How I Work', href: '/atelier/how-i-work/' },
-      { label: 'About', href: '/atelier/about/' },
-    ],
-  },
+const current = {
+  name: SITE_NAME,
+  href: '/',
+  status: 'Current',
+  llm: 'SWE-2.1 Max',
+  summary:
+    'Vendor-facing solo-led studio: multilingual human QA and AI evaluation as subcontracting capacity for agencies and vendors, plus carefully directed small product builds.',
+  sublinks: [
+    { label: 'Services', href: '/services/' },
+    { label: 'Work', href: '/work/' },
+    { label: 'For agencies', href: '/partners/' },
+    { label: 'How we build', href: '/how-we-build/' },
+  ],
+};
+
+const retired = [
+  'Editorial Consultancy',
+  'Laurent.Play Arcade',
+  'Laurent // Studio (AI & Web Lab)',
+  'Portfolio V2 — Warm Editorial',
+  'Direction — Product Builder Lens',
+  'Lens — Adaptive Portfolio',
+  'Laurent / Atelier',
 ];
 ---
-<!doctype html>
-<html lang="en" data-studio-theme="prism">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDesc} />
-    <meta name="theme-color" content="#FCF9F2" />
-    <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={config.name} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDesc} />
-    <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDesc} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
-    <style>
-      .hub-cards {
-        display: grid;
-        gap: 1.5rem;
-      }
-      .st-controls {
-        flex-wrap: wrap;
-        row-gap: 0.5rem;
-      }
-      @media (min-width: 62rem) {
-        .hub-cards {
-          grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-        }
-      }
-      .hub-card {
-        background: var(--surface);
-        border: 2.5px solid var(--border);
-        border-radius: 24px;
-        padding: 1.5rem;
-        box-shadow: 7px 7px 0 var(--shadow-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 1.25rem;
-      }
-      .hub-swatches {
-        display: inline-flex;
-        gap: 0.3rem;
-        align-items: center;
-      }
-      .hub-swatches i {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        border: 1.5px solid var(--border);
-        display: block;
-      }
-      .hub-list {
-        padding-left: 1.15rem;
-        margin: 0.75rem 0;
-        font-size: 0.9rem;
-        color: var(--ink-soft);
-      }
-      .hub-list li {
-        margin-bottom: 0.35rem;
-      }
-      .hub-sublinks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem;
-        margin-top: 0.65rem;
-      }
-      .hub-sublinks a {
-        font-size: 0.76rem;
-        font-weight: 700;
-        text-decoration: none;
-        padding: 0.22rem 0.55rem;
-        border-radius: 999px;
-        border: 1px solid var(--border-subtle);
-        background: var(--surface-2);
-      }
-      .hub-sublinks a:hover {
-        border-color: var(--border);
-        background: var(--bg-alt);
-      }
-      .hub-stage-shell {
-        background: var(--console-bg);
-        color: var(--console-ink);
-        border: 2.5px solid var(--border);
-        border-radius: 24px;
-        box-shadow: 8px 8px 0 var(--shadow-color);
-        overflow: hidden;
-      }
-      .hub-stage-bar {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        padding: 0.95rem 1.25rem;
-        background: var(--console-surface);
-        border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
-      }
-      .hub-frame-wrap {
-        padding: 1rem;
-        display: flex;
-        justify-content: center;
-        background: #090b13;
-      }
-      .hub-iframe {
-        width: 100%;
-        height: 640px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 14px;
-        background: #fff;
-        transition: max-width 0.3s ease;
-      }
-      .st-btn-v2 {
-        background: #de4b1f;
-        color: #fff6ee;
-      }
-      .st-btn-v2:hover {
-        background: #a83a0f;
-      }
-      .st-btn-direction {
-        background: #151712;
-        color: #f3f1ea;
-      }
-      .st-btn-direction:hover {
-        background: #2855d9;
-      }
-      .st-btn-lens {
-        background: #b23c1c;
-        color: #fff6ee;
-      }
-      .st-btn-lens:hover {
-        background: #ff4b23;
-      }
-      .st-btn-atelier {
-        background: #d2462a;
-        color: #fff6ee;
-      }
-      .st-btn-atelier:hover {
-        background: #a83417;
-      }
-    </style>
-  </head>
-  <body class="studio-body">
-    <a class="st-skip" href="#main">Skip to content</a>
+<StudioLayout title="Portfolio editions" description={description} path="/portfolios/">
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / Editions</p>
+      <p class="ll-eyebrow">Portfolio hub</p>
+      <h1 class="ll-h1">Editions.</h1>
+      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is the current edition. Earlier personal-portfolio directions are retired and redirect to the studio site.</p>
+    </div>
+  </section>
 
-    <header class="st-header">
-      <div class="st-wrap st-topbar">
-        <a class="st-brand" href="/portfolios/">
-          <span class="st-brand-mark" aria-hidden="true">LM</span>
-          <span>{config.name}</span>
-          <span class="st-brand-tag">All Portfolios</span>
-        </a>
-
-        <div class="st-controls">
-          <a class="st-pill-btn" href="/">01 Editorial</a>
-          <a class="st-pill-btn" href="/play/">02 Play</a>
-          <a class="st-pill-btn" href="/studio/">03 Studio</a>
-          <a class="st-pill-btn" href="/v2/" style="background: #de4b1f; color: #fff6ee; border-color: var(--border)">
-            04 V2
-          </a>
-          <a class="st-pill-btn" href="/direction/" style="background: #151712; color: #f3f1ea; border-color: var(--border)">
-            05 Direction
-          </a>
-          <a class="st-pill-btn" href="/lens/" style="background: #b23c1c; color: #fff6ee; border-color: var(--border)">
-            06 Lens
-          </a>
-          <a class="st-pill-btn" href="/atelier/" style="background: #d2462a; color: #fff; border-color: var(--border)">
-            07 Atelier
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <main id="main">
-      <section class="st-hero" style="padding-bottom: clamp(2.5rem, 6vw, 4.5rem)">
-        <div class="st-wrap">
-          <div class="st-kicker">
-            <span class="st-pulse-dot" aria-hidden="true"></span>
-            <span>Portfolio Directory · 7 Live Editions</span>
+  <section class="ll-sec" aria-labelledby="hub-current">
+    <div class="ll-wrap">
+      <h2 id="hub-current" class="ll-h2">Current edition</h2>
+      <div class="ll-proof-list" style="margin-top:1.5rem">
+        <article class="ll-proof-item ll-card">
+          <div class="ll-proof-meta">
+            <span class="ll-kind">Studio site</span>
+            <span class="ll-kind">LLM used: {current.llm}</span>
+            <span class="ll-status">{current.status}</span>
           </div>
-
-          <h1 style="max-width: 18ch">
-            One builder. <span class="st-gradient-word">Seven live portfolios.</span>
-          </h1>
-
-          <p class="st-hero-lead">
-            Every edition below presents the exact same verified facts and zero fabricated claims — expressed across seven distinct product directions: <strong>executive editorial</strong>, <strong>candy sticker arcade</strong>, <strong>full-power interactive AI &amp; web lab</strong>, <strong>warm editorial minimalism</strong>, <strong>product-builder lens</strong>, <strong>adaptive audience lens</strong>, and a <strong>premium atelier field notebook</strong>.
-          </p>
-
-          <div class="hub-cards" style="margin-top: 2.25rem">
-            {editions.map((ed) => (
-              <article class="hub-card">
-                <div>
-                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.85rem">
-                    <span class="st-eyebrow" style="margin: 0">{ed.num}</span>
-                    <span class="hub-swatches" aria-hidden="true">
-                      {ed.swatches.map((hex) => (
-                        <i style={`background:${hex}`}></i>
-                      ))}
-                    </span>
-                  </div>
-
-                  <h2 style="font-size: 1.55rem; margin-bottom: 0.45rem">{ed.name}</h2>
-                  <p style="font-size: 0.94rem; color: var(--ink-soft)">{ed.summary}</p>
-
-                  <p style="font-size: 0.8rem; font-weight: 750; margin-bottom: 0.35rem">
-                    Best for: <span style="font-weight: 500; color: var(--ink-soft)">{ed.audience}</span>
-                  </p>
-
-                  <ul class="hub-list">
-                    {ed.highlights.map((h) => (
-                      <li>{h}</li>
-                    ))}
-                  </ul>
-
-                  <div class="hub-sublinks" aria-label={`${ed.name} quick sections`}>
-                    {ed.sublinks.map((s) => (
-                      <a href={s.href}>{s.label}</a>
-                    ))}
-                  </div>
-                </div>
-
-                <div class="st-actions" style="margin-top: 0.5rem">
-                  <a class={`st-btn ${ed.btnClass} st-btn-sm`} href={ed.href}>
-                    Open Portfolio &rarr;
-                  </a>
-                  <button
-                    type="button"
-                    class="st-btn st-btn-surface st-btn-sm"
-                    data-preview-url={ed.href}
-                    data-preview-title={ed.name}
-                  >
-                    Live Preview Below
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Interactive Side-by-Side / Viewport Previewer -->
-      <section class="st-section st-section-alt" id="live-stage" aria-labelledby="stage-heading">
-        <div class="st-wrap">
-          <div class="st-sec-head">
-            <span class="st-eyebrow">Interactive Comparison Stage</span>
-            <h2 id="stage-heading">Test any edition right here — Desktop, Tablet, or Mobile.</h2>
-            <p>
-              Switch between all seven portfolios and resize the live viewport without leaving this hub, or open your favorite edition full-screen.
-            </p>
-          </div>
-
-          <div class="hub-stage-shell">
-            <div class="hub-stage-bar">
-              <div class="st-scenario-tabs" role="tablist" aria-label="Choose portfolio to preview">
-                <button type="button" class="st-tab" data-stage-src="/atelier/" aria-selected="true">
-                  07 · Laurent / Atelier
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/lens/" aria-selected="false">
-                  06 · Lens — Adaptive Portfolio
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/direction/" aria-selected="false">
-                  05 · Direction — Product Builder Lens
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/studio/" aria-selected="false">
-                  03 · Laurent // Studio
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/play/" aria-selected="false">
-                  02 · Laurent.Play
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/" aria-selected="false">
-                  01 · Editorial
-                </button>
-                <button type="button" class="st-tab" data-stage-src="/v2/" aria-selected="false">
-                  04 · V2 Warm Editorial
-                </button>
-              </div>
-
-              <div class="st-console-controls">
-                <div class="st-seg" role="group" aria-label="Preview viewport width">
-                  <button type="button" data-vp="100%" aria-pressed="true">Desktop</button>
-                  <button type="button" data-vp="768px" aria-pressed="false">Tablet</button>
-                  <button type="button" data-vp="375px" aria-pressed="false">Mobile</button>
-                </div>
-
-                <a class="st-btn st-btn-coral st-btn-sm" id="hub-open-full" href="/atelier/">
-                  Open Fullscreen &rarr;
-                </a>
-              </div>
+          <div class="ll-proof-body">
+            <h3>{current.name}</h3>
+            <p>{current.summary}</p>
+            <div class="ll-cats" style="margin:0 0 1rem">
+              {current.sublinks.map((l) => <a class="ll-tag" href={l.href} style="text-decoration:none">{l.label}</a>)}
             </div>
-
-            <div class="hub-frame-wrap">
-              <iframe
-                id="hub-iframe"
-                class="hub-iframe"
-                src="/atelier/"
-                title="Live portfolio edition preview"
-                loading="lazy"
-              ></iframe>
+            <div class="ll-actions">
+              <a class="ll-btn ll-btn-solid" href={current.href}>Open {SITE_NAME} <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="st-footer">
-      <div class="st-wrap st-footer-grid">
-        <div>
-          <strong>{config.name} · Portfolio Hub</strong>
-          <p style="margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--console-muted)">
-            {config.tagline}. All seven editions live under one roof.
-          </p>
-        </div>
-        <ul class="st-footer-links">
-          <li><a href="/">01 Editorial</a></li>
-          <li><a href="/play/">02 Laurent.Play</a></li>
-          <li><a href="/studio/">03 Laurent // Studio</a></li>
-          <li><a href="/v2/">04 Portfolio V2</a></li>
-          <li><a href="/direction/">05 Direction</a></li>
-          <li><a href="/lens/">06 Lens</a></li>
-          <li><a href="/atelier/">07 Laurent / Atelier</a></li>
-          <li><a href="/about/#contact">Contact</a></li>
-        </ul>
+        </article>
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <script is:inline>
-      (() => {
-        const frame = document.getElementById('hub-iframe');
-        const fullLink = document.getElementById('hub-open-full');
-        const stageTabs = Array.from(document.querySelectorAll('[data-stage-src]'));
-        const vpBtns = Array.from(document.querySelectorAll('[data-vp]'));
-        const cardPreviewBtns = Array.from(document.querySelectorAll('[data-preview-url]'));
-
-        function selectSource(url) {
-          if (!frame) return;
-          frame.src = url;
-          if (fullLink) fullLink.href = url;
-          stageTabs.forEach((btn) => {
-            btn.setAttribute('aria-selected', String(btn.getAttribute('data-stage-src') === url));
-          });
-        }
-
-        stageTabs.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            selectSource(btn.getAttribute('data-stage-src'));
-          });
-        });
-
-        cardPreviewBtns.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const url = btn.getAttribute('data-preview-url');
-            selectSource(url);
-            document.getElementById('live-stage')?.scrollIntoView({ behavior: 'smooth' });
-          });
-        });
-
-        vpBtns.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const w = btn.getAttribute('data-vp');
-            if (frame) frame.style.maxWidth = w;
-            vpBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-          });
-        });
-      })();
-    </script>
-  </body>
-</html>
+  <section class="ll-sec ll-sec-alt" aria-labelledby="hub-retired">
+    <div class="ll-wrap">
+      <h2 id="hub-retired" class="ll-h2">Retired editions</h2>
+      <p class="ll-sub">Earlier personal-portfolio editions of this site. Their routes now redirect to {SITE_NAME}.</p>
+      <ul class="ll-cats" style="margin-top:1.5rem">
+        {retired.map((r) => <li class="ll-tag" style="border-color:var(--rule);color:var(--ink-2)">{r} · retired</li>)}
+      </ul>
+    </div>
+  </section>
+</StudioLayout>

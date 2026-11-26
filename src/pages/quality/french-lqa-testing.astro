@@ -1,0 +1,127 @@
+---
+import StudioLayout from '../../layouts/StudioLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME, mailto, pageUrl, siteUrl } from '../../config';
+
+const description = 'French LQA testing for apps, web products and games: native-French linguistic QA, localization/i18n checks, severity-scored findings and vendor-friendly delivery.';
+const faqs = [
+  {
+    q: 'What does French LQA testing cover?',
+    a: 'It covers linguistic quality and in-context localization behavior: grammar, spelling, terminology, tone, truncation, encoding, locale formats, wrong-language fallbacks and cultural fit in the product UI.',
+  },
+  {
+    q: 'Is EN>FR the primary language pair?',
+    a: 'Yes. EN>FR is the primary pair, led by a native-French reviewer. FR>EN review support is also available, and EN<>ES is offered as secondary support.',
+  },
+  {
+    q: 'Can findings be delivered inside our tracker?',
+    a: 'Yes. Work is delivered in the tracker and tools your team already uses, with reproduction steps, evidence, severity and recommended fixes where applicable.',
+  },
+  {
+    q: 'Do you certify translation quality?',
+    a: 'No certification is claimed. You receive evidence-based findings, severity scoring and a retest delta; the release decision remains with your team.',
+  },
+];
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'French LQA testing',
+  serviceType: 'Localization/i18n QA and linguistic QA',
+  description,
+  provider: { '@type': 'ProfessionalService', name: SITE_NAME, url: siteUrl, email: CONTACT_EMAIL },
+  areaServed: { '@type': 'Place', name: 'Worldwide' },
+  availableLanguage: ['French', 'English'],
+  url: pageUrl('/quality/french-lqa-testing/'),
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<StudioLayout title="French LQA testing" description={description} path="/quality/french-lqa-testing/" jsonld={[serviceSchema, faqSchema]}>
+  <section class="ll-page-hero">
+    <div class="ll-wrap">
+      <p class="ll-crumbs"><a href="/">Home</a> / <a href="/quality/">Quality</a> / French LQA testing</p>
+      <p class="ll-eyebrow">Localization quality service</p>
+      <h1 class="ll-h1">French LQA testing that catches <em>what users will actually see.</em></h1>
+      <p class="ll-sub" style="margin-top:1rem">Native-French linguistic QA for apps, web products and games — combined with the internationalization checks that decide whether French text can survive real layouts, real locale formats and real user journeys.</p>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-signal" href="/partners/">Add us to your vendor database</a>
+        <a class="ll-btn ll-btn-ghost" href={mailto('Quote request — French LQA testing')}>Request a French LQA quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="fr-what">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">What the service covers</p>
+      <h2 id="fr-what" class="ll-h2">Language quality plus product context.</h2>
+      <div class="ll-prose">
+        <p>French localization problems are rarely only translation problems. A string can be grammatically correct and still fail because it truncates a button, breaks a plural rule, uses the wrong register for the product, or collides with a date, number or currency format. French LQA testing therefore has to look at language in context, not in a spreadsheet alone.</p>
+        <p>{SITE_NAME} reviews French copy the way a user encounters it: in screens, flows, system messages, onboarding, error states, store text and support content when those are in scope. Findings are written as actionable defects rather than vague preferences. Each item explains what is wrong, where it happens, why it matters and what evidence supports the severity.</p>
+        <p>The primary language pair is EN&gt;FR, led by a native-French reviewer. FR&gt;EN review support is available when the direction of travel is reversed. EN&lt;&gt;ES is secondary support rather than a lead-language claim, which keeps the offer honest.</p>
+      </div>
+      <div class="ll-grid-2" style="margin-top:2rem">
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Linguistic checks</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Grammar, spelling, agreement, punctuation and typography</li>
+            <li>Tone, register, inclusivity constraints and product voice</li>
+            <li>Terminology consistency across screens and releases</li>
+            <li>Idioms, examples, cultural references and market fit</li>
+          </ul>
+        </div>
+        <div class="ll-card">
+          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Localization behavior</h3>
+          <ul class="ll-proof-body" style="padding:0">
+            <li>Truncation, overflow, wrapping and clipped UI text</li>
+            <li>Encoding, accents, mojibake and broken punctuation</li>
+            <li>Date, time, number, currency and unit formats</li>
+            <li>Hard-coded, missing or wrong-language strings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec ll-sec-alt" aria-labelledby="fr-how">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">How it is delivered</p>
+      <h2 id="fr-how" class="ll-h2">Findings your team can act on.</h2>
+      <div class="ll-prose">
+        <p>A typical engagement starts with a written scope: product areas, platforms, locales, reference material, glossary, style guide, test access and the decision rules for severity. The review then combines structured passes with exploratory testing. If the product is a game or an app, the pass includes real interaction rather than static screenshot reading alone. If the product is web-based, responsive states and locale-sensitive formatting are included when they are in scope.</p>
+        <p>Delivery happens in your tracker and tools. Defects can be logged directly in Jira, Trello, Linear or another tracker supplied by the client. Where useful, the report includes screenshots, exact reproduction steps, source and target text, expected text, and a severity level. Retests are narrow by design: fixed issues are checked again and the delta is visible instead of hidden inside a new round of noise.</p>
+        <p>This service does not promise certification, legal compliance or a universal quality score. It provides human, evidence-based review by a native-French QA professional with enterprise localization testing background. The release decision remains with the client, but the decision is made with clearer evidence.</p>
+      </div>
+      <div class="ll-actions">
+        <a class="ll-btn ll-btn-solid" href="/quality/">See all quality services</a>
+        <a class="ll-btn ll-btn-ghost" href="/quality/multilingual-ai-evaluation/">Need multilingual AI evaluation?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ll-sec" aria-labelledby="fr-faq">
+    <div class="ll-wrap">
+      <p class="ll-eyebrow">FAQ</p>
+      <h2 id="fr-faq" class="ll-h2">French LQA questions.</h2>
+      <div class="ll-faq">
+        {faqs.map((f) => (
+          <details class="ll-card">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="ll-band" style="margin-top:2.5rem">
+        <div>
+          <h3>Agency or vendor team?</h3>
+          <p>Send the onboarding note with language pairs, service type, volumes, tracker and timeline. Rates are provided on request after scope is visible.</p>
+        </div>
+        <div class="ll-actions">
+          <a class="ll-btn ll-btn-signal" href="/partners/">Go to vendor onboarding</a>
+          <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudioLayout>
