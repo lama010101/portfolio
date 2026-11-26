@@ -8,6 +8,7 @@ const current = {
   name: SITE_NAME,
   href: '/',
   status: 'Current',
+  llm: 'SWE-2.1 Max',
   summary:
     'Vendor-facing solo-led studio: multilingual human QA and AI evaluation as subcontracting capacity for agencies and vendors, plus carefully directed small product builds.',
   sublinks: [
@@ -45,6 +46,7 @@ const retired = [
         <article class="ll-proof-item ll-card">
           <div class="ll-proof-meta">
             <span class="ll-kind">Studio site</span>
+            <span class="ll-kind">LLM used: {current.llm}</span>
             <span class="ll-status">{current.status}</span>
           </div>
           <div class="ll-proof-body">
