@@ -1,207 +1,110 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto } from '../config';
-import {
-  audiences,
-  buildServices,
-  buildSteps,
-  defaultAudience,
-  languageBadge,
-  languages,
-  location,
-  qualityServices,
-  sectionTitles,
-} from '../data/studio';
-import { projects } from '../data/work';
+import ScoreCanvas from '../components/ScoreCanvas.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import OfferCard from '../components/OfferCard.astro';
+import PackageCard from '../components/PackageCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ctas, engagementSteps } from '../content/site';
+import { homeCopy } from '../content/pages';
+import { homeUi, sharedUi } from '../content/ui';
+import { serviceOffers, verificationPrinciples } from '../content/services';
+import { packageOffers } from '../content/packages';
+import { projects } from '../content/work';
 
-const description = `${SITE_TAGLINE} Subcontract multilingual QA, localization and AI evaluation, or commission a small honestly scoped directed build.`;
-const quoteHref = mailto(`Quote request — ${SITE_NAME}`);
-const vendorHref = '/partners/';
-const audience = audiences.find((a) => a.id === defaultAudience)!;
+const featuredPackages = packageOffers.filter((pkg) => ['starter-audit', 'launch-audit', 'ai-evaluation-pilot'].includes(pkg.id));
 ---
-<StudioLayout title={SITE_NAME} description={description} path="/">
-  <section class="ll-hero" id="top" aria-labelledby="ll-h1">
-    <div class="ll-wrap ll-hero-grid">
-      <div class="ll-hero-copy">
-        <div class="ll-lens" role="group" aria-label="Who's reading? The page re-orders itself for you">
-          <span class="ll-lens-q">Who's reading?</span>
-          {audiences.map((a) => (
-            <button type="button" class="ll-lens-btn" data-audience-btn={a.id} aria-pressed={a.id === defaultAudience ? 'true' : 'false'}>{a.label}</button>
-          ))}
+<StudioLayout title={homeCopy.meta.title} description={homeCopy.meta.description} path="/">
+  <section class="ds-hero" aria-labelledby="home-title">
+    <div class="ds-wrap ds-hero-grid">
+      <div class="ds-hero-copy">
+        <p class="ds-eyebrow ds-reveal">{homeCopy.hero.eyebrow}</p>
+        <h1 class="ds-h1 ds-reveal" id="home-title">
+          {homeCopy.hero.titleA}
+          <span class="ds-title-rest"><em>{homeCopy.hero.titleB}</em></span>
+        </h1>
+        <p class="ds-lede ds-reveal">{homeCopy.hero.lede}</p>
+        <div class="ds-actions ds-reveal">
+          <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+          <a class="ds-btn ds-btn-ghost" href={ctas.services.href}>{ctas.services.label}</a>
         </div>
-
-        <p class="ll-eyebrow ll-reveal">{SITE_TAGLINE}</p>
-        <h1 id="ll-h1" class="ll-h1 ll-reveal">Human judgement. <em>Machine-paced delivery.</em></h1>
-        <p class="ll-sub ll-reveal" style="margin-top:1rem">{SITE_NAME} pairs multilingual human QA with carefully directed AI-assisted implementation. Agencies and vendors can subcontract the language layer; product teams can also commission small, honestly scoped builds.</p>
-        <p class="ll-lead ll-reveal" id="ll-lead" aria-live="polite">{audience.lead}</p>
-
-        <div class="ll-actions ll-reveal">
-          <a class="ll-btn ll-btn-solid" href={quoteHref}>Request a QA quote <span aria-hidden="true">&rarr;</span></a>
-          <a class="ll-btn ll-btn-signal" href={vendorHref}>For agencies: add us to your vendor database</a>
-        </div>
-
-        <ol class="ll-route" id="ll-route" aria-label="Your suggested route through this page">
-          {audience.order.slice(0, 3).map((id, i) => (
-            <li><a href={`#${id}`}><b>0{i + 1}</b>{sectionTitles[id]}</a></li>
-          ))}
-        </ol>
-      </div>
-
-      <aside class="ll-card ll-id ll-reveal" aria-label="Studio at a glance">
-        <div class="ll-id-top">
-          <div>
-            <p class="ll-id-name">{SITE_NAME}</p>
-            <p class="ll-id-role">Dual-intelligence studio &middot; human review plus directed AI leverage</p>
-            <p class="ll-id-loc"><span class="ll-live" aria-hidden="true"></span>{location}</p>
-          </div>
-        </div>
-        <div class="ll-duet" aria-label="The two kinds of intelligence behind the studio">
-          <div>
-            <span>Human intelligence</span>
-            <p>Native-French linguistic judgement, enterprise QA habits, severity decisions and final acceptance review.</p>
-          </div>
-          <div>
-            <span>Machine leverage</span>
-            <p>AI tools accelerate triage, drafting and bounded implementation — never final quality judgement.</p>
-          </div>
-        </div>
-        <ul class="ll-proof">
-          <li><span>QA roots</span>Google i18n and Apple localization testing background</li>
-          <li><span>Languages</span>{languageBadge}</li>
-          <li><span>Model</span>Solo-led studio &middot; specialists join per project when needed</li>
+        <ul class="ds-hero-proof ds-reveal" aria-label={sharedUi.homeOffersLabel}>
+          {homeUi.offerLabels.map((label) => <li>{label}</li>)}
         </ul>
-        <div class="ll-langs" aria-label="Language levels">
-          {languages.map((l) => (
-            <div class="ll-langbar">
-              <span>{l.lang}</span><i style={`--w:${l.width}%`} aria-hidden="true"></i><em>{l.level}</em>
-            </div>
-          ))}
-        </div>
-      </aside>
+        <p class="ds-hero-support ds-reveal">{homeCopy.hero.support}</p>
+      </div>
+      <ScoreCanvas label={homeCopy.hero.scoreLabel} text={homeCopy.hero.scoreText} />
     </div>
   </section>
 
-  <div id="ll-flow">
-    <section class="ll-sec" id="services" data-sec aria-labelledby="services-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">Services</p>
-        <h2 id="services-h" class="ll-h2">Quality first. <em>Build second.</em></h2>
-        <p class="ll-sub">The primary conversion goal is QA and localization subcontracting by agencies and vendors. Directed builds are available, but deliberately secondary.</p>
-
-        <h3 class="ll-group-title">Quality services</h3>
-        <div class="ll-offers ll-offers-quality">
-          {qualityServices.map((o) => (
-            <article class="ll-card ll-offer ll-spot">
-              <p class="ll-num">{o.index}</p>
-              <h3>{o.title}</h3>
-              <p class="ll-tagline">{o.tagline}</p>
-              <p>{o.summary}</p>
-              <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
-              <div class="ll-deliver">
-                <span>Deliverable</span>
-                <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
-              </div>
-              <div class="ll-actions">
-                <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <h3 class="ll-group-title ll-group-title-build">Build services</h3>
-        <div class="ll-offers ll-offers-build">
-          {buildServices.map((o) => (
-            <article class="ll-card ll-offer ll-offer-secondary ll-spot">
-              <p class="ll-num">{o.index}</p>
-              <h3>{o.title}</h3>
-              <p class="ll-tagline">{o.tagline}</p>
-              <p>{o.summary}</p>
-              <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
-              <div class="ll-deliver">
-                <span>Deliverable</span>
-                <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
-              </div>
-              <div class="ll-actions">
-                <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
-              </div>
-            </article>
-          ))}
-        </div>
+  <section class="ds-section" aria-labelledby="home-offers">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={homeCopy.offers.eyebrow} title={homeCopy.offers.title} accent={homeCopy.offers.accent} lede={homeCopy.offers.lede} id="home-offers" />
+      <div class="ds-offer-grid">
+        {serviceOffers.map((offer) => <OfferCard offer={offer} />)}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="ll-sec ll-sec-alt" id="partners" data-sec aria-labelledby="partners-h">
-      <div class="ll-wrap">
-        <div class="ll-band">
-          <div>
-            <p class="ll-eyebrow">For agencies &amp; vendors</p>
-            <h2 id="partners-h">Add a multilingual QA vendor <em>without adding headcount.</em></h2>
-            <p>You keep the client. We deliver localization QA, linguistic QA, functional QA and multilingual AI evaluation inside your tracker and tools — NDA-ready, hourly or per project, with UTC+7 coverage of US/EU overnight windows.</p>
-          </div>
-          <div class="ll-actions">
-            <a class="ll-btn ll-btn-solid" href="/partners/">Vendor onboarding <span aria-hidden="true">&rarr;</span></a>
-            <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
-          </div>
-        </div>
+  <section class="ds-section ds-section-alt" aria-labelledby="home-packages">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={homeCopy.packages.eyebrow} title={homeCopy.packages.title} lede={homeCopy.packages.lede} id="home-packages" />
+      <div class="ds-package-grid">
+        {featuredPackages.map((pkg) => <PackageCard pkg={pkg} />)}
       </div>
-    </section>
+      <div class="ds-actions">
+        <a class="ds-btn ds-btn-ghost" href="/services/#packages">{homeCopy.packages.linkLabel}<span aria-hidden="true"> →</span></a>
+      </div>
+    </div>
+  </section>
 
-    <section class="ll-sec" id="work" data-sec aria-labelledby="work-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">Work</p>
-        <h2 id="work-h" class="ll-h2">Real projects, <em>honest labels.</em></h2>
-        <p class="ll-sub">The showcase is content-driven and intentionally small. It shows what exists now — nothing is padded with filler case studies.</p>
-        <div class="ll-proof-list">
-          {projects.map((p) => (
-            <article class="ll-proof-item ll-card">
-              <div class="ll-proof-meta">
-                <span class="ll-kind">Project</span>
-                <span class="ll-status">{p.status}</span>
-              </div>
-              <div class="ll-proof-body">
-                <h3>{p.title}</h3>
-                <p>{p.summary}</p>
-                <ul>{p.capabilities.slice(0, 3).map((c) => <li>{c}</li>)}</ul>
-                <div class="ll-actions">
-                  <a class="ll-btn ll-btn-ghost" href={`/work/${p.slug}/`}>Read the case study <span aria-hidden="true">&rarr;</span></a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+  <section class="ds-section ds-section-dark" aria-labelledby="home-verify">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={homeCopy.verification.eyebrow} title={homeCopy.verification.title} lede={homeCopy.verification.lede} id="home-verify" />
+      <div class="ds-method-grid">
+        {verificationPrinciples.slice(1, 5).map((principle) => (
+          <article class="ds-method-card ds-reveal">
+            <h3>{principle.title}</h3>
+            <p>{principle.text}</p>
+          </article>
+        ))}
       </div>
-    </section>
+      <div class="ds-actions">
+        <a class="ds-btn ds-btn-light" href={ctas.verify.href}>{homeCopy.verification.linkLabel}<span aria-hidden="true"> →</span></a>
+      </div>
+    </div>
+  </section>
 
-    <section class="ll-sec ll-sec-alt" id="build" data-sec aria-labelledby="build-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">How we build</p>
-        <h2 id="build-h" class="ll-h2">Directed AI implementation. <em>Human acceptance.</em></h2>
-        <ol class="ll-steps ll-steps-three">
-          {buildSteps.slice(0, 3).map((s) => (
-            <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
-          ))}
-        </ol>
-        <div class="ll-actions">
-          <a class="ll-btn ll-btn-solid" href="/how-we-build/">See the full build method <span aria-hidden="true">&rarr;</span></a>
-        </div>
+  <section class="ds-section" aria-labelledby="home-work">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={homeCopy.work.eyebrow} title={homeCopy.work.title} lede={homeCopy.work.lede} id="home-work" />
+      <div class="ds-project-grid">
+        {projects.map((project) => <ProjectCard project={project} linkLabel={sharedUi.projectLinkLabel} />)}
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="ll-sec" id="about" data-sec aria-labelledby="about-h">
-      <div class="ll-wrap">
-        <p class="ll-eyebrow">About</p>
-        <h2 id="about-h" class="ll-h2">A solo-led studio with <em>enterprise QA roots.</em></h2>
-        <div class="ll-grid-2">
-          <div class="ll-prose">
-            <p>{SITE_NAME} is led by Laurent Martenot — a former QA test engineer on Google's i18n team (via Accenture) and Apple's localization team (via Moravia).</p>
-            <p>Human specialists and subcontractors join per project when the work needs them. No names are listed until the right people are assigned to a real engagement.</p>
-          </div>
-          <div class="ll-actions" style="margin-top:0">
-            <a class="ll-btn ll-btn-solid" href="/about/">Read the full story <span aria-hidden="true">&rarr;</span></a>
-            <a class="ll-btn ll-btn-ghost" href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  <section class="ds-section ds-section-alt" aria-labelledby="home-process">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={homeCopy.process.eyebrow} title={homeCopy.process.title} lede={homeCopy.process.lede} id="home-process" />
+      <ol class="ds-method-grid">
+        {engagementSteps.map((step) => (
+          <li class="ds-method-card ds-reveal">
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <CtaBand
+    title={homeCopy.final.title}
+    text={homeCopy.final.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.services.label}
+    secondaryHref={ctas.services.href}
+  />
 </StudioLayout>

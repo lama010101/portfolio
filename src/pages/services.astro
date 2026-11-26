@@ -1,109 +1,94 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto, pageUrl, siteUrl } from '../config';
-import { buildServices, methodLine, methodSteps, qualityServices } from '../data/studio';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import OfferCard from '../components/OfferCard.astro';
+import PackageCard from '../components/PackageCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE_NAME, SITE_URL } from '../config';
+import { ctas, engagementSteps, studioFacts } from '../content/site';
+import { servicesCopy } from '../content/pages';
+import { servicesUi, sharedUi } from '../content/ui';
+import { buildCapabilities, serviceOffers } from '../content/services';
+import { packageFootnotes, packageOffers } from '../content/packages';
 
-const description = `${SITE_NAME} services: localization/i18n QA, functional QA, linguistic QA, multilingual AI output evaluation, rubric writing, and secondary directed build services.`;
-const provider = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: SITE_NAME,
-  description: SITE_TAGLINE,
-  url: siteUrl,
-  email: CONTACT_EMAIL,
-  knowsLanguage: ['French', 'English', 'Spanish'],
-  areaServed: { '@type': 'Place', name: 'Worldwide' },
-};
-const serviceSchemas = qualityServices.map((service) => ({
+const serviceSchemas = serviceOffers.map((offer) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: service.title,
-  serviceType: service.title,
-  description: service.summary,
-  provider: { '@type': 'ProfessionalService', name: SITE_NAME, url: siteUrl },
-  areaServed: { '@type': 'Place', name: 'Worldwide' },
-  url: pageUrl(service.href),
+  name: offer.title,
+  serviceType: offer.title,
+  description: offer.summary,
+  provider: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  areaServed: 'Worldwide',
+  url: new URL(offer.href, SITE_URL).href,
 }));
 ---
-<StudioLayout title="Services" description={description} path="/services/" jsonld={[provider, ...serviceSchemas]}>
-  <section class="ll-page-hero">
-    <div class="ll-wrap">
-      <p class="ll-crumbs"><a href="/">Home</a> / Services</p>
-      <p class="ll-eyebrow">Services</p>
-      <h1 class="ll-h1">Quality services first. <em>Build services second.</em></h1>
-      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is optimized for QA and localization subcontracting by agencies and vendors. Directed build work is real, but it is intentionally the second priority.</p>
-      <div class="ll-actions">
-        <a class="ll-btn ll-btn-solid" href={mailto(`Quote request — ${SITE_NAME}`)}>Request a QA quote <span aria-hidden="true">&rarr;</span></a>
-        <a class="ll-btn ll-btn-signal" href="/partners/">For agencies: vendor onboarding</a>
+<StudioLayout title={servicesCopy.meta.title} description={servicesCopy.meta.description} path="/services/" jsonld={serviceSchemas}>
+  <PageHero eyebrow={servicesCopy.hero.eyebrow} titleA={servicesCopy.hero.titleA} titleB={servicesCopy.hero.titleB} lede={servicesCopy.hero.lede}>
+    <div slot="actions" class="ds-actions ds-reveal">
+      <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+      <a class="ds-btn ds-btn-ghost" href="#packages">{sharedUi.comparePackagesLabel}</a>
+    </div>
+    <dl class="ds-facts">
+      {studioFacts.map((fact) => (
+        <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+      ))}
+    </dl>
+  </PageHero>
+
+  <section class="ds-section" aria-labelledby="service-offers">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={servicesCopy.offersSection.eyebrow} title={servicesCopy.offersSection.title} lede={servicesCopy.offersSection.lede} id="service-offers" />
+      <div class="ds-grid-2">
+        {serviceOffers.map((offer) => <OfferCard offer={offer} detailed />)}
       </div>
     </div>
   </section>
 
-  <section class="ll-sec" aria-labelledby="quality-services-h">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">Priority 01</p>
-      <h2 id="quality-services-h" class="ll-h2">Quality services.</h2>
-      <div class="ll-offers ll-offers-quality">
-        {qualityServices.map((o) => (
-          <article class="ll-card ll-offer ll-spot">
-            <p class="ll-num">{o.index}</p>
-            <h3>{o.title}</h3>
-            <p class="ll-tagline">{o.tagline}</p>
-            <p>{o.summary}</p>
-            <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
-            <div class="ll-deliver">
-              <span>Deliverable</span>
-              <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
-            </div>
-            <div class="ll-actions">
-              <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
-            </div>
-          </article>
-        ))}
+  <section class="ds-section ds-section-alt" id="packages" aria-labelledby="packages-title">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={servicesCopy.packagesSection.eyebrow} title={servicesCopy.packagesSection.title} lede={servicesCopy.packagesSection.lede} id="packages-title" />
+      <div class="ds-package-grid">
+        {packageOffers.map((pkg) => <PackageCard pkg={pkg} deliveryLabel={servicesCopy.packagesSection.deliveryLabel} />)}
+      </div>
+      <ul class="ds-footnotes" aria-label={sharedUi.packageNotesLabel}>
+        {packageFootnotes.map((note) => <li>{note}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="ds-section" aria-labelledby="build-capabilities">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={servicesCopy.buildSection.eyebrow} title={servicesCopy.buildSection.title} lede={servicesCopy.buildSection.lede} id="build-capabilities" />
+      <ul class="ds-pill-list">
+        {buildCapabilities.map((capability) => <li>{capability}</li>)}
+      </ul>
+      <div class="ds-actions">
+        <a class="ds-btn ds-btn-ghost" href="/how-we-build/">{sharedUi.readBuildMethodLabel}<span aria-hidden="true"> →</span></a>
       </div>
     </div>
   </section>
 
-  <section class="ll-sec ll-sec-alt" aria-labelledby="build-services-h">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">Priority 02</p>
-      <h2 id="build-services-h" class="ll-h2">Directed build services.</h2>
-      <p class="ll-sub">Small product builds are scoped conservatively. The founder directs and reviews; AI coding agents implement bounded tasks. This is not sold as traditional full-service software development.</p>
-      <div class="ll-offers ll-offers-build">
-        {buildServices.map((o) => (
-          <article class="ll-card ll-offer ll-offer-secondary ll-spot">
-            <p class="ll-num">{o.index}</p>
-            <h3>{o.title}</h3>
-            <p class="ll-tagline">{o.tagline}</p>
-            <p>{o.summary}</p>
-            <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
-            <div class="ll-deliver">
-              <span>Deliverable</span>
-              <ul>{o.deliverables.map((d) => <li>{d}</li>)}</ul>
-            </div>
-            <div class="ll-actions">
-              <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="ll-sec" aria-labelledby="method-h">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">Quality method</p>
-      <h2 id="method-h" class="ll-h2">Five steps. <em>Written evidence.</em></h2>
-      <ol class="ll-steps">
-        {methodSteps.map((s) => (
-          <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
+  <section class="ds-section ds-section-dark" aria-labelledby="service-process">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={servicesCopy.processSection.eyebrow} title={servicesCopy.processSection.title} lede={servicesCopy.processSection.lede} id="service-process" />
+      <ol class="ds-method-grid">
+        {engagementSteps.map((step) => (
+          <li class="ds-method-card ds-reveal">
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
         ))}
       </ol>
-      <p class="ll-note ll-method-note">{methodLine}</p>
-      <div class="ll-actions">
-        <a class="ll-btn ll-btn-solid" href="/partners/">Onboard us as a vendor</a>
-        <a class="ll-btn ll-btn-ghost" href="/work/">See honest project status</a>
-      </div>
     </div>
   </section>
+
+  <CtaBand
+    title={servicesUi.cta.title}
+    text={servicesUi.cta.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.quote.label}
+    secondaryHref={ctas.quote.href}
+  />
 </StudioLayout>

@@ -1,107 +1,57 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, mailto, pageUrl, siteUrl } from '../config';
-import { languageBadge, methodLine, methodSteps, qualityServices, scoringMethodology } from '../data/studio';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PackageCard from '../components/PackageCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ctas } from '../content/site';
+import { qualityCopy } from '../content/quality';
+import { packageOffers } from '../content/packages';
+import { qualityIndexUi, sharedUi } from '../content/ui';
 
-const description = `Quality services from ${SITE_NAME}: localization/i18n QA, functional QA, linguistic QA, multilingual AI output evaluation, and rubric or annotation-guideline writing.`;
-const provider = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: SITE_NAME,
-  description: SITE_TAGLINE,
-  url: siteUrl,
-  email: CONTACT_EMAIL,
-  knowsLanguage: ['French', 'English', 'Spanish'],
-  areaServed: { '@type': 'Place', name: 'Worldwide' },
-};
-const serviceSchemas = qualityServices.map((service) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: service.title,
-  serviceType: service.title,
-  description: service.summary,
-  provider: { '@type': 'ProfessionalService', name: SITE_NAME, url: siteUrl },
-  areaServed: { '@type': 'Place', name: 'Worldwide' },
-  url: pageUrl(service.href),
-}));
+const qaPackages = packageOffers.filter((pkg) => ['starter-audit', 'launch-audit', 'release-watch', 'lqa-day'].includes(pkg.id));
 ---
-<StudioLayout title="Quality" description={description} path="/quality/" jsonld={[provider, ...serviceSchemas]}>
-  <section class="ll-page-hero">
-    <div class="ll-wrap">
-      <p class="ll-crumbs"><a href="/">Home</a> / Quality</p>
-      <p class="ll-eyebrow">Quality services</p>
-      <h1 class="ll-h1">Multilingual quality with <em>written evidence.</em></h1>
-      <p class="ll-sub" style="margin-top:1rem">Localization/i18n QA, functional QA, linguistic QA, multilingual AI output evaluation, and rubric or annotation-guideline writing. {languageBadge}.</p>
-      <div class="ll-actions">
-        <a class="ll-btn ll-btn-solid" href={mailto('Quote request — QA services')}>Request a QA quote <span aria-hidden="true">&rarr;</span></a>
-        <a class="ll-btn ll-btn-signal" href="/partners/">Agency vendor onboarding</a>
-      </div>
+<StudioLayout title={qualityCopy.meta.title} description={qualityCopy.meta.description} path="/quality/">
+  <PageHero eyebrow={qualityCopy.hero.eyebrow} titleA={qualityCopy.hero.titleA} titleB={qualityCopy.hero.titleB} lede={qualityCopy.hero.lede}>
+    <div slot="actions" class="ds-actions ds-reveal">
+      <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+      <a class="ds-btn ds-btn-ghost" href="/quality/french-lqa-testing/">{sharedUi.frenchLqaTestingLabel}</a>
     </div>
-  </section>
+    <div class="ds-panel">
+      <h3>{qualityCopy.languages.title}</h3>
+      <p class="ds-section-lede">{qualityCopy.languages.text}</p>
+    </div>
+  </PageHero>
 
-  <section class="ll-sec" aria-labelledby="q-services">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">What can be subcontracted</p>
-      <h2 id="q-services" class="ll-h2">Five quality service types.</h2>
-      <div class="ll-offers ll-offers-quality">
-        {qualityServices.map((o) => (
-          <article class="ll-card ll-offer ll-spot">
-            <p class="ll-num">{o.index}</p>
-            <h3>{o.title}</h3>
-            <p class="ll-tagline">{o.tagline}</p>
-            <p>{o.summary}</p>
-            <ul>{o.points.map((p) => <li>{p}</li>)}</ul>
-            <div class="ll-actions">
-              <a class="ll-btn ll-btn-ghost" href={o.href}>{o.cta} <span aria-hidden="true">&rarr;</span></a>
-            </div>
+  <section class="ds-section" aria-labelledby="qa-scope">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={qualityCopy.scope.eyebrow} title={qualityCopy.scope.title} id="qa-scope" />
+      <div class="ds-grid-2">
+        {qualityCopy.scope.cards.map((card) => (
+          <article class="ds-method-card ds-reveal">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="ll-sec ll-sec-alt" aria-labelledby="q-method">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">How engagements run</p>
-      <h2 id="q-method" class="ll-h2">The same five steps, every time.</h2>
-      <ol class="ll-steps">
-        {methodSteps.map((s) => (
-          <li class="ll-step"><b>{s.n}</b><h3>{s.title}</h3><p>{s.text}</p></li>
-        ))}
-      </ol>
-      <p class="ll-note ll-method-note">{methodLine}</p>
+  <section class="ds-section ds-section-alt" aria-labelledby="qa-packages">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={qualityIndexUi.packagesSection.eyebrow} title={qualityIndexUi.packagesSection.title} lede={qualityIndexUi.packagesSection.lede} id="qa-packages" />
+      <div class="ds-package-grid">
+        {qaPackages.map((pkg) => <PackageCard pkg={pkg} />)}
+      </div>
     </div>
   </section>
 
-  <section class="ll-sec" id="scoring" aria-labelledby="scoring-h">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">Scoring</p>
-      <h2 id="scoring-h" class="ll-h2">{scoringMethodology.title}</h2>
-      <p class="ll-sub ll-prose">{scoringMethodology.intro}</p>
-      <div class="ll-sev" role="list" aria-label="Severity levels">
-        {scoringMethodology.levels.map((l) => (
-          <article role="listitem"><b>{l.sev}</b><p>{l.def}</p></article>
-        ))}
-      </div>
-      <div class="ll-grid-2" style="margin-top:2.5rem">
-        <div class="ll-card">
-          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Categories</h3>
-          <ul class="ll-cats" style="margin-top:0">
-            {scoringMethodology.categories.map((c) => <li class="ll-tag" style="border-color:var(--rule);color:var(--ink-2)">{c}</li>)}
-          </ul>
-        </div>
-        <div class="ll-card">
-          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.75rem">Scoring rules</h3>
-          <ul class="ll-proof-body" style="padding:0">
-            {scoringMethodology.rules.map((r) => <li>{r}</li>)}
-          </ul>
-        </div>
-      </div>
-      <div class="ll-actions">
-        <a class="ll-btn ll-btn-solid" href="/partners/">Add us to your vendor database</a>
-        <a class="ll-btn ll-btn-ghost" href="/quality/french-lqa-testing/">French LQA testing</a>
-        <a class="ll-btn ll-btn-ghost" href="/quality/multilingual-ai-evaluation/">Multilingual AI evaluation</a>
-      </div>
-    </div>
-  </section>
+  <CtaBand
+    title={qualityIndexUi.cta.title}
+    text={qualityIndexUi.cta.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.quote.label}
+    secondaryHref={ctas.quote.href}
+  />
 </StudioLayout>

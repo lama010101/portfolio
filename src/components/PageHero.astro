@@ -1,0 +1,23 @@
+---
+interface Props {
+  eyebrow: string;
+  titleA: string;
+  titleB?: string;
+  lede: string;
+  meta?: string;
+}
+const { eyebrow, titleA, titleB, lede, meta } = Astro.props;
+const hasAside = Astro.slots.has('default');
+---
+<section class="ds-pagehero">
+  <div class:list={['ds-wrap', 'ds-pagehero-grid', !hasAside && 'is-single']}>
+    <div class="ds-pagehero-copy">
+      <p class="ds-eyebrow ds-reveal">{eyebrow}</p>
+      <h1 class="ds-h1 ds-reveal">{titleA}{titleB && <span class="ds-title-rest"> <em>{titleB}</em></span>}</h1>
+      <p class="ds-lede ds-reveal">{lede}</p>
+      {meta && <p class="ds-hero-meta ds-reveal">{meta}</p>}
+      <slot name="actions" />
+    </div>
+    {hasAside && <aside class="ds-pagehero-aside ds-reveal"><slot /></aside>}
+  </div>
+</section>

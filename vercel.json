@@ -1,9 +1,11 @@
 {
   "redirects": [
-    { "source": "/proof", "destination": "/work/", "permanent": true },
-    { "source": "/proof/:path*", "destination": "/work/", "permanent": true },
-    { "source": "/ai-evaluation", "destination": "/quality/multilingual-ai-evaluation/", "permanent": true },
-    { "source": "/ai-evaluation/:path*", "destination": "/quality/multilingual-ai-evaluation/", "permanent": true },
+    { "source": "/partners", "destination": "/services", "permanent": true },
+    { "source": "/partners/:path*", "destination": "/services", "permanent": true },
+    { "source": "/ai-evaluation", "destination": "/quality/multilingual-ai-evaluation", "permanent": true },
+    { "source": "/ai-evaluation/:path*", "destination": "/quality/multilingual-ai-evaluation", "permanent": true },
+    { "source": "/proof", "destination": "/work", "permanent": true },
+    { "source": "/proof/:path*", "destination": "/work", "permanent": true },
     { "source": "/atelier", "destination": "/", "permanent": true },
     { "source": "/atelier/:path*", "destination": "/", "permanent": true },
     { "source": "/lens", "destination": "/", "permanent": true },

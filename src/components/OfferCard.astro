@@ -1,0 +1,19 @@
+---
+import type { ServiceOffer } from '../content/services';
+interface Props { offer: ServiceOffer; detailed?: boolean }
+const { offer, detailed = false } = Astro.props;
+---
+<article class:list={['ds-offer-card', detailed && 'ds-offer-detailed']} data-spot>
+  <div class="ds-offer-topline">
+    <span class="ds-index">{offer.index}</span>
+    <span class="ds-offer-audience">{offer.audience}</span>
+  </div>
+  <h3>{offer.title}</h3>
+  <p class="ds-tagline">{offer.tagline}</p>
+  <p class="ds-card-copy">{offer.summary}</p>
+  <ul class="ds-checklist">
+    {offer.points.map((point) => <li>{point}</li>)}
+  </ul>
+  <p class="ds-proofline">{offer.proof}</p>
+  <a class="ds-textlink" href={offer.href}>{offer.cta}<span aria-hidden="true"> →</span></a>
+</article>

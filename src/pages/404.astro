@@ -1,17 +1,16 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { SITE_NAME } from '../config';
+import { notFoundCopy } from '../content/pages';
 ---
-<StudioLayout title="Page not found" description={`This page does not exist on the ${SITE_NAME} site.`} path="/404/">
-  <section class="ll-404">
-    <div class="ll-wrap" style="text-align:center">
-      <p class="ll-kicker">404</p>
-      <h1 class="ll-h1">This page took a wrong turn.</h1>
-      <p class="ll-sub" style="margin:0 auto 2rem">The link may be old. Start with services, vendor onboarding or the honest work showcase.</p>
-      <div class="ll-actions" style="justify-content:center">
-        <a class="ll-btn ll-btn-solid" href="/">Back to {SITE_NAME}</a>
-        <a class="ll-btn ll-btn-signal" href="/partners/">Vendor onboarding</a>
-        <a class="ll-btn ll-btn-ghost" href="/work/">Work</a>
+<StudioLayout title={notFoundCopy.meta.title} description={notFoundCopy.meta.description} path="/404/">
+  <section class="ds-pagehero">
+    <div class="ds-wrap">
+      <p class="ds-eyebrow">{notFoundCopy.eyebrow}</p>
+      <h1 class="ds-h1">{notFoundCopy.title}</h1>
+      <p class="ds-lede">{notFoundCopy.text}</p>
+      <div class="ds-actions">
+        <a class="ds-btn ds-btn-primary" href="/">{notFoundCopy.homeLabel}</a>
+        <a class="ds-btn ds-btn-ghost" href="/services/">{notFoundCopy.servicesLabel}</a>
       </div>
     </div>
   </section>

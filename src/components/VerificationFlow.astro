@@ -1,0 +1,14 @@
+---
+interface Step { n: string; title: string; text: string }
+interface Props { steps: readonly Step[] }
+const { steps } = Astro.props;
+---
+<ol class="ds-flowline">
+  {steps.map((step) => (
+    <li class="ds-flowstep ds-reveal">
+      <span class="ds-flow-index">{step.n}</span>
+      <h3>{step.title}</h3>
+      <p>{step.text}</p>
+    </li>
+  ))}
+</ol>

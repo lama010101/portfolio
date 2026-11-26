@@ -1,123 +1,64 @@
 ---
 import StudioLayout from '../layouts/StudioLayout.astro';
-import { CONTACT_EMAIL, LINKEDIN_URL, SITE_NAME, SITE_TAGLINE, mailto, siteUrl } from '../config';
-import { countries, education, experience, founder, languageBadge, languages, location, tools } from '../data/studio';
-
-const professionalService = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: SITE_NAME,
-  description: SITE_TAGLINE,
-  url: siteUrl,
-  email: CONTACT_EMAIL,
-  knowsLanguage: ['French', 'English', 'Spanish'],
-  areaServed: { '@type': 'Place', name: 'Worldwide' },
-  ...(LINKEDIN_URL ? { sameAs: [LINKEDIN_URL] } : {}),
-};
-const person = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: founder.name,
-  jobTitle: 'Founder',
-  worksFor: { '@type': 'ProfessionalService', name: SITE_NAME },
-  knowsLanguage: ['French', 'English', 'Spanish'],
-  ...(LINKEDIN_URL ? { sameAs: [LINKEDIN_URL] } : {}),
-};
-const description = `About ${SITE_NAME}: a solo-led multilingual QA and directed-build studio run by Laurent Martenot, with human specialists joining per project when needed.`;
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ctas, studioFacts } from '../content/site';
+import { aboutCopy } from '../content/pages';
+import { aboutUi, sharedUi } from '../content/ui';
 ---
-<StudioLayout title="About" description={description} path="/about/" jsonld={[professionalService, person]}>
-  <section class="ll-page-hero">
-    <div class="ll-wrap">
-      <p class="ll-crumbs"><a href="/">Home</a> / About</p>
-      <p class="ll-eyebrow">About</p>
-      <h1 class="ll-h1">One lead. <em>A flexible bench.</em></h1>
-      <p class="ll-sub" style="margin-top:1rem">{SITE_NAME} is a solo-led studio run by {founder.name}. Human specialists and subcontractors join per project when the work needs them. No anonymous “team” is invented for the website.</p>
+<StudioLayout title={aboutCopy.meta.title} description={aboutCopy.meta.description} path="/about/">
+  <PageHero eyebrow={aboutCopy.hero.eyebrow} titleA={aboutCopy.hero.titleA} titleB={aboutCopy.hero.titleB} lede={aboutCopy.hero.lede}>
+    <div slot="actions" class="ds-actions ds-reveal">
+      <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+      <a class="ds-btn ds-btn-ghost" href="/work/">{sharedUi.inspectWorkLabel}</a>
     </div>
-  </section>
+    <dl class="ds-facts">
+      {studioFacts.map((fact) => (
+        <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+      ))}
+    </dl>
+  </PageHero>
 
-  <section class="ll-sec" aria-labelledby="a-story">
-    <div class="ll-wrap">
-      <div class="ll-grid-2">
-        <div class="ll-prose">
-          <h2 id="a-story" class="ll-h2">The short version.</h2>
-          <p>{founder.name} is a French-native QA professional who tested software inside Google's internationalization team (via Accenture) and Apple's localization team (via Moravia). His work there covered functional and linguistic testing, bug reporting, triage and follow-up across real product surfaces.</p>
-          <p>He also brings commercial and project-management range from international B2B sales, startup operations and founder roles. That combination explains the studio shape: quality services first, directed product builds second, and no pretense that he personally writes production code.</p>
-          <p>Today {SITE_NAME} sells reviewed, scored, reproducible findings and carefully directed implementation. He has lived and worked in {countries}. Experience years are intentionally not aggregated until the exact count is confirmed.</p>
-        </div>
-        <div class="ll-card">
-          <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:0.9rem">At a glance</h3>
-          <ul class="ll-facts" style="margin:0">
-            <li><strong>Location:</strong> {location}</li>
-            <li><strong>Languages:</strong> {languageBadge}</li>
-            <li><strong>Model:</strong> Solo-led studio · NDA-ready · specialists join per project when needed</li>
-            <li><strong>Tools:</strong> {tools.slice(0, 6).join(', ')} &hellip;</li>
-            {LINKEDIN_URL && <li><strong>LinkedIn:</strong> <a class="ll-tlink" href={LINKEDIN_URL} rel="noopener">Public profile</a></li>}
-          </ul>
-        </div>
+  <section class="ds-section" aria-labelledby="about-model">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={aboutCopy.model.eyebrow} title={aboutCopy.model.title} lede={aboutCopy.model.lede} id="about-model" />
+      <div class="ds-grid-2">
+        {aboutCopy.model.cards.map((card) => (
+          <article class="ds-method-card ds-reveal">
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="ll-sec ll-sec-alt" aria-labelledby="a-exp">
-    <div class="ll-wrap">
-      <p class="ll-eyebrow">Experience</p>
-      <h2 id="a-exp" class="ll-h2">QA roots. <em>Commercial range.</em></h2>
-      <ol class="ll-timeline">
-        {experience.map((e) => (
-          <li>
-            <span class="ll-when">{e.dates}</span>
-            <span class="ll-what">{e.role}</span>
-            <span class="ll-where">{e.org}</span>
-            {e.note && <span class="ll-note2">{e.note}</span>}
-          </li>
+  <section class="ds-section ds-section-dark" aria-labelledby="about-language">
+    <div class="ds-wrap">
+      <p class="ds-eyebrow ds-eyebrow-invert">{aboutCopy.language.eyebrow}</p>
+      <h2 class="ds-h2" id="about-language">{aboutCopy.language.title}</h2>
+      <p class="ds-section-lede">{aboutCopy.language.text}</p>
+    </div>
+  </section>
+
+  <section class="ds-section ds-section-alt" aria-labelledby="about-principles">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={aboutCopy.principles.eyebrow} title={aboutCopy.principles.title} id="about-principles" />
+      <ol class="ds-kicker-list">
+        {aboutCopy.principles.items.map((item, index) => (
+          <li class="ds-reveal"><strong>{String(index + 1).padStart(2, '0')}</strong>{item}</li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="ll-sec" aria-labelledby="a-edu">
-    <div class="ll-wrap">
-      <div class="ll-grid-2">
-        <div>
-          <p class="ll-eyebrow">Education</p>
-          <h2 id="a-edu" class="ll-h2">Two degrees, <em>two systems.</em></h2>
-          <div class="ll-table-wrap" style="margin-top:1.5rem">
-            <table class="ll-table">
-              <tbody>
-                {education.map((ed) => (
-                  <tr><th scope="row">{ed.school}</th><td>{ed.degree}{ed.detail ? ` — ${ed.detail}` : ''}</td></tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div>
-          <p class="ll-eyebrow">Languages</p>
-          <h2 class="ll-h2">What “fluent” means here.</h2>
-          <div class="ll-langs" style="margin-top:1.5rem">
-            {languages.map((l) => (
-              <div class="ll-langbar">
-                <span>{l.lang}</span><i style={`--w:${l.width}%`} aria-hidden="true"></i><em>{l.level}</em>
-              </div>
-            ))}
-          </div>
-          <p class="ll-note" style="margin-top:1.25rem">French is the primary working language. English is near-native. Spanish is professional: reviews and second-language checks, EN↔ES source-side.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ll-sec ll-sec-alt" aria-labelledby="a-contact">
-    <div class="ll-wrap">
-      <div class="ll-contact" id="contact">
-        <h2 id="a-contact">Work with the studio.</h2>
-        <p class="ll-prose">For vendor onboarding, QA quotes, partnerships or scoped build questions: email is the fastest channel. Agencies should start on the vendor page so the onboarding subject is pre-filled correctly.</p>
-        <div class="ll-actions">
-          <a class="ll-btn ll-btn-signal" href="/partners/">Vendor onboarding</a>
-          <a class="ll-btn ll-btn-solid" href={mailto(`Hello — ${SITE_NAME}`)}>{CONTACT_EMAIL}</a>
-          <a class="ll-btn ll-btn-ghost" href="/capability-statement.pdf">Capability statement (PDF)</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <CtaBand
+    title={aboutUi.cta.title}
+    text={aboutUi.cta.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.contact.label}
+    secondaryHref={ctas.contact.href}
+  />
 </StudioLayout>

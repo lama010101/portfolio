@@ -1,0 +1,47 @@
+---
+import { sharedUi } from '../content/ui';
+interface Props { type: 'atlas' | 'nodes' | 'tools'; title: string }
+const { type, title } = Astro.props;
+---
+<div class:list={['ds-project-visual', `is-${type}`]} role="img" aria-label={sharedUi.artworkLabel(title)}>
+  {type === 'atlas' && (
+    <svg viewBox="0 0 420 260" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="atlas-line" x1="0" x2="1">
+          <stop offset="0" stop-color="#e55438" />
+          <stop offset="1" stop-color="#4765ff" />
+        </linearGradient>
+      </defs>
+      <path class="staff" d="M28 48H392M28 88H392M28 128H392M28 168H392M28 208H392" />
+      <path class="terrain t1" d="M35 176c44-58 82-75 119-51s58 7 88-29 78-34 143 47" />
+      <path class="terrain t2" d="M35 204c58-41 98-42 137-12s70 20 103-15 78-24 110 11" />
+      <path class="terrain t3" d="M35 134c38-28 68-28 103 0s68 28 102 0 80-25 145 11" />
+      <circle class="pulse p1" cx="154" cy="125" r="7" />
+      <circle class="pulse p2" cx="242" cy="97" r="7" />
+      <circle class="pulse p3" cx="312" cy="142" r="7" />
+      <path class="route" d="M154 125C190 95 211 91 242 97s49 25 70 45" />
+    </svg>
+  )}
+  {type === 'nodes' && (
+    <svg viewBox="0 0 420 260" aria-hidden="true" focusable="false">
+      <path class="staff" d="M28 48H392M28 88H392M28 128H392M28 168H392M28 208H392" />
+      <path class="link" d="M95 145 165 82 246 122 327 72M165 82l30 98 51-58M95 145l100 35M225 180l102-108" />
+      <circle class="node n1" cx="95" cy="145" r="18" />
+      <circle class="node n2" cx="165" cy="82" r="14" />
+      <circle class="node n3" cx="246" cy="122" r="20" />
+      <circle class="node n4" cx="327" cy="72" r="13" />
+      <circle class="node n5" cx="225" cy="180" r="12" />
+      <circle class="node n6" cx="195" cy="180" r="8" />
+    </svg>
+  )}
+  {type === 'tools' && (
+    <svg viewBox="0 0 420 260" aria-hidden="true" focusable="false">
+      <path class="staff" d="M28 48H392M28 88H392M28 128H392M28 168H392M28 208H392" />
+      <rect class="toolbox" x="82" y="72" width="112" height="112" rx="18" />
+      <rect class="toolbox alt" x="226" y="52" width="112" height="112" rx="18" />
+      <path class="beam" d="M138 112h144M138 144h144M282 92v92" />
+      <path class="spark" d="M112 206l28-28 28 28-28 28zM282 196l18-18 18 18-18 18z" />
+      <circle class="pulse p1" cx="282" cy="92" r="7" />
+    </svg>
+  )}
+</div>

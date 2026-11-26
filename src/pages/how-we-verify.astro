@@ -1,0 +1,73 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import VerificationFlow from '../components/VerificationFlow.astro';
+import ScoreCanvas from '../components/ScoreCanvas.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ctas } from '../content/site';
+import { verifyCopy } from '../content/pages';
+import { verificationBoundaries, verificationPrinciples } from '../content/services';
+import { howVerifyUi, sharedUi } from '../content/ui';
+---
+<StudioLayout title={verifyCopy.meta.title} description={verifyCopy.meta.description} path="/how-we-verify/">
+  <PageHero eyebrow={verifyCopy.hero.eyebrow} titleA={verifyCopy.hero.titleA} titleB={verifyCopy.hero.titleB} lede={verifyCopy.hero.lede}>
+    <div slot="actions" class="ds-actions ds-reveal">
+      <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+      <a class="ds-btn ds-btn-ghost" href="/services/#verification-pilot">{sharedUi.verificationPilotLabel}</a>
+    </div>
+    <ScoreCanvas compact label={howVerifyUi.score.label} text={howVerifyUi.score.text} />
+  </PageHero>
+
+  <section class="ds-section" aria-labelledby="verification-flow">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={verifyCopy.flow.eyebrow} title={verifyCopy.flow.title} id="verification-flow" />
+      <VerificationFlow steps={verifyCopy.flow.steps} />
+    </div>
+  </section>
+
+  <section class="ds-section ds-section-alt" aria-labelledby="verification-principles">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={verifyCopy.principles.eyebrow} title={verifyCopy.principles.title} lede={verifyCopy.principles.lede} id="verification-principles" />
+      <div class="ds-method-grid">
+        {verificationPrinciples.map((principle) => (
+          <article class="ds-method-card ds-reveal">
+            <h3>{principle.title}</h3>
+            <p>{principle.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section ds-section-dark" aria-labelledby="verification-boundaries">
+    <div class="ds-wrap">
+      <SectionHeading eyebrow={verifyCopy.boundaries.eyebrow} title={verifyCopy.boundaries.title} lede={verifyCopy.boundaries.lede} id="verification-boundaries" />
+      <ul class="ds-kicker-list">
+        {verificationBoundaries.map((boundary) => <li>{boundary}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="ds-section" aria-labelledby="verification-product-note">
+    <div class="ds-wrap">
+      <div class="ds-panel">
+        <p class="ds-eyebrow">{verifyCopy.productNote.eyebrow}</p>
+        <h2 class="ds-h2" id="verification-product-note">{verifyCopy.productNote.title}</h2>
+        <p class="ds-section-lede">{verifyCopy.productNote.text}</p>
+        <div class="ds-actions">
+          <a class="ds-btn ds-btn-ghost" href="/work/dig-the-past/">{sharedUi.openDigThePastStatusLabel}<span aria-hidden="true"> →</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={howVerifyUi.cta.title}
+    text={howVerifyUi.cta.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.quote.label}
+    secondaryHref={ctas.quote.href}
+  />
+</StudioLayout>

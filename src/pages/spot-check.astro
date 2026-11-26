@@ -1,0 +1,76 @@
+---
+import StudioLayout from '../layouts/StudioLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { CONTACT_EMAIL } from '../config';
+import { ctas } from '../content/site';
+import { spotCheckCopy } from '../content/pages';
+import { sharedUi, spotCheckUi } from '../content/ui';
+---
+<StudioLayout title={spotCheckCopy.meta.title} description={spotCheckCopy.meta.description} path="/spot-check/">
+  <PageHero eyebrow={spotCheckCopy.hero.eyebrow} titleA={spotCheckCopy.hero.titleA} titleB={spotCheckCopy.hero.titleB} lede={spotCheckCopy.hero.lede}>
+    <div slot="actions" class="ds-actions ds-reveal">
+      <a class="ds-btn ds-btn-primary" href={ctas.spotCheck.href}>{ctas.spotCheck.label}<span aria-hidden="true"> →</span></a>
+      <button class="ds-btn ds-btn-ghost" type="button" data-copy-target="spot-template" data-copied-label={spotCheckCopy.emailTemplateCopied} data-failed-label={sharedUi.copyFailureLabel}>{spotCheckCopy.emailTemplateLabel}</button>
+    </div>
+    <div class="ds-panel">
+      <h3>{spotCheckUi.direct.title}</h3>
+      <p><a class="ds-textlink" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+      <p class="ds-section-lede">{spotCheckUi.direct.text}</p>
+    </div>
+  </PageHero>
+
+  <section class="ds-section" aria-labelledby="spot-included">
+    <div class="ds-wrap ds-grid-2">
+      <div class="ds-panel">
+        <p class="ds-eyebrow">{spotCheckCopy.included.eyebrow}</p>
+        <h2 class="ds-h2" id="spot-included">{spotCheckCopy.included.title}</h2>
+        <ul class="ds-checklist">
+          {spotCheckCopy.included.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="ds-panel">
+        <p class="ds-eyebrow">{spotCheckCopy.needed.eyebrow}</p>
+        <h2 class="ds-h2">{spotCheckCopy.needed.title}</h2>
+        <ul class="ds-checklist">
+          {spotCheckCopy.needed.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section ds-section-alt" aria-labelledby="spot-template-title">
+    <div class="ds-wrap ds-grid-2">
+      <div>
+        <SectionHeading eyebrow={spotCheckUi.checklist.eyebrow} title={spotCheckUi.checklist.title} lede={spotCheckUi.checklist.lede} id="spot-template-title" />
+        <div class="ds-actions">
+          <button class="ds-btn ds-btn-primary" type="button" data-copy-target="spot-template" data-copied-label={spotCheckCopy.emailTemplateCopied} data-failed-label={sharedUi.copyFailureLabel}>{spotCheckCopy.emailTemplateLabel}</button>
+          <a class="ds-btn ds-btn-ghost" href={ctas.spotCheck.href}>{sharedUi.openPrefilledEmailLabel}</a>
+        </div>
+      </div>
+      <div class="ds-copybox">
+        <pre id="spot-template" tabindex="0">{spotCheckCopy.emailTemplate}</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section" aria-labelledby="spot-boundary">
+    <div class="ds-wrap">
+      <div class="ds-panel">
+        <p class="ds-eyebrow">{spotCheckCopy.notFit.eyebrow}</p>
+        <h2 class="ds-h2" id="spot-boundary">{spotCheckCopy.notFit.title}</h2>
+        <p class="ds-section-lede">{spotCheckCopy.notFit.text}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={spotCheckUi.cta.title}
+    text={spotCheckUi.cta.text}
+    primaryLabel={ctas.spotCheck.label}
+    primaryHref={ctas.spotCheck.href}
+    secondaryLabel={ctas.services.label}
+    secondaryHref={ctas.services.href}
+  />
+</StudioLayout>

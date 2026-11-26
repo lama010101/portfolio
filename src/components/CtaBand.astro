@@ -1,0 +1,26 @@
+---
+import { sharedUi } from '../content/ui';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+const { eyebrow = sharedUi.ctaEyebrow, title, text, primaryLabel, primaryHref, secondaryLabel, secondaryHref } = Astro.props;
+---
+<section class="ds-ctaband" aria-labelledby="cta-title">
+  <div class="ds-wrap ds-ctaband-inner">
+    <div>
+      <p class="ds-eyebrow ds-eyebrow-invert">{eyebrow}</p>
+      <h2 class="ds-h2" id="cta-title">{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="ds-actions ds-actions-invert">
+      <a class="ds-btn ds-btn-light" href={primaryHref}>{primaryLabel}<span aria-hidden="true"> →</span></a>
+      {secondaryLabel && secondaryHref && <a class="ds-btn ds-btn-outline-light" href={secondaryHref}>{secondaryLabel}</a>}
+    </div>
+  </div>
+</section>

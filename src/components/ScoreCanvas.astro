@@ -1,0 +1,30 @@
+---
+import { sharedUi } from '../content/ui';
+interface Props {
+  label: string;
+  text: string;
+  compact?: boolean;
+}
+const { label, text, compact = false } = Astro.props;
+---
+<figure class:list={['ds-scorevisual', compact && 'ds-scorevisual-compact']}>
+  <div
+    class="ds-score-frame"
+    data-score-frame
+    data-human-line-label={sharedUi.scoreCanvasLabels.humanLine}
+    data-ai-line-label={sharedUi.scoreCanvasLabels.aiLine}
+    data-resolution-points-label={sharedUi.scoreCanvasLabels.resolutionPoints}
+  >
+    <canvas data-duet-canvas aria-hidden="true"></canvas>
+    <div class="ds-score-legend" aria-hidden="true">
+      <span class="is-human">{sharedUi.scoreLegend.human}</span>
+      <span class="is-ai">{sharedUi.scoreLegend.ai}</span>
+      <span class="is-resolution">{sharedUi.scoreLegend.resolution}</span>
+    </div>
+  </div>
+  <figcaption>
+    <strong>{label}</strong>
+    <span>{text}</span>
+  </figcaption>
+  <p class="ds-visually-hidden">{sharedUi.scoreDescription}</p>
+</figure>

@@ -1,20 +1,24 @@
 # Duet Studio — studio site
 
-Vendor-facing studio site for multilingual QA, localization, AI evaluation and carefully directed small software builds.
-Static [Astro](https://astro.build) site — no backend, no database, no analytics, no cookies.
+Static [Astro](https://astro.build) site for Duet Studio: verification, localization and functional QA, and directed product builds. No backend, database, analytics, cookies, forms, or third-party runtime embeds.
 
 ## Stack
 
-- Astro 7 (static output, `dist/`), system serif and sans font stacks
-- Vanilla JS enhancement layer (`public/site.js`): audience routing, Ctrl+K palette, theme toggle, contact composer
-- Works without JS: all content is in the HTML; the audience selector falls back to the default section order
+- Astro 7, static output in `dist/`
+- Self-hosted variable fonts through Fontsource packages (Fraunces + Inter)
+- Vanilla JS enhancement layer in `public/site.js`; the site remains readable without it
+- Generated visual assets only: SVG/canvas/CSS imagery, OG image, favicon set, and a generated capability statement PDF
 
 ## Content sources
 
-- `src/config.ts` — SITE_NAME, tagline, CONTACT_EMAIL, LINKEDIN_URL, `SITE_URL` env override
-- `src/data/studio.ts` — studio copy: services, methods, partner facts, onboarding, founder bio
-- `src/data/work/projects/*.ts` — one data file per work case study; adding a file in that folder adds the project to `/work/` and `/work/<slug>/`
-- `scripts/generate-assets.mjs` — regenerates `public/og.png`, `public/capability-statement.pdf`, favicon PNGs from the same constants (`npm run assets`)
+- `src/config.ts` — SITE_NAME, tagline, CONTACT_EMAIL, SITE_URL, OG image path, mailto helpers
+- `src/content/site.ts` — navigation, shared calls to action, studio facts, footer copy, engagement steps
+- `src/content/services.ts` — the three service offers, build capabilities, verification principles and boundaries
+- `src/content/packages.ts` — all prices, package scopes, delivery notes, and package footnotes
+- `src/content/work.ts` — project names, honest statuses, facts, capabilities, and external links
+- `src/content/pages.ts` — page-specific copy for the main pages
+- `src/content/quality.ts` — QA, French LQA, and AI evaluation page copy
+- `scripts/generate-assets.mjs` — regenerates `public/og.png`, `public/capability-statement.pdf`, and favicon assets (`npm run assets`)
 
 ## Commands
 
@@ -34,4 +38,4 @@ npm run assets     # regenerate OG image, PDF, favicons
 
 ## Redirects
 
-`vercel.json` issues 301s from retired portfolio-edition routes and retired studio routes to the current pages.
+`vercel.json` issues permanent redirects from retired routes. `/partners` now redirects to `/services`; `/proof` redirects to `/work`; `/ai-evaluation` redirects to `/quality/multilingual-ai-evaluation`. Legacy portfolio-edition routes continue to redirect to `/`.

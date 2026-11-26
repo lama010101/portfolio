@@ -1,0 +1,18 @@
+---
+import type { PackageOffer } from '../content/packages';
+import { sharedUi } from '../content/ui';
+interface Props { pkg: PackageOffer; deliveryLabel?: string }
+const { pkg, deliveryLabel = sharedUi.packageDeliveryLabel } = Astro.props;
+---
+<article id={pkg.id} class:list={['ds-package-card', pkg.featured && 'is-featured']} data-spot>
+  {pkg.featured && <span class="ds-featured-tag">{sharedUi.featuredPackageLabel}</span>}
+  <div class="ds-package-head">
+    <h3>{pkg.name}</h3>
+    <p class="ds-price"><span>{pkg.price}</span>{pkg.unit && <small>{pkg.unit}</small>}</p>
+  </div>
+  <p class="ds-package-scope">{pkg.scope}</p>
+  <ul class="ds-checklist">
+    {pkg.includes.map((item) => <li>{item}</li>)}
+  </ul>
+  <p class="ds-delivery"><span>{deliveryLabel}</span>{pkg.delivery}</p>
+</article>

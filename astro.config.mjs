@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
-import { siteUrl } from './src/config.ts';
+import { SITE_URL } from './src/config.ts';
 
 export default defineConfig({
-  site: siteUrl,
+  site: SITE_URL,
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },

@@ -1,0 +1,24 @@
+---
+import type { Project } from '../content/work';
+import ProjectVisual from './ProjectVisual.astro';
+interface Props { project: Project; linkLabel: string }
+const { project, linkLabel } = Astro.props;
+---
+<article class="ds-project-card" data-spot>
+  <a class="ds-project-visual-link" href={`/work/${project.slug}/`} aria-label={`${linkLabel}: ${project.name}`}>
+    <ProjectVisual type={project.visual} title={project.name} />
+  </a>
+  <div class="ds-project-body">
+    <div class="ds-project-meta">
+      <span>{project.kind}</span>
+      <strong>{project.status}</strong>
+    </div>
+    <h3><a href={`/work/${project.slug}/`}>{project.name}</a></h3>
+    <p>{project.summary}</p>
+    <ul class="ds-checklist">
+      {project.facts.slice(0, 3).map((fact) => <li>{fact}</li>)}
+    </ul>
+    {project.caveat && <p class="ds-caveat">{project.caveat}</p>}
+    <span class="ds-textlink">{linkLabel}<span aria-hidden="true"> →</span></span>
+  </div>
+</article>
