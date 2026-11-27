@@ -2,45 +2,112 @@
 import StudioLayout from '../layouts/StudioLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { SITE_NAME } from '../config';
 import { portfolioHubCopy } from '../content/pages';
+
+const currentEdition = portfolioHubCopy.editions[0];
 ---
 <StudioLayout title={portfolioHubCopy.meta.title} description={portfolioHubCopy.meta.description} path="/portfolios/">
   <PageHero eyebrow={portfolioHubCopy.hero.eyebrow} titleA={portfolioHubCopy.hero.titleA} titleB={portfolioHubCopy.hero.titleB} lede={portfolioHubCopy.hero.lede}>
     <div slot="actions" class="ds-actions ds-reveal">
-      {portfolioHubCopy.current.links.slice(0, 2).map((link, index) => (
+      {portfolioHubCopy.heroActions.map((link, index) => (
         <a class:list={['ds-btn', index === 0 ? 'ds-btn-primary' : 'ds-btn-ghost']} href={link.href}>{link.label}<span aria-hidden="true"> →</span></a>
       ))}
     </div>
   </PageHero>
 
-  <section class="ds-section" aria-labelledby="hub-current">
+  <section class="ds-section" aria-labelledby="hub-directory">
     <div class="ds-wrap">
-      <SectionHeading eyebrow={portfolioHubCopy.current.eyebrow} title={portfolioHubCopy.current.title} lede={portfolioHubCopy.current.lede} id="hub-current" />
-      <article class="ds-panel ds-hub-current ds-reveal" data-spot>
-        <div class="ds-project-meta">
-          <span>{portfolioHubCopy.current.kind}</span>
-          <strong>{portfolioHubCopy.current.status}</strong>
-        </div>
-        <h3>{SITE_NAME}</h3>
-        <p>{portfolioHubCopy.current.summary}</p>
-        <ul class="ds-hub-links">
-          {portfolioHubCopy.current.links.map((link) => (
-            <li><a class="ds-textlink" href={link.href}>{link.label}<span aria-hidden="true"> →</span></a></li>
-          ))}
-        </ul>
-      </article>
+      <SectionHeading eyebrow={portfolioHubCopy.directory.eyebrow} title={portfolioHubCopy.directory.title} lede={portfolioHubCopy.directory.lede} id="hub-directory" />
+      <div class="ds-edition-grid">
+        {portfolioHubCopy.editions.map((edition) => (
+          <article class="ds-edition-card ds-reveal" data-spot>
+            <div class="ds-edition-meta">
+              <span>Edition {edition.num}</span>
+              <strong class:list={[edition.status === 'Current' && 'ds-edition-current']}>{edition.status}</strong>
+            </div>
+            <h3>{edition.name}</h3>
+            <p>{edition.summary}</p>
+            <ul>
+              {edition.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+            <div class="ds-edition-actions">
+              <a class="ds-btn ds-btn-primary ds-btn-small" href={edition.href}>{portfolioHubCopy.directory.openLabel}<span aria-hidden="true"> →</span></a>
+              <button class="ds-btn ds-btn-ghost ds-btn-small" type="button" data-preview-src={edition.href} data-preview-name={edition.name}>
+                {portfolioHubCopy.directory.previewLabel}
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="ds-section ds-section-alt" aria-labelledby="hub-retired">
+  <section class="ds-section ds-section-alt" id="comparison-stage" aria-labelledby="hub-stage">
     <div class="ds-wrap">
-      <SectionHeading eyebrow={portfolioHubCopy.retired.eyebrow} title={portfolioHubCopy.retired.title} lede={portfolioHubCopy.retired.lede} id="hub-retired" />
-      <ul class="ds-retired-list">
-        {portfolioHubCopy.retired.items.map((item) => (
-          <li class="ds-reveal"><span>{item}</span><small>{portfolioHubCopy.retired.statusLabel}</small></li>
-        ))}
-      </ul>
+      <SectionHeading eyebrow={portfolioHubCopy.stage.eyebrow} title={portfolioHubCopy.stage.title} lede={portfolioHubCopy.stage.lede} id="hub-stage" />
+      <div class="ds-stage ds-reveal">
+        <div class="ds-stage-bar">
+          <div class="ds-stage-editions" role="group" aria-label="Choose an edition to preview">
+            {portfolioHubCopy.editions.map((edition, index) => (
+              <button type="button" data-edition-src={edition.href} data-edition-name={edition.name} aria-pressed={index === 0 ? 'true' : 'false'}>
+                {edition.num} · {edition.name}
+              </button>
+            ))}
+          </div>
+          <div class="ds-stage-controls">
+            <div class="ds-stage-viewports" role="group" aria-label="Choose preview width">
+              {portfolioHubCopy.stage.viewportLabels.map((label, index) => (
+                <button type="button" data-viewport={index === 0 ? '100%' : index === 1 ? '768px' : '390px'} aria-pressed={index === 0 ? 'true' : 'false'}>{label}</button>
+              ))}
+            </div>
+            <a class="ds-btn ds-btn-primary ds-btn-small" id="ds-hub-open" href={currentEdition.href}>{portfolioHubCopy.directory.openLabel}<span aria-hidden="true"> →</span></a>
+          </div>
+        </div>
+        <div class="ds-frame-wrap">
+          <iframe id="ds-hub-frame" src={currentEdition.href} title={`Live preview: ${currentEdition.name}`} loading="lazy"></iframe>
+        </div>
+      </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const frame = document.getElementById('ds-hub-frame');
+      const openLink = document.getElementById('ds-hub-open');
+      const editionButtons = Array.from(document.querySelectorAll('[data-edition-src]'));
+      const previewButtons = Array.from(document.querySelectorAll('[data-preview-src]'));
+      const viewportButtons = Array.from(document.querySelectorAll('[data-viewport]'));
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const selectEdition = (url, name) => {
+        if (!frame || !openLink) return;
+        frame.src = url;
+        frame.title = `Live preview: ${name}`;
+        openLink.href = url;
+        editionButtons.forEach((button) => {
+          button.setAttribute('aria-pressed', String(button.getAttribute('data-edition-src') === url));
+        });
+      };
+
+      editionButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectEdition(button.getAttribute('data-edition-src'), button.getAttribute('data-edition-name'));
+        });
+      });
+
+      previewButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectEdition(button.getAttribute('data-preview-src'), button.getAttribute('data-preview-name'));
+          document.getElementById('comparison-stage')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+      });
+
+      viewportButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          if (frame) frame.style.maxWidth = button.getAttribute('data-viewport');
+          viewportButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        });
+      });
+    })();
+  </script>
 </StudioLayout>

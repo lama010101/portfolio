@@ -37,6 +37,10 @@ npm run assets     # regenerate OG image, PDF, favicons
 
 - `SITE_URL` — optional public origin for canonical/sitemap/OG URLs. Defaults to `https://portfolio-psi-topaz-22.vercel.app`. Set it when a custom domain goes live; no DNS changes are made from this repo.
 
+## Portfolio archive
+
+`/portfolios/` is the edition hub. `public/editions/archive/` contains static captures of the seven pre-pivot portfolio editions built from commit `97c6953`; root-relative URLs were rewritten into `/editions/archive/` so the editions can be browsed without restoring the legacy source tree. Third-party font requests were removed from the archived HTML. Archive-only redactions replace prohibited legacy project/profile names and missing-content terminology. The archive is historical reference material, not current studio positioning, and is not used by the Duet Studio pages.
+
 ## Redirects
 
-`vercel.json` issues permanent redirects from retired routes. `/partners` now redirects to `/services`; `/proof` redirects to `/work`; `/ai-evaluation` redirects to `/quality/multilingual-ai-evaluation`. `/portfolios/` remains live as the editions hub, while the retired portfolio-edition routes redirect to `/`.
+`vercel.json` issues permanent redirects from retired routes. `/partners` now redirects to `/services`; `/proof` redirects to `/work`; `/ai-evaluation` redirects to `/quality/multilingual-ai-evaluation`. `/portfolios/` remains live as the editions hub; the original retired portfolio-edition routes redirect to `/`, while their archived captures remain available under `/editions/archive/`.
